@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/D:/SCS/Open Source/log4j/apache-log4j-1.2.16/apache-log4j-1.2.16/site/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/xstream-1.4.2.jar" sourcepath="D:/SCS/Open Source/xstream/xstream-1.4.2/xstream/src/java"/>
+	<classpathentry kind="lib" path="lib/kxml2-2.3.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/zxn/文档/JavaFXSceneBuilder1.1/runtime/jre/lib/jfxrt.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
