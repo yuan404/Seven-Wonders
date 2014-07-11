@@ -32,6 +32,7 @@ import javafx.util.Duration;
 import org.tjuscs.sevenwonders.LocalMessages;
 import org.tjuscs.sevenwonders.Manager;
 import org.tjuscs.sevenwonders.kernel.Difficulty;
+
 //import org.tjuscs.sevenwonders.net.NetManager;
 
 public class GUIManager {
@@ -66,7 +67,7 @@ public class GUIManager {
 	public static double volumn = 0.5;
 
 	public void init() {
-		System.out.println(GUIManager.class.getName()+" - init()");
+		System.out.println(GUIManager.class.getName() + " - init()");
 		if (!restarted) {
 			stage.setResizable(false);
 			stage.setTitle("7Wonders");
@@ -76,7 +77,6 @@ public class GUIManager {
 		loadInitialScenes();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
-			@Override
 			public void handle(WindowEvent event) {
 				if (stage.getScene() == menuScene.getScene())
 					menuScene.queryQuit();
@@ -84,7 +84,8 @@ public class GUIManager {
 				if (stage.getScene() == helpScene.getScene())
 					helpScene.queryQuit();
 
-				if (mainScene != null && stage.getScene() == mainScene.getScene())
+				if (mainScene != null
+						&& stage.getScene() == mainScene.getScene())
 					mainScene.queryQuit();
 				event.consume();
 			}
@@ -139,7 +140,8 @@ public class GUIManager {
 
 	private void loadMainScene() {
 		try {
-			System.out.println(this.getClass().getName()+" - loadMainScene()");
+			System.out
+					.println(this.getClass().getName() + " - loadMainScene()");
 			mainScene = null;
 			mainScene = new MainBackGround();
 			mainScene.load();
@@ -173,19 +175,19 @@ public class GUIManager {
 	}
 
 	public void start(Stage stage) {
-		System.out.println(GUIManager.class.getName()+" - start()");
+		System.out.println(GUIManager.class.getName() + " - start()");
 		playMusic("menu.mp3");
 		GUIManager.stage = stage;
 		init();
 		Manager.hidePreloader();
-		stage.show();	
+		stage.show();
 	}
 
 	public void restart() {
-		System.out.println(this.getClass().getName()+" - restart()");
+		System.out.println(this.getClass().getName() + " - restart()");
 		restarted = true;
 		final EventHandler<ActionEvent> h = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				playMusic("menu.mp3");
 				stage.hide();
@@ -196,9 +198,12 @@ public class GUIManager {
 			}
 		};
 		Parent root = GUIManager.getCurrentScene().getRoot();
-		Timeline t = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(bgMusic.volumeProperty(), volumn),
-				new KeyValue(root.opacityProperty(), 1)), new KeyFrame(Duration.seconds(0.3), h, new KeyValue(
-				bgMusic.volumeProperty(), 0), new KeyValue(root.opacityProperty(), 0)));
+		Timeline t = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
+				bgMusic.volumeProperty(), volumn), new KeyValue(
+				root.opacityProperty(), 1)), new KeyFrame(
+				Duration.seconds(0.3), h, new KeyValue(
+						bgMusic.volumeProperty(), 0), new KeyValue(
+						root.opacityProperty(), 0)));
 		t.play();
 	}
 
@@ -206,14 +211,14 @@ public class GUIManager {
 		Manager.getKernel().startAge(age);
 	}
 
-//	public void startTurn(int turn) {
-//		try {
-//			Manager.getKernel().startTurn(turn);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	// public void startTurn(int turn) {
+	// try {
+	// Manager.getKernel().startTurn(turn);
+	// } catch (InterruptedException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
 
 	public void doEndOfTurn(int turn) {
 		//
@@ -232,35 +237,37 @@ public class GUIManager {
 		return false;
 	}
 
-	/* Original Version
-	public void createRoom(int playerNum, String wonderType, String host, int port) {
-		System.out.println(GUIManager.class.getName()+" - createRoom");
-		Manager.info("Room Created:[" + playerNum + "Players," + wonderType + "," + host + ":" + port + "]");
+	/*
+	 * Original Version public void createRoom(int playerNum, String wonderType,
+	 * String host, int port) {
+	 * System.out.println(GUIManager.class.getName()+" - createRoom");
+	 * Manager.info("Room Created:[" + playerNum + "Players," + wonderType + ","
+	 * + host + ":" + port + "]");
+	 * 
+	 * Manager.getKernel().setNumOfPlayers(playerNum);
+	 * 
+	 * // For Test! Manager.getKernel().setBoards(wonderType);
+	 * Manager.getKernel().setAIPlayers(); Manager.getKernel().initializeGame();
+	 * 
+	 * loadMainScene(); showRoom(); }
+	 */
 
-		Manager.getKernel().setNumOfPlayers(playerNum);
-
-		// For Test!
-		Manager.getKernel().setBoards(wonderType);
-		Manager.getKernel().setAIPlayers();
-		Manager.getKernel().initializeGame();
-
-		loadMainScene();
-		showRoom();
-	}
-	*/
-	
 	/**
 	 * TODO Added by zxn 4-5 new-1
+	 * 
 	 * @param playerNum
 	 * @param wonderType
 	 * @param host
 	 * @param port
 	 * @param diffs
 	 */
-	
-	public void createRoom(int playerNum, String wonderType, String host, int port, Difficulty[] diffs) {
-		System.out.println(GUIManager.class.getName()+" - createRoom(Difficulty[])");
-		Manager.info("Room Created:[" + playerNum + "Players," + wonderType + "," + host + ":" + port + "]");
+
+	public void createRoom(int playerNum, String wonderType, String host,
+			int port, Difficulty[] diffs) {
+		System.out.println(GUIManager.class.getName()
+				+ " - createRoom(Difficulty[])");
+		Manager.info("Room Created:[" + playerNum + "Players," + wonderType
+				+ "," + host + ":" + port + "]");
 
 		Manager.getKernel().setNumOfPlayers(playerNum);
 
@@ -270,15 +277,14 @@ public class GUIManager {
 		Manager.getKernel().initializeGame();
 
 		loadMainScene();
-		showRoom();		
+		showRoom();
 	}
-	
 
 	public void joinRoom(String host, int port) {
 		Manager.info("Room Joined:[" + host + ":" + port + "]");
-		//TODO Changed by zxn 4-10
-//		NetManager.isHost = false;
-//		NetManager.start();
+		// TODO Changed by zxn 4-10
+		// NetManager.isHost = false;
+		// NetManager.start();
 
 		loadMainScene();
 		showRoom();
@@ -301,7 +307,8 @@ public class GUIManager {
 		ft.setFromValue(1);
 		ft.setToValue(0);
 		ft.play();
-		final FadeTransition ft2 = new FadeTransition(Duration.seconds(0.3), newScene.getScene().getRoot());
+		final FadeTransition ft2 = new FadeTransition(Duration.seconds(0.3),
+				newScene.getScene().getRoot());
 		ft2.setFromValue(0);
 		ft2.setToValue(1);
 		EventHandler<ActionEvent> onFinished = new EventHandler<ActionEvent>() {
@@ -317,7 +324,8 @@ public class GUIManager {
 			}
 		};
 
-		Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), onFinished));
+		Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3),
+				onFinished));
 		tl.play();
 	}
 
@@ -328,31 +336,33 @@ public class GUIManager {
 	public void showMenu() {
 		changeScene(menuScene);
 	}
-//
-//	private void setDraggable(final Scene scene) {
-//		scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-//			public void handle(MouseEvent me) {
-//				double dragX = me.getSceneX() - dragAnchor.getX();
-//				double dragY = me.getSceneY() - dragAnchor.getY();
-//				// calculate new position of the circle
-//				double newXPosition = initX + dragX;
-//				double newYPosition = initY + dragY;
-//				stage.setX(newXPosition);
-//				stage.setY(newYPosition);
-//				Manager.debug("Stage Position Changed: [" + newXPosition + "," + newYPosition + "]");
-//				me.consume();
-//			}
-//		});
-//		scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-//			public void handle(MouseEvent me) {
-//				initX = stage.getX();
-//				initY = stage.getY();
-//				dragAnchor = new Point2D(me.getSceneX(), me.getSceneY());
-//				me.consume();
-//			}
-//		});
-//	}
-//
+
+	//
+	// private void setDraggable(final Scene scene) {
+	// scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+	// public void handle(MouseEvent me) {
+	// double dragX = me.getSceneX() - dragAnchor.getX();
+	// double dragY = me.getSceneY() - dragAnchor.getY();
+	// // calculate new position of the circle
+	// double newXPosition = initX + dragX;
+	// double newYPosition = initY + dragY;
+	// stage.setX(newXPosition);
+	// stage.setY(newYPosition);
+	// Manager.debug("Stage Position Changed: [" + newXPosition + "," +
+	// newYPosition + "]");
+	// me.consume();
+	// }
+	// });
+	// scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+	// public void handle(MouseEvent me) {
+	// initX = stage.getX();
+	// initY = stage.getY();
+	// dragAnchor = new Point2D(me.getSceneX(), me.getSceneY());
+	// me.consume();
+	// }
+	// });
+	// }
+	//
 	public static Point2D simpleScale(Node node, double newX, double newY) {
 		double x = node.getBoundsInLocal().getWidth();
 		double y = node.getBoundsInLocal().getHeight();
@@ -370,8 +380,10 @@ public class GUIManager {
 		// Manager.debug(fontList);
 		// Manager.debug(Font.getDefault());
 		int fontSize = Integer.parseInt(LocalMessages.getString("FontSize"));
-		font = ResManager.getFont(LocalMessages.getString("FontName"), fontSize);
-		bigFont = ResManager.getFont(LocalMessages.getString("FontName"), fontSize + 8);
+		font = ResManager
+				.getFont(LocalMessages.getString("FontName"), fontSize);
+		bigFont = ResManager.getFont(LocalMessages.getString("FontName"),
+				fontSize + 8);
 		if (fontList.contains("Microsoft YaHei"))
 			style = "-fx-font: " + (fontSize - 2) + " \"Microsoft YaHei\"";
 		else if (fontList.contains("Arial Unicode MS"))
@@ -413,38 +425,45 @@ public class GUIManager {
 	public static void disable(boolean disabled) {
 		final Group root = (Group) getCurrentScene().getRoot();
 		if (disabled) {
-			Rectangle rec = new Rectangle(GUIManager.width, GUIManager.height, Color.BLACK);
+			Rectangle rec = new Rectangle(GUIManager.width, GUIManager.height,
+					Color.BLACK);
 			rec.setOpacity(0);
 			root.getChildren().add(rec);
-			new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(rec.opacityProperty(), 0)), new KeyFrame(
-					Duration.seconds(3.0), new KeyValue(rec.opacityProperty(), 0.75), new KeyValue(
-							root.disableProperty(), true))).play();
+			new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
+					rec.opacityProperty(), 0)), new KeyFrame(
+					Duration.seconds(3.0), new KeyValue(rec.opacityProperty(),
+							0.75), new KeyValue(root.disableProperty(), true)))
+					.play();
 			// root.setDisable(true);
 		} else {
-			final Rectangle rec = (Rectangle) root.getChildren().get(root.getChildren().size() - 1);
+			final Rectangle rec = (Rectangle) root.getChildren().get(
+					root.getChildren().size() - 1);
 			EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-				@Override
+
 				public void handle(ActionEvent event) {
 					root.getChildren().remove(rec);
 				}
 			};
-			new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(rec.opacityProperty(), 0.75)), new KeyFrame(
-					Duration.seconds(0.3), act, new KeyValue(rec.opacityProperty(), 0), new KeyValue(
+			new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
+					rec.opacityProperty(), 0.75)), new KeyFrame(
+					Duration.seconds(0.3), act, new KeyValue(
+							rec.opacityProperty(), 0), new KeyValue(
 							root.disableProperty(), false))).play();
 		}
 	}
 
-//	public static void capture() {
-//		try {
-//			Robot robot = new Robot();
-//			Scene scene = getCurrentScene();
-//			java.awt.Rectangle rect = new java.awt.Rectangle((int) scene.getWindow().getX(), (int) scene.getWindow()
-//					.getY(), (int) scene.getWidth(), (int) scene.getHeight());
-////			BufferedImage image = robot.createScreenCapture(rect);
-//
-//		} catch (AWTException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//	}
+	// public static void capture() {
+	// try {
+	// Robot robot = new Robot();
+	// Scene scene = getCurrentScene();
+	// java.awt.Rectangle rect = new java.awt.Rectangle((int)
+	// scene.getWindow().getX(), (int) scene.getWindow()
+	// .getY(), (int) scene.getWidth(), (int) scene.getHeight());
+	// // BufferedImage image = robot.createScreenCapture(rect);
+	//
+	// } catch (AWTException e1) {
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// }
+	// }
 }

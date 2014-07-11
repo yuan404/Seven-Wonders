@@ -5,7 +5,7 @@ public class FreeBuildAction implements Action {
 
 	/** The board. */
 	Board board;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -18,7 +18,6 @@ public class FreeBuildAction implements Action {
 		board.canfreebuild = true;
 	}
 
-	@Override
 	public int points(Board brd) {
 		// TODO Auto-generated method stub
 		return 0;

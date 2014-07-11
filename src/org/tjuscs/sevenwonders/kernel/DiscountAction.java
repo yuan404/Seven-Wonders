@@ -95,7 +95,6 @@ class DiscountAction implements Action {
 		return "gives discount on " + discount.toString();
 	}
 
-	@Override
 	public int points(Board brd) {
 		// TODO Auto-generated method stub
 		return 0;

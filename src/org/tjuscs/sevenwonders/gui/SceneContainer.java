@@ -23,7 +23,7 @@ public abstract class SceneContainer {
 		root = new Group();
 		draggable = true;
 		anchor = new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent me) {
 				// Node s = (Node) me.getSource();
 				initX = scene.getWindow().getX();
@@ -33,7 +33,7 @@ public abstract class SceneContainer {
 			}
 		};
 		drag = new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent me) {
 				// Node s = (Node) me.getSource();
 				double dragX = me.getScreenX() - dragAnchor.getX();
@@ -49,7 +49,7 @@ public abstract class SceneContainer {
 		};
 	}
 
-	// @Override
+	//
 	// public final void start(Stage primaryStage) throws Exception {
 	// load();
 	// primaryStage.setScene(scene);

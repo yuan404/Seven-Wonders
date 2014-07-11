@@ -22,11 +22,13 @@ public class ScoreBoard extends DropGroup {
 		getChildren().add(frameTop);
 		int part = 30 * (boards.length + 1) / 74;
 		for (int i = 0; i < part; i++) {
-			ImageView frameBottom = new ImageView(ResManager.getImage("framebottom.jpg"));
+			ImageView frameBottom = new ImageView(
+					ResManager.getImage("framebottom.jpg"));
 			frameBottom.setLayoutY(i * 74 + 73);
 			getChildren().add(frameBottom);
 		}
-		ImageView frameBottom = new ImageView(ResManager.getImage("framebottom.jpg"));
+		ImageView frameBottom = new ImageView(
+				ResManager.getImage("framebottom.jpg"));
 		frameBottom.setLayoutY((boards.length) * 30 + 73 - (74 - 30));
 		getChildren().add(frameBottom);
 		ImageView head = new ImageView(ResManager.getImage("scorehead.jpg"));
@@ -38,16 +40,17 @@ public class ScoreBoard extends DropGroup {
 		ok.setLayoutY(20);
 		getChildren().add(ok);
 		ok.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-					@Override
+
 					public void handle(ActionEvent event) {
 						sb.setVisible(false);
 					}
 				};
-				Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.5), act, new KeyValue(sb.opacityProperty(),
-						0), new KeyValue(sb.layoutYProperty(), -300)));
+				Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.5),
+						act, new KeyValue(sb.opacityProperty(), 0),
+						new KeyValue(sb.layoutYProperty(), -300)));
 				tl.play();
 			}
 		});
@@ -61,9 +64,11 @@ public class ScoreBoard extends DropGroup {
 											// 20 text baseline offset
 		}
 		for (int i = 0; i < boards.length; i++) {
-			System.out.println(ScoreBoard.class.getName()+" "+boards[i].getName());
+			System.out.println(ScoreBoard.class.getName() + " "
+					+ boards[i].getName());
 			// Name
-			Text name = new Text(boards[i].getName() + (boards[i].isBSide() ? "(B)" : "(A)"));
+			Text name = new Text(boards[i].getName()
+					+ (boards[i].isBSide() ? "(B)" : "(A)"));
 			name.setFill(Color.GOLD);
 			name.setLayoutX(x[0] - 6);
 			name.setLayoutY(y[i]);
@@ -89,7 +94,8 @@ public class ScoreBoard extends DropGroup {
 			getChildren().add(coin);
 
 			// StageVPS
-			Text stageVPS = new Text(String.valueOf(boards[i].getStageCompleteVPS()));
+			Text stageVPS = new Text(String.valueOf(boards[i]
+					.getStageCompleteVPS()));
 			stageVPS.setFill(Color.GOLD);
 			stageVPS.setLayoutX(x[3]);
 			stageVPS.setLayoutY(y[i]);

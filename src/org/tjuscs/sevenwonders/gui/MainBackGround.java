@@ -96,7 +96,7 @@ public class MainBackGround extends SceneContainer {
 
 	private static Board[] boards;
 	private static Hand[] hands;
-	//private static CommandOption[] cms;
+	// private static CommandOption[] cms;
 	private static SimpleResList[] resList;
 	private static int[] orListNum;
 	// private static ArrayList<SimpleResList>[] orList = new ArrayList[7];
@@ -114,8 +114,8 @@ public class MainBackGround extends SceneContainer {
 	}
 
 	public void load() {
-		
-		System.out.println(this.getClass().getName()+" - load()");
+
+		System.out.println(this.getClass().getName() + " - load()");
 
 		age = 1;
 		turn = 1;
@@ -218,32 +218,40 @@ public class MainBackGround extends SceneContainer {
 		counterClockwise0 = new ImageView(im1);
 		counterClockwise0.setScaleX(xrate);
 		counterClockwise0.setScaleY(yrate);
-		counterClockwise0.setTranslateX((im1.getWidth() * xrate - 107.0) / 2 + 271.23 * xrate);
-		counterClockwise0.setTranslateY((im1.getHeight() * yrate - 86.0) / 2 + 560 * yrate);
+		counterClockwise0.setTranslateX((im1.getWidth() * xrate - 107.0) / 2
+				+ 271.23 * xrate);
+		counterClockwise0.setTranslateY((im1.getHeight() * yrate - 86.0) / 2
+				+ 560 * yrate);
 		counterClockwise0.setVisible(false);
 
 		Image im2 = ResManager.getImage("dir1.jpg");
 		counterClockwise1 = new ImageView(im2);
 		counterClockwise1.setScaleX(xrate);
 		counterClockwise1.setScaleY(yrate);
-		counterClockwise1.setTranslateX((im2.getWidth() * xrate - 112.0) / 2 + 826 * xrate);
-		counterClockwise1.setTranslateY((im2.getHeight() * yrate - 86.0) / 2 + 560 * yrate);
+		counterClockwise1.setTranslateX((im2.getWidth() * xrate - 112.0) / 2
+				+ 826 * xrate);
+		counterClockwise1.setTranslateY((im2.getHeight() * yrate - 86.0) / 2
+				+ 560 * yrate);
 		counterClockwise1.setVisible(false);
 
 		Image im3 = ResManager.getImage("dir2.jpg");
 		counterClockwise2 = new ImageView(im3);
 		counterClockwise2.setScaleX(xrate);
 		counterClockwise2.setScaleY(yrate);
-		counterClockwise2.setTranslateX((im3.getWidth() * xrate - 52.0) / 2 + 846.4 * xrate);
-		counterClockwise2.setTranslateY((im3.getHeight() * yrate - 39.0) / 2 + 223 * yrate);
+		counterClockwise2.setTranslateX((im3.getWidth() * xrate - 52.0) / 2
+				+ 846.4 * xrate);
+		counterClockwise2.setTranslateY((im3.getHeight() * yrate - 39.0) / 2
+				+ 223 * yrate);
 		counterClockwise2.setVisible(false);
 
 		Image im4 = ResManager.getImage("dir3.jpg");
 		counterClockwise3 = new ImageView(im4);
 		counterClockwise3.setScaleX(xrate);
 		counterClockwise3.setScaleY(yrate);
-		counterClockwise3.setTranslateX((im4.getWidth() * xrate - 52.0) / 2 + 302.6 * xrate);
-		counterClockwise3.setTranslateY((im4.getHeight() * yrate - 39.0) / 2 + 222.8 * yrate);
+		counterClockwise3.setTranslateX((im4.getWidth() * xrate - 52.0) / 2
+				+ 302.6 * xrate);
+		counterClockwise3.setTranslateY((im4.getHeight() * yrate - 39.0) / 2
+				+ 222.8 * yrate);
 		counterClockwise3.setVisible(false);
 		root.getChildren().add(counterClockwise0);
 		root.getChildren().add(counterClockwise1);
@@ -263,7 +271,7 @@ public class MainBackGround extends SceneContainer {
 		boardNameMap.put("Halicarnassus", 5);
 		boardNameMap.put("Giza", 6);
 
-		//TreeMap<String, Integer> resNameMap = new TreeMap<String, Integer>();
+		// TreeMap<String, Integer> resNameMap = new TreeMap<String, Integer>();
 		// resNameMap.put("", value)
 
 		for (int i = 0; i < numOfPlayers; i++) {
@@ -274,7 +282,8 @@ public class MainBackGround extends SceneContainer {
 			// Manager.debug("" + ii + boards[i].isBSide());
 			image[i] = ResManager.getImage("board" + ii + ".jpg");
 			// }
-			rec[i] = new Rectangle(image[i].getWidth(), image[i].getHeight(), Color.TRANSPARENT);
+			rec[i] = new Rectangle(image[i].getWidth(), image[i].getHeight(),
+					Color.TRANSPARENT);
 			rec[i].setX(0);
 			rec[i].setY(0);
 			rec[i].setArcWidth(20);
@@ -291,7 +300,8 @@ public class MainBackGround extends SceneContainer {
 			if (GUIManager.enableLightingEffect)
 				rec[i].setEffect(new Lighting());
 			tpa[i] = new TPABoard();
-			wonder[i] = new Wonders(image[i], screenX, screenY, GUIManager.enableReflectionEffect, ii, tpa[i], root);
+			wonder[i] = new Wonders(image[i], screenX, screenY,
+					GUIManager.enableReflectionEffect, ii, tpa[i], root);
 
 			SimpleResList list = boards[i].getResourceList();
 			for (int index = 1; index <= 7; index++) {
@@ -301,36 +311,42 @@ public class MainBackGround extends SceneContainer {
 				// SimpleResList.resourceAt(index).toString());
 			}
 			wonder[i].addGoldSign(3);
-			double percent = (workoutY1(Ox, Oy + r, i, numOfPlayers) - Oy + r) / (2 * r);
-			wonder[i].setLayoutX(workoutX1(Ox, Oy + r, i, numOfPlayers) - (0.6 * percent + 0.4) * 160);
-			wonder[i].setLayoutY(workoutY1(Ox, Oy + r, i, numOfPlayers) - (0.6 * percent + 0.4) * 90);
+			double percent = (workoutY1(Ox, Oy + r, i, numOfPlayers) - Oy + r)
+					/ (2 * r);
+			wonder[i].setLayoutX(workoutX1(Ox, Oy + r, i, numOfPlayers)
+					- (0.6 * percent + 0.4) * 160);
+			wonder[i].setLayoutY(workoutY1(Ox, Oy + r, i, numOfPlayers)
+					- (0.6 * percent + 0.4) * 90);
 			wonder[i].setScaleX(0.6 * percent + 0.4);
 			wonder[i].setScaleY(0.6 * percent + 0.4);
 			wonder[i].getChildren().add(rec[i]);
 			final int index = i;
-			wonder[i].addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					moveable = true;
-					targetWonderIndex = index;
-					for (int i = 0; i < numOfPlayers; i++) {
-						Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(wonder[i]
-								.opacityProperty(), 1)));
-						tl.play();
-					}
-				}
+			wonder[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
+					new EventHandler<MouseEvent>() {
 
-			});
-			wonder[i].addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							moveable = true;
+							targetWonderIndex = index;
+							for (int i = 0; i < numOfPlayers; i++) {
+								Timeline tl = new Timeline(
+										new KeyFrame(Duration.seconds(0.3),
+												new KeyValue(wonder[i]
+														.opacityProperty(), 1)));
+								tl.play();
+							}
+						}
 
-				@Override
-				public void handle(MouseEvent event) {
-					if (!isDragging)
-						moveable = false;
+					});
+			wonder[i].addEventHandler(MouseEvent.MOUSE_EXITED,
+					new EventHandler<MouseEvent>() {
 
-				}
+						public void handle(MouseEvent event) {
+							if (!isDragging)
+								moveable = false;
 
-			});
+						}
+
+					});
 
 			wonder[i].getChildren().add(tpa[i]);
 			tpa[i].setLayoutY(-80);
@@ -341,9 +357,10 @@ public class MainBackGround extends SceneContainer {
 
 		dicClockwise();
 		bigCircle = new Group();
-		bigCircle.getChildren().add(
-				MovingStroke.set(new Circle(29, Color.web("white", 0)), Color.web("white", 0.7), 6, 5, 10,
-						0.3 * (age != 2 ? -1 : 1)));
+		bigCircle.getChildren()
+				.add(MovingStroke.set(new Circle(29, Color.web("white", 0)),
+						Color.web("white", 0.7), 6, 5, 10, 0.3 * (age != 2 ? -1
+								: 1)));
 
 		// bigCircle.setStroke(Color.web("white", 0.3));
 		if (GUIManager.enableLightingEffect)
@@ -365,163 +382,213 @@ public class MainBackGround extends SceneContainer {
 				player[i].setEffect(new Lighting());
 			player[i].setLayoutX(xForPlayer(i));
 			player[i].setLayoutY(yForPlayer(i));
-			player[i].addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent e) {
-					// show the information of the players
-				}
-			});
+			player[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
+					new EventHandler<MouseEvent>() {
+
+						public void handle(MouseEvent e) {
+							// show the information of the players
+						}
+					});
 			final int i1 = i;
-			player[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent e) {
-					if (!isTwice[i1]) {
-						if (remable) {
-							remable = false;
-						}
-						isTwice[i1] = true;
-						for (int i = 0; i < numOfPlayers; i++)
-							if (i != i1)
-								isTwice[i] = false;
-						handlerEnable = true;
-						EventHandler<ActionEvent> act1 = new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								wonder[signrec].hideInfo();
-							}
-						};
-						EventHandler<ActionEvent> act2 = new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								b.setVisible(false);
-								// cardBoard.toFront();
-								player[i1].setDisable(false);
-							}
-						};
-						Timeline pre_tl = new Timeline(new KeyFrame(Duration.ZERO, act1), new KeyFrame(Duration
-								.seconds(0.3), new KeyValue(b.opacityProperty(), 0.7), new KeyValue(cardBoard
-								.layoutYProperty(), screenY - 105)), new KeyFrame(Duration.seconds(0.6), new KeyValue(b
-								.opacityProperty(), 0)), new KeyFrame(Duration.seconds(0.6), act2));
-						if (b.isVisible()) {
-							player[i1].setDisable(true);
-							pre_tl.play();
-						}
-						double[] forsort = new double[numOfPlayers];
-						int[] sign = new int[numOfPlayers];
-						for (int j = 0; j < numOfPlayers; j++) {
-							double percent = (workoutY1(Ox, Oy + r, j - i1, numOfPlayers) - Oy + r) / (2 * r);
-							Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(wonder[j]
-									.layoutXProperty(), workoutX1(Ox, Oy + r, j - i1, numOfPlayers)
-									- (0.6 * percent + 0.4) * 160), new KeyValue(wonder[j].layoutYProperty(),
-									workoutY1(Ox, Oy + r, j - i1, numOfPlayers) - (0.6 * percent + 0.4) * 90),
-									new KeyValue(tpa[j].scaleXProperty(), 1 / (0.6 * percent + 0.4)), new KeyValue(
-											tpa[j].scaleYProperty(), 1 / (0.6 * percent + 0.4)), new KeyValue(wonder[j]
-											.scaleXProperty(), (0.6 * percent + 0.4)), new KeyValue(wonder[j]
-											.scaleYProperty(), (0.6 * percent + 0.4))));
-							// wonder[j].setLayoutX();
-							// wonder[j].setLayoutY();
-							// tpa[j].setScaleX();
-							// tpa[j].setScaleY();
-							// wonder[j].setScaleX();
-							// wonder[j].setScaleY();
-							// Path path = new Path();
-							// Manager.debug(wonder[j].getLayoutX() +
-							// ":" +
-							// wonder[j].getLayoutY() + " " +
-							// wonder[j].getTranslateX() + ":" +
-							// wonder[j].getTranslateY());
-							// double x = wonder[j].getLayoutX();
-							// double y = wonder[j].getLayoutY();
-							// path.getElements().addAll(new
-							// MoveTo(screenX/2,screenY/2),
-							// new ArcTo(R/2,r/2,0,workoutX1(Ox, Oy + r,
-							// j - i1,
-							// numOfPlayers) - x, workoutY1(Ox, Oy + r,
-							// j - i1,
-							// numOfPlayers) - y,true,true)
-							// );
-							// path.setStroke(color[j]);
-							// path.setStrokeWidth(10);
-							// root.getChildren().add(path);
-							// PathTransition pt = new
-							// PathTransition(Duration.seconds(8),path,wonder[j]);
-							//
-							// pt.setCycleCount(PathTransition.INDEFINITE);
-							// pt.setAutoReverse(true);
-							// pt.play();
+			player[i].addEventHandler(MouseEvent.MOUSE_CLICKED,
+					new EventHandler<MouseEvent>() {
 
-							tl.play();
-							forsort[j] = wonder[j].getLayoutY();
-							sign[j] = j;
-						}
-						// wonder[i1].toFront();
-						for (int i = 0; i < numOfPlayers - 1; i++) {
-							for (int j = 0; j < numOfPlayers - i - 1; j++) {
-								if (forsort[j] > forsort[j + 1]) {
-									double temp = forsort[j + 1];
-									forsort[j + 1] = forsort[j];
-									forsort[j] = temp;
-									int temp1 = sign[j + 1];
-									sign[j + 1] = sign[j];
-									sign[j] = temp1;
+						public void handle(MouseEvent e) {
+							if (!isTwice[i1]) {
+								if (remable) {
+									remable = false;
 								}
-							}
-						}
-						for (int i = 0; i < numOfPlayers; i++) {
-							if (sign[i] == i1) {
+								isTwice[i1] = true;
+								for (int i = 0; i < numOfPlayers; i++)
+									if (i != i1)
+										isTwice[i] = false;
+								handlerEnable = true;
+								EventHandler<ActionEvent> act1 = new EventHandler<ActionEvent>() {
 
-								b.toFront();
-							}
-							wonder[sign[i]].toFront();
-						}
-						// if(!b.isVisible())
-						cardBoard.toFront();
-						playerBoard.toFront();
-						// turn the wonderBoard
-						if (Manager.getKernel().isReplayMode()) {
-							int index = 0;
-							if (age == 2)
-								index = (2 * numOfPlayers - turn + i1 + 1) % numOfPlayers;
-							else
-								index = (turn + i1 - 1) % numOfPlayers;
-							handCard.changeRole(boards[i1], hands[index]);
-							observeIndex = i1;
-						}
-					} else {
-						EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								wonder[i1].showInfo();
-								remable = true;
-								signrec = i1;
+									public void handle(ActionEvent event) {
+										wonder[signrec].hideInfo();
+									}
+								};
+								EventHandler<ActionEvent> act2 = new EventHandler<ActionEvent>() {
+
+									public void handle(ActionEvent event) {
+										b.setVisible(false);
+										// cardBoard.toFront();
+										player[i1].setDisable(false);
+									}
+								};
+								Timeline pre_tl = new Timeline(new KeyFrame(
+										Duration.ZERO, act1), new KeyFrame(
+										Duration.seconds(0.3), new KeyValue(b
+												.opacityProperty(), 0.7),
+										new KeyValue(cardBoard
+												.layoutYProperty(),
+												screenY - 105)), new KeyFrame(
+										Duration.seconds(0.6), new KeyValue(b
+												.opacityProperty(), 0)),
+										new KeyFrame(Duration.seconds(0.6),
+												act2));
+								if (b.isVisible()) {
+									player[i1].setDisable(true);
+									pre_tl.play();
+								}
+								double[] forsort = new double[numOfPlayers];
+								int[] sign = new int[numOfPlayers];
+								for (int j = 0; j < numOfPlayers; j++) {
+									double percent = (workoutY1(Ox, Oy + r, j
+											- i1, numOfPlayers)
+											- Oy + r)
+											/ (2 * r);
+									Timeline tl = new Timeline(
+											new KeyFrame(
+													Duration.seconds(0.3),
+													new KeyValue(
+															wonder[j]
+																	.layoutXProperty(),
+															workoutX1(Ox, Oy
+																	+ r,
+																	j - i1,
+																	numOfPlayers)
+																	- (0.6 * percent + 0.4)
+																	* 160),
+													new KeyValue(
+															wonder[j]
+																	.layoutYProperty(),
+															workoutY1(Ox, Oy
+																	+ r,
+																	j - i1,
+																	numOfPlayers)
+																	- (0.6 * percent + 0.4)
+																	* 90),
+													new KeyValue(
+															tpa[j].scaleXProperty(),
+															1 / (0.6 * percent + 0.4)),
+													new KeyValue(
+															tpa[j].scaleYProperty(),
+															1 / (0.6 * percent + 0.4)),
+													new KeyValue(
+															wonder[j]
+																	.scaleXProperty(),
+															(0.6 * percent + 0.4)),
+													new KeyValue(
+															wonder[j]
+																	.scaleYProperty(),
+															(0.6 * percent + 0.4))));
+									// wonder[j].setLayoutX();
+									// wonder[j].setLayoutY();
+									// tpa[j].setScaleX();
+									// tpa[j].setScaleY();
+									// wonder[j].setScaleX();
+									// wonder[j].setScaleY();
+									// Path path = new Path();
+									// Manager.debug(wonder[j].getLayoutX() +
+									// ":" +
+									// wonder[j].getLayoutY() + " " +
+									// wonder[j].getTranslateX() + ":" +
+									// wonder[j].getTranslateY());
+									// double x = wonder[j].getLayoutX();
+									// double y = wonder[j].getLayoutY();
+									// path.getElements().addAll(new
+									// MoveTo(screenX/2,screenY/2),
+									// new ArcTo(R/2,r/2,0,workoutX1(Ox, Oy + r,
+									// j - i1,
+									// numOfPlayers) - x, workoutY1(Ox, Oy + r,
+									// j - i1,
+									// numOfPlayers) - y,true,true)
+									// );
+									// path.setStroke(color[j]);
+									// path.setStrokeWidth(10);
+									// root.getChildren().add(path);
+									// PathTransition pt = new
+									// PathTransition(Duration.seconds(8),path,wonder[j]);
+									//
+									// pt.setCycleCount(PathTransition.INDEFINITE);
+									// pt.setAutoReverse(true);
+									// pt.play();
+
+									tl.play();
+									forsort[j] = wonder[j].getLayoutY();
+									sign[j] = j;
+								}
+								// wonder[i1].toFront();
+								for (int i = 0; i < numOfPlayers - 1; i++) {
+									for (int j = 0; j < numOfPlayers - i - 1; j++) {
+										if (forsort[j] > forsort[j + 1]) {
+											double temp = forsort[j + 1];
+											forsort[j + 1] = forsort[j];
+											forsort[j] = temp;
+											int temp1 = sign[j + 1];
+											sign[j + 1] = sign[j];
+											sign[j] = temp1;
+										}
+									}
+								}
+								for (int i = 0; i < numOfPlayers; i++) {
+									if (sign[i] == i1) {
+
+										b.toFront();
+									}
+									wonder[sign[i]].toFront();
+								}
+								// if(!b.isVisible())
+								cardBoard.toFront();
 								playerBoard.toFront();
-								// show the game information of player
-							}
-						};
-						for (int i = 0; i < numOfPlayers; i++)
-							isTwice[i] = false;
-						b.setOpacity(0);
-						b.toFront();
-						playerBoard.toFront();
-						wonder[i1].toFront();
-						b.setVisible(true);
+								// turn the wonderBoard
+								if (Manager.getKernel().isReplayMode()) {
+									int index = 0;
+									if (age == 2)
+										index = (2 * numOfPlayers - turn + i1 + 1)
+												% numOfPlayers;
+									else
+										index = (turn + i1 - 1) % numOfPlayers;
+									handCard.changeRole(boards[i1],
+											hands[index]);
+									observeIndex = i1;
+								}
+							} else {
+								EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
 
-						handlerEnable = false;
-						Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(
-								b.opacityProperty(), 0.7), new KeyValue(cardBoard.layoutYProperty(), screenY)),
-								new KeyFrame(Duration.seconds(0.3), act));
-						tl.play();
-					}
-					theta = Math.PI / 2 - 2 * Math.PI / numOfPlayers * i1;
-				}
-			});
+									public void handle(ActionEvent event) {
+										wonder[i1].showInfo();
+										remable = true;
+										signrec = i1;
+										playerBoard.toFront();
+										// show the game information of player
+									}
+								};
+								for (int i = 0; i < numOfPlayers; i++)
+									isTwice[i] = false;
+								b.setOpacity(0);
+								b.toFront();
+								playerBoard.toFront();
+								wonder[i1].toFront();
+								b.setVisible(true);
+
+								handlerEnable = false;
+								Timeline tl = new Timeline(
+										new KeyFrame(
+												Duration.seconds(0.3),
+												new KeyValue(b
+														.opacityProperty(), 0.7),
+												new KeyValue(cardBoard
+														.layoutYProperty(),
+														screenY)),
+										new KeyFrame(Duration.seconds(0.3), act));
+								tl.play();
+							}
+							theta = Math.PI / 2 - 2 * Math.PI / numOfPlayers
+									* i1;
+						}
+					});
 			playerBoard.getChildren().add(player[i]);
-			judgeStateTimeline[i] = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(
-					player[i].opacityProperty(), 0)));
+			judgeStateTimeline[i] = new Timeline(new KeyFrame(
+					Duration.seconds(0.3), new KeyValue(
+							player[i].opacityProperty(), 0)));
 			judgeStateTimeline[i].setCycleCount(Timeline.INDEFINITE);
 			judgeStateTimeline[i].setAutoReverse(true);
-			buyStateCircle[i] = (Circle) MovingStroke.set(new Circle(xForPlayer(i), yForPlayer(i), 11,
-					Color.TRANSPARENT), Color.GOLDENROD, 3, 3, 4, 0.3);
+			buyStateCircle[i] = (Circle) MovingStroke.set(new Circle(
+					xForPlayer(i), yForPlayer(i), 11, Color.TRANSPARENT),
+					Color.GOLDENROD, 3, 3, 4, 0.3);
 			playerBoard.getChildren().add(buyStateCircle[i]);
 			buyStateCircle[i].setVisible(false);
 		}
@@ -541,92 +608,103 @@ public class MainBackGround extends SceneContainer {
 		 * primaryStage.addEventHandler(WindowEvent.RESIZE, new
 		 * EventHandler<MouseEvent>(){
 		 * 
-		 * @Override public void handle(MouseEvent event) {
-		 * System.out.println("OK");
+		 * public void handle(MouseEvent event) { System.out.println("OK");
 		 * 
 		 * }
 		 * 
 		 * }); primaryStage.
 		 */
 
-		scene.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				if (handlerEnable && moveable) {
-					double x = e.getX(), y = e.getY();
-					double tana = (y - Oy) / (x - Ox) * R / r;
-					beta = Math.atan(tana);
-					if (x <= Ox)
-						beta = beta + Math.PI;
-				}
-			}
-		});
+		scene.addEventHandler(MouseEvent.MOUSE_PRESSED,
+				new EventHandler<MouseEvent>() {
 
-		scene.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				isDragging = false;
-				if (handlerEnable && moveable)
-					theta = alpha - beta + theta;
-			}
-
-		});
-
-		scene.addEventHandler(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				isDragging = true;
-				if (handlerEnable && moveable) {
-					for (int i = 0; i < numOfPlayers; i++)
-						isTwice[i] = false;
-					double x = e.getX() - 70, y = e.getY();
-					double[] forsort = new double[numOfPlayers];
-					int[] sign = new int[numOfPlayers];
-					for (int i = 0; i < numOfPlayers; i++) {
-						// int index = (i +
-						// numOfPlayers+targetWonderIndex+1) %
-						// numOfPlayers;
-						int index = i;
-						double percent = (workoutY(x, y, i, numOfPlayers) - Oy + r) / (2 * r);
-						tpa[index].setScaleX(1 / (0.6 * percent + 0.4));
-						tpa[index].setScaleY(1 / (0.6 * percent + 0.4));
-						wonder[index].setScaleX((0.6 * percent + 0.4));
-						wonder[index].setScaleY((0.6 * percent + 0.4));
-						wonder[index].setLayoutX(workoutX(x, y, i, numOfPlayers) - (0.6 * percent + 0.4) * 160);
-						wonder[index].setLayoutY(workoutY(x, y, i, numOfPlayers) - (0.6 * percent + 0.4) * 90);
-						forsort[i] = wonder[i].getLayoutY();
-						sign[i] = i;
-					}
-					for (int i = 0; i < numOfPlayers - 1; i++) {
-						for (int j = 0; j < numOfPlayers - i - 1; j++) {
-							if (forsort[j] > forsort[j + 1]) {
-								double temp = forsort[j + 1];
-								forsort[j + 1] = forsort[j];
-								forsort[j] = temp;
-								int temp1 = sign[j + 1];
-								sign[j + 1] = sign[j];
-								sign[j] = temp1;
-							}
+					public void handle(MouseEvent e) {
+						if (handlerEnable && moveable) {
+							double x = e.getX(), y = e.getY();
+							double tana = (y - Oy) / (x - Ox) * R / r;
+							beta = Math.atan(tana);
+							if (x <= Ox)
+								beta = beta + Math.PI;
 						}
 					}
-					for (int i = 0; i < numOfPlayers; i++)
-						wonder[sign[i]].toFront();
-					playerBoard.toFront();
-					cardBoard.toFront();
-				}
-			}
-		});
+				});
 
-		scene.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				if (handlerEnable) {
-					// if( y > screenY - 牌宽)
-					// 牌.show();
-				}
-			}
+		scene.addEventHandler(MouseEvent.MOUSE_RELEASED,
+				new EventHandler<MouseEvent>() {
 
-		});
+					public void handle(MouseEvent e) {
+						isDragging = false;
+						if (handlerEnable && moveable)
+							theta = alpha - beta + theta;
+					}
+
+				});
+
+		scene.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+				new EventHandler<MouseEvent>() {
+
+					public void handle(MouseEvent e) {
+						isDragging = true;
+						if (handlerEnable && moveable) {
+							for (int i = 0; i < numOfPlayers; i++)
+								isTwice[i] = false;
+							double x = e.getX() - 70, y = e.getY();
+							double[] forsort = new double[numOfPlayers];
+							int[] sign = new int[numOfPlayers];
+							for (int i = 0; i < numOfPlayers; i++) {
+								// int index = (i +
+								// numOfPlayers+targetWonderIndex+1) %
+								// numOfPlayers;
+								int index = i;
+								double percent = (workoutY(x, y, i,
+										numOfPlayers) - Oy + r)
+										/ (2 * r);
+								tpa[index].setScaleX(1 / (0.6 * percent + 0.4));
+								tpa[index].setScaleY(1 / (0.6 * percent + 0.4));
+								wonder[index].setScaleX((0.6 * percent + 0.4));
+								wonder[index].setScaleY((0.6 * percent + 0.4));
+								wonder[index].setLayoutX(workoutX(x, y, i,
+										numOfPlayers)
+										- (0.6 * percent + 0.4)
+										* 160);
+								wonder[index].setLayoutY(workoutY(x, y, i,
+										numOfPlayers)
+										- (0.6 * percent + 0.4)
+										* 90);
+								forsort[i] = wonder[i].getLayoutY();
+								sign[i] = i;
+							}
+							for (int i = 0; i < numOfPlayers - 1; i++) {
+								for (int j = 0; j < numOfPlayers - i - 1; j++) {
+									if (forsort[j] > forsort[j + 1]) {
+										double temp = forsort[j + 1];
+										forsort[j + 1] = forsort[j];
+										forsort[j] = temp;
+										int temp1 = sign[j + 1];
+										sign[j + 1] = sign[j];
+										sign[j] = temp1;
+									}
+								}
+							}
+							for (int i = 0; i < numOfPlayers; i++)
+								wonder[sign[i]].toFront();
+							playerBoard.toFront();
+							cardBoard.toFront();
+						}
+					}
+				});
+
+		scene.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				new EventHandler<MouseEvent>() {
+
+					public void handle(MouseEvent e) {
+						if (handlerEnable) {
+							// if( y > screenY - 牌宽)
+							// 牌.show();
+						}
+					}
+
+				});
 		switch (numOfPlayers) {
 		case 3:
 			root.getChildren().add(wonder[2]);
@@ -666,60 +744,82 @@ public class MainBackGround extends SceneContainer {
 		root.getChildren().add(cardBoard);
 		cardBoard.setLayoutX(0);
 		cardBoard.setLayoutY(screenY - 105);
-		cardBoard.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+		cardBoard.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				new EventHandler<MouseEvent>() {
 
-			@Override
-			public void handle(MouseEvent e) {
-				if (wonderFadeTimeline != null)
-					for (Timeline tl : wonderFadeTimeline)
-						if (tl != null)
-							tl.stop();
-				wonderFadeTimeline = new Timeline[numOfPlayers];
-				wonderFadeTimeline[observeIndex] = new Timeline(new KeyFrame(Duration.seconds(0.1), new KeyValue(
-						cardBoard.layoutYProperty(), screenY - 270)));
-				for (int i = 0; i < numOfPlayers; i++) {
-					if (i == observeIndex)
-						continue;
-					if (wonder[i].getOpacity() > 0.99)
-						wonderFadeTimeline[i] = new Timeline(new KeyFrame(Duration.seconds(0), new KeyValue(wonder[i]
-								.opacityProperty(), 1)), new KeyFrame(Duration.seconds(1.5), new KeyValue(wonder[i]
-								.opacityProperty(), 1)), new KeyFrame(Duration.seconds(2), new KeyValue(wonder[i]
-								.opacityProperty(), i == (1 + observeIndex) % numOfPlayers
-								|| i == (numOfPlayers - 1 + observeIndex) % numOfPlayers ? 0.65 : 0.35,
-								Interpolator.EASE_IN)));
-				}
-				for (Timeline tl : wonderFadeTimeline)
-					if (tl != null)
-						tl.play();
+					public void handle(MouseEvent e) {
+						if (wonderFadeTimeline != null)
+							for (Timeline tl : wonderFadeTimeline)
+								if (tl != null)
+									tl.stop();
+						wonderFadeTimeline = new Timeline[numOfPlayers];
+						wonderFadeTimeline[observeIndex] = new Timeline(
+								new KeyFrame(Duration.seconds(0.1),
+										new KeyValue(cardBoard
+												.layoutYProperty(),
+												screenY - 270)));
+						for (int i = 0; i < numOfPlayers; i++) {
+							if (i == observeIndex)
+								continue;
+							if (wonder[i].getOpacity() > 0.99)
+								wonderFadeTimeline[i] = new Timeline(
+										new KeyFrame(Duration.seconds(0),
+												new KeyValue(wonder[i]
+														.opacityProperty(), 1)),
+										new KeyFrame(Duration.seconds(1.5),
+												new KeyValue(wonder[i]
+														.opacityProperty(), 1)),
+										new KeyFrame(
+												Duration.seconds(2),
+												new KeyValue(
+														wonder[i]
+																.opacityProperty(),
+														i == (1 + observeIndex)
+																% numOfPlayers
+																|| i == (numOfPlayers - 1 + observeIndex)
+																		% numOfPlayers ? 0.65
+																: 0.35,
+														Interpolator.EASE_IN)));
+						}
+						for (Timeline tl : wonderFadeTimeline)
+							if (tl != null)
+								tl.play();
 
-				cardBoard.toFront();
-				isIncard = true;
-			}
+						cardBoard.toFront();
+						isIncard = true;
+					}
 
-		});
-		cardBoard.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				if (wonderFadeTimeline != null)
-					for (Timeline tl : wonderFadeTimeline)
-						if (tl != null)
-							tl.stop();
-				wonderFadeTimeline = new Timeline[numOfPlayers];
-				wonderFadeTimeline[0] = new Timeline(new KeyFrame(Duration.seconds(0.15), new KeyValue(cardBoard
-						.layoutYProperty(), screenY - 105)));
-				for (int i = 1; i < numOfPlayers; i++) {
-					if (wonder[i].getOpacity() < 0.99)
-						wonderFadeTimeline[i] = new Timeline(new KeyFrame(Duration.seconds(0), new KeyValue(wonder[i]
-								.opacityProperty(), 0.5)), new KeyFrame(Duration.seconds(0.3), new KeyValue(wonder[i]
-								.opacityProperty(), 1)));
-				}
-				for (Timeline tl : wonderFadeTimeline)
-					if (tl != null)
-						tl.play();
-				isIncard = true;
-			}
+				});
+		cardBoard.addEventHandler(MouseEvent.MOUSE_EXITED,
+				new EventHandler<MouseEvent>() {
 
-		});
+					public void handle(MouseEvent e) {
+						if (wonderFadeTimeline != null)
+							for (Timeline tl : wonderFadeTimeline)
+								if (tl != null)
+									tl.stop();
+						wonderFadeTimeline = new Timeline[numOfPlayers];
+						wonderFadeTimeline[0] = new Timeline(new KeyFrame(
+								Duration.seconds(0.15), new KeyValue(cardBoard
+										.layoutYProperty(), screenY - 105)));
+						for (int i = 1; i < numOfPlayers; i++) {
+							if (wonder[i].getOpacity() < 0.99)
+								wonderFadeTimeline[i] = new Timeline(
+										new KeyFrame(
+												Duration.seconds(0),
+												new KeyValue(wonder[i]
+														.opacityProperty(), 0.5)),
+										new KeyFrame(Duration.seconds(0.3),
+												new KeyValue(wonder[i]
+														.opacityProperty(), 1)));
+						}
+						for (Timeline tl : wonderFadeTimeline)
+							if (tl != null)
+								tl.play();
+						isIncard = true;
+					}
+
+				});
 		this.exitDialog = Index.loadExitGameDialog(root);
 		root.getChildren().add(new GameMenu());
 
@@ -735,7 +835,7 @@ public class MainBackGround extends SceneContainer {
 		if (Manager.getKernel().isReplayMode()) {
 			// Button nextBtn = new Button("Next!");
 			// nextBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			// @Override
+			//
 			// public void handle(MouseEvent event) {
 			// nextTurn();
 			// }
@@ -812,6 +912,7 @@ public class MainBackGround extends SceneContainer {
 		counterClockwise2.setVisible(false);
 		counterClockwise3.setVisible(false);
 	}
+
 	public static void changeCardGivenUp(int i) {
 		CardsGivenup = i;
 		String s = String.valueOf(CardsGivenup);
@@ -828,17 +929,20 @@ public class MainBackGround extends SceneContainer {
 			stageLabel.setImage(stageI);
 			stageLabel.setScaleX(rate);
 			stageLabel.setScaleY(rate);
-			stageLabel.setTranslateX((stageI.getWidth() * xrate - 134) / 2.0 + 15);
+			stageLabel
+					.setTranslateX((stageI.getWidth() * xrate - 134) / 2.0 + 15);
 			stageLabel.setTranslateY((stageI.getHeight() * yrate - 128) / 2.0);
 			stageLabel.toBack();
 			background.toBack();
 			mbg.root.getChildren().add(stageLabel);
 			stageLabel.setX(0);
 			stageLabel.setY(0);
-			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0), new KeyValue(stageLabel.opacityProperty(), 0),
-					new KeyValue(stageLabel.scaleXProperty(), 0)), new KeyFrame(Duration.seconds(1), new KeyValue(
-					stageLabel.opacityProperty(), 1), new KeyValue(stageLabel.scaleXProperty(), rate,
-					Interpolator.EASE_OUT)));
+			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0),
+					new KeyValue(stageLabel.opacityProperty(), 0),
+					new KeyValue(stageLabel.scaleXProperty(), 0)),
+					new KeyFrame(Duration.seconds(1), new KeyValue(stageLabel
+							.opacityProperty(), 1), new KeyValue(stageLabel
+							.scaleXProperty(), rate, Interpolator.EASE_OUT)));
 			tl.play();
 		} else if (age == 2) {
 			GUIManager.bgMusic.stop();
@@ -848,16 +952,20 @@ public class MainBackGround extends SceneContainer {
 			GUIManager.bgMusic.play();
 			final Image stageII = ResManager.getImage("ph2.png");
 			EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-				@Override
+
 				public void handle(ActionEvent event) {
 					stageLabel.setImage(stageII);
 				}
 			};
-			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(1), new KeyValue(stageLabel.opacityProperty(), 0),
-					new KeyValue(stageLabel.scaleXProperty(), 0, Interpolator.EASE_IN)), new KeyFrame(
-					Duration.seconds(1), act), new KeyFrame(Duration.seconds(2), new KeyValue(
-					stageLabel.opacityProperty(), 1), new KeyValue(stageLabel.scaleXProperty(), rate,
-					Interpolator.EASE_OUT)));
+			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(1),
+					new KeyValue(stageLabel.opacityProperty(), 0),
+					new KeyValue(stageLabel.scaleXProperty(), 0,
+							Interpolator.EASE_IN)), new KeyFrame(
+					Duration.seconds(1), act), new KeyFrame(
+					Duration.seconds(2), new KeyValue(
+							stageLabel.opacityProperty(), 1), new KeyValue(
+							stageLabel.scaleXProperty(), rate,
+							Interpolator.EASE_OUT)));
 			tl.play();
 
 		} else if (age == 3) {
@@ -868,16 +976,20 @@ public class MainBackGround extends SceneContainer {
 			GUIManager.bgMusic.play();
 			final Image stageIII = ResManager.getImage("ph3.png");
 			EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-				@Override
+
 				public void handle(ActionEvent event) {
 					stageLabel.setImage(stageIII);
 				}
 			};
-			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(1), new KeyValue(stageLabel.opacityProperty(), 0),
-					new KeyValue(stageLabel.scaleXProperty(), 0, Interpolator.EASE_IN)), new KeyFrame(
-					Duration.seconds(1), act), new KeyFrame(Duration.seconds(2), new KeyValue(
-					stageLabel.opacityProperty(), 1), new KeyValue(stageLabel.scaleXProperty(), rate,
-					Interpolator.EASE_OUT)));
+			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(1),
+					new KeyValue(stageLabel.opacityProperty(), 0),
+					new KeyValue(stageLabel.scaleXProperty(), 0,
+							Interpolator.EASE_IN)), new KeyFrame(
+					Duration.seconds(1), act), new KeyFrame(
+					Duration.seconds(2), new KeyValue(
+							stageLabel.opacityProperty(), 1), new KeyValue(
+							stageLabel.scaleXProperty(), rate,
+							Interpolator.EASE_OUT)));
 			tl.play();
 		}
 	}
@@ -893,11 +1005,16 @@ public class MainBackGround extends SceneContainer {
 			// handCard.unload();
 			if (turn < 6) {
 				if (age == 2) {
-					handCard.nextHand(hands[(2 * numOfPlayers - turn + observeIndex) % numOfPlayers], false);
-					Manager.debug("Player is taking hands[" + (2 * numOfPlayers - turn) % numOfPlayers + "]");
+					handCard.nextHand(
+							hands[(2 * numOfPlayers - turn + observeIndex)
+									% numOfPlayers], false);
+					Manager.debug("Player is taking hands["
+							+ (2 * numOfPlayers - turn) % numOfPlayers + "]");
 				} else {
-					handCard.nextHand(hands[(turn + observeIndex) % numOfPlayers], false);
-					Manager.debug("Player is taking hands[" + (turn) % numOfPlayers + "]");
+					handCard.nextHand(hands[(turn + observeIndex)
+							% numOfPlayers], false);
+					Manager.debug("Player is taking hands[" + (turn)
+							% numOfPlayers + "]");
 				}
 				turn++;
 			} else {
@@ -927,7 +1044,9 @@ public class MainBackGround extends SceneContainer {
 					Manager.getKernel().startAge(age);
 					bigCircle.getChildren().clear();
 					bigCircle.getChildren().add(
-							MovingStroke.set(new Circle(29, Color.web("white", 0)), Color.web("white", 0.7), 6, 5, 10,
+							MovingStroke.set(
+									new Circle(29, Color.web("white", 0)),
+									Color.web("white", 0.7), 6, 5, 10,
 									0.3 * (age != 2 ? -1 : 1)));
 					hands = Manager.getKernel().getHands();
 					handCard.nextHand(hands[0], true);
@@ -948,9 +1067,12 @@ public class MainBackGround extends SceneContainer {
 					sb.setLayoutY(-300);
 					mbg.root.getChildren().add(sb);
 					Manager.getKernel().saveRec(true);
-					Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(sb.opacityProperty(), 0),
-							new KeyValue(sb.layoutYProperty(), -300)), new KeyFrame(Duration.seconds(0.5),
-							new KeyValue(sb.opacityProperty(), 1), new KeyValue(sb.layoutYProperty(), (screenY - sb
+					Timeline tl = new Timeline(new KeyFrame(Duration.ZERO,
+							new KeyValue(sb.opacityProperty(), 0),
+							new KeyValue(sb.layoutYProperty(), -300)),
+							new KeyFrame(Duration.seconds(0.5), new KeyValue(sb
+									.opacityProperty(), 1), new KeyValue(sb
+									.layoutYProperty(), (screenY - sb
 									.getBoundsInLocal().getHeight()) / 2)));
 					tl.play();
 					// quit();//Only for test
@@ -983,22 +1105,29 @@ public class MainBackGround extends SceneContainer {
 				// JOptionPane.showMessageDialog(null, or.get(i));
 				SimpleResList oneOrList = or.get(i);
 				int kind;
-				if (oneOrList.numAt(1) == 1 && oneOrList.numAt(4) == 1 && oneOrList.numAt(2) == 0)
+				if (oneOrList.numAt(1) == 1 && oneOrList.numAt(4) == 1
+						&& oneOrList.numAt(2) == 0)
 					kind = 8;
-				else if (oneOrList.numAt(1) == 1 && oneOrList.numAt(3) == 1 && oneOrList.numAt(2) == 0)
+				else if (oneOrList.numAt(1) == 1 && oneOrList.numAt(3) == 1
+						&& oneOrList.numAt(2) == 0)
 					kind = 9;
-				else if (oneOrList.numAt(1) == 1 && oneOrList.numAt(2) == 1 && oneOrList.numAt(3) == 0)
+				else if (oneOrList.numAt(1) == 1 && oneOrList.numAt(2) == 1
+						&& oneOrList.numAt(3) == 0)
 					kind = 10;
-				else if (oneOrList.numAt(3) == 1 && oneOrList.numAt(4) == 1 && oneOrList.numAt(2) == 0)
+				else if (oneOrList.numAt(3) == 1 && oneOrList.numAt(4) == 1
+						&& oneOrList.numAt(2) == 0)
 					kind = 11;
-				else if (oneOrList.numAt(2) == 1 && oneOrList.numAt(4) == 1 && oneOrList.numAt(3) == 0)
+				else if (oneOrList.numAt(2) == 1 && oneOrList.numAt(4) == 1
+						&& oneOrList.numAt(3) == 0)
 					kind = 12;
-				else if (oneOrList.numAt(2) == 1 && oneOrList.numAt(3) == 1 && oneOrList.numAt(1) == 0)
+				else if (oneOrList.numAt(2) == 1 && oneOrList.numAt(3) == 1
+						&& oneOrList.numAt(1) == 0)
 					kind = 13;
-				else if (oneOrList.numAt(5) == 1 && oneOrList.numAt(6) == 1 && oneOrList.numAt(7) == 1)
+				else if (oneOrList.numAt(5) == 1 && oneOrList.numAt(6) == 1
+						&& oneOrList.numAt(7) == 1)
 					kind = 14;
-				else if (oneOrList.numAt(1) == 1 && oneOrList.numAt(2) == 1 && oneOrList.numAt(3) == 1
-						&& oneOrList.numAt(4) == 1)
+				else if (oneOrList.numAt(1) == 1 && oneOrList.numAt(2) == 1
+						&& oneOrList.numAt(3) == 1 && oneOrList.numAt(4) == 1)
 					kind = 15;
 				else
 					continue;
@@ -1033,13 +1162,17 @@ public class MainBackGround extends SceneContainer {
 		for (int i = start; i < numOfPlayers; i++) {
 			Board board = boards[i];
 			if (age == 2) {
-				board.takeTurn(hands[(2 - turn + ind + 2 * numOfPlayers) % numOfPlayers], turn);
-				Manager.debug("AI " + i + " takes hand[" + (2 - turn + ind + 2 * numOfPlayers) % numOfPlayers + "]");
+				board.takeTurn(hands[(2 - turn + ind + 2 * numOfPlayers)
+						% numOfPlayers], turn);
+				Manager.debug("AI " + i + " takes hand["
+						+ (2 - turn + ind + 2 * numOfPlayers) % numOfPlayers
+						+ "]");
 			} else {
 				// JOptionPane.showMessageDialog(null, hands[(ind + turn) %
 				// numOfPlayers]);
 				board.takeTurn(hands[(ind + turn) % numOfPlayers], turn);
-				Manager.debug("AI " + i + " takes hand[" + (ind + turn) % numOfPlayers + "]");
+				Manager.debug("AI " + i + " takes hand[" + (ind + turn)
+						% numOfPlayers + "]");
 			} // Q:
 				// What
 				// if
@@ -1072,9 +1205,11 @@ public class MainBackGround extends SceneContainer {
 	public static void implementPlayerCommandOption(int index, CommandOption com) {
 
 		if (com.getCommand().equals(Command.BUILD_CARD)) {
-			wonder[index].addCard(CardGroup.cardNameMap.get(com.getCard().getName()), com.getCard().getColor());
+			wonder[index].addCard(CardGroup.cardNameMap.get(com.getCard()
+					.getName()), com.getCard().getColor());
 		} else if (com.getCommand().equals(Command.SELL_CARD)) {
-			wonder[index].discardCard(CardGroup.cardNameMap.get(com.getCard().getName()));
+			wonder[index].discardCard(CardGroup.cardNameMap.get(com.getCard()
+					.getName()));
 			addCardGivenUp(1);
 		}
 	}

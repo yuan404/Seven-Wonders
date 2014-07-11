@@ -41,6 +41,7 @@ import org.tjuscs.sevenwonders.gui.MainBackGround;
 import org.tjuscs.sevenwonders.kernel.RecManager.AgeInfo;
 import org.tjuscs.sevenwonders.kernel.RecManager.GameInfo;
 import org.tjuscs.sevenwonders.kernel.RecManager.TurnInfo;
+
 //import org.tjuscs.sevenwonders.net.NetPlayer;
 
 /**
@@ -196,13 +197,15 @@ public class KernelManager {
 			}
 		}
 	}
+
 	/**
 	 * TODO Overload method, Changed by zxn
+	 * 
 	 * @param diffs
 	 */
-	
+
 	public void setAIPlayers(Difficulty[] diffs) {
-		System.out.println(this.getClass().getName()+" - setAIPlayers()");
+		System.out.println(this.getClass().getName() + " - setAIPlayers()");
 		GamePlayer player;
 		players = new GamePlayer[numPlayers];
 		String[] boardNames = new String[numPlayers];
@@ -210,11 +213,11 @@ public class KernelManager {
 		String[] playerNames = new String[numPlayers];
 		for (int i = 0; i < boards.length; i++) {
 			Board board = boards[i];
-			//TODO Changed by zxn
-			if (i==0)
+			// TODO Changed by zxn
+			if (i == 0)
 				players[i] = player = new RandBot(i);
 			else
-				players[i] = player = new RandBot(i,diffs[i-1]);
+				players[i] = player = new RandBot(i, diffs[i - 1]);
 			//
 			player.setBoard(board);
 			board.setPlayer(player);
@@ -225,7 +228,7 @@ public class KernelManager {
 
 		players[0] = player = new GUIPlayer();
 		player.setBoard(boards[0]);
-		System.out.println("GUIPlayer.board="+player.board.brdName);
+		System.out.println("GUIPlayer.board=" + player.board.brdName);
 		boards[0].setPlayer(player);
 		playerNames[0] = players[0].getName();
 
@@ -235,6 +238,7 @@ public class KernelManager {
 		gameInfo.boardNames = boardNames;
 		gameInfo.boardSides = boardSides;
 	}
+
 	/**
 	 * Start the game.<br>
 	 * 开始游戏
@@ -368,12 +372,13 @@ public class KernelManager {
 	 *            the age number.时代序号(1/2/3)
 	 */
 	public void startAge(int ageNum) {
-		System.out.println(this.getClass().getName()+" - startAge()");
+		System.out.println(this.getClass().getName() + " - startAge()");
 		age = ageNum;
 		if (!replayMode)
 			hands = cardManager.setupHands(ageNum);
 		else
-			hands = cardManager.loadHands(ageNum,gameInfo.ages[ageNum-1].cardNames);
+			hands = cardManager.loadHands(ageNum,
+					gameInfo.ages[ageNum - 1].cardNames);
 		// debug output
 		Manager.debug("Start Age " + ageNum + "\n");
 		for (StringBuilder sb : out) {
@@ -412,33 +417,33 @@ public class KernelManager {
 	 * (按顺时针或逆时针)将手牌传给相应的奇迹，并逐个地请求奇迹来完成该回合。
 	 * 
 	 * @deprecated Don't use it!<br>
-	 *             别用这个哦，亲！╮(╯_╰)╭	TODO: Unused
+	 *             别用这个哦，亲！╮(╯_╰)╭ TODO: Unused
 	 * @param trnNum
 	 *            the turn number. 回合序号
 	 * @throws InterruptedException
 	 */
-//	public void startTurn(int trnNum) throws InterruptedException {
-//		int ind = -1;
-//		System.out.println("\nTurn " + trnNum);
-//
-//		for (Board board : boards) {
-//			out[ind + 1].append("\nTurn " + trnNum);
-//			out[ind + 1].append("\n" + board);
-//			System.out.println("\n\n" + board);
-//
-//			// Thread t = new Thread(board.new TakeTurnTask(hands[(ind + trnNum)
-//			// % numPlayers], trnNum)); // Q:
-//			// What
-//			// if
-//			// Age 2
-//			// ?
-//			// t.start();
-//			// t.sleep(200000);
-//			ind++;
-//			// out[ind].append("\n" + board );
-//		}
-//	}
-//
+	// public void startTurn(int trnNum) throws InterruptedException {
+	// int ind = -1;
+	// System.out.println("\nTurn " + trnNum);
+	//
+	// for (Board board : boards) {
+	// out[ind + 1].append("\nTurn " + trnNum);
+	// out[ind + 1].append("\n" + board);
+	// System.out.println("\n\n" + board);
+	//
+	// // Thread t = new Thread(board.new TakeTurnTask(hands[(ind + trnNum)
+	// // % numPlayers], trnNum)); // Q:
+	// // What
+	// // if
+	// // Age 2
+	// // ?
+	// // t.start();
+	// // t.sleep(200000);
+	// ind++;
+	// // out[ind].append("\n" + board );
+	// }
+	// }
+	//
 	/**
 	 * Do end of turn.<br>
 	 * 回合结束时的结算
@@ -478,11 +483,14 @@ public class KernelManager {
 		}
 
 		for (Board board : boards) {
-			int ourSheild = (board.goods.containsKey(Resource.SHEILD) ? board.goods.get(Resource.SHEILD) : 0);
-			int lftNghborSheild = (board.getLeftNeighbor().goods.containsKey(Resource.SHEILD) ? board.getLeftNeighbor().goods
+			int ourSheild = (board.goods.containsKey(Resource.SHEILD) ? board.goods
 					.get(Resource.SHEILD) : 0);
-			int rghtNghborSheild = (board.getRightNeighbor().goods.containsKey(Resource.SHEILD) ? board
-					.getRightNeighbor().goods.get(Resource.SHEILD) : 0);
+			int lftNghborSheild = (board.getLeftNeighbor().goods
+					.containsKey(Resource.SHEILD) ? board.getLeftNeighbor().goods
+					.get(Resource.SHEILD) : 0);
+			int rghtNghborSheild = (board.getRightNeighbor().goods
+					.containsKey(Resource.SHEILD) ? board.getRightNeighbor().goods
+					.get(Resource.SHEILD) : 0);
 			if (ourSheild > lftNghborSheild)
 				board.militaryVPS[LEFT][ageNum] = victVP[ageNum];
 			else if (ourSheild < lftNghborSheild) {
@@ -505,14 +513,15 @@ public class KernelManager {
 	 */
 	public void doEndOfGame() {
 		for (Board board : boards) {
-			System.out.println(KernelManager.class.getName()+" - doEndOfGame() - Board name: "+ board.getName());
+			System.out.println(KernelManager.class.getName()
+					+ " - doEndOfGame() - Board name: " + board.getName());
 			int sciScore = board.scoreVPs();
 			board.addToVPs(sciScore);
 			int coinScore = board.cscoreVPs();
-			//Original
-			//board.addToCoins(coinScore);
-			
-			board.addToVPs(coinScore);	//Changed By ZXN
+			// Original
+			// board.addToCoins(coinScore);
+
+			board.addToVPs(coinScore); // Changed By ZXN
 		}
 		for (DelayedAction da : EOGameDelayedActionList) {
 			da.doDelayedAction();
@@ -526,9 +535,9 @@ public class KernelManager {
 			return;
 		recorder.rec(gameInfo);
 	}
-	
-	public String getTempRec(){
-		if(gameInfo != null)
+
+	public String getTempRec() {
+		if (gameInfo != null)
 			return gameInfo.toString();
 		else
 			return null;
@@ -548,10 +557,13 @@ public class KernelManager {
 			this.replayMode = true;
 			gameInfo = recorder.read(file);
 			numPlayers = gameInfo.boardNames.length;
-			boards = BoardFactory.makeBoards(gameInfo.boardNames, gameInfo.boardSides);
+			boards = BoardFactory.makeBoards(gameInfo.boardNames,
+					gameInfo.boardSides);
 			ReplayPlayer.init(gameInfo);
 			players = new ReplayPlayer[numPlayers];
-			System.out.println("****************************************ReplayPlayers="+players);
+			System.out
+					.println("****************************************ReplayPlayers="
+							+ players);
 			for (int i = 0; i < boards.length; i++) {
 				players[i] = new ReplayPlayer(i);
 				players[i].setBoard(boards[i]);
@@ -559,46 +571,52 @@ public class KernelManager {
 			}
 			initializeGame();
 
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		}catch(Throwable e){
+			// } catch (FileNotFoundException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } catch (IOException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
+		} catch (Throwable e) {
 			Manager.error(e);
 		}
 	}
-	
-	public boolean isReplayMode(){
+
+	public boolean isReplayMode() {
 		return replayMode;
 	}
+
 	/**
 	 * TODO Added by zxn 4-7
+	 * 
 	 * @return
 	 */
 	public int getNumPlayers() {
 		return this.numPlayers;
 	}
+
 	/**
 	 * TODO Added by zxn 4-7
+	 * 
 	 * @param index
 	 * @param diff
 	 */
-	public void setAIDifficulty(int index,Difficulty diff) {
-		if (index!=0) {
-			RandBot bot=(RandBot)players[index];
-			bot.difficulty=diff;
+	public void setAIDifficulty(int index, Difficulty diff) {
+		if (index != 0) {
+			RandBot bot = (RandBot) players[index];
+			bot.difficulty = diff;
 		}
 	}
+
 	/**
 	 * TODO Added by zxn 4-11
+	 * 
 	 * @return
 	 */
-	
+
 	public GamePlayer[] getPlayers() {
 		return players;
 	}
-	
+
 }

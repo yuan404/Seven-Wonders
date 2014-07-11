@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 /**
- * The Class HumanDialogBasedPlayer.  Unused in GUI game
+ * The Class HumanDialogBasedPlayer. Unused in GUI game
  */
 @SuppressWarnings("serial")
 public class HumanDialogBasedPlayer implements Player {
@@ -94,7 +94,7 @@ public class HumanDialogBasedPlayer implements Player {
 		JOptionPane.showMessageDialog(null, bigPanel, board.getName(),
 				JOptionPane.PLAIN_MESSAGE);
 
-		if (board.canBuildNextStage()) 
+		if (board.canBuildNextStage())
 			options[choice].setCanBuildStage(true);
 		options[choice].setCommand(cmdChoice);
 		System.out.println("HumanDialogPlayer Chose: "
@@ -110,13 +110,13 @@ public class HumanDialogBasedPlayer implements Player {
 	 * .core.SimpleResList, org.tjuscs.sevenwonders.core.SimpleResList,
 	 * org.tjuscs.sevenwonders.core.SimpleResList)
 	 */
-	//TODO make buy decision
-	@Override
+	// TODO make buy decision
+
 	public void makeBuyDecision(SimpleResList needs, SimpleResList leftGoods,
 			SimpleResList rightGoods) {
 		int needtol = needs.getTotalRes();
 		for (int i = 0; i < needtol; i++) {
-			
+
 		}
 		System.out.println("HumanDialogBasedPlayer::makeBuyDecision");
 	}
@@ -298,8 +298,6 @@ public class HumanDialogBasedPlayer implements Player {
 
 		}
 	} // end of BoardPanel class
-
-
 
 } // end of HumanDialogBasedPlayer class
 

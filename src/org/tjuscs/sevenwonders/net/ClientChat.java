@@ -67,7 +67,7 @@
 //		//
 //		// txt_messageToSend.addKeyListener(new KeyAdapter()
 //		// {
-//		// @Override
+//		// 
 //		// public void keyPressed(KeyEvent e)
 //		// {
 //		// if (e.getKeyCode() == KeyEvent.VK_ENTER)
@@ -97,7 +97,7 @@
 //		// btn_send.addActionListener(new ActionListener()
 //		// {
 //		//
-//		// @Override
+//		// 
 //		// public void actionPerformed(ActionEvent e)
 //		// {
 //		// String message = txt_messageToSend.getText();
@@ -132,7 +132,7 @@
 //		//
 //		// addWindowListener(new WindowAdapter()
 //		// {
-//		// @Override
+//		// 
 //		// public void windowClosing(WindowEvent e)
 //		// {
 //		// System.exit(0);
@@ -161,7 +161,7 @@
 //		//Following is for test!
 ////		final Chat self = this;
 ////		new Thread() {
-////			@Override
+////			
 ////			public void run() {
 ////				while (true) {
 ////					try {
@@ -196,4 +196,4 @@
 //		return msgList.isEmpty();
 //	}
 //
-//}
+// }

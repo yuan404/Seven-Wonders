@@ -30,7 +30,6 @@ public class FreeSciSymbolAction implements Action {
 		return "free science symbol at the end of the game ";
 	}
 
-	@Override
 	public int points(Board brd) {
 		// TODO Auto-generated method stub
 		return 0;

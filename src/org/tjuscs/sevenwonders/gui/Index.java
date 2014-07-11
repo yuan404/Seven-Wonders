@@ -49,18 +49,24 @@ public class Index extends SceneContainer {
 	public static Font font;
 	public static String style;
 	private Timeline timeline;
-	private InnerDialog newGameDialog = new InnerDialog(400, 350);	//TODO Changed by zxn 4-5 new-1 Original:(400,300)
+	private InnerDialog newGameDialog = new InnerDialog(400, 350); // TODO
+																	// Changed
+																	// by zxn
+																	// 4-5 new-1
+																	// Original:(400,300)
 	private InnerDialog joinGameDialog = new InnerDialog(400, 300);
 	private InnerDialog settingDialog;
 	private InnerDialog replayGameDialog = new InnerDialog(400, 300);
 	private InnerDialog creditsDialog;
-//	private static String playerName = Manager.getNet().getLocalName();	TODO Changed by zxn
-	private static String playerName = "Player Name";	//TODO Changed by zxn
+	// private static String playerName = Manager.getNet().getLocalName(); TODO
+	// Changed by zxn
+	private static String playerName = "Player Name"; // TODO Changed by zxn
 	private File record;
 	private ImageView view;
 	private Index self;
-	
-	private InnerDialog botDiffDialog;//= new InnerDialog(400,100);	//TODO Added by zxn 4-5 new-1
+
+	private InnerDialog botDiffDialog;// = new InnerDialog(400,100); //TODO
+										// Added by zxn 4-5 new-1
 
 	// public static AudioClip bgMusic;
 	private int choice;
@@ -83,7 +89,8 @@ public class Index extends SceneContainer {
 		area[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				label.setVisible(true);
-				Rectangle mouseArea = new Rectangle(38 - i * 5, 4 + i * 45, 173, 44);
+				Rectangle mouseArea = new Rectangle(38 - i * 5, 4 + i * 45,
+						173, 44);
 				label.setClip(mouseArea);
 				choice = i;
 			}
@@ -91,13 +98,14 @@ public class Index extends SceneContainer {
 	}
 
 	public void load() {
-		System.out.println(Index.class.getName()+" - load()");
+		System.out.println(Index.class.getName() + " - load()");
 		choice = -1;
 		self = this;
 		double screenWidth = GUIManager.width;
 		double screenHeight = GUIManager.height;
 		// setLocale();
-		scene = new Scene(root, GUIManager.width, GUIManager.height, GUIManager.bgColor);
+		scene = new Scene(root, GUIManager.width, GUIManager.height,
+				GUIManager.bgColor);
 
 		scene.setCursor(new ImageCursor(GUIManager.cursor));
 		font = GUIManager.font;
@@ -141,70 +149,82 @@ public class Index extends SceneContainer {
 		if (GUIManager.enableDropShadowEffect)
 			version.setEffect(new DropShadow());
 		root.getChildren().add(version);
-		FadeTransition fadeTransition0 = new FadeTransition(Duration.seconds(0.5), backgroundLabel);
+		FadeTransition fadeTransition0 = new FadeTransition(
+				Duration.seconds(0.5), backgroundLabel);
 		fadeTransition0.setFromValue(0);
 		fadeTransition0.setToValue(1);
 		// Menu Background
 		Label itemBg_top = new Label();
-		itemBg_top.setGraphic(new ImageView(ResManager.getImage("paper_top.png")));
-		labelInit(itemBg_top, scene.getWidth() * 11 / 23.0, scene.getHeight() * 6 / 23.0, false);
+		itemBg_top.setGraphic(new ImageView(ResManager
+				.getImage("paper_top.png")));
+		labelInit(itemBg_top, scene.getWidth() * 11 / 23.0,
+				scene.getHeight() * 6 / 23.0, false);
 		root.getChildren().add(itemBg_top);
 		fadeTransition1 = new FadeTransition(Duration.seconds(0.5), itemBg_top);
 		fadeSet(fadeTransition1, 1);
 
 		Label itemBg_middle = new Label();
-		ImageView middleView = new ImageView(ResManager.getImage("paper_middle.png"));
+		ImageView middleView = new ImageView(
+				ResManager.getImage("paper_middle.png"));
 		Rectangle rect = new Rectangle(0, 0, 324, 0);
 		middleView.setOpacity(0);
 		middleView.setClip(rect);
 		itemBg_middle.setGraphic(middleView);
-		labelInit(itemBg_middle, scene.getWidth() * 11 / 23.0 - 17.0, scene.getHeight() * 6 / 23.0 + 75.0, true);
+		labelInit(itemBg_middle, scene.getWidth() * 11 / 23.0 - 17.0,
+				scene.getHeight() * 6 / 23.0 + 75.0, true);
 		root.getChildren().add(itemBg_middle);
 
 		Label itemBg_foot = new Label();
-		itemBg_foot.setGraphic(new ImageView(ResManager.getImage("paper_foot.png")));
-		labelInit(itemBg_foot, scene.getWidth() * 11 / 23.0 - 10.0, scene.getHeight() * 6 / 23.0 + 75.0, false);
+		itemBg_foot.setGraphic(new ImageView(ResManager
+				.getImage("paper_foot.png")));
+		labelInit(itemBg_foot, scene.getWidth() * 11 / 23.0 - 10.0,
+				scene.getHeight() * 6 / 23.0 + 75.0, false);
 		root.getChildren().add(itemBg_foot);
 		fadeTransition2 = new FadeTransition(Duration.seconds(0.5), itemBg_foot);
 		fadeSet(fadeTransition2, 1);
 
 		// Menu Item
 		Label menuItem = new Label();
-		menuItem.setGraphic(new ImageView(ResManager.getImage(LocalMessages.getString("NormalMenu"))));
-		labelInit(menuItem, scene.getWidth() * 11 / 23.0 + 35.0, scene.getHeight() * 6 / 23.0 + 50.0, false);
+		menuItem.setGraphic(new ImageView(ResManager.getImage(LocalMessages
+				.getString("NormalMenu"))));
+		labelInit(menuItem, scene.getWidth() * 11 / 23.0 + 35.0,
+				scene.getHeight() * 6 / 23.0 + 50.0, false);
 		root.getChildren().add(menuItem);
 		fadeTransition3 = new FadeTransition(Duration.seconds(0.5), menuItem);
 		fadeSet(fadeTransition3, 2);
 
 		final Label activeMenuItem = new Label();
-		final ImageView activeMenuView = new ImageView(ResManager.getImage(LocalMessages.getString("MoveOnMenu")));
+		final ImageView activeMenuView = new ImageView(
+				ResManager.getImage(LocalMessages.getString("MoveOnMenu")));
 		activeMenuItem.setGraphic(activeMenuView);
-		labelInit(activeMenuItem, scene.getWidth() * 11 / 23.0 + 35.0, scene.getHeight() * 6 / 23.0 + 50.0, false);
+		labelInit(activeMenuItem, scene.getWidth() * 11 / 23.0 + 35.0,
+				scene.getHeight() * 6 / 23.0 + 50.0, false);
 		root.getChildren().add(activeMenuItem);
 
 		// React Mouse Area
 		Rectangle[] area = new Rectangle[7];
 		for (int i = 0; i < 7; ++i) {
-			area[i] = new Rectangle(scene.getWidth() * 173 / 800.0, scene.getHeight() * 3 / 45.0);
+			area[i] = new Rectangle(scene.getWidth() * 173 / 800.0,
+					scene.getHeight() * 3 / 45.0);
 			area[i].setTranslateX(scene.getWidth() * 9 / 16.0 - 5.0 * i);
 			area[i].setTranslateY(scene.getHeight() * 211 / 600.0 + 45.0 * i);
 			area[i].setFill(Color.TRANSPARENT);
 			root.getChildren().add(area[i]);
 			setMouseEntered(i, area, activeMenuItem);
 			area[i].setOnMouseExited(new EventHandler<MouseEvent>() {
-				@Override
+
 				public void handle(MouseEvent event) {
 					activeMenuItem.setVisible(false);
 				}
 			});
 			area[i].setOnMousePressed(new EventHandler<MouseEvent>() {
-				@Override
+
 				public void handle(MouseEvent event) {
 					activeMenuItem.setVisible(false);
 				}
 			});
 			area[i].setOnMouseReleased(new EventHandler<MouseEvent>() {
-				@Override
+
 				public void handle(MouseEvent event) {
 					activeMenuItem.setVisible(true);
 				}
@@ -214,7 +234,7 @@ public class Index extends SceneContainer {
 
 		// Menu function
 		area[0].setOnMouseClicked(new EventHandler<MouseEvent>() { // New game
-			@Override
+
 			public void handle(MouseEvent event) {
 				newGameDialog.show();
 				event.consume();
@@ -222,7 +242,7 @@ public class Index extends SceneContainer {
 		});
 
 		area[1].setOnMouseClicked(new EventHandler<MouseEvent>() { // Join game
-			@Override
+
 			public void handle(MouseEvent event) {
 				// joinGameDialog.show();
 				constructing();
@@ -232,7 +252,7 @@ public class Index extends SceneContainer {
 
 		area[2].setOnMouseClicked(new EventHandler<MouseEvent>() { // Game
 																	// replay
-			@Override
+
 			public void handle(MouseEvent event) {
 				replayGameDialog.show();
 				event.consume();
@@ -240,7 +260,7 @@ public class Index extends SceneContainer {
 		});
 
 		area[3].setOnMouseClicked(new EventHandler<MouseEvent>() { // Game rules
-			@Override
+
 			public void handle(MouseEvent event) {
 				Manager.getGUI().showHelp();
 				event.consume();
@@ -249,7 +269,7 @@ public class Index extends SceneContainer {
 
 		area[4].setOnMouseClicked(new EventHandler<MouseEvent>() { // Game
 																	// options
-			@Override
+
 			public void handle(MouseEvent event) {
 				// if(Manager.isApplet){
 				// showMessageDialog(root,
@@ -263,7 +283,7 @@ public class Index extends SceneContainer {
 		});
 
 		area[5].setOnMouseClicked(new EventHandler<MouseEvent>() { // Game staff
-			@Override
+
 			public void handle(MouseEvent event) {
 				creditsDialog.show();
 				event.consume();
@@ -271,7 +291,7 @@ public class Index extends SceneContainer {
 		});
 
 		area[6].setOnMouseClicked(new EventHandler<MouseEvent>() { // Exit game
-			@Override
+
 			public void handle(MouseEvent event) {
 				queryQuit();
 				event.consume();
@@ -288,36 +308,57 @@ public class Index extends SceneContainer {
 		// Motion control
 		timeline = new Timeline();
 		timeline.getKeyFrames().addAll(
-				new KeyFrame(Duration.ZERO,
-						new KeyValue(logoLabel.translateXProperty(), (scene.getWidth() - 400) / 2.0), new KeyValue(
-								logoLabel.translateYProperty(), scene.getHeight() - 170.0), new KeyValue(
-								logoLabel.scaleXProperty(), 2.5), new KeyValue(logoLabel.scaleYProperty(), 2.5)),
-				new KeyFrame(new Duration(300), new KeyValue(logoLabel.translateXProperty(),
-						(scene.getWidth() - 1000) / 2.0), new KeyValue(logoLabel.translateYProperty(), scene
-						.getHeight() - 100), new KeyValue(logoLabel.scaleXProperty(), 7.5), new KeyValue(logoLabel
-						.scaleYProperty(), 7.5)),
-				new KeyFrame(new Duration(1000), new KeyValue(logoLabel.translateXProperty(),
-						(scene.getWidth() - 400) / 2.0), new KeyValue(logoLabel.translateYProperty(), 40),
-						new KeyValue(logoLabel.scaleXProperty(), 1), new KeyValue(logoLabel.scaleYProperty(), 1),
-						new KeyValue(itemBg_top.visibleProperty(), true), new KeyValue(itemBg_foot.visibleProperty(),
-								true), new KeyValue(backgroundLabel.opacityProperty(), 0), new KeyValue(middleView
-								.opacityProperty(), 0)),
-				new KeyFrame(new Duration(1500), new KeyValue(itemBg_foot.translateXProperty(),
-						scene.getWidth() * 11 / 23.0 - 10.0), new KeyValue(itemBg_foot.translateYProperty(), scene
-						.getHeight() * 6 / 23.0 + 75.0), new KeyValue(rect.heightProperty(), 1), new KeyValue(version
-						.opacityProperty(), 0), new KeyValue(middleView.opacityProperty(), 1)),
-				new KeyFrame(new Duration(2000), new KeyValue(itemBg_foot.translateXProperty(),
-						scene.getWidth() * 11 / 23.0 - 30.0), new KeyValue(itemBg_foot.translateYProperty(), scene
-						.getHeight() * 6 / 23.0 + 340.0), new KeyValue(rect.heightProperty(), 265), new KeyValue(
-						menuItem.visibleProperty(), true), new KeyValue(area[0].visibleProperty(), true), new KeyValue(
-						area[1].visibleProperty(), true), new KeyValue(area[2].visibleProperty(), true), new KeyValue(
-						area[3].visibleProperty(), true), new KeyValue(area[4].visibleProperty(), true), new KeyValue(
-						area[5].visibleProperty(), true), new KeyValue(area[6].visibleProperty(), true), new KeyValue(
-						backgroundLabel.opacityProperty(), 1), new KeyValue(version.opacityProperty(), 1)));
+				new KeyFrame(Duration.ZERO, new KeyValue(
+						logoLabel.translateXProperty(),
+						(scene.getWidth() - 400) / 2.0), new KeyValue(
+						logoLabel.translateYProperty(),
+						scene.getHeight() - 170.0), new KeyValue(
+						logoLabel.scaleXProperty(), 2.5), new KeyValue(
+						logoLabel.scaleYProperty(), 2.5)),
+				new KeyFrame(new Duration(300),
+						new KeyValue(logoLabel.translateXProperty(), (scene
+								.getWidth() - 1000) / 2.0), new KeyValue(
+								logoLabel.translateYProperty(), scene
+										.getHeight() - 100), new KeyValue(
+								logoLabel.scaleXProperty(), 7.5), new KeyValue(
+								logoLabel.scaleYProperty(), 7.5)),
+				new KeyFrame(new Duration(1000), new KeyValue(logoLabel
+						.translateXProperty(), (scene.getWidth() - 400) / 2.0),
+						new KeyValue(logoLabel.translateYProperty(), 40),
+						new KeyValue(logoLabel.scaleXProperty(), 1),
+						new KeyValue(logoLabel.scaleYProperty(), 1),
+						new KeyValue(itemBg_top.visibleProperty(), true),
+						new KeyValue(itemBg_foot.visibleProperty(), true),
+						new KeyValue(backgroundLabel.opacityProperty(), 0),
+						new KeyValue(middleView.opacityProperty(), 0)),
+				new KeyFrame(new Duration(1500), new KeyValue(itemBg_foot
+						.translateXProperty(),
+						scene.getWidth() * 11 / 23.0 - 10.0), new KeyValue(
+						itemBg_foot.translateYProperty(),
+						scene.getHeight() * 6 / 23.0 + 75.0), new KeyValue(rect
+						.heightProperty(), 1), new KeyValue(version
+						.opacityProperty(), 0), new KeyValue(middleView
+						.opacityProperty(), 1)),
+				new KeyFrame(new Duration(2000), new KeyValue(itemBg_foot
+						.translateXProperty(),
+						scene.getWidth() * 11 / 23.0 - 30.0), new KeyValue(
+						itemBg_foot.translateYProperty(),
+						scene.getHeight() * 6 / 23.0 + 340.0), new KeyValue(
+						rect.heightProperty(), 265), new KeyValue(menuItem
+						.visibleProperty(), true), new KeyValue(area[0]
+						.visibleProperty(), true), new KeyValue(area[1]
+						.visibleProperty(), true), new KeyValue(area[2]
+						.visibleProperty(), true), new KeyValue(area[3]
+						.visibleProperty(), true), new KeyValue(area[4]
+						.visibleProperty(), true), new KeyValue(area[5]
+						.visibleProperty(), true), new KeyValue(area[6]
+						.visibleProperty(), true), new KeyValue(backgroundLabel
+						.opacityProperty(), 1), new KeyValue(version
+						.opacityProperty(), 1)));
 
 		// KeyEvents:
 		root.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				// Manager.debug(event);
 				if (event.getCode().equals(KeyCode.UP)) {
@@ -357,7 +398,8 @@ public class Index extends SceneContainer {
 				}
 				if (choice >= 0) {
 					activeMenuItem.setVisible(true);
-					Rectangle mouseArea = new Rectangle(38 - choice * 5, 4 + choice * 45, 173, 44);
+					Rectangle mouseArea = new Rectangle(38 - choice * 5,
+							4 + choice * 45, 173, 44);
 					activeMenuItem.setClip(mouseArea);
 				}
 			}
@@ -397,7 +439,7 @@ public class Index extends SceneContainer {
 		dg.getChildren().add(t1);
 
 		final EventHandler<ActionEvent> h = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				Manager.exit(0);
 			}
@@ -408,7 +450,7 @@ public class Index extends SceneContainer {
 		btn.setLayoutX(90);
 		btn.setLayoutY(185);
 		btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				// if (Manager.isApplet) {
 				// showMessageDialog(addRoot,
@@ -417,13 +459,15 @@ public class Index extends SceneContainer {
 				// return;
 				// }
 				Parent root = GUIManager.getCurrentScene().getRoot();
-				Timeline t = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(root.opacityProperty(), 1)),
-						new KeyFrame(Duration.seconds(0.3), h, new KeyValue(root.opacityProperty(), 0)));
+				Timeline t = new Timeline(new KeyFrame(Duration.ZERO,
+						new KeyValue(root.opacityProperty(), 1)), new KeyFrame(
+						Duration.seconds(0.3), h, new KeyValue(root
+								.opacityProperty(), 0)));
 				t.play();
 			}
 		});
 		btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ENTER)) {
 					// if (Manager.isApplet) {
@@ -433,8 +477,10 @@ public class Index extends SceneContainer {
 					// return;
 					// }
 					Parent root = GUIManager.getCurrentScene().getRoot();
-					Timeline t = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(root.opacityProperty(), 1)),
-							new KeyFrame(Duration.seconds(0.3), h, new KeyValue(root.opacityProperty(), 0)));
+					Timeline t = new Timeline(new KeyFrame(Duration.ZERO,
+							new KeyValue(root.opacityProperty(), 1)),
+							new KeyFrame(Duration.seconds(0.3), h,
+									new KeyValue(root.opacityProperty(), 0)));
 					t.play();
 				}
 			}
@@ -447,14 +493,13 @@ public class Index extends SceneContainer {
 		btn2.setLayoutY(185);
 		btn2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-			@Override
 			public void handle(MouseEvent event) {
 				dg.close();
 				root.requestFocus();
 			}
 		});
 		btn2.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ENTER)) {
 					dg.close();
@@ -486,7 +531,6 @@ public class Index extends SceneContainer {
 		host.setLayoutY(112);
 		host.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ESCAPE)) {
 					// InnerDialog s = (InnerDialog) event.getSource();
@@ -510,7 +554,6 @@ public class Index extends SceneContainer {
 		port.setLayoutY(165);
 		port.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ESCAPE)) {
 					// InnerDialog s = (InnerDialog) event.getSource();
@@ -526,16 +569,17 @@ public class Index extends SceneContainer {
 		btn.setLayoutY(235);
 		btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-			@Override
 			public void handle(MouseEvent event) {
-				Manager.getGUI().joinRoom(host.getText(), Integer.parseInt(port.getText()));
+				Manager.getGUI().joinRoom(host.getText(),
+						Integer.parseInt(port.getText()));
 			}
 		});
 		btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ENTER)) {
-					Manager.getGUI().joinRoom(host.getText(), Integer.parseInt(port.getText()));
+					Manager.getGUI().joinRoom(host.getText(),
+							Integer.parseInt(port.getText()));
 				}
 			}
 		});
@@ -548,7 +592,8 @@ public class Index extends SceneContainer {
 	}
 
 	public void loadNewGameDialog() {
-		System.out.println(Index.class.getName()+" - loadNewGameDialog() - Start");
+		System.out.println(Index.class.getName()
+				+ " - loadNewGameDialog() - Start");
 		// Show an inner frame and ...
 		Text t1 = new Text(LocalMessages.getString("PlayerNum"));
 		t1.setFont(font);
@@ -578,52 +623,50 @@ public class Index extends SceneContainer {
 		wonderType.setStyle(style);
 		newGameDialog.getChildren().add(wonderType);
 
-		//TODO Changed by zxn 4-5 new-1
+		// TODO Changed by zxn 4-5 new-1
 		Text t7 = new Text("Bot Option");
 		t7.setFont(font);
 		t7.setLayoutX(50);
 		t7.setLayoutY(140);
 		newGameDialog.getChildren().add(t7);
-		
+
 		final ChoiceBox<String> botOpt = new ChoiceBox<String>();
-		botOpt.getItems().addAll("ON","OFF");
+		botOpt.getItems().addAll("ON", "OFF");
 		botOpt.getSelectionModel().selectFirst();
 		botOpt.setLayoutX(253);
 		botOpt.setLayoutY(113);
 		botOpt.setStyle(style);
 		newGameDialog.getChildren().add(botOpt);
-		
-		
-		
-		
-		Line l1 = new Line(25, 160, 375, 160);	//Changed 25,115,375,115
+
+		Line l1 = new Line(25, 160, 375, 160); // Changed 25,115,375,115
 		newGameDialog.getChildren().add(l1);
 
 		Text t3 = new Text(LocalMessages.getString("LocalIP"));
 		t3.setFont(font);
 		t3.setLayoutX(50);
-		t3.setLayoutY(188);	//Changed 143
+		t3.setLayoutY(188); // Changed 143
 		newGameDialog.getChildren().add(t3);
 
 		Text t4 = new Text("127.0.0.1");
 		t4.setFont(font);
 		t4.setLayoutX(70);
-		t4.setLayoutY(213);	//Changed 168
+		t4.setLayoutY(213); // Changed 168
 		newGameDialog.getChildren().add(t4);
 
-		//Text t5 = new Text(Manager.getNet().getLanIP() + "(" + LocalMessages.getString("Lan") + ")"); TODO Changed by zxn
+		// Text t5 = new Text(Manager.getNet().getLanIP() + "(" +
+		// LocalMessages.getString("Lan") + ")"); TODO Changed by zxn
 
 		Text t5 = new Text("(" + LocalMessages.getString("Lan") + ")");
-		
+
 		t5.setFont(font);
 		t5.setLayoutX(70);
-		t5.setLayoutY(248);	//Changed 203
+		t5.setLayoutY(248); // Changed 203
 		newGameDialog.getChildren().add(t5);
 
 		Text t6 = new Text(LocalMessages.getString("Port"));
 		t6.setFont(font);
 		t6.setLayoutX(80);
-		t6.setLayoutY(283);	//Changed 238
+		t6.setLayoutY(283); // Changed 238
 		newGameDialog.getChildren().add(t6);
 
 		final TextField port = new TextField("7777");
@@ -631,10 +674,9 @@ public class Index extends SceneContainer {
 		port.setPrefColumnCount(3);
 		port.setStyle(style);
 		port.setLayoutX(214);
-		port.setLayoutY(254);	//Changed 209
+		port.setLayoutY(254); // Changed 209
 		port.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ESCAPE)) {
 					// InnerDialog s = (InnerDialog) event.getSource();
@@ -643,245 +685,258 @@ public class Index extends SceneContainer {
 			}
 		});
 		newGameDialog.getChildren().add(port);
-		
+
 		Button btn = new Button(LocalMessages.getString("Start"));
 		btn.setFont(font);
 		btn.setLayoutX(165);
-		btn.setLayoutY(300);	//Changed 255
+		btn.setLayoutY(300); // Changed 255
 
-		/* TODO Original Version
-		Line l1 = new Line(25, 115, 375, 115);	
-		newGameDialog.getChildren().add(l1);
-
-		Text t3 = new Text(LocalMessages.getString("LocalIP"));
-		t3.setFont(font);
-		t3.setLayoutX(50);
-		t3.setLayoutY(143);
-		newGameDialog.getChildren().add(t3);
-
-		Text t4 = new Text("127.0.0.1");
-		t4.setFont(font);
-		t4.setLayoutX(70);
-		t4.setLayoutY(168);
-		newGameDialog.getChildren().add(t4);
-
-		Text t5 = new Text(Manager.getNet().getLanIP() + "(" + LocalMessages.getString("Lan") + ")");
-		t5.setFont(font);
-		t5.setLayoutX(70);
-		t5.setLayoutY(203);
-		newGameDialog.getChildren().add(t5);
-
-		Text t6 = new Text(LocalMessages.getString("Port"));
-		t6.setFont(font);
-		t6.setLayoutX(80);
-		t6.setLayoutY(238);
-		newGameDialog.getChildren().add(t6);
-
-		final TextField port = new TextField("7777");
-		// port.setFont(font);
-		port.setPrefColumnCount(3);
-		port.setStyle(style);
-		port.setLayoutX(214);
-		port.setLayoutY(209);
-		port.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-			@Override
-			public void handle(KeyEvent event) {
-				if (event.getCode().equals(KeyCode.ESCAPE)) {
-					// InnerDialog s = (InnerDialog) event.getSource();
-					newGameDialog.close();
-				}
-			}
-		});
-		newGameDialog.getChildren().add(port);
-		
-		Button btn = new Button(LocalMessages.getString("Start"));
-		btn.setFont(font);
-		btn.setLayoutX(165);
-		btn.setLayoutY(255);		
-		*/
-		
-		
+		/*
+		 * TODO Original Version Line l1 = new Line(25, 115, 375, 115);
+		 * newGameDialog.getChildren().add(l1);
+		 * 
+		 * Text t3 = new Text(LocalMessages.getString("LocalIP"));
+		 * t3.setFont(font); t3.setLayoutX(50); t3.setLayoutY(143);
+		 * newGameDialog.getChildren().add(t3);
+		 * 
+		 * Text t4 = new Text("127.0.0.1"); t4.setFont(font); t4.setLayoutX(70);
+		 * t4.setLayoutY(168); newGameDialog.getChildren().add(t4);
+		 * 
+		 * Text t5 = new Text(Manager.getNet().getLanIP() + "(" +
+		 * LocalMessages.getString("Lan") + ")"); t5.setFont(font);
+		 * t5.setLayoutX(70); t5.setLayoutY(203);
+		 * newGameDialog.getChildren().add(t5);
+		 * 
+		 * Text t6 = new Text(LocalMessages.getString("Port"));
+		 * t6.setFont(font); t6.setLayoutX(80); t6.setLayoutY(238);
+		 * newGameDialog.getChildren().add(t6);
+		 * 
+		 * final TextField port = new TextField("7777"); // port.setFont(font);
+		 * port.setPrefColumnCount(3); port.setStyle(style);
+		 * port.setLayoutX(214); port.setLayoutY(209); port.setOnKeyPressed(new
+		 * EventHandler<KeyEvent>() {
+		 * 
+		 * public void handle(KeyEvent event) { if
+		 * (event.getCode().equals(KeyCode.ESCAPE)) { // InnerDialog s =
+		 * (InnerDialog) event.getSource(); newGameDialog.close(); } } });
+		 * newGameDialog.getChildren().add(port);
+		 * 
+		 * Button btn = new Button(LocalMessages.getString("Start"));
+		 * btn.setFont(font); btn.setLayoutX(165); btn.setLayoutY(255);
+		 */
 
 		btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-			@Override
 			public void handle(MouseEvent event) {
-				//* TODO changed by zxn 4-5 new-1
-				int botNum=playerNum.getSelectionModel().getSelectedItem()-1;
+				// * TODO changed by zxn 4-5 new-1
+				int botNum = playerNum.getSelectionModel().getSelectedItem() - 1;
 				if (botOpt.getSelectionModel().getSelectedItem().equals("ON")) {
-					//Create bot difficulty dialog
-					botDiffDialog=new InnerDialog(400,50*botNum+80);
-					final ArrayList<ChoiceBox<String>> botDiffs=new ArrayList<ChoiceBox<String>>();
-					//ArrayList<Integer> list=new ArrayList<Integer>();
-					//ChoiceBox<String>[] botDiffs=new ChoicBox<String>()[5];
-					int offset=50;
-					for (int i=0;i<botNum;i++) {
-						Text t1 = new Text("Bot "+(i+1));
+					// Create bot difficulty dialog
+					botDiffDialog = new InnerDialog(400, 50 * botNum + 80);
+					final ArrayList<ChoiceBox<String>> botDiffs = new ArrayList<ChoiceBox<String>>();
+					// ArrayList<Integer> list=new ArrayList<Integer>();
+					// ChoiceBox<String>[] botDiffs=new ChoicBox<String>()[5];
+					int offset = 50;
+					for (int i = 0; i < botNum; i++) {
+						Text t1 = new Text("Bot " + (i + 1));
 						t1.setFont(font);
 						t1.setLayoutX(50);
 						t1.setLayoutY(offset);
 						botDiffDialog.getChildren().add(t1);
-						
+
 						final ChoiceBox<String> botDiff = new ChoiceBox<String>();
-						botDiff.getItems().addAll("Easy","Normal","Hard");
+						botDiff.getItems().addAll("Easy", "Normal", "Hard");
 						botDiff.getSelectionModel().selectFirst();
 						botDiff.setLayoutX(203);
-						botDiff.setLayoutY(offset-27);
+						botDiff.setLayoutY(offset - 27);
 						botDiff.setStyle(style);
 						botDiffDialog.getChildren().add(botDiff);
 						botDiffs.add(botDiff);
-						
-						offset+=45;
+
+						offset += 45;
 					}
 
-					offset-=15;
+					offset -= 15;
 
 					Button btn = new Button(LocalMessages.getString("Start"));
 					btn.setFont(font);
 					btn.setLayoutX(165);
-					btn.setLayoutY(offset);		
-					final int bn=botNum;
+					btn.setLayoutY(offset);
+					final int bn = botNum;
 					btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-						@Override
 						public void handle(MouseEvent event) {
-							Difficulty[] diffs=new Difficulty[bn];
-							for (int i=0;i<bn;i++) {
-								if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Normal"))
-									diffs[i]=Difficulty.NORMAL;
-								if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Hard"))
-									diffs[i]=Difficulty.HARD;
-								if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Easy"))
-									diffs[i]=Difficulty.EASY;
+							Difficulty[] diffs = new Difficulty[bn];
+							for (int i = 0; i < bn; i++) {
+								if (botDiffs.get(i).getSelectionModel()
+										.getSelectedItem().equals("Normal"))
+									diffs[i] = Difficulty.NORMAL;
+								if (botDiffs.get(i).getSelectionModel()
+										.getSelectedItem().equals("Hard"))
+									diffs[i] = Difficulty.HARD;
+								if (botDiffs.get(i).getSelectionModel()
+										.getSelectedItem().equals("Easy"))
+									diffs[i] = Difficulty.EASY;
 							}
-							Manager.getGUI()
-							.createRoom(playerNum.getSelectionModel().getSelectedItem(),
-									wonderType.getSelectionModel().getSelectedItem(), "127.0.0.1",
-									Integer.parseInt(port.getText()),diffs);
-							
+							Manager.getGUI().createRoom(
+									playerNum.getSelectionModel()
+											.getSelectedItem(),
+									wonderType.getSelectionModel()
+											.getSelectedItem(), "127.0.0.1",
+									Integer.parseInt(port.getText()), diffs);
+
 						}
 					});
-					
+
 					btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
-						@Override
+
 						public void handle(KeyEvent event) {
 							if (event.getCode().equals(KeyCode.ENTER)) {
-								Difficulty[] diffs=new Difficulty[bn];
-								for (int i=0;i<bn;i++) {
-									if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Normal"))
-										diffs[i]=Difficulty.NORMAL;
-									if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Hard"))
-										diffs[i]=Difficulty.HARD;
-									if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Easy"))
-										diffs[i]=Difficulty.EASY;
+								Difficulty[] diffs = new Difficulty[bn];
+								for (int i = 0; i < bn; i++) {
+									if (botDiffs.get(i).getSelectionModel()
+											.getSelectedItem().equals("Normal"))
+										diffs[i] = Difficulty.NORMAL;
+									if (botDiffs.get(i).getSelectionModel()
+											.getSelectedItem().equals("Hard"))
+										diffs[i] = Difficulty.HARD;
+									if (botDiffs.get(i).getSelectionModel()
+											.getSelectedItem().equals("Easy"))
+										diffs[i] = Difficulty.EASY;
 								}
-										
+
 								Manager.getGUI()
-								.createRoom(playerNum.getSelectionModel().getSelectedItem(),
-										wonderType.getSelectionModel().getSelectedItem(), "127.0.0.1",
-										Integer.parseInt(port.getText()),diffs);
+										.createRoom(
+												playerNum.getSelectionModel()
+														.getSelectedItem(),
+												wonderType.getSelectionModel()
+														.getSelectedItem(),
+												"127.0.0.1",
+												Integer.parseInt(port.getText()),
+												diffs);
 							}
 						}
 					});
 
 					botDiffDialog.getChildren().add(btn);
-					
+
 					newGameDialog.getChildren().add(botDiffDialog);
 					botDiffDialog.setLayoutX(50);
 					botDiffDialog.setLayoutY(50);
 					botDiffDialog.setVisible(true);
-					
+
 				} else {
-					Difficulty[] diffs=new Difficulty[botNum];
-					for (int i=0;i<botNum;i++) 
-						diffs[i]=Difficulty.EASY;
-					Manager.getGUI()
-							.createRoom(playerNum.getSelectionModel().getSelectedItem(),
-									wonderType.getSelectionModel().getSelectedItem(), "127.0.0.1",
-									Integer.parseInt(port.getText()),diffs);
+					Difficulty[] diffs = new Difficulty[botNum];
+					for (int i = 0; i < botNum; i++)
+						diffs[i] = Difficulty.EASY;
+					Manager.getGUI().createRoom(
+							playerNum.getSelectionModel().getSelectedItem(),
+							wonderType.getSelectionModel().getSelectedItem(),
+							"127.0.0.1", Integer.parseInt(port.getText()),
+							diffs);
 				}
-				
-				//End Change
-				
+
+				// End Change
+
 			}
 		});
 		btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ENTER)) {
-					//* TODO changed by zxn 4-5 new-1
-					int botNum=playerNum.getSelectionModel().getSelectedItem()-1;
-					if (botOpt.getSelectionModel().getSelectedItem().equals("ON")) {
-						//Create bot difficulty dialog
-						botDiffDialog=new InnerDialog(400,50*botNum+80);
-						final ArrayList<ChoiceBox<String>> botDiffs=new ArrayList<ChoiceBox<String>>();
-						int offset=50;
-						for (int i=0;i<botNum;i++) {
-							Text t1 = new Text("Bot "+(i+1));
+					// * TODO changed by zxn 4-5 new-1
+					int botNum = playerNum.getSelectionModel()
+							.getSelectedItem() - 1;
+					if (botOpt.getSelectionModel().getSelectedItem()
+							.equals("ON")) {
+						// Create bot difficulty dialog
+						botDiffDialog = new InnerDialog(400, 50 * botNum + 80);
+						final ArrayList<ChoiceBox<String>> botDiffs = new ArrayList<ChoiceBox<String>>();
+						int offset = 50;
+						for (int i = 0; i < botNum; i++) {
+							Text t1 = new Text("Bot " + (i + 1));
 							t1.setFont(font);
 							t1.setLayoutX(50);
 							t1.setLayoutY(offset);
 							botDiffDialog.getChildren().add(t1);
-							
+
 							final ChoiceBox<String> botDiff = new ChoiceBox<String>();
-							botDiff.getItems().addAll("Normal","Hard","Extream");
+							botDiff.getItems().addAll("Normal", "Hard",
+									"Extream");
 							botDiff.getSelectionModel().selectFirst();
 							botDiff.setLayoutX(203);
-							botDiff.setLayoutY(offset-27);
+							botDiff.setLayoutY(offset - 27);
 							botDiff.setStyle(style);
 							botDiffDialog.getChildren().add(botDiff);
 							botDiffs.add(botDiff);
-							
-							offset+=45;
+
+							offset += 45;
 						}
 
-						offset-=15;
+						offset -= 15;
 
-						Button btn = new Button(LocalMessages.getString("Start"));
+						Button btn = new Button(LocalMessages
+								.getString("Start"));
 						btn.setFont(font);
 						btn.setLayoutX(165);
-						btn.setLayoutY(offset);		
-						final int bn=botNum;
+						btn.setLayoutY(offset);
+						final int bn = botNum;
 						btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-							@Override
 							public void handle(MouseEvent event) {
-								Difficulty[] diffs=new Difficulty[bn];
-								for (int i=0;i<bn;i++) {
-									if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Normal"))
-										diffs[i]=Difficulty.NORMAL;
-									if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Hard"))
-										diffs[i]=Difficulty.HARD;
-									if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Easy"))
-										diffs[i]=Difficulty.EASY;
+								Difficulty[] diffs = new Difficulty[bn];
+								for (int i = 0; i < bn; i++) {
+									if (botDiffs.get(i).getSelectionModel()
+											.getSelectedItem().equals("Normal"))
+										diffs[i] = Difficulty.NORMAL;
+									if (botDiffs.get(i).getSelectionModel()
+											.getSelectedItem().equals("Hard"))
+										diffs[i] = Difficulty.HARD;
+									if (botDiffs.get(i).getSelectionModel()
+											.getSelectedItem().equals("Easy"))
+										diffs[i] = Difficulty.EASY;
 								}
-										
+
 								Manager.getGUI()
-								.createRoom(playerNum.getSelectionModel().getSelectedItem(),
-										wonderType.getSelectionModel().getSelectedItem(), "127.0.0.1",
-										Integer.parseInt(port.getText()),diffs);
-								
+										.createRoom(
+												playerNum.getSelectionModel()
+														.getSelectedItem(),
+												wonderType.getSelectionModel()
+														.getSelectedItem(),
+												"127.0.0.1",
+												Integer.parseInt(port.getText()),
+												diffs);
+
 							}
 						});
 						btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
-							@Override
+
 							public void handle(KeyEvent event) {
 								if (event.getCode().equals(KeyCode.ENTER)) {
-									Difficulty[] diffs=new Difficulty[bn];
-									for (int i=0;i<bn;i++) {
-										if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Normal"))
-											diffs[i]=Difficulty.NORMAL;
-										if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Hard"))
-											diffs[i]=Difficulty.HARD;
-										if (botDiffs.get(i).getSelectionModel().getSelectedItem().equals("Easy"))
-											diffs[i]=Difficulty.EASY;
+									Difficulty[] diffs = new Difficulty[bn];
+									for (int i = 0; i < bn; i++) {
+										if (botDiffs.get(i).getSelectionModel()
+												.getSelectedItem()
+												.equals("Normal"))
+											diffs[i] = Difficulty.NORMAL;
+										if (botDiffs.get(i).getSelectionModel()
+												.getSelectedItem()
+												.equals("Hard"))
+											diffs[i] = Difficulty.HARD;
+										if (botDiffs.get(i).getSelectionModel()
+												.getSelectedItem()
+												.equals("Easy"))
+											diffs[i] = Difficulty.EASY;
 									}
-											
-									Manager.getGUI()
-									.createRoom(playerNum.getSelectionModel().getSelectedItem(),
-											wonderType.getSelectionModel().getSelectedItem(), "127.0.0.1",
-											Integer.parseInt(port.getText()),diffs);
+
+									Manager.getGUI().createRoom(
+											playerNum.getSelectionModel()
+													.getSelectedItem(),
+											wonderType.getSelectionModel()
+													.getSelectedItem(),
+											"127.0.0.1",
+											Integer.parseInt(port.getText()),
+											diffs);
 								}
 							}
 						});
@@ -892,34 +947,42 @@ public class Index extends SceneContainer {
 						botDiffDialog.setLayoutX(50);
 						botDiffDialog.setLayoutY(50);
 						botDiffDialog.setVisible(true);
-						
+
 					} else {
-						Difficulty[] diffs=new Difficulty[botNum];
-						for (int i=0;i<botNum;i++) 
-							diffs[i]=Difficulty.EASY;
+						Difficulty[] diffs = new Difficulty[botNum];
+						for (int i = 0; i < botNum; i++)
+							diffs[i] = Difficulty.EASY;
 						Manager.getGUI()
-								.createRoom(playerNum.getSelectionModel().getSelectedItem(),
-										wonderType.getSelectionModel().getSelectedItem(), "127.0.0.1",
-										Integer.parseInt(port.getText()),diffs);
+								.createRoom(
+										playerNum.getSelectionModel()
+												.getSelectedItem(),
+										wonderType.getSelectionModel()
+												.getSelectedItem(),
+										"127.0.0.1",
+										Integer.parseInt(port.getText()), diffs);
 					}
 
 				}
-				/*Original Version
-					Manager.getGUI().createRoom(playerNum.getSelectionModel().getSelectedItem(),
-							wonderType.getSelectionModel().getSelectedItem(), "127.0.0.1",
-							Integer.parseInt(port.getText()));
-				*/
+				/*
+				 * Original Version
+				 * Manager.getGUI().createRoom(playerNum.getSelectionModel
+				 * ().getSelectedItem(),
+				 * wonderType.getSelectionModel().getSelectedItem(),
+				 * "127.0.0.1", Integer.parseInt(port.getText()));
+				 */
 			}
 		});
 		newGameDialog.getChildren().add(btn);
-		
-		//newGameDialog.getChildren().add(botDiffDialog);	//TODO CHanged by zxn 4-5 new-1
+
+		// newGameDialog.getChildren().add(botDiffDialog); //TODO CHanged by zxn
+		// 4-5 new-1
 
 		newGameDialog.setLayoutX((root.getScene().getWidth() - 400) / 2);
 		newGameDialog.setLayoutY((root.getScene().getHeight() - 300) / 2);
 		root.getChildren().add(newGameDialog);
 		newGameDialog.setDefaultFocus(btn);
-		System.out.println(Index.class.getName()+" - loadNewGameDialog() - End");
+		System.out.println(Index.class.getName()
+				+ " - loadNewGameDialog() - End");
 
 	}
 
@@ -943,7 +1006,8 @@ public class Index extends SceneContainer {
 		t11.setLayoutY(55);
 		settingDialog.getChildren().add(t11);
 		vs.valueProperty().addListener(new ChangeListener<Number>() {
-			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+			public void changed(ObservableValue<? extends Number> ov,
+					Number old_val, Number new_val) {
 				t11.setText(String.valueOf(((Double) new_val).intValue()));
 			}
 		});
@@ -968,8 +1032,9 @@ public class Index extends SceneContainer {
 		t3.setLayoutY(25 + 50 * 2);
 		settingDialog.getChildren().add(t3);
 		final ChoiceBox<String> screenSize = new ChoiceBox<String>();
-		screenSize.getItems().addAll("800 * 600", "960 * 720", "1028 * 771", "1280 * 960", "960 * 540", "1120 * 630",
-				"1280 * 720", "1366 * 768");
+		screenSize.getItems().addAll("800 * 600", "960 * 720", "1028 * 771",
+				"1280 * 960", "960 * 540", "1120 * 630", "1280 * 720",
+				"1366 * 768");
 		screenSize.getSelectionModel().selectFirst();
 		screenSize.setLayoutX(194);
 		screenSize.setLayoutY(100);
@@ -989,7 +1054,7 @@ public class Index extends SceneContainer {
 		isFullScreen.setLayoutY(140);
 		isFullScreen.setStyle(style);
 		isFullScreen.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				if (!Manager.isApplet) {
 					if (screenSize.isDisable())
@@ -1013,7 +1078,7 @@ public class Index extends SceneContainer {
 		if (temp.equals("Language"))
 			language.getItems().addAll("Chinese", "English");
 		else
-			language.getItems().addAll("中文", "英文");
+			language.getItems().addAll("����(Chinese)", "English");
 		language.getSelectionModel().selectFirst();
 		language.setLayoutX(194);
 		language.setLayoutY(175);
@@ -1034,7 +1099,6 @@ public class Index extends SceneContainer {
 		lanName.setLayoutY(215);
 		lanName.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ESCAPE)) {
 					// InnerDialog s = (InnerDialog) event.getSource();
@@ -1049,14 +1113,15 @@ public class Index extends SceneContainer {
 		btn.setLayoutX(165);
 		btn.setLayoutY(255);
 		btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				playerName = lanName.getText();
 				if (language.getSelectionModel().getSelectedIndex() == 0)
 					LocalMessages.setLocale(new Locale("zh", "CN"));
 				else
 					LocalMessages.setLocale(new Locale("en", "US"));
-				String screen = screenSize.getSelectionModel().getSelectedItem();
+				String screen = screenSize.getSelectionModel()
+						.getSelectedItem();
 				String[] s = screen.split("\\*");
 				GUIManager.width = Integer.parseInt(s[0].trim());
 				GUIManager.height = Integer.parseInt(s[1].trim());
@@ -1098,7 +1163,7 @@ public class Index extends SceneContainer {
 			}
 		});
 		btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ENTER)) {
 					playerName = lanName.getText();
@@ -1106,7 +1171,8 @@ public class Index extends SceneContainer {
 						LocalMessages.setLocale(new Locale("zh", "CN"));
 					else
 						LocalMessages.setLocale(new Locale("en", "US"));
-					String screen = screenSize.getSelectionModel().getSelectedItem();
+					String screen = screenSize.getSelectionModel()
+							.getSelectedItem();
 					String[] s = screen.split("\\*");
 					GUIManager.width = Integer.parseInt(s[0].trim());
 					GUIManager.height = Integer.parseInt(s[1].trim());
@@ -1114,7 +1180,8 @@ public class Index extends SceneContainer {
 					if (!Manager.isApplet) {
 						GUIManager.setFullScreen(isFullScreen.isSelected());
 					}
-					int effect = effectLevel.getSelectionModel().getSelectedItem();
+					int effect = effectLevel.getSelectionModel()
+							.getSelectedItem();
 					GUIManager.enableLightingEffect = true;
 					GUIManager.enableReflectionEffect = true;
 					GUIManager.enableGlowEffect = true;
@@ -1137,7 +1204,7 @@ public class Index extends SceneContainer {
 
 		// final EventHandler<ActionEvent> act = new EventHandler<ActionEvent>()
 		// {
-		// @Override
+		//
 		// public void handle(ActionEvent event) {
 		// //screenSize.getSelectionModel().select(GUIManager.width + " * "+
 		// GUIManager.height);
@@ -1169,7 +1236,7 @@ public class Index extends SceneContainer {
 		recordFile.setLayoutX(53);
 		recordFile.setLayoutY(138);
 		recordFile.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ESCAPE)) {
 					// InnerDialog s = (InnerDialog) event.getSource();
@@ -1186,7 +1253,6 @@ public class Index extends SceneContainer {
 		final FileChooser fileChoose = new FileChooser();
 		open.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-			@Override
 			public void handle(MouseEvent event) {
 				fileChoose.setTitle(LocalMessages.getString("ReplayFile"));
 				File file = new File(System.getProperty("user.dir") + "/rec");
@@ -1199,7 +1265,9 @@ public class Index extends SceneContainer {
 						file = new File(System.getProperty("user.dir"));
 					fileChoose.setInitialDirectory(file);
 				}
-				fileChoose.getExtensionFilters().add(new ExtensionFilter(LocalMessages.getString("RecFile"), "*.xml"));
+				fileChoose.getExtensionFilters().add(
+						new ExtensionFilter(LocalMessages.getString("RecFile"),
+								"*.xml"));
 				record = fileChoose.showOpenDialog(null);
 				if (record != null) {
 					recordFile.setText(record.getName());
@@ -1208,11 +1276,12 @@ public class Index extends SceneContainer {
 			}
 		});
 		open.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ENTER)) {
 					fileChoose.setTitle(LocalMessages.getString("ReplayFile"));
-					File file = new File(System.getProperty("user.dir") + "/rec");
+					File file = new File(System.getProperty("user.dir")
+							+ "/rec");
 					if (file.exists())
 						fileChoose.setInitialDirectory(file);
 					else {
@@ -1223,7 +1292,8 @@ public class Index extends SceneContainer {
 						fileChoose.setInitialDirectory(file);
 					}
 					fileChoose.getExtensionFilters().add(
-							new ExtensionFilter(LocalMessages.getString("RecFile"), "*.rec"));
+							new ExtensionFilter(LocalMessages
+									.getString("RecFile"), "*.rec"));
 					record = fileChoose.showOpenDialog(null);
 					if (record != null) {
 						recordFile.setText(record.getName());
@@ -1241,7 +1311,6 @@ public class Index extends SceneContainer {
 		btn.setLayoutY(200);
 		btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-			@Override
 			public void handle(MouseEvent event) {
 				replayGameDialog.close();
 				if (record != null)
@@ -1249,7 +1318,7 @@ public class Index extends SceneContainer {
 			}
 		});
 		btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
+
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ENTER)) {
 					replayGameDialog.close();
@@ -1268,10 +1337,11 @@ public class Index extends SceneContainer {
 		replayGameDialog.setDefaultFocus(open);
 	}
 
-	//Update by Xingnan Zhou
+	// Update by Xingnan Zhou
 	public void loadCreditsDialog() {
 
-		int fontSize = Integer.parseInt(LocalMessages.getString("FontSizeForCreditsList"));
+		int fontSize = Integer.parseInt(LocalMessages
+				.getString("FontSizeForCreditsList"));
 		String fontName = LocalMessages.getString("FontForCreditsList");
 		Font font = ResManager.getFont(fontName, fontSize);
 		Font bigFont = ResManager.getFont(fontName, fontSize + 8);
@@ -1286,39 +1356,43 @@ public class Index extends SceneContainer {
 		logo.setLayoutX((700 - logoImage.getWidth()) / 2);
 		logo.setLayoutY((500 - logoImage.getWidth()) / 2 - 50);
 
-		Timeline scroll = new Timeline(new KeyFrame(Duration.ZERO,// new KeyValue(clip.layoutYProperty(), 0),
-				 new KeyValue(
-						head.opacityProperty(), 0), new KeyValue(head.textProperty(),
-						"\t\tCOMP 3004B\n\nObject-Oriented Software Engineering\n\n\t\t Team 21"), new KeyValue(
-						head.layoutXProperty(), headX-100 ), new KeyValue(head.fontProperty(), bigFont), new KeyValue(head.layoutYProperty(), 230 )), new KeyFrame(
+		Timeline scroll = new Timeline(new KeyFrame(
+				Duration.ZERO,// new KeyValue(clip.layoutYProperty(), 0),
+				new KeyValue(head.opacityProperty(), 0), new KeyValue(
+						head.textProperty(),
+						"\t\tLane\n\n\thttps://github.com/LiLane"),
+				new KeyValue(head.layoutXProperty(), headX - 100),
+				new KeyValue(head.fontProperty(), bigFont), new KeyValue(
+						head.layoutYProperty(), 240)), new KeyFrame(
 				Duration.seconds(1), new KeyValue(head.opacityProperty(), 1)),
-				new KeyFrame(Duration.seconds(2), new KeyValue(head.opacityProperty(), 1)), new KeyFrame(Duration.seconds(3), new KeyValue(head.opacityProperty(),
-						0), new KeyValue(head.textProperty(),
-						"    Xingnan Zhou\n\n    100870968"), new KeyValue(head.fontProperty(), bigFont),
-						new KeyValue(head.layoutYProperty(), 230), new KeyValue(head.layoutXProperty(),
-								headX - 100)), new KeyFrame(Duration.seconds(3), new KeyValue(head.layoutYProperty(),
-						230), new KeyValue(head.layoutXProperty(), headX + 30)), new KeyFrame(Duration.seconds(4),
-						new KeyValue(head.opacityProperty(), 1)), new KeyFrame(Duration.seconds(5), new KeyValue(
-						head.opacityProperty(), 1), new KeyValue(head.layoutXProperty(), headX)), new KeyFrame(
-						Duration.seconds(6), new KeyValue(head.opacityProperty(), 0), new KeyValue(
-								head.layoutXProperty(), headX + 30), new KeyValue(head.textProperty(),
-								"    Chang xu\n\n    100854340")), new KeyFrame(Duration.seconds(7),
-						new KeyValue(head.opacityProperty(), 1)), new KeyFrame(Duration.seconds(8), new KeyValue(
-						head.opacityProperty(), 1), new KeyValue(head.layoutXProperty(), headX)), new KeyFrame(
-						Duration.seconds(9), new KeyValue(head.opacityProperty(), 0), new KeyValue(
-								head.layoutXProperty(), headX + 30), new KeyValue(head.textProperty(),
-								"  Arslan Ahmed\n\n  Student Number")), new KeyFrame(Duration.seconds(10),
-						new KeyValue(head.opacityProperty(), 1)), new KeyFrame(Duration.seconds(11), new KeyValue(
-						head.opacityProperty(), 1), new KeyValue(head.layoutXProperty(), headX)), new KeyFrame(
-						Duration.seconds(12), new KeyValue(head.opacityProperty(), 0), new KeyValue(
-								head.layoutXProperty(), headX + 30), new KeyValue(head.textProperty(),
-								"Hasanain Alsafi\n\n100801010")), new KeyFrame(Duration.seconds(13),
-						new KeyValue(head.opacityProperty(), 1)), new KeyFrame(Duration.seconds(14), new KeyValue(
-						head.opacityProperty(), 1), new KeyValue(head.layoutXProperty(), headX))
-						, new KeyFrame(Duration.seconds(15), new KeyValue(head.opacityProperty(), 0), new KeyValue(
-								head.layoutXProperty(), headX + 30)) 
-		);
-		
+				new KeyFrame(Duration.seconds(1), new KeyValue(head
+						.opacityProperty(), 1)), new KeyFrame(
+						Duration.seconds(2), new KeyValue(
+								head.opacityProperty(), 1), new KeyValue(
+								head.layoutXProperty(), headX)),
+				new KeyFrame(Duration.seconds(3), new KeyValue(head
+						.opacityProperty(), 0), new KeyValue(head
+						.layoutXProperty(), headX + 30), new KeyValue(head
+						.textProperty(),
+						"\t\twanting721\n\n\thttps://github.com/wanting721")),
+				new KeyFrame(Duration.seconds(6), new KeyValue(head
+						.opacityProperty(), 1)), new KeyFrame(
+						Duration.seconds(7), new KeyValue(
+								head.opacityProperty(), 0), new KeyValue(
+								head.textProperty(),
+								"\t\tFork From:\n\nhttps://github.com/zxn"),
+						new KeyValue(head.fontProperty(), bigFont),
+						new KeyValue(head.layoutYProperty(), 230),
+						new KeyValue(head.layoutXProperty(), headX - 100)),
+				new KeyFrame(Duration.seconds(8), new KeyValue(head
+						.opacityProperty(), 1)), new KeyFrame(
+						Duration.seconds(9), new KeyValue(
+								head.opacityProperty(), 1), new KeyValue(
+								head.layoutXProperty(), headX)), new KeyFrame(
+						Duration.seconds(10), new KeyValue(
+								head.opacityProperty(), 0), new KeyValue(
+								head.layoutXProperty(), headX + 30)));
+
 		scroll.setCycleCount(Timeline.INDEFINITE);
 		scroll.setAutoReverse(false);
 		creditsDialog = new InnerDialog(700, 500, scroll);

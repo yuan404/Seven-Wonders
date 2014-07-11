@@ -1,6 +1,5 @@
 package org.tjuscs.sevenwonders.kernel;
 
-
 //import org.tjuscs.sevenwonders.Manager;
 import org.tjuscs.sevenwonders.kernel.RecManager.GameInfo;
 import org.tjuscs.sevenwonders.kernel.RecManager.TurnInfo;
@@ -18,20 +17,19 @@ public class ReplayPlayer extends GamePlayer {
 		this.index = i;
 	}
 
-	@Override
 	public CommandOption makeAChoice(CommandOption[] options) {
-		if (record != null){
+		if (record != null) {
 			TurnInfo t = record.ages[this.getAge() - 1].turns[7 - options.length][this.index];
 			int i = t.chosenCardIndex;
-			//JOptionPane.showMessageDialog(null, i);
+			// JOptionPane.showMessageDialog(null, i);
 			options[i].setCommand(t.chosenCommandType);
 			return options[i];
-		}else
+		} else
 			return null;
 	}
 
-	@Override
-	public void makeABuyDecision(SimpleResList needs, SimpleResList leftGoods, SimpleResList rightGoods) {
+	public void makeABuyDecision(SimpleResList needs, SimpleResList leftGoods,
+			SimpleResList rightGoods) {
 		// TODO Auto-generated method stub
 
 	}

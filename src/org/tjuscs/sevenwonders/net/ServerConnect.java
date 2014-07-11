@@ -53,7 +53,7 @@
 //		new Thread(){                 //等待客户端连接的线程
 //			
 //
-//			@Override
+//			
 //			public void run()
 //			{
 //				while(waiting )
@@ -136,7 +136,7 @@
 //		this.socket = socket;
 //	}
 //	
-//	@Override
+//	
 //	public void run()
 //	{
 //		ServerSocket clientServerSocket;
@@ -162,4 +162,4 @@
 //	{
 //		return this.new_socket;
 //	}
-//}
+// }

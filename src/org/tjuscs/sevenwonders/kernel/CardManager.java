@@ -76,7 +76,8 @@ public class CardManager {
 			}
 		}
 
-		System.out.println(String.format("Age %d has %d cards", age, ageDeck.size()));
+		System.out.println(String.format("Age %d has %d cards", age,
+				ageDeck.size()));
 
 		shuffle(ageDeck);
 		Hand[] hands = new Hand[numPlayers];
@@ -966,14 +967,13 @@ public class CardManager {
 		Hand[] hands = new Hand[numPlayers];
 		for (int i = 0; i < numPlayers; i++) {
 			hands[i] = new Hand();
-			nextCard:
-			for (String cn : cardNames[i]) {
+			nextCard: for (String cn : cardNames[i]) {
 				for (Card c : deck)
 					if (c.getName().equals(cn)) {
 						hands[i].add(c);
 						continue nextCard;
 					}
-				for(Card c : guildDeck)
+				for (Card c : guildDeck)
 					if (c.getName().equals(cn)) {
 						hands[i].add(c);
 						continue nextCard;

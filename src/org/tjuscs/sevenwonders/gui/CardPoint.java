@@ -11,49 +11,49 @@ import org.tjuscs.sevenwonders.kernel.CardColor;
 
 public class CardPoint extends Circle {
 	public CardPoint(int k, CardColor c, Wonders w) {
-//		num = k;
-//		color = c;
+		// num = k;
+		// color = c;
 		wonder = w;
 		iv = new ImageView(ResManager.getImage(k + ".jpg"));
 		iv.setScaleX(0.7);
 		iv.setScaleY(0.7);
 		setEffect(new DropShadow());
-		addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				// show the information of the players
-				wonder.getChildren().add(iv);
-				iv.setTranslateX(getLayoutX() - 78);
-				iv.setTranslateY(getLayoutY() - 160);
-				toFront();
-				setOpacity(0);
-				isout = false;
-			}
-		});
-		addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				// show the information of the players
-				// wonder.getChildren().remove(iv);
-				isout = true;
-			}
-		});
-		iv.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				// show the information of the players
-			}
-		});
-		iv.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				// show the information of the players
-				if (isout) {
-					wonder.getChildren().remove(iv);
-					setOpacity(1);
-				}
-			}
-		});
+		addEventHandler(MouseEvent.MOUSE_ENTERED,
+				new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+						// show the information of the players
+						wonder.getChildren().add(iv);
+						iv.setTranslateX(getLayoutX() - 78);
+						iv.setTranslateY(getLayoutY() - 160);
+						toFront();
+						setOpacity(0);
+						isout = false;
+					}
+				});
+		addEventHandler(MouseEvent.MOUSE_EXITED,
+				new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+						// show the information of the players
+						// wonder.getChildren().remove(iv);
+						isout = true;
+					}
+				});
+		iv.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+						// show the information of the players
+					}
+				});
+		iv.addEventHandler(MouseEvent.MOUSE_EXITED,
+				new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+						// show the information of the players
+						if (isout) {
+							wonder.getChildren().remove(iv);
+							setOpacity(1);
+						}
+					}
+				});
 		setStrokeWidth(1);
 		if (c == CardColor.YELLOW) {
 			setFill(Color.YELLOW);
@@ -80,9 +80,9 @@ public class CardPoint extends Circle {
 		setRadius(4);
 	}
 
-//	private boolean isin = false;
-//	private CardColor color;
-//	private int num;
+	// private boolean isin = false;
+	// private CardColor color;
+	// private int num;
 	private ImageView iv = new ImageView();
 	private Wonders wonder;
 	private boolean isout = true;

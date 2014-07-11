@@ -7,7 +7,7 @@ import java.util.*;
  * The Class Card.
  */
 @SuppressWarnings("serial")
-public class Card implements Cloneable, Buildable ,Serializable{
+public class Card implements Cloneable, Buildable, Serializable {
 
 	/** The cost. */
 	EnumMap<Resource, Integer> cost;
@@ -27,7 +27,7 @@ public class Card implements Cloneable, Buildable ,Serializable{
 	CommandOption cmd;
 	/** The age. */
 	int age;
-	
+
 	int coinNeed = 0;
 
 	/** The player number. */
@@ -71,7 +71,7 @@ public class Card implements Cloneable, Buildable ,Serializable{
 		action = null;
 		name = nm;
 		this.age = age;
-		//coinNeed = cost.get(Resource.COIN);
+		// coinNeed = cost.get(Resource.COIN);
 		playerNumber = plynum;
 		color = clr;
 	}
@@ -90,11 +90,11 @@ public class Card implements Cloneable, Buildable ,Serializable{
 		}
 		return card;
 	}
-	
-	int getCoin(){
-		if(cost.containsKey(Resource.COIN))
+
+	int getCoin() {
+		if (cost.containsKey(Resource.COIN))
 			return cost.get(Resource.COIN);
-		else 
+		else
 			return 0;
 	}
 
@@ -370,28 +370,30 @@ public class Card implements Cloneable, Buildable ,Serializable{
 	public void setplayerNumber(int playNum) {
 		this.playerNumber = playNum;
 	}
+
 	/**
 	 * TODO Added by zxn 4-11
+	 * 
 	 * @return
 	 */
-	
+
 	public SimpleResList getResList() {
-		System.out.println("Card getResList() "+goods);
-		SimpleResList list=new SimpleResList();
+		System.out.println("Card getResList() " + goods);
+		SimpleResList list = new SimpleResList();
 		if (goods.containsKey(Resource.BRICK))
-			list.srl[1]=goods.get(Resource.BRICK);
+			list.srl[1] = goods.get(Resource.BRICK);
 		if (goods.containsKey(Resource.ORE))
-			list.srl[2]=goods.get(Resource.ORE);
+			list.srl[2] = goods.get(Resource.ORE);
 		if (goods.containsKey(Resource.STONE))
-			list.srl[3]=goods.get(Resource.STONE);
+			list.srl[3] = goods.get(Resource.STONE);
 		if (goods.containsKey(Resource.WOOD))
-			list.srl[4]=goods.get(Resource.WOOD);
+			list.srl[4] = goods.get(Resource.WOOD);
 		if (goods.containsKey(Resource.CLOTH))
-			list.srl[5]=goods.get(Resource.CLOTH);
+			list.srl[5] = goods.get(Resource.CLOTH);
 		if (goods.containsKey(Resource.GLASS))
-			list.srl[6]=goods.get(Resource.GLASS);
+			list.srl[6] = goods.get(Resource.GLASS);
 		if (goods.containsKey(Resource.PAPYRUS))
-			list.srl[7]=goods.get(Resource.PAPYRUS);
+			list.srl[7] = goods.get(Resource.PAPYRUS);
 		if (goods.containsKey(Resource.BRICK_ORE)) {
 			list.srl[1]++;
 			list.srl[2]++;
@@ -404,15 +406,15 @@ public class Card implements Cloneable, Buildable ,Serializable{
 		}
 		if (goods.containsKey(Resource.STONE_BRICK)) {
 			list.srl[1]++;
-			list.srl[3]++;			
+			list.srl[3]++;
 		}
 		if (goods.containsKey(Resource.STONE_WOOD)) {
 			list.srl[3]++;
-			list.srl[4]++;			
+			list.srl[4]++;
 		}
 		if (goods.containsKey(Resource.ORE_STONE)) {
 			list.srl[2]++;
-			list.srl[3]++;			
+			list.srl[3]++;
 		}
 		if (goods.containsKey(Resource.WOOD_BRICK)) {
 			list.srl[1]++;
@@ -420,15 +422,16 @@ public class Card implements Cloneable, Buildable ,Serializable{
 		}
 		if (goods.containsKey(Resource.WOOD_ORE)) {
 			list.srl[2]++;
-			list.srl[4]++;			
+			list.srl[4]++;
 		}
 		if (goods.containsKey(Resource.PAPYRUS_GLASS_CLOTH)) {
 			list.srl[5]++;
 			list.srl[6]++;
 			list.srl[7]++;
 		}
-		
-		list.srl[0]=list.srl[1]+list.srl[2]+list.srl[3]+list.srl[4]+list.srl[5]+list.srl[6]+list.srl[7];
+
+		list.srl[0] = list.srl[1] + list.srl[2] + list.srl[3] + list.srl[4]
+				+ list.srl[5] + list.srl[6] + list.srl[7];
 		return list;
 	}
 

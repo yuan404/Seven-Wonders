@@ -335,12 +335,12 @@ public class SimpleResList implements Serializable {
 
 	public static boolean jugOrListCanAfford(SimpleResList need,
 			ArrayList<SimpleResList> orList) {
-		for(SimpleResList smpList:orList){
-			for(int i=1;i<=7;i++){
-				if(need.srl[i]>0&&smpList.srl[i]>0){
+		for (SimpleResList smpList : orList) {
+			for (int i = 1; i <= 7; i++) {
+				if (need.srl[i] > 0 && smpList.srl[i] > 0) {
 					need.srl[i]--;
 					orList.remove(smpList);
-					if(jugOrListCanAfford(need,orList)){
+					if (jugOrListCanAfford(need, orList)) {
 						return true;
 					}
 					need.srl[i]++;
@@ -348,25 +348,26 @@ public class SimpleResList implements Serializable {
 				}
 			}
 		}
-		if(need.getTotalRes()==0){
+		if (need.getTotalRes() == 0) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * TODO Added by zxn 4-8 Bug-09
+	 * 
 	 * @param rawCost
 	 * @param manfCost
 	 * @return
 	 */
-	public int getTotalCost(int rawCost,int manfCost) {
-		int cost=0;
-		for (int i=1;i<8;i++)
-			if (i<5)
-				cost+=(rawCost*srl[i]);
+	public int getTotalCost(int rawCost, int manfCost) {
+		int cost = 0;
+		for (int i = 1; i < 8; i++)
+			if (i < 5)
+				cost += (rawCost * srl[i]);
 			else
-				cost+=(manfCost*srl[i]);
+				cost += (manfCost * srl[i]);
 		return cost;
 	}
 

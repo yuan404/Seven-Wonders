@@ -63,7 +63,7 @@ public class ErrorDialog extends Stage {
 			errorDialog.setScene(new Scene(root, 700, 400));
 			Toolkit.getDefaultToolkit().beep();
 			errorDialog.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				@Override
+				
 				public void handle(WindowEvent event) {
 					Toolkit.getDefaultToolkit().beep();
 					event.consume();
@@ -84,7 +84,7 @@ public class ErrorDialog extends Stage {
 			envData = new TextArea();
 			envData.setEditable(false);
 			// textArea.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			// @Override
+			// 
 			// public void handle(KeyEvent event) {
 			// event.consume();
 			// }
@@ -192,7 +192,7 @@ public class ErrorDialog extends Stage {
 
 			Button exit = new Button(LocalMessages.getString("Exit"));
 			exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
+				
 				public void handle(MouseEvent event) {
 					try {
 						writer.close();
@@ -207,7 +207,7 @@ public class ErrorDialog extends Stage {
 
 			final Button ctn = new Button(LocalMessages.getString("Continue"));
 			ctn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
+				
 				public void handle(MouseEvent event) {
 					if (errorDialog.reallyContinue) {
 						errorDialog.close();
@@ -224,7 +224,7 @@ public class ErrorDialog extends Stage {
 			// final Button copy = new
 			// Button(LocalMessages.getString("CopyToClipboard"));
 			// copy.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			// @Override
+			// 
 			// public void handle(MouseEvent event) {
 			// //Clipboard clipboard = Clipboard.getSystemClipboard();
 			// //JOptionPane.showMessageDialog(null, text.toString());
@@ -250,7 +250,7 @@ public class ErrorDialog extends Stage {
 			// send.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			//
 			//
-			// @Override
+			// 
 			// public void handle(MouseEvent event) {
 			// try {
 			// writeAvailable = false;
@@ -291,7 +291,7 @@ public class ErrorDialog extends Stage {
 
 			Button contact = new Button(LocalMessages.getString("ContactUs"));
 			contact.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
+				
 				public void handle(MouseEvent event) {
 					String qqURL = "http://wpa.qq.com/msgrd?v=3&uin=773534839&site=qq&menu=yes";
 					if (Manager.isApplet) {

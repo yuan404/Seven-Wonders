@@ -8,25 +8,24 @@ public abstract class GamePlayer implements Player {
 	protected Board board;
 	protected int index;
 	protected String name;
-	
-	@Override
+
 	public final CommandOption makeChoice(CommandOption[] options) {
 		CommandOption opt = makeAChoice(options);
 		MainBackGround.implementPlayerCommandOption(index, opt);
 		return opt;
 	}
 
-	@Override
-	public final void makeBuyDecision(SimpleResList needs, SimpleResList leftGoods, SimpleResList rightGoods) {
-		//Inform the GUI!!!
-		makeABuyDecision(needs,leftGoods,rightGoods);
+	public final void makeBuyDecision(SimpleResList needs,
+			SimpleResList leftGoods, SimpleResList rightGoods) {
+		// Inform the GUI!!!
+		makeABuyDecision(needs, leftGoods, rightGoods);
 	}
 
 	public abstract CommandOption makeAChoice(CommandOption[] options);
 
-	public abstract void makeABuyDecision(SimpleResList needs, SimpleResList leftGoods, SimpleResList rightGoods);
+	public abstract void makeABuyDecision(SimpleResList needs,
+			SimpleResList leftGoods, SimpleResList rightGoods);
 
-	
 	public Board getBoard() {
 		return board;
 	}
@@ -50,8 +49,8 @@ public abstract class GamePlayer implements Player {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public int getAge(){
+
+	public int getAge() {
 		return Manager.getKernel().getAge();
 	}
 

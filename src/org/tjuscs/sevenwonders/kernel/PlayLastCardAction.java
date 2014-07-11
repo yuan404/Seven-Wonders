@@ -51,7 +51,6 @@ public class PlayLastCardAction implements Action, DelayedAction {
 		return "play of the seventh card at the end of the age";
 	}
 
-	@Override
 	public int points(Board brd) {
 		// TODO Auto-generated method stub
 		return 0;

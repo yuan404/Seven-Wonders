@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * The Enum Resource.
  */
-public enum Resource implements Serializable{
+public enum Resource implements Serializable {
 
 	/** The BRICK. */
 	BRICK("brick", "B", 1, null),

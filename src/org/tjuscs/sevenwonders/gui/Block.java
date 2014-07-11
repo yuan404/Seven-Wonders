@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+//Wonders Block
 public class Block extends Parent {
 	Block(double screenX, double screenY) {
 		Rectangle rec = new Rectangle(screenX, screenY, Color.web("black", 0.7));

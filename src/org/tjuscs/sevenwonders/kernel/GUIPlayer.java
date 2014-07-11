@@ -3,20 +3,19 @@ package org.tjuscs.sevenwonders.kernel;
 @SuppressWarnings("serial")
 public class GUIPlayer extends GamePlayer {
 
-	public GUIPlayer(){
+	public GUIPlayer() {
 		this.name = "Player";
 	}
 
-	@Override
 	public CommandOption makeAChoice(CommandOption[] options) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void makeABuyDecision(SimpleResList needs, SimpleResList leftGoods, SimpleResList rightGoods) {
+	public void makeABuyDecision(SimpleResList needs, SimpleResList leftGoods,
+			SimpleResList rightGoods) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

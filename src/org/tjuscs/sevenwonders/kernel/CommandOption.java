@@ -9,14 +9,14 @@ public class CommandOption {
 	Command command;
 
 	/** The number of options. */
-	int needToBuild,needToBuildStage;
+	int needToBuild, needToBuildStage;
 	int leftHas, rightHas, totalCost, numberOptions;
 
 	/** The card. */
 	Card card;
 
 	/** The can build stage. */
-	boolean options, availableFree, canBuild,  canBuildStage;
+	boolean options, availableFree, canBuild, canBuildStage;
 
 	/** The ops. */
 	int[][] ops;
@@ -41,16 +41,18 @@ public class CommandOption {
 	 * @param needs
 	 *            the needed resources.需要的资源
 	 * @param left
-	 *            the resource list of the left-neighboring board.左边相邻奇迹（板）所拥有资源的清单
+	 *            the resource list of the left-neighboring
+	 *            board.左边相邻奇迹（板）所拥有资源的清单
 	 * @param right
-	 *            the resource list of the right-neighboring board.右边相邻奇迹（板）所拥有资源的清单
+	 *            the resource list of the right-neighboring
+	 *            board.右边相邻奇迹（板）所拥有资源的清单
 	 * @param bldable
 	 *            whether available to build.是否可以建造
 	 * @param free
-	 *            whether it's free to build.是否可以免费建造	TODO: Free Building
+	 *            whether it's free to build.是否可以免费建造 TODO: Free Building
 	 */
-	
-	public CommandOption(){
+
+	public CommandOption() {
 		options = false;
 		availableFree = false;
 		canBuild = false;
@@ -62,8 +64,9 @@ public class CommandOption {
 		rightSRL = new SimpleResList();
 		needsSRL = new SimpleResList();
 	}
-	public CommandOption(boolean opt, boolean ava, boolean bldable, 
-			boolean bldStage, int ndToBuild, int ndToBuildStage){
+
+	public CommandOption(boolean opt, boolean ava, boolean bldable,
+			boolean bldStage, int ndToBuild, int ndToBuildStage) {
 		options = opt;
 		availableFree = ava;
 		canBuild = bldable;
@@ -75,10 +78,12 @@ public class CommandOption {
 		rightSRL = new SimpleResList();
 		needsSRL = new SimpleResList();
 	}
+
 	public CommandOption(Card crd, int ndBuy, SimpleResList needs,
 			SimpleResList left, SimpleResList right, boolean bldable,
 			boolean free) {
-		System.out.println(CommandOption.class.getName()+" - CommandOption()");
+		System.out
+				.println(CommandOption.class.getName() + " - CommandOption()");
 		card = crd;
 		if (left != null)
 			leftHas = left.getTotalRes();
@@ -199,8 +204,7 @@ public class CommandOption {
 		leftHas = leftSRL.getTotalRes();
 		return leftSRL.getTotalRes(); // old way leftHas;
 	}
-	
-	
+
 	/**
 	 * Sets the left has.
 	 * 
@@ -230,7 +234,6 @@ public class CommandOption {
 		rightHas = rightSRL.getTotalRes();
 		return rightSRL.getTotalRes(); // old rightHas;
 	}
-
 
 	/**
 	 * Gets the needs srl.
@@ -374,8 +377,8 @@ public class CommandOption {
 	 */
 	public boolean needsBuyDecision() {
 		System.out.println("NBD: needBuy: " + needToBuild);
-		//System.out.println("NBD: neighbourGoods: "
-				//+ (getLeftHas() + getRightHas()));
+		// System.out.println("NBD: neighbourGoods: "
+		// + (getLeftHas() + getRightHas()));
 		if (needToBuild != getLeftHas() + getRightHas())
 			return true;
 		else
@@ -442,7 +445,8 @@ public class CommandOption {
 		StringBuilder strB = new StringBuilder();
 
 		strB.append(String.format("%s: %s buildable:[<%d>: E%d, W%d]", card,
-				(isBuildable() ? "is" : "isn't"), needToBuild, leftHas, rightHas));
+				(isBuildable() ? "is" : "isn't"), needToBuild, leftHas,
+				rightHas));
 
 		// strB.append(" ");
 		strB.append(reason);

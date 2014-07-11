@@ -80,7 +80,6 @@ public class ColorBasedIncomeAction implements Action, DelayedAction {
 		return "coins based on neighbors " + color.toString() + " cards";
 	}
 
-	@Override
 	public int points(Board brd) {
 		// TODO Auto-generated method stub
 		return 0;

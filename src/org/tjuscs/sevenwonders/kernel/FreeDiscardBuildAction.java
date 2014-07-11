@@ -27,7 +27,8 @@ public class FreeDiscardBuildAction implements Action, DelayedAction {
 	 * @see org.tjuscs.sevenwonders.core.DelayedAction#doDelayedAction()
 	 */
 	public void doDelayedAction() {
-		Card[] discards =KernelManager.getManager().getCardManager().getDiscardedCards();
+		Card[] discards = KernelManager.getManager().getCardManager()
+				.getDiscardedCards();
 		CommandOption[] options = new CommandOption[discards.length];
 		int i = 0;
 		for (Card crd : discards) {
@@ -42,8 +43,11 @@ public class FreeDiscardBuildAction implements Action, DelayedAction {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		board.getPlayerChoice(options);
 
-		KernelManager.getManager().removeEOTDelayedAction(this); // remove because this is a one time
-											// action
+		KernelManager.getManager().removeEOTDelayedAction(this); // remove
+																	// because
+																	// this is a
+																	// one time
+		// action
 	}
 
 	/*
@@ -55,7 +59,6 @@ public class FreeDiscardBuildAction implements Action, DelayedAction {
 		return "free build from the discard pile at the end of this turn";
 	}
 
-	@Override
 	public int points(Board brd) {
 		// TODO Auto-generated method stub
 		return 0;

@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- * The Interface Buildable.
- * 声明某个资源是否可以创建的借口
+ * The Interface Buildable. 声明某个资源是否可以创建的借口
  */
-public interface Buildable extends Serializable{
+public interface Buildable extends Serializable {
 
 	/**
 	 * Gets the costs.

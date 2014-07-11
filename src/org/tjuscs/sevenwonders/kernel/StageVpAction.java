@@ -27,7 +27,7 @@ public class StageVpAction implements Action, DelayedAction {
 		stageCount = board.getStagesCompleted()
 				+ eastBoard.getStagesCompleted()
 				+ westBoard.getStagesCompleted();
-		board.GuildVps+=stageCount;	//TODO added by zxn
+		board.GuildVps += stageCount; // TODO added by zxn
 		board.addToVPs(stageCount);
 		KernelManager.getManager().addEOTDelayedAction(this);
 	}
@@ -47,8 +47,7 @@ public class StageVpAction implements Action, DelayedAction {
 			newStages = newStageCount - stageCount;
 			stageCount = newStageCount;
 		}
-		if (newStages != 0)
-		{
+		if (newStages != 0) {
 			board.GuildVps += newStages;
 			board.addToVPs(newStages);
 		}
@@ -63,8 +62,6 @@ public class StageVpAction implements Action, DelayedAction {
 		return "vps for the number of stages neighbors have completed";
 	}
 
-
-	@Override
 	public int points(Board brd) {
 		board = brd;
 		Board westBoard = board.getLeftNeighbor();

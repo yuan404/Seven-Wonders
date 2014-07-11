@@ -153,7 +153,7 @@ public class CardGroup extends Parent {
 
 	public void load(Hand hand) {
 		try {
-			System.out.println(CardGroup.class.getName()+" - load()");
+			System.out.println(CardGroup.class.getName() + " - load()");
 			if (hoverTimeline != null) {
 				hoverTimeline.stop();
 				hoverBox.setVisible(false);
@@ -161,7 +161,8 @@ public class CardGroup extends Parent {
 			CardGroup.hand = hand;
 			CommandOption[] commandOptions = board.buildCommandOptions(hand);
 			cardLeft = commandOptions.length;
-			System.out.println(CardGroup.class.getName()+" - load() cardLeft="+cardLeft);
+			System.out.println(CardGroup.class.getName()
+					+ " - load() cardLeft=" + cardLeft);
 			g = new Group[cardLeft];
 			com = new CommandOption[cardLeft];
 
@@ -190,9 +191,12 @@ public class CardGroup extends Parent {
 				green1[i].setVisible(false);
 				brown1[i].setVisible(false);
 				green2[i].setVisible(false);
-				card[i] = new ImageView(ResManager.getImage(cardNameMap.get(cardItem.getName()) + ".jpg"));
-				if (!com[i].isAvailableFree() && com[i].isCanBuild() && com[i].getNeedToBuild() > 0)
-					needCoins[i] = new Text(String.valueOf(com[i].getNeedToBuild()));
+				card[i] = new ImageView(ResManager.getImage(cardNameMap
+						.get(cardItem.getName()) + ".jpg"));
+				if (!com[i].isAvailableFree() && com[i].isCanBuild()
+						&& com[i].getNeedToBuild() > 0)
+					needCoins[i] = new Text(String.valueOf(com[i]
+							.getNeedToBuild()));
 				else
 					needCoins[i] = new Text();
 				needCoins[i].setFill(Color.WHITE);
@@ -229,319 +233,402 @@ public class CardGroup extends Parent {
 						setSign(2, i);
 				}
 				final int i1 = i;
-				card[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						System.out.println(CardGroup.class.getName()+" - load() - card["+i1+"] : handle");
-						e.consume();
-						chooser[i1].setVisible(true);
-						chooser[i1].setLayoutX(35);
-						chooser[i1].setLayoutY(80);
-						green[i1].setLayoutX(35);
-						green[i1].setLayoutY(84);
-						green1[i1].setLayoutX(35);
-						green1[i1].setLayoutY(147);
-						green2[i1].setLayoutX(35);
-						green2[i1].setLayoutY(210);
-						brown[i1].setLayoutX(35);
-						brown[i1].setLayoutY(84);
-						brown1[i1].setLayoutX(35);
-						brown1[i1].setLayoutY(147);
-						// workout whether it could be afford
-						if (isFree) {
-							brown[i1].setVisible(false);
-							green[i1].setVisible(true);
-						} else {
-							if (isAB) {
-								brown[i1].setVisible(false);
-								green[i1].setVisible(true);
-							} else {
-								green[i1].setVisible(false);
-								brown[i1].setVisible(true);
+				card[i].addEventHandler(MouseEvent.MOUSE_CLICKED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								System.out.println(CardGroup.class.getName()
+										+ " - load() - card[" + i1
+										+ "] : handle");
+								e.consume();
+								chooser[i1].setVisible(true);
+								chooser[i1].setLayoutX(35);
+								chooser[i1].setLayoutY(80);
+								green[i1].setLayoutX(35);
+								green[i1].setLayoutY(84);
+								green1[i1].setLayoutX(35);
+								green1[i1].setLayoutY(147);
+								green2[i1].setLayoutX(35);
+								green2[i1].setLayoutY(210);
+								brown[i1].setLayoutX(35);
+								brown[i1].setLayoutY(84);
+								brown1[i1].setLayoutX(35);
+								brown1[i1].setLayoutY(147);
+								// workout whether it could be afford
+								if (isFree) {
+									brown[i1].setVisible(false);
+									green[i1].setVisible(true);
+								} else {
+									if (isAB) {
+										brown[i1].setVisible(false);
+										green[i1].setVisible(true);
+									} else {
+										green[i1].setVisible(false);
+										brown[i1].setVisible(true);
+									}
+								}
+								if (isAW) {
+									brown1[i1].setVisible(false);
+									green1[i1].setVisible(true);
+								} else {
+									green1[i1].setVisible(false);
+									brown1[i1].setVisible(true);
+								}
+								green2[i1].setVisible(true);
 							}
-						}
-						if (isAW) {
-							brown1[i1].setVisible(false);
-							green1[i1].setVisible(true);
-						} else {
-							green1[i1].setVisible(false);
-							brown1[i1].setVisible(true);
-						}
-						green2[i1].setVisible(true);
-					}
-				});
+						});
 
-				card[i].addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						event.consume();
+				card[i].addEventHandler(MouseEvent.MOUSE_PRESSED,
+						new EventHandler<MouseEvent>() {
 
-					}
-				});
+							public void handle(MouseEvent event) {
+								event.consume();
 
-				card[i].addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						event.consume();
+							}
+						});
 
-					}
-				});
+				card[i].addEventHandler(MouseEvent.MOUSE_RELEASED,
+						new EventHandler<MouseEvent>() {
 
-				green[i].addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						green[i1].setOpacity(0);
-					}
-				});
+							public void handle(MouseEvent event) {
+								event.consume();
+
+							}
+						});
+
+				green[i].addEventHandler(MouseEvent.MOUSE_EXITED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								green[i1].setOpacity(0);
+							}
+						});
 
 				if (available)
-					green[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-						public void handle(MouseEvent e) {
-							e.consume();
-							markCard(i1);
+					green[i].addEventHandler(MouseEvent.MOUSE_CLICKED,
+							new EventHandler<MouseEvent>() {
+								public void handle(MouseEvent e) {
+									e.consume();
+									markCard(i1);
 
-							EventHandler<ActionEvent> buildAction = new EventHandler<ActionEvent>() {
-								@Override
-								public void handle(ActionEvent event) {
-									System.out.println(CardGroup.class.getName()+" - green["+i1+"] buildAction");
-									com[i1].setCommand(Command.BUILD_CARD);
+									EventHandler<ActionEvent> buildAction = new EventHandler<ActionEvent>() {
+
+										public void handle(ActionEvent event) {
+											System.out.println(CardGroup.class
+													.getName()
+													+ " - green["
+													+ i1 + "] buildAction");
+											com[i1].setCommand(Command.BUILD_CARD);
+											implementCommand(com[i1]);
+											// JOptionPane.showMessageDialog(null,
+											// com[i1]
+											// .getCard());
+											player.addCard(cardNameMap
+													.get(com[i1].getCard()
+															.getName()),
+													com[i1].getCard()
+															.getColor());
+											TurnInfo info = new TurnInfo();
+											info.playerIndex = 0;
+											info.chosenBuyDecision = null;
+											info.chosenCardIndex = i1;
+											info.chosenCommandType = Command.BUILD_CARD;
+											info.turnNum = MainBackGround.turn;
+											Manager.getKernel().recordTurnInfo(
+													info);
+
+											EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
+
+												public void handle(
+														ActionEvent event) {
+													MainBackGround.nextTurn();
+												}
+											};
+											Timeline tl = new Timeline(
+													new KeyFrame(
+															Duration.seconds(0.3),
+															new KeyValue(
+																	g[i1].opacityProperty(),
+																	0)),
+													new KeyFrame(Duration
+															.seconds(0.3), act));
+											tl.play();
+										}
+									};
+									if (!freeBuild && com[i1].isOptions()) {
+
+										BI.load(com[i1].getCard(), board);
+										BI.setBuildAction(buildAction);
+										BI.toFront();
+									} else
+										buildAction.handle(new ActionEvent());
+								}
+							});
+				brown[i].addEventHandler(MouseEvent.MOUSE_EXITED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								brown[i1].setOpacity(0);
+							}
+						});
+				green[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								green[i1].setOpacity(1);
+							}
+						});
+				brown[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								brown[i1].setOpacity(1);
+							}
+						});
+				green1[i].addEventHandler(MouseEvent.MOUSE_EXITED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								green1[i1].setOpacity(0);
+							}
+						});
+
+				if (available)
+					green1[i].addEventHandler(MouseEvent.MOUSE_CLICKED,
+							new EventHandler<MouseEvent>() {
+								public void handle(MouseEvent e) {
+									e.consume();
+									markCard(i1);
+
+									// BI.load(10, 7);
+									// BI.toFront();
+									com[i1].setCommand(Command.BUILD_STAGE);
 									implementCommand(com[i1]);
-									// JOptionPane.showMessageDialog(null,
-									// com[i1]
-									// .getCard());
-									player.addCard(cardNameMap.get(com[i1].getCard().getName()), com[i1].getCard()
-											.getColor());
 									TurnInfo info = new TurnInfo();
 									info.playerIndex = 0;
 									info.chosenBuyDecision = null;
 									info.chosenCardIndex = i1;
-									info.chosenCommandType = Command.BUILD_CARD;
+									info.chosenCommandType = Command.BUILD_STAGE;
 									info.turnNum = MainBackGround.turn;
 									Manager.getKernel().recordTurnInfo(info);
-
 									EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-										@Override
+
 										public void handle(ActionEvent event) {
 											MainBackGround.nextTurn();
 										}
 									};
-									Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(g[i1]
-											.opacityProperty(), 0)), new KeyFrame(Duration.seconds(0.3), act));
+									Timeline tl = new Timeline(new KeyFrame(
+											Duration.seconds(0.3),
+											new KeyValue(g[i1]
+													.opacityProperty(), 0)),
+											new KeyFrame(Duration.seconds(0.3),
+													act));
 									tl.play();
 								}
-							};
-							if (!freeBuild && com[i1].isOptions()) {
-
-								BI.load(com[i1].getCard(), board);
-								BI.setBuildAction(buildAction);
-								BI.toFront();
-							} else
-								buildAction.handle(new ActionEvent());
-						}
-					});
-				brown[i].addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						brown[i1].setOpacity(0);
-					}
-				});
-				green[i].addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						green[i1].setOpacity(1);
-					}
-				});
-				brown[i].addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						brown[i1].setOpacity(1);
-					}
-				});
-				green1[i].addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						green1[i1].setOpacity(0);
-					}
-				});
-
-				if (available)
-					green1[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-						public void handle(MouseEvent e) {
-							e.consume();
-							markCard(i1);
-
-							// BI.load(10, 7);
-							// BI.toFront();
-							com[i1].setCommand(Command.BUILD_STAGE);
-							implementCommand(com[i1]);
-							TurnInfo info = new TurnInfo();
-							info.playerIndex = 0;
-							info.chosenBuyDecision = null;
-							info.chosenCardIndex = i1;
-							info.chosenCommandType = Command.BUILD_STAGE;
-							info.turnNum = MainBackGround.turn;
-							Manager.getKernel().recordTurnInfo(info);
-							EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-								@Override
-								public void handle(ActionEvent event) {
-									MainBackGround.nextTurn();
-								}
-							};
-							Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(g[i1]
-									.opacityProperty(), 0)), new KeyFrame(Duration.seconds(0.3), act));
-							tl.play();
-						}
-					});
-				brown1[i].addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						brown1[i1].setOpacity(0);
-					}
-				});
-				green1[i].addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						green1[i1].setOpacity(1);
-					}
-				});
-				brown1[i].addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						brown1[i1].setOpacity(1);
-					}
-				});
-				green2[i].addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						green2[i1].setOpacity(0);
-					}
-				});
-				green2[i].addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						green2[i1].setOpacity(1);
-					}
-				});
+							});
+				brown1[i].addEventHandler(MouseEvent.MOUSE_EXITED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								brown1[i1].setOpacity(0);
+							}
+						});
+				green1[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								green1[i1].setOpacity(1);
+							}
+						});
+				brown1[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								brown1[i1].setOpacity(1);
+							}
+						});
+				green2[i].addEventHandler(MouseEvent.MOUSE_EXITED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								green2[i1].setOpacity(0);
+							}
+						});
+				green2[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								green2[i1].setOpacity(1);
+							}
+						});
 
 				if (available)
-					green2[i].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-						public void handle(MouseEvent e) {
-							e.consume();
-							markCard(i1);
+					green2[i].addEventHandler(MouseEvent.MOUSE_CLICKED,
+							new EventHandler<MouseEvent>() {
+								public void handle(MouseEvent e) {
+									e.consume();
+									markCard(i1);
 
-							com[i1].setCommand(Command.SELL_CARD);
-							implementCommand(com[i1]);
-							TurnInfo info = new TurnInfo();
-							info.playerIndex = 0;
-							info.chosenBuyDecision = null;
-							info.chosenCardIndex = i1;
-							info.chosenCommandType = Command.SELL_CARD;
-							info.turnNum = MainBackGround.turn;
-							Manager.getKernel().recordTurnInfo(info);
-							EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-								@Override
-								public void handle(ActionEvent event) {
-									MainBackGround.addCardGivenUp(1);
-									MainBackGround.nextTurn();
+									com[i1].setCommand(Command.SELL_CARD);
+									implementCommand(com[i1]);
+									TurnInfo info = new TurnInfo();
+									info.playerIndex = 0;
+									info.chosenBuyDecision = null;
+									info.chosenCardIndex = i1;
+									info.chosenCommandType = Command.SELL_CARD;
+									info.turnNum = MainBackGround.turn;
+									Manager.getKernel().recordTurnInfo(info);
+									EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
+
+										public void handle(ActionEvent event) {
+											MainBackGround.addCardGivenUp(1);
+											MainBackGround.nextTurn();
+										}
+									};
+									player.discardCard(cardNameMap.get(com[i1]
+											.getCard().getName()));
+									Timeline tl = new Timeline(new KeyFrame(
+											Duration.seconds(0.3),
+											new KeyValue(g[i1]
+													.opacityProperty(), 0)),
+											new KeyFrame(Duration.seconds(0.3),
+													act));
+									tl.play();
 								}
-							};
-							player.discardCard(cardNameMap.get(com[i1].getCard().getName()));
-							Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(g[i1]
-									.opacityProperty(), 0)), new KeyFrame(Duration.seconds(0.3), act));
-							tl.play();
-						}
-					});
+							});
 
 				// final double x = card[i].getLayoutX();
 				// final double y = card[i].getLayoutY();
-				card[i].addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						for (int j = 0; j < cardLeft; j++) {
-							if (j != i1) {
-								g[j].setLayoutY(getLayoutY() + 10);
-								chooser[j].setVisible(false);
-								green[j].setVisible(false);
-								brown[j].setVisible(false);
-								green1[j].setVisible(false);
-								brown1[j].setVisible(false);
-								green2[j].setVisible(false);
-							}
-						}
-						g[i1].setLayoutY(getLayoutY() - 50);	//TODO Changed by zxn 4-8 Bug-14 Original -20
-						g[i1].toFront();
-						chooser[i1].toFront();
-						green[i1].toFront();
-						brown[i1].toFront();
-						green1[i1].toFront();
-						brown1[i1].toFront();
-						green2[i1].toFront();
-						needCoins[i1].toFront();
-
-						EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								hoverBox.setVisible(true);
-								final StringBuilder str = new StringBuilder();
-								str.append(cardItem.getName() + "\n");
-								double h = 50;
-
-								ArrayList<String> freeList = cardItem.getFreeList();
-								if (freeList != null && freeList.size() > 0) {
-									// str.append("Freelist:\n");
-									// h+=20;
-									for (String s : freeList) {
-										str.append("--->" + s + "\n");
-										h += deltaH;
-
+				card[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								for (int j = 0; j < cardLeft; j++) {
+									if (j != i1) {
+										g[j].setLayoutY(getLayoutY() + 10);
+										chooser[j].setVisible(false);
+										green[j].setVisible(false);
+										brown[j].setVisible(false);
+										green1[j].setVisible(false);
+										brown1[j].setVisible(false);
+										green2[j].setVisible(false);
 									}
 								}
+								g[i1].setLayoutY(getLayoutY() - 50); // TODO
+																		// Changed
+																		// by
+																		// zxn
+																		// 4-8
+																		// Bug-14
+																		// Original
+																		// -20
+								g[i1].toFront();
+								chooser[i1].toFront();
+								green[i1].toFront();
+								brown[i1].toFront();
+								green1[i1].toFront();
+								brown1[i1].toFront();
+								green2[i1].toFront();
+								needCoins[i1].toFront();
+
 								EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-									@Override
+
 									public void handle(ActionEvent event) {
-										text.setText(str.toString());
+										hoverBox.setVisible(true);
+										final StringBuilder str = new StringBuilder();
+										str.append(cardItem.getName() + "\n");
+										double h = 50;
+
+										ArrayList<String> freeList = cardItem
+												.getFreeList();
+										if (freeList != null
+												&& freeList.size() > 0) {
+											// str.append("Freelist:\n");
+											// h+=20;
+											for (String s : freeList) {
+												str.append("--->" + s + "\n");
+												h += deltaH;
+
+											}
+										}
+										EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
+
+											public void handle(ActionEvent event) {
+												text.setText(str.toString());
+											}
+										};
+
+										double lx = 10;
+										if (i1 < cardLeft / 2)
+											lx = screenX - 310;
+										hoverBox.toFront();
+										Timeline tl = new Timeline(
+												new KeyFrame(
+														Duration.seconds(0.2),
+														new KeyValue(
+																hoverBox.opacityProperty(),
+																0.85),
+														new KeyValue(
+																hoverBox.layoutXProperty(),
+																lx),
+														new KeyValue(
+																bg.heightProperty(),
+																h),
+														new KeyValue(
+																text.opacityProperty(),
+																0)),
+												new KeyFrame(Duration
+														.seconds(0.2), act),
+												new KeyFrame(
+														Duration.seconds(0.3),
+														new KeyValue(
+																text.opacityProperty(),
+																1)),
+												new KeyFrame(
+														Duration.seconds(2),
+														new KeyValue(
+																hoverBox.opacityProperty(),
+																0.85),
+														new KeyValue(
+																text.opacityProperty(),
+																1)),
+												new KeyFrame(
+														Duration.seconds(2.3),
+														new KeyValue(
+																hoverBox.opacityProperty(),
+																0),
+														new KeyValue(
+																text.opacityProperty(),
+																0)));
+										tl.play();
+										// JOptionPane.showMessageDialog(null,
+										// freeList);
 									}
 								};
-
-								double lx = 10;
-								if (i1 < cardLeft / 2)
-									lx = screenX - 310;
-								hoverBox.toFront();
-								Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.2), new KeyValue(hoverBox
-										.opacityProperty(), 0.85), new KeyValue(hoverBox.layoutXProperty(), lx),
-										new KeyValue(bg.heightProperty(), h), new KeyValue(text.opacityProperty(), 0)),
-										new KeyFrame(Duration.seconds(0.2), act), new KeyFrame(Duration.seconds(0.3),
-												new KeyValue(text.opacityProperty(), 1)), new KeyFrame(Duration
-												.seconds(2), new KeyValue(hoverBox.opacityProperty(), 0.85),
-												new KeyValue(text.opacityProperty(), 1)), new KeyFrame(Duration
-												.seconds(2.3), new KeyValue(hoverBox.opacityProperty(), 0),
-												new KeyValue(text.opacityProperty(), 0)));
-								tl.play();
-								// JOptionPane.showMessageDialog(null,
-								// freeList);
+								if (hoverTimeline != null)
+									hoverTimeline.stop();
+								hoverTimeline = new Timeline(new KeyFrame(
+										Duration.seconds(0.5), act));
+								hoverTimeline.play();
 							}
-						};
-						if (hoverTimeline != null)
-							hoverTimeline.stop();
-						hoverTimeline = new Timeline(new KeyFrame(Duration.seconds(0.5), act));
-						hoverTimeline.play();
-					}
-				});
+						});
 
-				card[i].addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent e) {
-						e.consume();
-						if (e.getX() > 208 || e.getY() > 320 || e.getX() < 0 || e.getY() < 0) {
-							g[i1].setLayoutY(getLayoutY() + 10);
-							chooser[i1].setVisible(false);
-							green[i1].setVisible(false);
-							brown[i1].setVisible(false);
-							green1[i1].setVisible(false);
-							brown1[i1].setVisible(false);
-							green2[i1].setVisible(false);
-						}
-					}
+				card[i].addEventHandler(MouseEvent.MOUSE_EXITED,
+						new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+								e.consume();
+								if (e.getX() > 208 || e.getY() > 320
+										|| e.getX() < 0 || e.getY() < 0) {
+									g[i1].setLayoutY(getLayoutY() + 10);
+									chooser[i1].setVisible(false);
+									green[i1].setVisible(false);
+									brown[i1].setVisible(false);
+									green1[i1].setVisible(false);
+									brown1[i1].setVisible(false);
+									green2[i1].setVisible(false);
+								}
+							}
 
-				});
+						});
 
 				g[i].setLayoutY(10);
 
@@ -565,20 +652,28 @@ public class CardGroup extends Parent {
 			for (int j = 0; j < cardLeft; j++) {
 				final int current = j;
 				g[j].setOnMouseEntered(new EventHandler<MouseEvent>() {
-					@Override
+
 					public void handle(MouseEvent event) {
 						for (int j = 0; j < cardLeft; j++) {
 							if (j < current) {
-								Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.1), new KeyValue(g[j]
-										.scaleXProperty(), 0.75), new KeyValue(g[j].scaleYProperty(), 0.75)));
+								Timeline tl = new Timeline(new KeyFrame(
+										Duration.seconds(0.1), new KeyValue(
+												g[j].scaleXProperty(), 0.75),
+										new KeyValue(g[j].scaleYProperty(),
+												0.75)));
 								tl.play();
 							} else if (j > current) {
-								Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.1), new KeyValue(g[j]
-										.scaleXProperty(), 0.75), new KeyValue(g[j].scaleYProperty(), 0.75)));
+								Timeline tl = new Timeline(new KeyFrame(
+										Duration.seconds(0.1), new KeyValue(
+												g[j].scaleXProperty(), 0.75),
+										new KeyValue(g[j].scaleYProperty(),
+												0.75)));
 								tl.play();
 							} else {
-								Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.1), new KeyValue(g[j]
-										.scaleXProperty(), 1), new KeyValue(g[j].scaleYProperty(), 1)));
+								Timeline tl = new Timeline(new KeyFrame(
+										Duration.seconds(0.1), new KeyValue(
+												g[j].scaleXProperty(), 1),
+										new KeyValue(g[j].scaleYProperty(), 1)));
 								tl.play();
 							}
 
@@ -588,11 +683,13 @@ public class CardGroup extends Parent {
 			}
 
 			this.setOnMouseExited(new EventHandler<MouseEvent>() {
-				@Override
+
 				public void handle(MouseEvent event) {
 					for (int j = 0; j < cardLeft; j++) {
-						Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.1), new KeyValue(g[j]
-								.scaleXProperty(), 0.75), new KeyValue(g[j].scaleYProperty(), 0.75)));
+						Timeline tl = new Timeline(new KeyFrame(Duration
+								.seconds(0.1), new KeyValue(g[j]
+								.scaleXProperty(), 0.75), new KeyValue(g[j]
+								.scaleYProperty(), 0.75)));
 						tl.play();
 						// if(card[j].getLayoutY() < card[0].getLayoutY()){
 						// card[0].setLayoutY(card[j].getLayoutY());
@@ -607,7 +704,7 @@ public class CardGroup extends Parent {
 
 			// if (available) {
 			// this.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			// @Override
+			//
 			// public void handle(KeyEvent event) {
 			// MainBackGround.nextTurn();
 			// }
@@ -625,11 +722,11 @@ public class CardGroup extends Parent {
 	}
 
 	public void nextHand(Hand hand, boolean isFirstTurnInOneAge) {
-		System.out.println(this.getClass().getName()+" - nextHand()");
+		System.out.println(this.getClass().getName() + " - nextHand()");
 		final CardGroup self = this;
 		final Hand newHand = hand;
 		EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				unload();
 				if (newHand != null)
@@ -640,25 +737,37 @@ public class CardGroup extends Parent {
 		};
 		if (CardGroup.hand != null) {
 			if (!isFirstTurnInOneAge) {
-				Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(this.layoutXProperty(),
-						MainBackGround.age == 2 ? screenX : -screenX)), new KeyFrame(Duration.seconds(0.3),
-						new KeyValue(this.layoutXProperty(), MainBackGround.age == 2 ? -screenX : screenX)),
-						new KeyFrame(Duration.seconds(0.3), act), new KeyFrame(Duration.seconds(0.6), new KeyValue(
-								this.layoutXProperty(), 0)));
+				Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3),
+						new KeyValue(this.layoutXProperty(),
+								MainBackGround.age == 2 ? screenX : -screenX)),
+						new KeyFrame(Duration.seconds(0.3), new KeyValue(this
+								.layoutXProperty(),
+								MainBackGround.age == 2 ? -screenX : screenX)),
+						new KeyFrame(Duration.seconds(0.3), act), new KeyFrame(
+								Duration.seconds(0.6), new KeyValue(
+										this.layoutXProperty(), 0)));
 				tl.play();
 			} else {
-				Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3),
-						new KeyValue(this.layoutYProperty(), 150), new KeyValue(this.layoutXProperty(),
-								this.getLayoutX())), new KeyFrame(Duration.seconds(0.31), new KeyValue(
-						this.layoutXProperty(), MainBackGround.age == 2 ? -screenX : screenX), new KeyValue(
-						this.layoutYProperty(), 0)), new KeyFrame(Duration.seconds(0.31), act), new KeyFrame(
-						Duration.seconds(1), new KeyValue(this.layoutXProperty(), 0)));
+				Timeline tl = new Timeline(
+						new KeyFrame(Duration.seconds(0.3), new KeyValue(
+								this.layoutYProperty(), 150), new KeyValue(
+								this.layoutXProperty(), this.getLayoutX())),
+						new KeyFrame(Duration.seconds(0.31), new KeyValue(this
+								.layoutXProperty(),
+								MainBackGround.age == 2 ? -screenX : screenX),
+								new KeyValue(this.layoutYProperty(), 0)),
+						new KeyFrame(Duration.seconds(0.31), act),
+						new KeyFrame(Duration.seconds(1), new KeyValue(this
+								.layoutXProperty(), 0)));
 				tl.play();
 			}
 		} else {// Only when Age 1 Turn 1
-			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0), new KeyValue(this.layoutXProperty(),
-					MainBackGround.age == 2 ? -screenX : screenX)), new KeyFrame(Duration.seconds(0), act),
-					new KeyFrame(Duration.seconds(1), new KeyValue(this.layoutXProperty(), 0)));
+			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0),
+					new KeyValue(this.layoutXProperty(),
+							MainBackGround.age == 2 ? -screenX : screenX)),
+					new KeyFrame(Duration.seconds(0), act), new KeyFrame(
+							Duration.seconds(1), new KeyValue(
+									this.layoutXProperty(), 0)));
 			tl.play();
 		}
 	}
@@ -675,21 +784,23 @@ public class CardGroup extends Parent {
 		sign.setScaleY(0.7);
 		sign.setLayoutX(-1.5);
 		final ImageView s = sign;
-		sign.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent e) {
-				s.setOpacity(0);
-			}
-		});
-		sign.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent e) {
-				s.setOpacity(1);
-			}
-		});
+		sign.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+						s.setOpacity(0);
+					}
+				});
+		sign.addEventHandler(MouseEvent.MOUSE_EXITED,
+				new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+						s.setOpacity(1);
+					}
+				});
 		g[i].getChildren().add(sign);
 	}
 
 	private void implementCommand(CommandOption com) {
-		System.out.println(CardGroup.class.getName()+" - implementCommand()");
+		System.out.println(CardGroup.class.getName() + " - implementCommand()");
 		board.implementCommand(com);
 		Card card = com.getCard();
 		hand.remove(card.getName());
@@ -702,23 +813,25 @@ public class CardGroup extends Parent {
 	public void changeRole(final Board board, final Hand hand) {
 		final CardGroup cg = this;
 		EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				cg.unload();
 				CardGroup.board = board;
 				cg.load(hand);
 			}
 		};
-		Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(this.layoutYProperty(), 105)),
-				new KeyFrame(Duration.seconds(0.3), act), new KeyFrame(Duration.seconds(0.6), new KeyValue(
-						this.layoutYProperty(), 0)));
+		Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3),
+				new KeyValue(this.layoutYProperty(), 105)), new KeyFrame(
+				Duration.seconds(0.3), act), new KeyFrame(
+				Duration.seconds(0.6), new KeyValue(this.layoutYProperty(), 0)));
 		tl.play();
 	}
 
 	public void markCard(final int index) {
 		Rectangle rec = new Rectangle(-1.5, -1.5, 208 + 3, 320 + 3);
 		rec.setFill(Color.TRANSPARENT);
-		Rectangle mstk = (Rectangle) MovingStroke.set(rec, Color.GOLDENROD, 6, 20, 20, 0.3);
+		Rectangle mstk = (Rectangle) MovingStroke.set(rec, Color.GOLDENROD, 6,
+				20, 20, 0.3);
 		g[index].getChildren().add(mstk);
 		mstk.toBack();
 	}

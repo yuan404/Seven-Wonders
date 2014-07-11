@@ -28,7 +28,7 @@ public class ReplayControl extends Group {
 		rc = this;
 		stopped = false;
 		EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				MainBackGround.nextTurn();
 			}
@@ -54,7 +54,8 @@ public class ReplayControl extends Group {
 		this.getChildren().add(menuBackground);
 
 		final Button playButton = new Button();
-		playButton.setGraphic(new ImageView(ResManager.getImage("img_pause.png")));
+		playButton.setGraphic(new ImageView(ResManager
+				.getImage("img_pause.png")));
 		playButton.setLayoutX(150.0);
 		// optionButton.setLayoutY(20.0);
 		playButton.setLayoutY(-50.0);
@@ -62,7 +63,8 @@ public class ReplayControl extends Group {
 		this.getChildren().add(playButton);
 
 		Button fastForwardButton = new Button();
-		fastForwardButton.setGraphic(new ImageView(ResManager.getImage("img_fastForward.png")));
+		fastForwardButton.setGraphic(new ImageView(ResManager
+				.getImage("img_fastForward.png")));
 		fastForwardButton.setLayoutX(220.0);
 		// returnButton.setLayoutY(20.0);
 		fastForwardButton.setLayoutY(-50.0);
@@ -76,7 +78,8 @@ public class ReplayControl extends Group {
 		this.getChildren().add(speedText);
 
 		Button singleStepButton = new Button();
-		singleStepButton.setGraphic(new ImageView(ResManager.getImage("img_singleStep.png")));
+		singleStepButton.setGraphic(new ImageView(ResManager
+				.getImage("img_singleStep.png")));
 		singleStepButton.setLayoutX(290.0);
 		// exitButton.setLayoutY(20.0);
 		singleStepButton.setLayoutY(-50.0);
@@ -84,29 +87,47 @@ public class ReplayControl extends Group {
 		this.getChildren().add(singleStepButton);
 
 		final Timeline down = new Timeline();
-		down.getKeyFrames().addAll(
-				new KeyFrame(Duration.ZERO, new KeyValue(menuBackground.layoutYProperty(), -335.0), new KeyValue(
-						playButton.layoutYProperty(), -50.0), new KeyValue(fastForwardButton.layoutYProperty(), -50.0),
-						new KeyValue(singleStepButton.layoutYProperty(), -50.0), new KeyValue(
-								speedText.layoutYProperty(), -50.0 + 45)),
-				new KeyFrame(new Duration(100), new KeyValue(menuBackground.layoutYProperty(), -265.0), new KeyValue(
-						playButton.layoutYProperty(), 15.0), new KeyValue(fastForwardButton.layoutYProperty(), 15.0),
-						new KeyValue(singleStepButton.layoutYProperty(), 15.0), new KeyValue(speedText
-								.layoutYProperty(), 15.0 + 45)));
+		down.getKeyFrames()
+				.addAll(new KeyFrame(
+						Duration.ZERO,
+						new KeyValue(menuBackground.layoutYProperty(), -335.0),
+						new KeyValue(playButton.layoutYProperty(), -50.0),
+						new KeyValue(fastForwardButton.layoutYProperty(), -50.0),
+						new KeyValue(singleStepButton.layoutYProperty(), -50.0),
+						new KeyValue(speedText.layoutYProperty(), -50.0 + 45)),
+						new KeyFrame(
+								new Duration(100),
+								new KeyValue(menuBackground.layoutYProperty(),
+										-265.0),
+								new KeyValue(playButton.layoutYProperty(), 15.0),
+								new KeyValue(fastForwardButton
+										.layoutYProperty(), 15.0),
+								new KeyValue(
+										singleStepButton.layoutYProperty(),
+										15.0), new KeyValue(speedText
+										.layoutYProperty(), 15.0 + 45)));
 
 		final Timeline up = new Timeline();
-		up.getKeyFrames().addAll(
-				new KeyFrame(Duration.ZERO, new KeyValue(menuBackground.layoutYProperty(), -265.0), new KeyValue(
-						playButton.layoutYProperty(), 15.0), new KeyValue(fastForwardButton.layoutYProperty(), 15.0),
-						new KeyValue(singleStepButton.layoutYProperty(), 15.0), new KeyValue(
-								speedText.layoutYProperty(), 15.0 + 45)),
-				new KeyFrame(new Duration(100), new KeyValue(menuBackground.layoutYProperty(), -335.0), new KeyValue(
-						playButton.layoutYProperty(), -50.0), new KeyValue(fastForwardButton.layoutYProperty(), -50.0),
-						new KeyValue(singleStepButton.layoutYProperty(), -50.0), new KeyValue(speedText
-								.layoutYProperty(), -50.0 + 45)));
+		up.getKeyFrames()
+				.addAll(new KeyFrame(
+						Duration.ZERO,
+						new KeyValue(menuBackground.layoutYProperty(), -265.0),
+						new KeyValue(playButton.layoutYProperty(), 15.0),
+						new KeyValue(fastForwardButton.layoutYProperty(), 15.0),
+						new KeyValue(singleStepButton.layoutYProperty(), 15.0),
+						new KeyValue(speedText.layoutYProperty(), 15.0 + 45)),
+						new KeyFrame(new Duration(100), new KeyValue(
+								menuBackground.layoutYProperty(), -335.0),
+								new KeyValue(playButton.layoutYProperty(),
+										-50.0), new KeyValue(fastForwardButton
+										.layoutYProperty(), -50.0),
+								new KeyValue(
+										singleStepButton.layoutYProperty(),
+										-50.0), new KeyValue(speedText
+										.layoutYProperty(), -50.0 + 45)));
 
 		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				rc.toFront();
 				down.play();
@@ -114,27 +135,30 @@ public class ReplayControl extends Group {
 		});
 
 		this.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				up.play();
 			}
 		});
 
 		playButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
-				if (!stopped && play.getStatus().equals(Animation.Status.PAUSED)) {
+				if (!stopped
+						&& play.getStatus().equals(Animation.Status.PAUSED)) {
 					play.play();
-					playButton.setGraphic(new ImageView(ResManager.getImage("img_pause.png")));
+					playButton.setGraphic(new ImageView(ResManager
+							.getImage("img_pause.png")));
 				} else if (play.getStatus().equals(Animation.Status.RUNNING)) {
 					play.pause();
-					playButton.setGraphic(new ImageView(ResManager.getImage("img_play.png")));
+					playButton.setGraphic(new ImageView(ResManager
+							.getImage("img_play.png")));
 				}
 			}
 		});
 
 		fastForwardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				if (rate > 7.9)
 					rate = 1;
@@ -146,7 +170,7 @@ public class ReplayControl extends Group {
 		});
 
 		speedText.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				if (rate > 7.9)
 					rate = 1;
@@ -158,11 +182,12 @@ public class ReplayControl extends Group {
 		});
 
 		singleStepButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
+
 			public void handle(MouseEvent event) {
 				if (play.getStatus().equals(Animation.Status.RUNNING)) {
 					play.pause();
-					playButton.setGraphic(new ImageView(ResManager.getImage("img_play.png")));
+					playButton.setGraphic(new ImageView(ResManager
+							.getImage("img_play.png")));
 				}
 				if (!stopped)
 					MainBackGround.nextTurn();

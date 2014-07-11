@@ -13,6 +13,7 @@ public class ResManager {
 	private static HashMap<String, Font> fonts = new HashMap<String, Font>();
 	private static HashMap<String, AudioClip> audioClips = new HashMap<String, AudioClip>();
 	private static ResManager rm;
+
 	public ResManager() {
 		rm = this;
 	}
@@ -23,14 +24,15 @@ public class ResManager {
 		if ((image = images.get(key)) != null) {
 			return image;
 		} else {
-			image = new Image(rm.getClass().getResourceAsStream("res/image/" + key));
+			image = new Image(rm.getClass().getResourceAsStream(
+					"res/image/" + key));
 
 			if (image != null) {
 				images.put(key, image);
 				return image;
-			} 
+			}
 			return null;
-			
+
 		}
 	}
 
@@ -40,7 +42,8 @@ public class ResManager {
 			return font;
 		} else {
 
-			font = Font.loadFont(rm.getClass().getResourceAsStream("res/font/" + key), size);
+			font = Font.loadFont(
+					rm.getClass().getResourceAsStream("res/font/" + key), size);
 
 			if (font != null) {
 				fonts.put(key + size, font);

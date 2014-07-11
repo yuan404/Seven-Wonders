@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.tjuscs.sevenwonders.gui.ErrorDialog;
 import org.tjuscs.sevenwonders.gui.GUIManager;
 import org.tjuscs.sevenwonders.kernel.KernelManager;
+
 //import org.tjuscs.sevenwonders.net.NetManager;
 
 public class Manager extends Application {
@@ -21,7 +22,7 @@ public class Manager extends Application {
 	private final static Logger log = Logger.getLogger(Manager.class.getName());
 	private static Manager manager;
 	private static KernelManager km;
-//	private static NetManager nm;
+	// private static NetManager nm;
 	private static GUIManager gm;
 	private static Object finalReport;
 	public static boolean isApplet;
@@ -37,21 +38,20 @@ public class Manager extends Application {
 		return gm;
 	}
 
-//	public static NetManager getNet() {
-//		return nm;
-//	}
+	// public static NetManager getNet() {
+	// return nm;
+	// }
 
 	public static KernelManager getKernel() {
 		return km;
 	}
 
-	@Override
 	public void init() throws Exception {
 		super.init();
 		log.setLevel(Level.DEBUG);
 		log.info("Log system initialized");
 		km = KernelManager.getManager();
-//		nm = NetManager.getManager();
+		// nm = NetManager.getManager();
 		gm = GUIManager.getManager();
 		log.info("All moduels initialized");
 		if (Platform.isSupported(ConditionalFeature.EFFECT))
@@ -76,10 +76,10 @@ public class Manager extends Application {
 			log.warn("Check Shape Clip support...No!");
 	}
 
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Manager.manager = this;
-		netscape.javascript.JSObject browser = getHostServices().getWebContext();
+		netscape.javascript.JSObject browser = getHostServices()
+				.getWebContext();
 		isApplet = browser != null;
 		if (isApplet) {
 			GUIManager.width = (int) primaryStage.getWidth();
@@ -88,7 +88,7 @@ public class Manager extends Application {
 		} else
 			log.info("Start running as an Application...");
 		log.info("Now Loading GUI Moduel...");
-		System.out.println(Manager.class.getName()+" - start()");
+		System.out.println(Manager.class.getName() + " - start()");
 		gm.start(primaryStage);
 	}
 
@@ -97,16 +97,17 @@ public class Manager extends Application {
 		});
 	}
 
-	@Override
 	public void stop() throws Exception {
 		super.stop();
 		if (errorCount <= 0)
 			if (warningCount <= 0)
 				log.info("Exit successfully![" + exitCode + "]");
 			else
-				log.warn("Exit with " + warningCount + " waring(s)![" + exitCode + "]");
+				log.warn("Exit with " + warningCount + " waring(s)!["
+						+ exitCode + "]");
 		else
-			log.error("Exit with " + errorCount + " error(s)![" + exitCode + "]");
+			log.error("Exit with " + errorCount + " error(s)![" + exitCode
+					+ "]");
 	}
 
 	public static void info(Object o) {
@@ -152,9 +153,7 @@ public class Manager extends Application {
 
 	}
 
-	/**
-	 * @param args
-	 */
+	// Main Function and main->init->start;
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -162,10 +161,9 @@ public class Manager extends Application {
 	public static void exit(int exitCode) {
 		Manager.exitCode = exitCode;
 		if (Manager.isApplet)
-			Manager.getManager().getHostServices().getWebContext().eval("close()");
+			Manager.getManager().getHostServices().getWebContext()
+					.eval("close()");
 		else
 			Platform.exit();
-
 	}
-
 }

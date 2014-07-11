@@ -22,7 +22,8 @@ import javafx.util.Duration;
 import org.tjuscs.sevenwonders.kernel.CardColor;
 
 public class Wonders extends Group {
-	Wonders(Image image, double screenX2, double screenY2, boolean abled, int Num, TPABoard t, Group r) {
+	Wonders(Image image, double screenX2, double screenY2, boolean abled,
+			int Num, TPABoard t, Group r) {
 		tpa = t;
 		root = r;
 		for (int i = 0; i < 15; i++) {
@@ -205,12 +206,18 @@ public class Wonders extends Group {
 		// new KeyFrame(Duration.seconds(0.9), new
 		// KeyValue(this.translateYProperty(), 0), new
 		// KeyValue(sta.opacityProperty(), 1)));
-				new KeyFrame(Duration.seconds(0.2), new KeyValue(this.scaleXProperty(), 0.75 * sx), new KeyValue(
-						this.scaleYProperty(), 0.75 * sy)), new KeyFrame(Duration.seconds(0.4), new KeyValue(
-						this.scaleXProperty(), 1.10 * sx), new KeyValue(this.scaleYProperty(), 1.10 * sy),
-						new KeyValue(sta.opacityProperty(), 1)), new KeyFrame(Duration.seconds(0.6), new KeyValue(
-						this.scaleXProperty(), 0.90 * sx), new KeyValue(this.scaleYProperty(), 0.90 * sy)),
-				new KeyFrame(Duration.seconds(0.8), new KeyValue(this.scaleXProperty(), 1.00 * sx), new KeyValue(this
+				new KeyFrame(Duration.seconds(0.2), new KeyValue(
+						this.scaleXProperty(), 0.75 * sx), new KeyValue(
+						this.scaleYProperty(), 0.75 * sy)), new KeyFrame(
+						Duration.seconds(0.4), new KeyValue(
+								this.scaleXProperty(), 1.10 * sx),
+						new KeyValue(this.scaleYProperty(), 1.10 * sy),
+						new KeyValue(sta.opacityProperty(), 1)), new KeyFrame(
+						Duration.seconds(0.6), new KeyValue(
+								this.scaleXProperty(), 0.90 * sx),
+						new KeyValue(this.scaleYProperty(), 0.90 * sy)),
+				new KeyFrame(Duration.seconds(0.8), new KeyValue(this
+						.scaleXProperty(), 1.00 * sx), new KeyValue(this
 						.scaleYProperty(), 1.00 * sy)));
 		tl.play();
 	}
@@ -279,7 +286,8 @@ public class Wonders extends Group {
 		resSign.getChildren().clear();
 		for (int i = 0; i < 15; i++) {
 			if (hasRes[i] == 1) {
-				resource = new ImageView(ResManager.getImage("rs" + (i + 1) + ".png"));
+				resource = new ImageView(ResManager.getImage("rs" + (i + 1)
+						+ ".png"));
 				if (i < 7)
 					resource.setLayoutX(-42);
 				else
@@ -295,7 +303,8 @@ public class Wonders extends Group {
 				numOfRes[tt].setFont(Font.font("Arial", 20));
 				numOfRes[tt].setTextFill(Color.WHITE);
 				numOfRes[tt].setEffect(new DropShadow());
-				resource = new ImageView(ResManager.getImage("rs" + (i + 1) + ".png"));
+				resource = new ImageView(ResManager.getImage("rs" + (i + 1)
+						+ ".png"));
 				resource.setLayoutX(-42);
 				resource.setLayoutY(-68 + t * 32);
 				resource.setScaleX(0.65);
@@ -320,7 +329,7 @@ public class Wonders extends Group {
 	 * @param cardColor
 	 */
 	public void addCard(final int cardID, final CardColor cardColor) {
-		System.out.println(this.getClass().getName()+" - addCard()");
+		System.out.println(this.getClass().getName() + " - addCard()");
 		list.add(cardID);
 		color.add(cardColor);
 		// tpa.clear();
@@ -338,7 +347,7 @@ public class Wonders extends Group {
 		cardImage.setScaleX(0.2);
 		cardImage.setScaleY(0.2);
 		EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				cir = new CardPoint(cardID, cardColor, self);
 				if (cardColor == CardColor.YELLOW) {
@@ -371,11 +380,13 @@ public class Wonders extends Group {
 					getChildren().add(cir);
 					i3++;
 				} else if (cardColor == CardColor.GREEN) {
-					if (cardID == 65 || cardID == 68 || cardID == 72 || cardID == 75) {
+					if (cardID == 65 || cardID == 68 || cardID == 72
+							|| cardID == 75) {
 						cir.setLayoutX(25 + 10 * i4);
 						cir.setLayoutY(74);
 						i4++;
-					} else if (cardID == 66 || cardID == 69 || cardID == 70 || cardID == 73) {
+					} else if (cardID == 66 || cardID == 69 || cardID == 70
+							|| cardID == 73) {
 						cir.setLayoutX(75 + 10 * i8);
 						cir.setLayoutY(74);
 						i8++;
@@ -405,17 +416,28 @@ public class Wonders extends Group {
 				// cardImage.toFront();
 			}
 		};
-		Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(cardImage.layoutXProperty(), 250),
-				new KeyValue(cardImage.layoutYProperty(), -80), new KeyValue(cardImage.opacityProperty(), 0),
-				new KeyValue(cardImage.scaleXProperty(), 0.2), new KeyValue(cardImage.scaleYProperty(), 0.2)),
-				new KeyFrame(Duration.seconds(0.5), new KeyValue(cardImage.layoutXProperty(), 150), new KeyValue(
-						cardImage.layoutYProperty(), -180), new KeyValue(cardImage.opacityProperty(), 1), new KeyValue(
-						cardImage.scaleXProperty(), 0.45), new KeyValue(cardImage.scaleYProperty(), 0.45)),
-				new KeyFrame(Duration.seconds(0.5), act), new KeyFrame(Duration.seconds(1.0), new KeyValue(
-						cardImage.layoutXProperty(), 50), new KeyValue(cardImage.layoutYProperty(), -80), new KeyValue(
-						cardImage.opacityProperty(), 1), new KeyValue(cardImage.scaleXProperty(), 0.6), new KeyValue(
-						cardImage.scaleYProperty(), 0.6)), new KeyFrame(Duration.seconds(3.0), new KeyValue(
-						cardImage.opacityProperty(), 1)), new KeyFrame(Duration.seconds(3.3), new KeyValue(
+		Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
+				cardImage.layoutXProperty(), 250), new KeyValue(
+				cardImage.layoutYProperty(), -80), new KeyValue(
+				cardImage.opacityProperty(), 0), new KeyValue(
+				cardImage.scaleXProperty(), 0.2), new KeyValue(
+				cardImage.scaleYProperty(), 0.2)), new KeyFrame(
+				Duration.seconds(0.5), new KeyValue(
+						cardImage.layoutXProperty(), 150), new KeyValue(
+						cardImage.layoutYProperty(), -180), new KeyValue(
+						cardImage.opacityProperty(), 1), new KeyValue(
+						cardImage.scaleXProperty(), 0.45), new KeyValue(
+						cardImage.scaleYProperty(), 0.45)), new KeyFrame(
+				Duration.seconds(0.5), act), new KeyFrame(
+				Duration.seconds(1.0), new KeyValue(
+						cardImage.layoutXProperty(), 50), new KeyValue(
+						cardImage.layoutYProperty(), -80), new KeyValue(
+						cardImage.opacityProperty(), 1), new KeyValue(
+						cardImage.scaleXProperty(), 0.6), new KeyValue(
+						cardImage.scaleYProperty(), 0.6)), new KeyFrame(
+				Duration.seconds(3.0), new KeyValue(
+						cardImage.opacityProperty(), 1)), new KeyFrame(
+				Duration.seconds(3.3), new KeyValue(
 						cardImage.opacityProperty(), 0)));
 		tl.play();
 		// }
@@ -462,26 +484,35 @@ public class Wonders extends Group {
 				targetY = (45 * i7);
 				i7++;
 			}
-			Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(imv[i].translateXProperty(),
-					this.getLayoutX()), new KeyValue(imv[i].translateYProperty(), this.getLayoutY())), new KeyFrame(
-					Duration.seconds(0.3), new KeyValue(imv[i].translateXProperty(), targetX), new KeyValue(
-							imv[i].translateYProperty(), targetY), new KeyValue(imv[i].opacityProperty(), 1)));
+			Timeline tl = new Timeline(
+					new KeyFrame(Duration.ZERO, new KeyValue(
+							imv[i].translateXProperty(), this.getLayoutX()),
+							new KeyValue(imv[i].translateYProperty(), this
+									.getLayoutY())), new KeyFrame(
+							Duration.seconds(0.3), new KeyValue(
+									imv[i].translateXProperty(), targetX),
+							new KeyValue(imv[i].translateYProperty(), targetY),
+							new KeyValue(imv[i].opacityProperty(), 1)));
 			tl.play();
 		}
 	}
 
 	public void hideInfo() {
 		EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				root.getChildren().removeAll(imv);
 			}
 		};
 
 		for (int i = 0; i < list.size(); i++) {
-			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.3), new KeyValue(imv[i].translateXProperty(),
-					this.getLayoutX()), new KeyValue(imv[i].translateYProperty(), this.getLayoutY()), new KeyValue(
-					imv[i].opacityProperty(), 0)), new KeyFrame(Duration.seconds(0.3), act));
+			Timeline tl = new Timeline(
+					new KeyFrame(Duration.seconds(0.3), new KeyValue(
+							imv[i].translateXProperty(), this.getLayoutX()),
+							new KeyValue(imv[i].translateYProperty(), this
+									.getLayoutY()), new KeyValue(
+									imv[i].opacityProperty(), 0)),
+					new KeyFrame(Duration.seconds(0.3), act));
 			tl.play();
 		}
 	}
@@ -497,32 +528,47 @@ public class Wonders extends Group {
 		rec.setArcWidth(30);
 		cardImage.setClip(rec);
 		cardImage.toFront();
-		//final Wonders self = this;
+		// final Wonders self = this;
 		getChildren().add(cardImage);
 		// cardImage.toBack();
 		cardImage.setScaleX(0.2);
 		cardImage.setScaleY(0.2);
 
-		RotateTransition rt = new RotateTransition(Duration.seconds(1.0), cardImage);
+		RotateTransition rt = new RotateTransition(Duration.seconds(1.0),
+				cardImage);
 		rt.setFromAngle(0);
 		rt.setToAngle(390);
 		// rt.setCycleCount(RotateTransition.INDEFINITE);
 		rt.play();
-		Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(cardImage.layoutXProperty(), 250),
-				new KeyValue(cardImage.layoutYProperty(), -80), new KeyValue(cardImage.opacityProperty(), 0),
-				new KeyValue(cardImage.scaleXProperty(), 0.2), new KeyValue(cardImage.scaleYProperty(), 0.2)),
-				new KeyFrame(Duration.seconds(0.5), new KeyValue(cardImage.layoutXProperty(), 250), new KeyValue(
-						cardImage.layoutYProperty(), -180), new KeyValue(cardImage.opacityProperty(), 1), new KeyValue(
-						cardImage.scaleXProperty(), 0.45), new KeyValue(cardImage.scaleYProperty(), 0.45)),
-				// new KeyFrame(Duration.seconds(0.5),act),
-				new KeyFrame(Duration.seconds(1.0), new KeyValue(cardImage.layoutXProperty(), 250), new KeyValue(
-						cardImage.layoutYProperty(), -80), new KeyValue(cardImage.opacityProperty(), 1), new KeyValue(
-						cardImage.scaleXProperty(), 0.6), new KeyValue(cardImage.scaleYProperty(), 0.6)), new KeyFrame(
-						Duration.seconds(3.0), new KeyValue(cardImage.opacityProperty(), 1), new KeyValue(
-								cardImage.layoutXProperty(), 290), new KeyValue(cardImage.layoutYProperty(), 0),
-						new KeyValue(rt.rateProperty(), 0.2)), new KeyFrame(Duration.seconds(3.3), new KeyValue(
-						cardImage.opacityProperty(), 0), new KeyValue(cardImage.layoutXProperty(), 300), new KeyValue(
-						cardImage.layoutYProperty(), 80), new KeyValue(cardImage.visibleProperty(), false)));
+		Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
+				cardImage.layoutXProperty(), 250), new KeyValue(
+				cardImage.layoutYProperty(), -80), new KeyValue(
+				cardImage.opacityProperty(), 0), new KeyValue(
+				cardImage.scaleXProperty(), 0.2), new KeyValue(
+				cardImage.scaleYProperty(), 0.2)), new KeyFrame(
+				Duration.seconds(0.5), new KeyValue(
+						cardImage.layoutXProperty(), 250), new KeyValue(
+						cardImage.layoutYProperty(), -180), new KeyValue(
+						cardImage.opacityProperty(), 1), new KeyValue(
+						cardImage.scaleXProperty(), 0.45), new KeyValue(
+						cardImage.scaleYProperty(), 0.45)),
+		// new KeyFrame(Duration.seconds(0.5),act),
+				new KeyFrame(Duration.seconds(1.0), new KeyValue(
+						cardImage.layoutXProperty(), 250), new KeyValue(
+						cardImage.layoutYProperty(), -80), new KeyValue(
+						cardImage.opacityProperty(), 1), new KeyValue(
+						cardImage.scaleXProperty(), 0.6), new KeyValue(
+						cardImage.scaleYProperty(), 0.6)), new KeyFrame(
+						Duration.seconds(3.0), new KeyValue(
+								cardImage.opacityProperty(), 1), new KeyValue(
+								cardImage.layoutXProperty(), 290),
+						new KeyValue(cardImage.layoutYProperty(), 0),
+						new KeyValue(rt.rateProperty(), 0.2)), new KeyFrame(
+						Duration.seconds(3.3), new KeyValue(
+								cardImage.opacityProperty(), 0), new KeyValue(
+								cardImage.layoutXProperty(), 300),
+						new KeyValue(cardImage.layoutYProperty(), 80),
+						new KeyValue(cardImage.visibleProperty(), false)));
 		tl.play();
 	}
 
@@ -558,5 +604,6 @@ public class Wonders extends Group {
 	private static Group root;
 	private ImageView[] imv;
 	private Group resSign;
-	private int i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0, i8 = 0, i9 = 0;
+	private int i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0, i8 = 0,
+			i9 = 0;
 }

@@ -97,7 +97,7 @@
 ////		txt_port.setInputVerifier(new InputVerifier() // 应该是使用了观察者模式
 ////		{
 ////
-////			@Override
+////			
 ////			public boolean verify(JComponent input)
 ////			{
 ////				JTextField txt_com = (JTextField) input;
@@ -142,7 +142,7 @@
 ////		btn_start.addActionListener(new ActionListener()
 ////		{
 ////
-////			@Override
+////			
 ////			public void actionPerformed(ActionEvent e)
 ////			{
 //				//String text =;
@@ -190,7 +190,7 @@
 ////		btn_stop.addActionListener(new ActionListener()
 ////		{
 ////
-////			@Override
+////			
 ////			public void actionPerformed(ActionEvent e)
 ////			{
 ////				try
@@ -265,7 +265,7 @@
 ////		 */
 ////		this.addWindowListener(new WindowAdapter()
 ////		{
-////			@Override
+////			
 ////			public void windowClosing(WindowEvent e)
 ////			{
 ////				System.exit(0);
@@ -325,4 +325,4 @@
 //			e1.printStackTrace();
 //		}
 //	}
-//}
+// }

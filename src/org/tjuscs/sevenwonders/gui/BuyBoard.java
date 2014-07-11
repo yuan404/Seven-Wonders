@@ -101,12 +101,12 @@ public class BuyBoard extends DropGroup {
 
 	public void load(Card cd, final Board board) {
 		try {
-			System.out.println(BuyBoard.class.getName()+" - load()");
-			over=false;		//TODO Changed by zxn 4-5 Bug-8
-			//TODO Changed by zxn 4-5 Bug-4
+			System.out.println(BuyBoard.class.getName() + " - load()");
+			over = false; // TODO Changed by zxn 4-5 Bug-8
+			// TODO Changed by zxn 4-5 Bug-4
 			if (getChildren().contains(goldBoard))
 				getChildren().remove(goldBoard);
-			//End todo
+			// End todo
 			needList = SimpleResList.buildCostList(cd);
 			gold = board.getTotalCoins();
 			numOfRsNeeded = needList.getTotalRes();
@@ -159,15 +159,20 @@ public class BuyBoard extends DropGroup {
 					getChildren().add(frame[i]);
 				} else {
 					label[i - 2] = new Label();
-					label[i - 2].setText(SimpleResList.resourceAt(needListByInt[i - 2]).toString());
+					label[i - 2].setText(SimpleResList.resourceAt(
+							needListByInt[i - 2]).toString());
 					frame[i] = new ImageView(frame2);
 
 					dir1[i - 2] = new ImageView(left);
 					buyFromLeft.srl[0]++;
 					buyFromLeft.srl[needListByInt[i - 2]]++;
-					//TODO Changed by zxn 4-10 bug-6
-					if (this.canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board.getLeftNeighbor()
-							.getSellOrList()) && ((needListByInt[i-2]<5 && gold>=board.getLeftRawCost()) || (needListByInt[i-2]>4 && gold>=board.getManfCost()))) {
+					// TODO Changed by zxn 4-10 bug-6
+					if (this.canAfford(buyFromLeft, board.getLeftNeighbor()
+							.getResourceList(), board.getLeftNeighbor()
+							.getSellOrList())
+							&& ((needListByInt[i - 2] < 5 && gold >= board
+									.getLeftRawCost()) || (needListByInt[i - 2] > 4 && gold >= board
+									.getManfCost()))) {
 						dir1[i - 2].setVisible(true);
 					} else {
 						dir1[i - 2].setVisible(false);
@@ -178,7 +183,8 @@ public class BuyBoard extends DropGroup {
 					dir2[i - 2] = new ImageView(down);
 					buyFromSelf.srl[0]++;
 					buyFromSelf.srl[needListByInt[i - 2]]++;
-					if (this.canAfford(buyFromSelf, board.getResourceList(), board.getOrList())) {
+					if (this.canAfford(buyFromSelf, board.getResourceList(),
+							board.getOrList())) {
 						dir2[i - 2].setVisible(true);
 					} else {
 						dir2[i - 2].setVisible(false);
@@ -189,9 +195,13 @@ public class BuyBoard extends DropGroup {
 					dir3[i - 2] = new ImageView(right);
 					buyFromRight.srl[0]++;
 					buyFromRight.srl[needListByInt[i - 2]]++;
-					//TODO Changed by zxn 4-10 bug-6
-					if (this.canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-							.getRightNeighbor().getSellOrList()) && ((needListByInt[i-2]<5 && gold>=board.getRightRawCost()) || (needListByInt[i-2]>4 && gold>=board.getManfCost()))) {
+					// TODO Changed by zxn 4-10 bug-6
+					if (this.canAfford(buyFromRight, board.getRightNeighbor()
+							.getResourceList(), board.getRightNeighbor()
+							.getSellOrList())
+							&& ((needListByInt[i - 2] < 5 && gold >= board
+									.getRightRawCost()) || (needListByInt[i - 2] > 4 && gold >= board
+									.getManfCost()))) {
 						dir3[i - 2].setVisible(true);
 					} else {
 						dir3[i - 2].setVisible(false);
@@ -230,608 +240,743 @@ public class BuyBoard extends DropGroup {
 					dir3[i - 2].setScaleX(0.9);
 					dir3[i - 2].setScaleY(0.9);
 					final int i1 = i;
-					dir1[i - 2].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-						public void handle(MouseEvent e) {
-							System.out.println(BuyBoard.class.getName()+" - dir1");
-							System.out.println("Test.." + 1);
-							if (jugClicked[0][i1 - 2]) {
-								jugClicked[0][i1 - 2] = false;
-								buyFromLeft.srl[0]--;
-								buyFromLeft.srl[needListByInt[i1 - 2]]--;
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("1");
-									if (!jugClicked[0][i]) {
-										buyFromLeft.srl[0]++;
-										buyFromLeft.srl[needListByInt[i]]++;
-										if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board
-												.getLeftNeighbor().getSellOrList())) {
-											dir1[i].setVisible(true);
-										} else {
-											dir1[i].setVisible(false);
-										}
+					dir1[i - 2].addEventHandler(MouseEvent.MOUSE_CLICKED,
+							new EventHandler<MouseEvent>() {
+								public void handle(MouseEvent e) {
+									System.out.println(BuyBoard.class.getName()
+											+ " - dir1");
+									System.out.println("Test.." + 1);
+									if (jugClicked[0][i1 - 2]) {
+										jugClicked[0][i1 - 2] = false;
 										buyFromLeft.srl[0]--;
-										buyFromLeft.srl[needListByInt[i]]--;
-									}
-								}
-
-								dir1[i1 - 2].setOpacity(1);
-								dir2[i1 - 2].setOpacity(1);
-								dir3[i1 - 2].setOpacity(1);
-								
-								
-								// TODO Changed by zxn 4-5 Bug-3-4
-								//gold = gold + 1;	//Original
-								if (needListByInt[i1-2]<5)
-									gold+=board.getLeftRawCost();
-								else
-									gold+=board.getManfCost();
-								//getChildren().remove(goldBoard);	//Original
-								showGold();
-								
-								//TODO Changed by zxn 4-5 Bug-6
-								for (int i=0; i<numOfRsNeeded; i++) {
-									if (!jugClicked[0][i] && !dir1[i].isVisible()) {
-									
-										buyFromLeft.srl[0]++;
-										buyFromLeft.srl[needListByInt[i]]++;
-										if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board.getLeftNeighbor().getSellOrList()))
-											if ((needListByInt[i]<5 && gold>=board.getLeftRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-												dir1[i].setVisible(true);
-										
-										buyFromLeft.srl[0]--;
-										buyFromLeft.srl[needListByInt[i]]--;
-
-										
-									}
-									if (!jugClicked[2][i] && !dir3[i].isVisible()) {
-										buyFromRight.srl[0]++;
-										buyFromRight.srl[needListByInt[i]]++;
-										if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-												.getRightNeighbor().getSellOrList())) 
-											if ((needListByInt[i]<5 && gold>=board.getRightRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-												dir3[i].setVisible(true);
-
-										buyFromRight.srl[0]--;
-										buyFromRight.srl[needListByInt[i]]--;
-									}
-								}
-
-								
-								from[i1 - 2] = 0;
-								over = true;
-								for (int j = 0; j < numOfRsNeeded; j++) {
-									System.out.println("2");
-									if (from[j] == 0) {
-										over = false;
-										break;
-									}
-								}
-								if (over)
-									isFinish.setImage(ok);
-								else {
-									isFinish.setImage(notok);
-								}
-								return;
-							}
-							System.out.println("Test.." + 2);
-							if (jugClicked[1][i1 - 2]) {
-								System.out.println("Dir 1...Clicked 1");
-								buyFromSelf.srl[0]--;
-								buyFromSelf.srl[needListByInt[i1 - 2]]--;
-								jugClicked[1][i1 - 2] = false;
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("3");
-									if (!jugClicked[1][i]) {
-										buyFromSelf.srl[0]++;
-										buyFromSelf.srl[needListByInt[i]]++;
-										if (canAfford(buyFromSelf, board.getResourceList(), board.getOrList())) {
-											dir2[i].setVisible(true);
-										} else {
-											dir2[i].setVisible(false);
+										buyFromLeft.srl[needListByInt[i1 - 2]]--;
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("1");
+											if (!jugClicked[0][i]) {
+												buyFromLeft.srl[0]++;
+												buyFromLeft.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromLeft,
+														board.getLeftNeighbor()
+																.getResourceList(),
+														board.getLeftNeighbor()
+																.getSellOrList())) {
+													dir1[i].setVisible(true);
+												} else {
+													dir1[i].setVisible(false);
+												}
+												buyFromLeft.srl[0]--;
+												buyFromLeft.srl[needListByInt[i]]--;
+											}
 										}
+
+										dir1[i1 - 2].setOpacity(1);
+										dir2[i1 - 2].setOpacity(1);
+										dir3[i1 - 2].setOpacity(1);
+
+										// TODO Changed by zxn 4-5 Bug-3-4
+										// gold = gold + 1; //Original
+										if (needListByInt[i1 - 2] < 5)
+											gold += board.getLeftRawCost();
+										else
+											gold += board.getManfCost();
+										// getChildren().remove(goldBoard);
+										// //Original
+										showGold();
+
+										// TODO Changed by zxn 4-5 Bug-6
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											if (!jugClicked[0][i]
+													&& !dir1[i].isVisible()) {
+
+												buyFromLeft.srl[0]++;
+												buyFromLeft.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromLeft,
+														board.getLeftNeighbor()
+																.getResourceList(),
+														board.getLeftNeighbor()
+																.getSellOrList()))
+													if ((needListByInt[i] < 5 && gold >= board
+															.getLeftRawCost())
+															|| (needListByInt[i] > 4 && gold >= board
+																	.getManfCost()))
+														dir1[i].setVisible(true);
+
+												buyFromLeft.srl[0]--;
+												buyFromLeft.srl[needListByInt[i]]--;
+
+											}
+											if (!jugClicked[2][i]
+													&& !dir3[i].isVisible()) {
+												buyFromRight.srl[0]++;
+												buyFromRight.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromRight,
+														board.getRightNeighbor()
+																.getResourceList(),
+														board.getRightNeighbor()
+																.getSellOrList()))
+													if ((needListByInt[i] < 5 && gold >= board
+															.getRightRawCost())
+															|| (needListByInt[i] > 4 && gold >= board
+																	.getManfCost()))
+														dir3[i].setVisible(true);
+
+												buyFromRight.srl[0]--;
+												buyFromRight.srl[needListByInt[i]]--;
+											}
+										}
+
+										from[i1 - 2] = 0;
+										over = true;
+										for (int j = 0; j < numOfRsNeeded; j++) {
+											System.out.println("2");
+											if (from[j] == 0) {
+												over = false;
+												break;
+											}
+										}
+										if (over)
+											isFinish.setImage(ok);
+										else {
+											isFinish.setImage(notok);
+										}
+										return;
+									}
+									System.out.println("Test.." + 2);
+									if (jugClicked[1][i1 - 2]) {
+										System.out.println("Dir 1...Clicked 1");
 										buyFromSelf.srl[0]--;
-										buyFromSelf.srl[needListByInt[i]]--;
-									}
-								}
-							} else if (jugClicked[2][i1 - 2]) {
-								System.out.println("Dir 1...Clicked 2");
-								buyFromRight.srl[0]--;
-								buyFromRight.srl[needListByInt[i1 - 2]]--;
-								jugClicked[2][i1 - 2] = false;
-
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("4");
-									if (!jugClicked[2][i]) {
-										buyFromRight.srl[0]++;
-										buyFromRight.srl[needListByInt[i]]++;
-										if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-												.getRightNeighbor().getSellOrList())) {
-											dir3[i].setVisible(true);
-										} else {
-											dir3[i].setVisible(false);
+										buyFromSelf.srl[needListByInt[i1 - 2]]--;
+										jugClicked[1][i1 - 2] = false;
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("3");
+											if (!jugClicked[1][i]) {
+												buyFromSelf.srl[0]++;
+												buyFromSelf.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromSelf,
+														board.getResourceList(),
+														board.getOrList())) {
+													dir2[i].setVisible(true);
+												} else {
+													dir2[i].setVisible(false);
+												}
+												buyFromSelf.srl[0]--;
+												buyFromSelf.srl[needListByInt[i]]--;
+											}
 										}
+									} else if (jugClicked[2][i1 - 2]) {
+										System.out.println("Dir 1...Clicked 2");
 										buyFromRight.srl[0]--;
-										buyFromRight.srl[needListByInt[i]]--;
+										buyFromRight.srl[needListByInt[i1 - 2]]--;
+										jugClicked[2][i1 - 2] = false;
+
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("4");
+											if (!jugClicked[2][i]) {
+												buyFromRight.srl[0]++;
+												buyFromRight.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromRight,
+														board.getRightNeighbor()
+																.getResourceList(),
+														board.getRightNeighbor()
+																.getSellOrList())) {
+													dir3[i].setVisible(true);
+												} else {
+													dir3[i].setVisible(false);
+												}
+												buyFromRight.srl[0]--;
+												buyFromRight.srl[needListByInt[i]]--;
+											}
+										}
+
+										// TODO Changed by zxn 4-5 Bug-3
+										if (needListByInt[i1 - 2] < 5)
+											gold += board.getRightRawCost();
+										else
+											gold += board.getManfCost();
+
+										// TODO Changed by zxn 4-5 Bug-6
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											if (!jugClicked[0][i]
+													&& !dir1[i].isVisible()) {
+
+												buyFromLeft.srl[0]++;
+												buyFromLeft.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromLeft,
+														board.getLeftNeighbor()
+																.getResourceList(),
+														board.getLeftNeighbor()
+																.getSellOrList()))
+													if ((needListByInt[i] < 5 && gold >= board
+															.getLeftRawCost())
+															|| (needListByInt[i] > 4 && gold >= board
+																	.getManfCost()))
+														dir1[i].setVisible(true);
+
+												buyFromLeft.srl[0]--;
+												buyFromLeft.srl[needListByInt[i]]--;
+
+											}
+											if (!jugClicked[2][i]
+													&& !dir3[i].isVisible()) {
+												buyFromRight.srl[0]++;
+												buyFromRight.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromRight,
+														board.getRightNeighbor()
+																.getResourceList(),
+														board.getRightNeighbor()
+																.getSellOrList()))
+													if ((needListByInt[i] < 5 && gold >= board
+															.getRightRawCost())
+															|| (needListByInt[i] > 4 && gold >= board
+																	.getManfCost()))
+														dir3[i].setVisible(true);
+
+												buyFromRight.srl[0]--;
+												buyFromRight.srl[needListByInt[i]]--;
+											}
+										}
+
 									}
-								}
-
-								//TODO Changed by zxn 4-5 Bug-3
-								if (needListByInt[i1-2]<5)
-									gold+=board.getRightRawCost();
-								else
-									gold+=board.getManfCost();
-								
-								//TODO Changed by zxn 4-5 Bug-6
-								for (int i=0; i<numOfRsNeeded; i++) {
-									if (!jugClicked[0][i] && !dir1[i].isVisible()) {
-									
-										buyFromLeft.srl[0]++;
-										buyFromLeft.srl[needListByInt[i]]++;
-										if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board.getLeftNeighbor().getSellOrList()))
-											if ((needListByInt[i]<5 && gold>=board.getLeftRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-												dir1[i].setVisible(true);
-										
-										buyFromLeft.srl[0]--;
-										buyFromLeft.srl[needListByInt[i]]--;
-
-										
-									}
-									if (!jugClicked[2][i] && !dir3[i].isVisible()) {
-										buyFromRight.srl[0]++;
-										buyFromRight.srl[needListByInt[i]]++;
-										if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-												.getRightNeighbor().getSellOrList())) 
-											if ((needListByInt[i]<5 && gold>=board.getRightRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-												dir3[i].setVisible(true);
-
-										buyFromRight.srl[0]--;
-										buyFromRight.srl[needListByInt[i]]--;
-									}
-								}
-
-
-							}
-							jugClicked[0][i1 - 2] = true;
-							buyFromLeft.srl[0]++;
-							buyFromLeft.srl[needListByInt[i1 - 2]]++;
-							for (int i = 0; i < numOfRsNeeded; i++) {
-								System.out.println("5");
-								if (!jugClicked[0][i]) {
+									jugClicked[0][i1 - 2] = true;
 									buyFromLeft.srl[0]++;
-									buyFromLeft.srl[needListByInt[i]]++;
-									if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board
-											.getLeftNeighbor().getSellOrList())) {
-										dir1[i].setVisible(true); //Original
-									} else {
-										dir1[i].setVisible(false);
-									}
-									buyFromLeft.srl[0]--;
-									buyFromLeft.srl[needListByInt[i]]--;
-								}
-							}
-
-
-							System.out.println("Test.." + 3);
-							dir1[i1 - 2].setOpacity(0.3);
-							dir2[i1 - 2].setOpacity(1);
-							dir3[i1 - 2].setOpacity(1);
-							
-							// TODO Changed by zxn 4-5 Bug-3-4
-							//gold = gold - 1;	//Original
-							if (needListByInt[i1-2]<5)
-								gold-=board.getLeftRawCost();
-							else
-								gold-=board.getManfCost();
-						//	getChildren().remove(goldBoard);	//Original
-							showGold();
-							
-							//TODO Changed by zxn 4-5 Bug-6
-							for (int i=0; i<numOfRsNeeded; i++) {
-								if (!jugClicked[0][i] && dir1[i].isVisible())
-									if ((needListByInt[i]<5 && gold<board.getLeftRawCost()) || (needListByInt[i]>4 && gold<board.getManfCost()))
-										dir1[i].setVisible(false);
-								if (!jugClicked[2][i] && dir3[i].isVisible())
-									if ((needListByInt[i]<5 && gold<board.getRightRawCost()) || (needListByInt[i]>4 && gold<board.getManfCost()))
-										dir3[i].setVisible(false);
-							}
-
-							
-							System.out.println("Gold="+gold);
-							System.out.println("Test.." + 4);
-							from[i1 - 2] = 1;
-							over = true;
-							for (int j = 0; j < numOfRsNeeded; j++) {
-								System.out.println("6");
-								if (from[j] == 0) {
-									over = false;
-									break;
-								}
-							}
-							System.out.println("Test.." + 5);
-							if (over) {
-								isFinish.setImage(ok);
-							}
-							System.out.println("Test.." + 6);
-						}
-					});
-					dir2[i - 2].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-						public void handle(MouseEvent e) {
-							System.out.println(BuyBoard.class.getName()+" - dir2");
-							
-							if (jugClicked[1][i1 - 2]) {
-								jugClicked[1][i1 - 2] = false;
-								buyFromSelf.srl[0]--;
-								buyFromSelf.srl[needListByInt[i1 - 2]]--;
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("7");
-									if (!jugClicked[1][i]) {
-										buyFromSelf.srl[0]++;
-										buyFromSelf.srl[needListByInt[i]]++;
-										if (canAfford(buyFromSelf, board.getResourceList(), board.getOrList())) {
-											dir2[i].setVisible(true);
-										} else {
-											dir2[i].setVisible(false);
+									buyFromLeft.srl[needListByInt[i1 - 2]]++;
+									for (int i = 0; i < numOfRsNeeded; i++) {
+										System.out.println("5");
+										if (!jugClicked[0][i]) {
+											buyFromLeft.srl[0]++;
+											buyFromLeft.srl[needListByInt[i]]++;
+											if (canAfford(buyFromLeft, board
+													.getLeftNeighbor()
+													.getResourceList(), board
+													.getLeftNeighbor()
+													.getSellOrList())) {
+												dir1[i].setVisible(true); // Original
+											} else {
+												dir1[i].setVisible(false);
+											}
+											buyFromLeft.srl[0]--;
+											buyFromLeft.srl[needListByInt[i]]--;
 										}
+									}
+
+									System.out.println("Test.." + 3);
+									dir1[i1 - 2].setOpacity(0.3);
+									dir2[i1 - 2].setOpacity(1);
+									dir3[i1 - 2].setOpacity(1);
+
+									// TODO Changed by zxn 4-5 Bug-3-4
+									// gold = gold - 1; //Original
+									if (needListByInt[i1 - 2] < 5)
+										gold -= board.getLeftRawCost();
+									else
+										gold -= board.getManfCost();
+									// getChildren().remove(goldBoard);
+									// //Original
+									showGold();
+
+									// TODO Changed by zxn 4-5 Bug-6
+									for (int i = 0; i < numOfRsNeeded; i++) {
+										if (!jugClicked[0][i]
+												&& dir1[i].isVisible())
+											if ((needListByInt[i] < 5 && gold < board
+													.getLeftRawCost())
+													|| (needListByInt[i] > 4 && gold < board
+															.getManfCost()))
+												dir1[i].setVisible(false);
+										if (!jugClicked[2][i]
+												&& dir3[i].isVisible())
+											if ((needListByInt[i] < 5 && gold < board
+													.getRightRawCost())
+													|| (needListByInt[i] > 4 && gold < board
+															.getManfCost()))
+												dir3[i].setVisible(false);
+									}
+
+									System.out.println("Gold=" + gold);
+									System.out.println("Test.." + 4);
+									from[i1 - 2] = 1;
+									over = true;
+									for (int j = 0; j < numOfRsNeeded; j++) {
+										System.out.println("6");
+										if (from[j] == 0) {
+											over = false;
+											break;
+										}
+									}
+									System.out.println("Test.." + 5);
+									if (over) {
+										isFinish.setImage(ok);
+									}
+									System.out.println("Test.." + 6);
+								}
+							});
+					dir2[i - 2].addEventHandler(MouseEvent.MOUSE_CLICKED,
+							new EventHandler<MouseEvent>() {
+								public void handle(MouseEvent e) {
+									System.out.println(BuyBoard.class.getName()
+											+ " - dir2");
+
+									if (jugClicked[1][i1 - 2]) {
+										jugClicked[1][i1 - 2] = false;
 										buyFromSelf.srl[0]--;
-										buyFromSelf.srl[needListByInt[i]]--;
-									}
-								}
-
-								dir1[i1 - 2].setOpacity(1);
-								dir2[i1 - 2].setOpacity(1);
-								dir3[i1 - 2].setOpacity(1);
-								from[i1 - 2] = 0;
-								
-								over = true;
-								for (int j = 0; j < numOfRsNeeded; j++) {
-									System.out.println("8");
-									if (from[j] == 0) {
-										over = false;
-										break;
-									}
-								}
-								if (over)
-									isFinish.setImage(ok);
-								else {
-									isFinish.setImage(notok);
-								}
-								return;
-							}
-
-							if (jugClicked[0][i1 - 2]) {
-								System.out.println("Dir 2...Clicked 0");
-								buyFromLeft.srl[0]--;
-								buyFromLeft.srl[needListByInt[i1 - 2]]--;
-								jugClicked[0][i1 - 2] = false;
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("9");
-									if (!jugClicked[0][i]) {
-										buyFromLeft.srl[0]++;
-										buyFromLeft.srl[needListByInt[i]]++;
-										if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board
-												.getLeftNeighbor().getSellOrList())) {
-											dir1[i].setVisible(true);
-										} else {
-											dir1[i].setVisible(false);
+										buyFromSelf.srl[needListByInt[i1 - 2]]--;
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("7");
+											if (!jugClicked[1][i]) {
+												buyFromSelf.srl[0]++;
+												buyFromSelf.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromSelf,
+														board.getResourceList(),
+														board.getOrList())) {
+													dir2[i].setVisible(true);
+												} else {
+													dir2[i].setVisible(false);
+												}
+												buyFromSelf.srl[0]--;
+												buyFromSelf.srl[needListByInt[i]]--;
+											}
 										}
+
+										dir1[i1 - 2].setOpacity(1);
+										dir2[i1 - 2].setOpacity(1);
+										dir3[i1 - 2].setOpacity(1);
+										from[i1 - 2] = 0;
+
+										over = true;
+										for (int j = 0; j < numOfRsNeeded; j++) {
+											System.out.println("8");
+											if (from[j] == 0) {
+												over = false;
+												break;
+											}
+										}
+										if (over)
+											isFinish.setImage(ok);
+										else {
+											isFinish.setImage(notok);
+										}
+										return;
+									}
+
+									if (jugClicked[0][i1 - 2]) {
+										System.out.println("Dir 2...Clicked 0");
 										buyFromLeft.srl[0]--;
-										buyFromLeft.srl[needListByInt[i]]--;
-									}
-								}
-								//TODO Changed by zxn 4-5 Bug-3
-								if (needListByInt[i1-2]<5)
-									gold+=board.getLeftRawCost();
-								else
-									gold+=board.getManfCost();
-								
-							} else if (jugClicked[2][i1 - 2]) {
-								System.out.println("Dir 2...Clicked 2");
-								buyFromRight.srl[0]--;
-								buyFromRight.srl[needListByInt[i1 - 2]]--;
-								jugClicked[2][i1 - 2] = false;
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("10");
-									if (!jugClicked[2][i]) {
-										buyFromRight.srl[0]++;
-										buyFromRight.srl[needListByInt[i]]++;
-										if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-												.getRightNeighbor().getSellOrList())) {
-											dir3[i].setVisible(true);
-										} else {
-											dir3[i].setVisible(false);
+										buyFromLeft.srl[needListByInt[i1 - 2]]--;
+										jugClicked[0][i1 - 2] = false;
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("9");
+											if (!jugClicked[0][i]) {
+												buyFromLeft.srl[0]++;
+												buyFromLeft.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromLeft,
+														board.getLeftNeighbor()
+																.getResourceList(),
+														board.getLeftNeighbor()
+																.getSellOrList())) {
+													dir1[i].setVisible(true);
+												} else {
+													dir1[i].setVisible(false);
+												}
+												buyFromLeft.srl[0]--;
+												buyFromLeft.srl[needListByInt[i]]--;
+											}
 										}
+										// TODO Changed by zxn 4-5 Bug-3
+										if (needListByInt[i1 - 2] < 5)
+											gold += board.getLeftRawCost();
+										else
+											gold += board.getManfCost();
+
+									} else if (jugClicked[2][i1 - 2]) {
+										System.out.println("Dir 2...Clicked 2");
 										buyFromRight.srl[0]--;
-										buyFromRight.srl[needListByInt[i]]--;
+										buyFromRight.srl[needListByInt[i1 - 2]]--;
+										jugClicked[2][i1 - 2] = false;
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("10");
+											if (!jugClicked[2][i]) {
+												buyFromRight.srl[0]++;
+												buyFromRight.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromRight,
+														board.getRightNeighbor()
+																.getResourceList(),
+														board.getRightNeighbor()
+																.getSellOrList())) {
+													dir3[i].setVisible(true);
+												} else {
+													dir3[i].setVisible(false);
+												}
+												buyFromRight.srl[0]--;
+												buyFromRight.srl[needListByInt[i]]--;
+											}
+										}
+										// TODO Changed by zxn 4-5 bug-3
+										if (needListByInt[i1 - 2] < 5)
+											gold += board.getRightRawCost();
+										else
+											gold += board.getManfCost();
 									}
-								}
-								//TODO Changed by zxn 4-5 bug-3
-								if (needListByInt[i1-2]<5)
-									gold+=board.getRightRawCost();
-								else
-									gold+=board.getManfCost();
-							}
-							jugClicked[1][i1 - 2] = true;
-							buyFromSelf.srl[0]++;
-							buyFromSelf.srl[needListByInt[i1 - 2]]++;
-							for (int i = 0; i < numOfRsNeeded; i++) {
-								System.out.println("11");
-								if (!jugClicked[1][i]) {
+									jugClicked[1][i1 - 2] = true;
 									buyFromSelf.srl[0]++;
-									buyFromSelf.srl[needListByInt[i]]++;
-									if (canAfford(buyFromSelf, board.getResourceList(), board.getOrList())) {
-										dir2[i].setVisible(true);
-									} else {
-										dir2[i].setVisible(false);
-									}
-									buyFromSelf.srl[0]--;
-									buyFromSelf.srl[needListByInt[i]]--;
-								}
-							}
-							//TODO Changed by zxn 4-5 Bug-6
-							for (int i=0; i<numOfRsNeeded; i++) {
-								if (!jugClicked[0][i] && !dir1[i].isVisible()) {
-								
-									buyFromLeft.srl[0]++;
-									buyFromLeft.srl[needListByInt[i]]++;
-									if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board.getLeftNeighbor().getSellOrList()))
-										if ((needListByInt[i]<5 && gold>=board.getLeftRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-											dir1[i].setVisible(true);
-									
-									buyFromLeft.srl[0]--;
-									buyFromLeft.srl[needListByInt[i]]--;
-
-									
-								}
-								if (!jugClicked[2][i] && !dir3[i].isVisible()) {
-									buyFromRight.srl[0]++;
-									buyFromRight.srl[needListByInt[i]]++;
-									if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-											.getRightNeighbor().getSellOrList())) 
-										if ((needListByInt[i]<5 && gold>=board.getRightRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-											dir3[i].setVisible(true);
-
-									buyFromRight.srl[0]--;
-									buyFromRight.srl[needListByInt[i]]--;
-								}
-							}
-
-
-
-							dir1[i1 - 2].setOpacity(1);
-							dir2[i1 - 2].setOpacity(0.3);
-							dir3[i1 - 2].setOpacity(1);
-							from[i1 - 2] = 2;
-							//TODO Changed by zxn 4-5 Bug-3-4
-							//getChildren().remove(goldBoard);	//Original
-							showGold();
-
-							over = true;
-							for (int j = 0; j < numOfRsNeeded; j++) {
-								System.out.println("12");
-								if (from[j] == 0) {
-									over = false;
-									break;
-								}
-							}
-							if (over)
-								isFinish.setImage(ok);
-						}
-					});
-					dir3[i - 2].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-						public void handle(MouseEvent e) {
-							System.out.println(BuyBoard.class.getName()+" - dir3");
-
-
-							if (jugClicked[2][i1 - 2]) {
-								jugClicked[2][i1 - 2] = false;
-								buyFromRight.srl[0]--;
-								buyFromRight.srl[needListByInt[i1 - 2]]--;
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("13");
-									if (!jugClicked[2][i]) {
-										buyFromRight.srl[0]++;
-										buyFromRight.srl[needListByInt[i]]++;
-										if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-												.getRightNeighbor().getSellOrList())) {
-											dir3[i].setVisible(true);
-										} else {
-											dir3[i].setVisible(false);
+									buyFromSelf.srl[needListByInt[i1 - 2]]++;
+									for (int i = 0; i < numOfRsNeeded; i++) {
+										System.out.println("11");
+										if (!jugClicked[1][i]) {
+											buyFromSelf.srl[0]++;
+											buyFromSelf.srl[needListByInt[i]]++;
+											if (canAfford(buyFromSelf,
+													board.getResourceList(),
+													board.getOrList())) {
+												dir2[i].setVisible(true);
+											} else {
+												dir2[i].setVisible(false);
+											}
+											buyFromSelf.srl[0]--;
+											buyFromSelf.srl[needListByInt[i]]--;
 										}
-										buyFromRight.srl[0]--;
-										buyFromRight.srl[needListByInt[i]]--;
 									}
-								}
+									// TODO Changed by zxn 4-5 Bug-6
+									for (int i = 0; i < numOfRsNeeded; i++) {
+										if (!jugClicked[0][i]
+												&& !dir1[i].isVisible()) {
 
+											buyFromLeft.srl[0]++;
+											buyFromLeft.srl[needListByInt[i]]++;
+											if (canAfford(buyFromLeft, board
+													.getLeftNeighbor()
+													.getResourceList(), board
+													.getLeftNeighbor()
+													.getSellOrList()))
+												if ((needListByInt[i] < 5 && gold >= board
+														.getLeftRawCost())
+														|| (needListByInt[i] > 4 && gold >= board
+																.getManfCost()))
+													dir1[i].setVisible(true);
 
-								dir1[i1 - 2].setOpacity(1);
-								dir2[i1 - 2].setOpacity(1);
-								dir3[i1 - 2].setOpacity(1);
-								//gold = gold + 1;	//Original
-								// TODO CHanged by zxn 4-5 Bug-3-4
-								if (needListByInt[i1-2]<5)
-									gold+=board.getRightRawCost();
-								else
-									gold+=board.getManfCost();
-								//getChildren().remove(goldBoard);	//Original
-								showGold();
-								
-								//TODO Changed by zxn 4-5 Bug-6
-								for (int i=0; i<numOfRsNeeded; i++) {
-									if (!jugClicked[0][i] && !dir1[i].isVisible()) {
-									
-										buyFromLeft.srl[0]++;
-										buyFromLeft.srl[needListByInt[i]]++;
-										if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board.getLeftNeighbor().getSellOrList()))
-											if ((needListByInt[i]<5 && gold>=board.getLeftRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-												dir1[i].setVisible(true);
-										
-										buyFromLeft.srl[0]--;
-										buyFromLeft.srl[needListByInt[i]]--;
+											buyFromLeft.srl[0]--;
+											buyFromLeft.srl[needListByInt[i]]--;
 
-										
-									}
-									if (!jugClicked[2][i] && !dir3[i].isVisible()) {
-										buyFromRight.srl[0]++;
-										buyFromRight.srl[needListByInt[i]]++;
-										if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-												.getRightNeighbor().getSellOrList())) 
-											if ((needListByInt[i]<5 && gold>=board.getRightRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-												dir3[i].setVisible(true);
-
-										buyFromRight.srl[0]--;
-										buyFromRight.srl[needListByInt[i]]--;
-									}
-								}
-
-								
-								//
-								from[i1 - 2] = 0;
-								over = true;
-								for (int j = 0; j < numOfRsNeeded; j++) {
-									System.out.println("14");
-									if (from[j] == 0) {
-										over = false;
-										break;
-									}
-								}
-								if (over)
-									isFinish.setImage(ok);
-								else {
-									isFinish.setImage(notok);
-								}
-								return;
-							}
-
-							if (jugClicked[0][i1 - 2]) {
-								System.out.println("Dir 3...Clicked 0");
-								buyFromLeft.srl[0]--;
-								buyFromLeft.srl[needListByInt[i1 - 2]]--;
-								jugClicked[0][i1 - 2] = false;
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("15");
-									if (!jugClicked[0][i]) {
-										buyFromLeft.srl[0]++;
-										buyFromLeft.srl[needListByInt[i]]++;
-										if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board
-												.getLeftNeighbor().getSellOrList())) {
-											dir1[i].setVisible(true);
-										} else {
-											dir1[i].setVisible(false);
 										}
-										buyFromLeft.srl[0]--;
-										buyFromLeft.srl[needListByInt[i]]--;
-									}
-								}
-								//TODO Changed by zxn 4-5 Bug-3
-								if (needListByInt[i1-2]<5)
-									gold+=board.getLeftRawCost();
-								else
-									gold+=board.getManfCost();
-								
-								//TODO Changed by zxn 4-5 Bug-6
-								for (int i=0; i<numOfRsNeeded; i++) {
-									if (!jugClicked[0][i] && !dir1[i].isVisible()) {
-									
-										buyFromLeft.srl[0]++;
-										buyFromLeft.srl[needListByInt[i]]++;
-										if (canAfford(buyFromLeft, board.getLeftNeighbor().getResourceList(), board.getLeftNeighbor().getSellOrList()))
-											if ((needListByInt[i]<5 && gold>=board.getLeftRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-												dir1[i].setVisible(true);
-										
-										buyFromLeft.srl[0]--;
-										buyFromLeft.srl[needListByInt[i]]--;
+										if (!jugClicked[2][i]
+												&& !dir3[i].isVisible()) {
+											buyFromRight.srl[0]++;
+											buyFromRight.srl[needListByInt[i]]++;
+											if (canAfford(buyFromRight, board
+													.getRightNeighbor()
+													.getResourceList(), board
+													.getRightNeighbor()
+													.getSellOrList()))
+												if ((needListByInt[i] < 5 && gold >= board
+														.getRightRawCost())
+														|| (needListByInt[i] > 4 && gold >= board
+																.getManfCost()))
+													dir3[i].setVisible(true);
 
-										
-									}
-									if (!jugClicked[2][i] && !dir3[i].isVisible()) {
-										buyFromRight.srl[0]++;
-										buyFromRight.srl[needListByInt[i]]++;
-										if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-												.getRightNeighbor().getSellOrList())) 
-											if ((needListByInt[i]<5 && gold>=board.getRightRawCost()) || (needListByInt[i]>4 && gold>=board.getManfCost()))
-												dir3[i].setVisible(true);
-
-										buyFromRight.srl[0]--;
-										buyFromRight.srl[needListByInt[i]]--;
-									}
-								}
-
-
-							} else if (jugClicked[1][i1 - 2]) {
-								System.out.println("Dir 3...Clicked 1");
-								buyFromSelf.srl[0]--;
-								buyFromSelf.srl[needListByInt[i1 - 2]]--;
-								jugClicked[1][i1 - 2] = false;
-								for (int i = 0; i < numOfRsNeeded; i++) {
-									System.out.println("16");
-									if (!jugClicked[1][i]) {
-										buyFromSelf.srl[0]++;
-										buyFromSelf.srl[needListByInt[i]]++;
-										if (canAfford(buyFromSelf, board.getResourceList(), board.getOrList())) {
-											dir2[i].setVisible(true);
-										} else {
-											dir2[i].setVisible(false);
+											buyFromRight.srl[0]--;
+											buyFromRight.srl[needListByInt[i]]--;
 										}
+									}
+
+									dir1[i1 - 2].setOpacity(1);
+									dir2[i1 - 2].setOpacity(0.3);
+									dir3[i1 - 2].setOpacity(1);
+									from[i1 - 2] = 2;
+									// TODO Changed by zxn 4-5 Bug-3-4
+									// getChildren().remove(goldBoard);
+									// //Original
+									showGold();
+
+									over = true;
+									for (int j = 0; j < numOfRsNeeded; j++) {
+										System.out.println("12");
+										if (from[j] == 0) {
+											over = false;
+											break;
+										}
+									}
+									if (over)
+										isFinish.setImage(ok);
+								}
+							});
+					dir3[i - 2].addEventHandler(MouseEvent.MOUSE_CLICKED,
+							new EventHandler<MouseEvent>() {
+								public void handle(MouseEvent e) {
+									System.out.println(BuyBoard.class.getName()
+											+ " - dir3");
+
+									if (jugClicked[2][i1 - 2]) {
+										jugClicked[2][i1 - 2] = false;
+										buyFromRight.srl[0]--;
+										buyFromRight.srl[needListByInt[i1 - 2]]--;
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("13");
+											if (!jugClicked[2][i]) {
+												buyFromRight.srl[0]++;
+												buyFromRight.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromRight,
+														board.getRightNeighbor()
+																.getResourceList(),
+														board.getRightNeighbor()
+																.getSellOrList())) {
+													dir3[i].setVisible(true);
+												} else {
+													dir3[i].setVisible(false);
+												}
+												buyFromRight.srl[0]--;
+												buyFromRight.srl[needListByInt[i]]--;
+											}
+										}
+
+										dir1[i1 - 2].setOpacity(1);
+										dir2[i1 - 2].setOpacity(1);
+										dir3[i1 - 2].setOpacity(1);
+										// gold = gold + 1; //Original
+										// TODO CHanged by zxn 4-5 Bug-3-4
+										if (needListByInt[i1 - 2] < 5)
+											gold += board.getRightRawCost();
+										else
+											gold += board.getManfCost();
+										// getChildren().remove(goldBoard);
+										// //Original
+										showGold();
+
+										// TODO Changed by zxn 4-5 Bug-6
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											if (!jugClicked[0][i]
+													&& !dir1[i].isVisible()) {
+
+												buyFromLeft.srl[0]++;
+												buyFromLeft.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromLeft,
+														board.getLeftNeighbor()
+																.getResourceList(),
+														board.getLeftNeighbor()
+																.getSellOrList()))
+													if ((needListByInt[i] < 5 && gold >= board
+															.getLeftRawCost())
+															|| (needListByInt[i] > 4 && gold >= board
+																	.getManfCost()))
+														dir1[i].setVisible(true);
+
+												buyFromLeft.srl[0]--;
+												buyFromLeft.srl[needListByInt[i]]--;
+
+											}
+											if (!jugClicked[2][i]
+													&& !dir3[i].isVisible()) {
+												buyFromRight.srl[0]++;
+												buyFromRight.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromRight,
+														board.getRightNeighbor()
+																.getResourceList(),
+														board.getRightNeighbor()
+																.getSellOrList()))
+													if ((needListByInt[i] < 5 && gold >= board
+															.getRightRawCost())
+															|| (needListByInt[i] > 4 && gold >= board
+																	.getManfCost()))
+														dir3[i].setVisible(true);
+
+												buyFromRight.srl[0]--;
+												buyFromRight.srl[needListByInt[i]]--;
+											}
+										}
+
+										//
+										from[i1 - 2] = 0;
+										over = true;
+										for (int j = 0; j < numOfRsNeeded; j++) {
+											System.out.println("14");
+											if (from[j] == 0) {
+												over = false;
+												break;
+											}
+										}
+										if (over)
+											isFinish.setImage(ok);
+										else {
+											isFinish.setImage(notok);
+										}
+										return;
+									}
+
+									if (jugClicked[0][i1 - 2]) {
+										System.out.println("Dir 3...Clicked 0");
+										buyFromLeft.srl[0]--;
+										buyFromLeft.srl[needListByInt[i1 - 2]]--;
+										jugClicked[0][i1 - 2] = false;
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("15");
+											if (!jugClicked[0][i]) {
+												buyFromLeft.srl[0]++;
+												buyFromLeft.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromLeft,
+														board.getLeftNeighbor()
+																.getResourceList(),
+														board.getLeftNeighbor()
+																.getSellOrList())) {
+													dir1[i].setVisible(true);
+												} else {
+													dir1[i].setVisible(false);
+												}
+												buyFromLeft.srl[0]--;
+												buyFromLeft.srl[needListByInt[i]]--;
+											}
+										}
+										// TODO Changed by zxn 4-5 Bug-3
+										if (needListByInt[i1 - 2] < 5)
+											gold += board.getLeftRawCost();
+										else
+											gold += board.getManfCost();
+
+										// TODO Changed by zxn 4-5 Bug-6
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											if (!jugClicked[0][i]
+													&& !dir1[i].isVisible()) {
+
+												buyFromLeft.srl[0]++;
+												buyFromLeft.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromLeft,
+														board.getLeftNeighbor()
+																.getResourceList(),
+														board.getLeftNeighbor()
+																.getSellOrList()))
+													if ((needListByInt[i] < 5 && gold >= board
+															.getLeftRawCost())
+															|| (needListByInt[i] > 4 && gold >= board
+																	.getManfCost()))
+														dir1[i].setVisible(true);
+
+												buyFromLeft.srl[0]--;
+												buyFromLeft.srl[needListByInt[i]]--;
+
+											}
+											if (!jugClicked[2][i]
+													&& !dir3[i].isVisible()) {
+												buyFromRight.srl[0]++;
+												buyFromRight.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromRight,
+														board.getRightNeighbor()
+																.getResourceList(),
+														board.getRightNeighbor()
+																.getSellOrList()))
+													if ((needListByInt[i] < 5 && gold >= board
+															.getRightRawCost())
+															|| (needListByInt[i] > 4 && gold >= board
+																	.getManfCost()))
+														dir3[i].setVisible(true);
+
+												buyFromRight.srl[0]--;
+												buyFromRight.srl[needListByInt[i]]--;
+											}
+										}
+
+									} else if (jugClicked[1][i1 - 2]) {
+										System.out.println("Dir 3...Clicked 1");
 										buyFromSelf.srl[0]--;
-										buyFromSelf.srl[needListByInt[i]]--;
+										buyFromSelf.srl[needListByInt[i1 - 2]]--;
+										jugClicked[1][i1 - 2] = false;
+										for (int i = 0; i < numOfRsNeeded; i++) {
+											System.out.println("16");
+											if (!jugClicked[1][i]) {
+												buyFromSelf.srl[0]++;
+												buyFromSelf.srl[needListByInt[i]]++;
+												if (canAfford(
+														buyFromSelf,
+														board.getResourceList(),
+														board.getOrList())) {
+													dir2[i].setVisible(true);
+												} else {
+													dir2[i].setVisible(false);
+												}
+												buyFromSelf.srl[0]--;
+												buyFromSelf.srl[needListByInt[i]]--;
+											}
+										}
 									}
-								}
-							}
-							jugClicked[2][i1 - 2] = true;
-							buyFromRight.srl[0]++;
-							buyFromRight.srl[needListByInt[i1 - 2]]++;
-							for (int i = 0; i < numOfRsNeeded; i++) {
-								System.out.println("17");
-								if (!jugClicked[2][i]) {
+									jugClicked[2][i1 - 2] = true;
 									buyFromRight.srl[0]++;
-									buyFromRight.srl[needListByInt[i]]++;
-									if (canAfford(buyFromRight, board.getRightNeighbor().getResourceList(), board
-											.getRightNeighbor().getSellOrList())) {
-										dir3[i].setVisible(true);
-									} else {
-										dir3[i].setVisible(false);
+									buyFromRight.srl[needListByInt[i1 - 2]]++;
+									for (int i = 0; i < numOfRsNeeded; i++) {
+										System.out.println("17");
+										if (!jugClicked[2][i]) {
+											buyFromRight.srl[0]++;
+											buyFromRight.srl[needListByInt[i]]++;
+											if (canAfford(buyFromRight, board
+													.getRightNeighbor()
+													.getResourceList(), board
+													.getRightNeighbor()
+													.getSellOrList())) {
+												dir3[i].setVisible(true);
+											} else {
+												dir3[i].setVisible(false);
+											}
+											buyFromRight.srl[0]--;
+											buyFromRight.srl[needListByInt[i]]--;
+										}
 									}
-									buyFromRight.srl[0]--;
-									buyFromRight.srl[needListByInt[i]]--;
-								}
-							}
 
-							dir1[i1 - 2].setOpacity(1);
-							dir2[i1 - 2].setOpacity(1);
-							dir3[i1 - 2].setOpacity(0.3);
-							//gold = gold - 1;	//Original
-							// TODO Changed by zxn 4-5 Bug-3-4
-							if (needListByInt[i1-2]<5)
-								gold-=board.getRightRawCost();
-							else
-								gold-=board.getManfCost();
-							//getChildren().remove(goldBoard);	//Original
-							showGold();
-							
-							//TODO Changed by zxn 4-5 Bug-6
-							for (int i=0; i<numOfRsNeeded; i++) {
-								if (!jugClicked[0][i] && !dir1[i].isVisible())
-									if ((needListByInt[i]<5 && gold<board.getLeftRawCost()) || (needListByInt[i]>4 && gold<board.getManfCost()))
-										dir1[i].setVisible(false);
-								if (!jugClicked[2][i] && !dir3[i].isVisible())
-									if ((needListByInt[i]<5 && gold<board.getRightRawCost()) || (needListByInt[i]>4 && gold<board.getManfCost()))
-										dir3[i].setVisible(false);
-							}
-							
-							from[i1 - 2] = 3;
-							over = true;
-							for (int j = 0; j < numOfRsNeeded; j++) {
-								System.out.println("18");
-								if (from[j] == 0) {
-									over = false;
-									break;
+									dir1[i1 - 2].setOpacity(1);
+									dir2[i1 - 2].setOpacity(1);
+									dir3[i1 - 2].setOpacity(0.3);
+									// gold = gold - 1; //Original
+									// TODO Changed by zxn 4-5 Bug-3-4
+									if (needListByInt[i1 - 2] < 5)
+										gold -= board.getRightRawCost();
+									else
+										gold -= board.getManfCost();
+									// getChildren().remove(goldBoard);
+									// //Original
+									showGold();
+
+									// TODO Changed by zxn 4-5 Bug-6
+									for (int i = 0; i < numOfRsNeeded; i++) {
+										if (!jugClicked[0][i]
+												&& !dir1[i].isVisible())
+											if ((needListByInt[i] < 5 && gold < board
+													.getLeftRawCost())
+													|| (needListByInt[i] > 4 && gold < board
+															.getManfCost()))
+												dir1[i].setVisible(false);
+										if (!jugClicked[2][i]
+												&& !dir3[i].isVisible())
+											if ((needListByInt[i] < 5 && gold < board
+													.getRightRawCost())
+													|| (needListByInt[i] > 4 && gold < board
+															.getManfCost()))
+												dir3[i].setVisible(false);
+									}
+
+									from[i1 - 2] = 3;
+									over = true;
+									for (int j = 0; j < numOfRsNeeded; j++) {
+										System.out.println("18");
+										if (from[j] == 0) {
+											over = false;
+											break;
+										}
+									}
+									if (over) {
+										isFinish.setImage(ok);
+									}
 								}
-							}
-							if (over) {
-								isFinish.setImage(ok);
-							}
-						}
-					});
+							});
 					rs[i - 2].setLayoutX(64);
 					rs[i - 2].setLayoutY(69 * i);
 					rs[i - 2].setScaleX(0.9);
@@ -847,26 +992,28 @@ public class BuyBoard extends DropGroup {
 
 			}
 			getChildren().add(isFinish);
-			isFinish.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent e) {
-					System.out.println(BuyBoard.class.getName()+" - isFinish");
-					if (over) {
-						System.out.println("is over");
-//						System.out.println(BuyBoard.class.getName()+" - buyFromLeft: "+buyFromLeft);
-//						System.out.println(BuyBoard.class.getName()+" - buyFromRight: "+buyFromRight);
-//						System.out.println(BuyBoard.class.getName()+" - buyFromSelf: "+buyFromSelf);
-						//TODO Changed by zxn 4-2 Bug-2
-						BuyDecision.buyFromLeft=buyFromLeft;
-						BuyDecision.buyFromRight=buyFromRight;
-						
-						buildAction.handle(new ActionEvent());
-						unload();
-					} else {
-						System.out.println("unload");
-						unload();
-					}
-				}
-			});
+			isFinish.addEventHandler(MouseEvent.MOUSE_CLICKED,
+					new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent e) {
+							System.out.println(BuyBoard.class.getName()
+									+ " - isFinish");
+							if (over) {
+								System.out.println("is over");
+								// System.out.println(BuyBoard.class.getName()+" - buyFromLeft: "+buyFromLeft);
+								// System.out.println(BuyBoard.class.getName()+" - buyFromRight: "+buyFromRight);
+								// System.out.println(BuyBoard.class.getName()+" - buyFromSelf: "+buyFromSelf);
+								// TODO Changed by zxn 4-2 Bug-2
+								BuyDecision.buyFromLeft = buyFromLeft;
+								BuyDecision.buyFromRight = buyFromRight;
+
+								buildAction.handle(new ActionEvent());
+								unload();
+							} else {
+								System.out.println("unload");
+								unload();
+							}
+						}
+					});
 			for (int i = 0; i < numOfRsNeeded; i++) {
 				System.out.println("19");
 				dir1[i].toFront();
@@ -877,7 +1024,7 @@ public class BuyBoard extends DropGroup {
 			}
 			showGold();
 			if (!getChildren().contains(goldBoard))
-				getChildren().add(goldBoard);	//TODO Changed by zxn 4-5 Bug-4
+				getChildren().add(goldBoard); // TODO Changed by zxn 4-5 Bug-4
 			setVisible(true);
 		} catch (Throwable error) {
 			Manager.error(error);
@@ -885,17 +1032,17 @@ public class BuyBoard extends DropGroup {
 	}
 
 	private void showGold() {
-		System.out.println(BuyBoard.class.getName()+" - showGold()");
+		System.out.println(BuyBoard.class.getName() + " - showGold()");
 
-		//TODO Changed by zxn 4-5 Bug-4
-		if (goldBoard==null) {
+		// TODO Changed by zxn 4-5 Bug-4
+		if (goldBoard == null) {
 			goldBoard = new Group();
 			goldBoard.setLayoutX(16);
 			goldBoard.setLayoutY(7);
 
 		}
 		goldBoard.getChildren().clear();
-		//end change
+		// end change
 		int k = 0;
 		for (int j = 0; j < gold / 3; j++) {
 			System.out.println("20");
@@ -929,18 +1076,20 @@ public class BuyBoard extends DropGroup {
 			System.out.println("22");
 			goldBoard.getChildren().add(iv[j]);
 		}
-//TODO Changed by zxn 4-5 Bug-4
-//		goldBoard.setLayoutX(16); 
-//		goldBoard.setLayoutY(7);
-	//	}
-		//getChildren().add(goldBoard);
+		// TODO Changed by zxn 4-5 Bug-4
+		// goldBoard.setLayoutX(16);
+		// goldBoard.setLayoutY(7);
+		// }
+		// getChildren().add(goldBoard);
 	}
 
 	@SuppressWarnings("unchecked")
-	public boolean canAfford(SimpleResList need, SimpleResList simple, ArrayList<SimpleResList> orList) {
+	public boolean canAfford(SimpleResList need, SimpleResList simple,
+			ArrayList<SimpleResList> orList) {
 		need = SimpleResList.subtract(need, simple);
 		@SuppressWarnings("unchecked")
-		ArrayList<SimpleResList> newOrList = (ArrayList<SimpleResList>) orList.clone();
+		ArrayList<SimpleResList> newOrList = (ArrayList<SimpleResList>) orList
+				.clone();
 		boolean res, jug;
 		if (need.getTotalRes() == 0) {
 			return true;
@@ -981,9 +1130,8 @@ public class BuyBoard extends DropGroup {
 	}
 
 	public void setBuildAction(EventHandler<ActionEvent> buildAction) {
-		System.out.println(BuyBoard.class.getName()+" - setBuildAction()");
+		System.out.println(BuyBoard.class.getName() + " - setBuildAction()");
 		this.buildAction = buildAction;
 	}
-	
 
 }

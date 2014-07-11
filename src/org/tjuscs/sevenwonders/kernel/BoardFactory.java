@@ -68,15 +68,20 @@ public class BoardFactory {
 		Board[] boardPile = new Board[7];
 		Random rndGen = new Random(System.currentTimeMillis());
 
-		boardPile[0] = (rndGen.nextInt(100) <= 50 ? BoardInfo.ALEXANDRIA_A.buildBoard() : BoardInfo.ALEXANDRIA_B
-				.buildBoard());
-		boardPile[1] = (rndGen.nextInt(100) <= 50 ? BoardInfo.BABYLON_A.buildBoard() : BoardInfo.BABYLON_B.buildBoard());
-		boardPile[2] = (rndGen.nextInt(100) <= 50 ? BoardInfo.EPHESUS_A.buildBoard() : BoardInfo.EPHESUS_B.buildBoard());
-		boardPile[3] = (rndGen.nextInt(100) <= 50 ? BoardInfo.GIZA_A.buildBoard() : BoardInfo.GIZA_B.buildBoard());
-		boardPile[4] = (rndGen.nextInt(100) <= 50 ? BoardInfo.HALICARNASSUS_A.buildBoard() : BoardInfo.HALICARNASSUS_B
-				.buildBoard());
-		boardPile[5] = (rndGen.nextInt(100) <= 50 ? BoardInfo.OYLMPIA_A.buildBoard() : BoardInfo.OYLMPIA_B.buildBoard());
-		boardPile[6] = (rndGen.nextInt(100) <= 50 ? BoardInfo.RHODES_A.buildBoard() : BoardInfo.RHODES_B.buildBoard());
+		boardPile[0] = (rndGen.nextInt(100) <= 50 ? BoardInfo.ALEXANDRIA_A
+				.buildBoard() : BoardInfo.ALEXANDRIA_B.buildBoard());
+		boardPile[1] = (rndGen.nextInt(100) <= 50 ? BoardInfo.BABYLON_A
+				.buildBoard() : BoardInfo.BABYLON_B.buildBoard());
+		boardPile[2] = (rndGen.nextInt(100) <= 50 ? BoardInfo.EPHESUS_A
+				.buildBoard() : BoardInfo.EPHESUS_B.buildBoard());
+		boardPile[3] = (rndGen.nextInt(100) <= 50 ? BoardInfo.GIZA_A
+				.buildBoard() : BoardInfo.GIZA_B.buildBoard());
+		boardPile[4] = (rndGen.nextInt(100) <= 50 ? BoardInfo.HALICARNASSUS_A
+				.buildBoard() : BoardInfo.HALICARNASSUS_B.buildBoard());
+		boardPile[5] = (rndGen.nextInt(100) <= 50 ? BoardInfo.OYLMPIA_A
+				.buildBoard() : BoardInfo.OYLMPIA_B.buildBoard());
+		boardPile[6] = (rndGen.nextInt(100) <= 50 ? BoardInfo.RHODES_A
+				.buildBoard() : BoardInfo.RHODES_B.buildBoard());
 
 		shuffle(boardPile);
 		Board[] returnBoards = new Board[num];
@@ -94,32 +99,32 @@ public class BoardFactory {
 					boards[i] = BoardInfo.RHODES_A.buildBoard();
 				else
 					boards[i] = BoardInfo.RHODES_B.buildBoard();
-			}else if (boardNames[i].equals("Alexandria")) {
+			} else if (boardNames[i].equals("Alexandria")) {
 				if (boardSides[i] == 0)
 					boards[i] = BoardInfo.ALEXANDRIA_A.buildBoard();
 				else
 					boards[i] = BoardInfo.ALEXANDRIA_B.buildBoard();
-			}else if (boardNames[i].equals("Ephesus")) {
+			} else if (boardNames[i].equals("Ephesus")) {
 				if (boardSides[i] == 0)
 					boards[i] = BoardInfo.EPHESUS_A.buildBoard();
 				else
 					boards[i] = BoardInfo.EPHESUS_B.buildBoard();
-			}else if (boardNames[i].equals("Babylon")) {
+			} else if (boardNames[i].equals("Babylon")) {
 				if (boardSides[i] == 0)
 					boards[i] = BoardInfo.BABYLON_A.buildBoard();
 				else
 					boards[i] = BoardInfo.BABYLON_B.buildBoard();
-			}else if (boardNames[i].equals("Olympia")) {
+			} else if (boardNames[i].equals("Olympia")) {
 				if (boardSides[i] == 0)
 					boards[i] = BoardInfo.OYLMPIA_A.buildBoard();
 				else
 					boards[i] = BoardInfo.OYLMPIA_B.buildBoard();
-			}else if (boardNames[i].equals("Halicarnassus")) {
+			} else if (boardNames[i].equals("Halicarnassus")) {
 				if (boardSides[i] == 0)
 					boards[i] = BoardInfo.HALICARNASSUS_A.buildBoard();
 				else
 					boards[i] = BoardInfo.HALICARNASSUS_B.buildBoard();
-			}else if (boardNames[i].equals("Giza")) {
+			} else if (boardNames[i].equals("Giza")) {
 				if (boardSides[i] == 0)
 					boards[i] = BoardInfo.GIZA_A.buildBoard();
 				else

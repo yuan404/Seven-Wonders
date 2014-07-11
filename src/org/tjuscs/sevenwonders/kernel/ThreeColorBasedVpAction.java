@@ -25,17 +25,17 @@ public class ThreeColorBasedVpAction implements Action, DelayedAction {
 	 * core.Board)
 	 */
 	public void activate(Board brd) {
-		System.out.println(this.getClass().getName()+" - activate() - "+brd.brdName);
+		System.out.println(this.getClass().getName() + " - activate() - "
+				+ brd.brdName);
 		board = brd;
-		//TODO Changed by zxn 4-7
-			Manager.getKernel().addEOGDelayedAction(this);
-		/*Original Version
-		GameManager.getManager().addEOTDelayedAction(this);
-		currentCount = board.getColorCount(CardColor.BROWN)
-				+ board.getColorCount(CardColor.GREY)
-				+ board.getColorCount(CardColor.PURPLE);
-		board.addToVPs(currentCount);
-		*/
+		// TODO Changed by zxn 4-7
+		Manager.getKernel().addEOGDelayedAction(this);
+		/*
+		 * Original Version GameManager.getManager().addEOTDelayedAction(this);
+		 * currentCount = board.getColorCount(CardColor.BROWN) +
+		 * board.getColorCount(CardColor.GREY) +
+		 * board.getColorCount(CardColor.PURPLE); board.addToVPs(currentCount);
+		 */
 	}
 
 	/*
@@ -44,14 +44,14 @@ public class ThreeColorBasedVpAction implements Action, DelayedAction {
 	 * @see org.tjuscs.sevenwonders.core.DelayedAction#doDelayedAction()
 	 */
 	public void doDelayedAction() {
-		System.out.println(this.getClass().getName()+" - doDelayedAction()");
-		//TODO Changed by zxn 4-7 bug-11
+		System.out.println(this.getClass().getName() + " - doDelayedAction()");
+		// TODO Changed by zxn 4-7 bug-11
 		int newCount = board.getColorCount(CardColor.BROWN)
 				+ board.getColorCount(CardColor.GREY)
 				+ board.getColorCount(CardColor.PURPLE);
 
 		board.GuildVps += newCount * vps;
-		board.addToVPs(newCount*vps);
+		board.addToVPs(newCount * vps);
 	}
 
 	/*
@@ -63,12 +63,11 @@ public class ThreeColorBasedVpAction implements Action, DelayedAction {
 		return "vps for brown, grey, and purple building built";
 	}
 
-	@Override
 	public int points(Board brd) {
-		board=brd;
+		board = brd;
 		int newCount = board.getColorCount(CardColor.BROWN)
 				+ board.getColorCount(CardColor.GREY)
 				+ board.getColorCount(CardColor.PURPLE);
-		return newCount*vps;
+		return newCount * vps;
 	}
 }

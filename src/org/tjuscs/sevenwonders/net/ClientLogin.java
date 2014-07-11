@@ -90,7 +90,7 @@
 ////		txt_port.setInputVerifier(new InputVerifier() // 应该是使用了观察者模式
 ////		{
 ////
-////			@Override
+////			
 ////			public boolean verify(JComponent input)
 ////			{
 ////				JTextField txt_com = (JTextField) input;
@@ -129,7 +129,7 @@
 ////		btn_confirm.addActionListener(new ActionListener()
 ////		{
 ////
-////			@Override
+////			
 ////			public void actionPerformed(ActionEvent e)
 ////			{
 //				userName = NetManager.getPlayerName();
@@ -180,7 +180,7 @@
 ////
 ////		addWindowListener(new WindowAdapter()
 ////		{
-////			@Override
+////			
 ////			public void windowClosing(WindowEvent e)
 ////			{
 ////				System.exit(0);
@@ -208,4 +208,4 @@
 //		return chat;
 //	}
 //	
-//}
+// }

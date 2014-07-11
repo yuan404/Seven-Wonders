@@ -62,7 +62,6 @@ public class CopyNeighborsGuildAction implements Action, DelayedAction {
 		return "copies a neighbors guild at the end of the game";
 	}
 
-	@Override
 	public int points(Board brd) {
 		// TODO Auto-generated method stub
 		return 0;

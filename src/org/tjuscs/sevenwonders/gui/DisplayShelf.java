@@ -47,17 +47,17 @@ public class DisplayShelf extends SceneContainer {
 			// images[0] = new Image("file:res/image/demo.png");
 
 			for (int i = 0; i < 12; i++) {
-				images[i] = ResManager.getImage("manual (" + (i+1) + ").png");
+				images[i] = ResManager.getImage("manual (" + (i + 1) + ").png");
 			}
 			// create display shelf
 			Shelf displayShelf = new Shelf(images);
 			displayShelf.setPrefSize(GUIManager.width, GUIManager.height);
 			root.getChildren().add(displayShelf);
-			scene = new Scene(root, GUIManager.width, GUIManager.height, GUIManager.bgColor);
+			scene = new Scene(root, GUIManager.width, GUIManager.height,
+					GUIManager.bgColor);
 			scene.setCursor(new ImageCursor(GUIManager.cursor));
 			scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-				@Override
 				public void handle(KeyEvent event) {
 					if (event.getCode().equals(KeyCode.ESCAPE)) {
 						Manager.getGUI().showMenu();
@@ -67,7 +67,6 @@ public class DisplayShelf extends SceneContainer {
 			});
 			scene.setOnMousePressed(new EventHandler<MouseEvent>() {
 
-				@Override
 				public void handle(MouseEvent event) {
 					if (event.getButton().equals(MouseButton.SECONDARY)) {
 						Manager.getGUI().showMenu();
@@ -82,7 +81,8 @@ public class DisplayShelf extends SceneContainer {
 			text.setFont(GUIManager.font);
 			if (GUIManager.enableDropShadowEffect)
 				text.setEffect(new DropShadow());
-			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.8), new KeyValue(text.opacityProperty(), 0)));
+			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(0.8),
+					new KeyValue(text.opacityProperty(), 0)));
 			tl.setAutoReverse(true);
 			tl.setCycleCount(Timeline.INDEFINITE);
 			text.setLayoutX(GUIManager.width / 2 - 100);
@@ -126,8 +126,9 @@ public class DisplayShelf extends SceneContainer {
 			scrollBar.setId("DisplayShelfScrollBar");
 			// create items
 			items = new PerspectiveImage[images.length];
-			for (int i = 0; i < images.length; i++) {	//Old ond: int i=0;
-				final PerspectiveImage item = items[i] = new PerspectiveImage(images[i]);
+			for (int i = 0; i < images.length; i++) { // Old ond: int i=0;
+				final PerspectiveImage item = items[i] = new PerspectiveImage(
+						images[i]);
 				final double index = i;
 				item.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent me) {
@@ -156,14 +157,14 @@ public class DisplayShelf extends SceneContainer {
 			// KeyFrame(Duration.seconds(0.3),new
 			// KeyValue(scrollBar.opacityProperty(),0.3)));
 			scrollBar.setOnMouseEntered(new EventHandler<MouseEvent>() {
-				@Override
+
 				public void handle(MouseEvent event) {
 					// appear.play();
 					scrollBar.setOpacity(1);
 				}
 			});
 			scrollBar.setOnMouseExited(new EventHandler<MouseEvent>() {
-				@Override
+
 				public void handle(MouseEvent event) {
 					// disappear.play();
 					scrollBar.setOpacity(0.3);
@@ -200,7 +201,6 @@ public class DisplayShelf extends SceneContainer {
 			update();
 		}
 
-		@Override
 		protected void layoutChildren() {
 			// update clip to our size
 			clip.setWidth(getWidth());
@@ -215,12 +215,12 @@ public class DisplayShelf extends SceneContainer {
 		}
 
 		private void update() {
-			System.out.println(DisplayShelf.class.getName()+" - update()");
+			System.out.println(DisplayShelf.class.getName() + " - update()");
 			// move items to new homes in groups
 			left.getChildren().clear();
 			center.getChildren().clear();
 			right.getChildren().clear();
-			
+
 			for (int i = 0; i < centerIndex; i++) {
 				left.getChildren().add(items[i]);
 			}
@@ -237,23 +237,37 @@ public class DisplayShelf extends SceneContainer {
 			final ObservableList<KeyFrame> keyFrames = timeline.getKeyFrames();
 			for (int i = 0; i < left.getChildren().size(); i++) {
 				final PerspectiveImage it = items[i];
-				double newX = -left.getChildren().size() * SPACING + SPACING * i + LEFT_OFFSET;
-				keyFrames.add(new KeyFrame(DURATION, new KeyValue(it.translateXProperty(), newX, INTERPOLATOR),
-						new KeyValue(it.scaleXProperty(), SCALE_SMALL, INTERPOLATOR), new KeyValue(it.scaleYProperty(),
-								SCALE_SMALL, INTERPOLATOR), new KeyValue(it.angle, 45.0, INTERPOLATOR)));
+				double newX = -left.getChildren().size() * SPACING + SPACING
+						* i + LEFT_OFFSET;
+				keyFrames.add(new KeyFrame(DURATION, new KeyValue(it
+						.translateXProperty(), newX, INTERPOLATOR),
+						new KeyValue(it.scaleXProperty(), SCALE_SMALL,
+								INTERPOLATOR),
+						new KeyValue(it.scaleYProperty(), SCALE_SMALL,
+								INTERPOLATOR), new KeyValue(it.angle, 45.0,
+								INTERPOLATOR)));
 			}
 			// add keyframe for center item
 			final PerspectiveImage centerItem = items[centerIndex];
-			keyFrames.add(new KeyFrame(DURATION, new KeyValue(centerItem.translateXProperty(), 0, INTERPOLATOR),
-					new KeyValue(centerItem.scaleXProperty(), 1.0, INTERPOLATOR), new KeyValue(centerItem
-							.scaleYProperty(), 1.0, INTERPOLATOR), new KeyValue(centerItem.angle, 90.0, INTERPOLATOR)));
+			keyFrames
+					.add(new KeyFrame(DURATION, new KeyValue(centerItem
+							.translateXProperty(), 0, INTERPOLATOR),
+							new KeyValue(centerItem.scaleXProperty(), 1.0,
+									INTERPOLATOR), new KeyValue(centerItem
+									.scaleYProperty(), 1.0, INTERPOLATOR),
+							new KeyValue(centerItem.angle, 90.0, INTERPOLATOR)));
 			// add keyframes for right items
 			for (int i = 0; i < right.getChildren().size(); i++) {
 				final PerspectiveImage it = items[items.length - i - 1];
-				final double newX = right.getChildren().size() * SPACING - SPACING * i + RIGHT_OFFSET;
-				keyFrames.add(new KeyFrame(DURATION, new KeyValue(it.translateXProperty(), newX, INTERPOLATOR),
-						new KeyValue(it.scaleXProperty(), SCALE_SMALL, INTERPOLATOR), new KeyValue(it.scaleYProperty(),
-								SCALE_SMALL, INTERPOLATOR), new KeyValue(it.angle, 135.0, INTERPOLATOR)));
+				final double newX = right.getChildren().size() * SPACING
+						- SPACING * i + RIGHT_OFFSET;
+				keyFrames.add(new KeyFrame(DURATION, new KeyValue(it
+						.translateXProperty(), newX, INTERPOLATOR),
+						new KeyValue(it.scaleXProperty(), SCALE_SMALL,
+								INTERPOLATOR),
+						new KeyValue(it.scaleYProperty(), SCALE_SMALL,
+								INTERPOLATOR), new KeyValue(it.angle, 135.0,
+								INTERPOLATOR)));
 			}
 			// play animation
 			timeline.play();
@@ -302,11 +316,13 @@ public class DisplayShelf extends SceneContainer {
 		private PerspectiveTransform transform = new PerspectiveTransform();
 		/** Angle Property */
 		private final DoubleProperty angle = new SimpleDoubleProperty(45) {
-			@Override
+
 			protected void invalidated() {
 				// when angle changes calculate new transform
-				double lx = (RADIUS_H - Math.sin(Math.toRadians(angle.get())) * RADIUS_H - 1);
-				double rx = (RADIUS_H + Math.sin(Math.toRadians(angle.get())) * RADIUS_H + 1);
+				double lx = (RADIUS_H - Math.sin(Math.toRadians(angle.get()))
+						* RADIUS_H - 1);
+				double rx = (RADIUS_H + Math.sin(Math.toRadians(angle.get()))
+						* RADIUS_H + 1);
 				double uly = (-Math.cos(Math.toRadians(angle.get())) * BACK);
 				double ury = -uly;
 				transform.setUlx(lx);
@@ -334,9 +350,11 @@ public class DisplayShelf extends SceneContainer {
 
 		public PerspectiveImage(Image image) {
 			ImageView imageView = new ImageView(image);
-			imageView.setEffect(ReflectionBuilder.create().fraction(REFLECTION_SIZE).build());
+			imageView.setEffect(ReflectionBuilder.create()
+					.fraction(REFLECTION_SIZE).build());
 			setEffect(transform);
-			if (image==null) System.out.println("Null Image");
+			if (image == null)
+				System.out.println("Null Image");
 			Rectangle rec = new Rectangle(image.getWidth(), image.getHeight());
 			rec.setArcHeight(150);
 			rec.setArcWidth(150);

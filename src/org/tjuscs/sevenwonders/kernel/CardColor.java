@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * The Enum CardColor.
  */
-public enum CardColor implements Serializable{
+public enum CardColor implements Serializable {
 
 	/** The YELLOW. */
 	YELLOW("yellow"),

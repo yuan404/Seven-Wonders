@@ -59,8 +59,7 @@ public class ColorIncAndVpAction implements Action, DelayedAction {
 			newStructures += newSelfCount - selfCount;
 			selfCount = newSelfCount;
 		}
-		if (newStructures * incr != 0)
-		{
+		if (newStructures * incr != 0) {
 			board.CommerceVps += newStructures * incr;
 			board.addToVPs(newStructures * incr);
 		}
@@ -76,11 +75,10 @@ public class ColorIncAndVpAction implements Action, DelayedAction {
 				+ color.toString() + " cards";
 	}
 
-	@Override
 	public int points(Board brd) {
-		board=brd;
+		board = brd;
 		int newSelfCount = board.getColorCount(color);
-		
+
 		return newSelfCount * incr;
 	}
 

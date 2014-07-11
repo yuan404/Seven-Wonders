@@ -29,12 +29,12 @@ public class NeighborDefeatVpAction implements Action, DelayedAction {
 	 * 
 	 * @see org.tjuscs.sevenwonders.core.DelayedAction#doDelayedAction()
 	 */
-	//TODO Changed by zxn bug-16
+	// TODO Changed by zxn bug-16
 	public void doDelayedAction() {
 		leftCount = board.getLeftNeighbor().getNumberOfDefeats();
 		rightCount = board.getRightNeighbor().getNumberOfDefeats();
 
-		int defeats = leftCount+rightCount;
+		int defeats = leftCount + rightCount;
 		board.GuildVps += defeats;
 		board.addToVPs(defeats);
 	}
@@ -48,13 +48,12 @@ public class NeighborDefeatVpAction implements Action, DelayedAction {
 		return "vps for the amount of defeats suffered by neighbors";
 	}
 
-	@Override
 	public int points(Board brd) {
-		board=brd;
+		board = brd;
 		int leftCount = board.getLeftNeighbor().getNumberOfDefeats();
 		int rightCount = board.getRightNeighbor().getNumberOfDefeats();
 
-		int defeats = leftCount+rightCount;
+		int defeats = leftCount + rightCount;
 		return defeats;
 	}
 } // end of NeighborDefeatVpAction class

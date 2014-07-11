@@ -25,8 +25,8 @@ public class StageIncAndVpAction implements Action, DelayedAction {
 		board.addToCoins(stageCount * 3);
 		board.addToVPs(stageCount);
 
-		board.CommerceVps+=stageCount;	//TODO Added by zxn 4-8 bug-13
-		
+		board.CommerceVps += stageCount; // TODO Added by zxn 4-8 bug-13
+
 		KernelManager.getManager().addEOTDelayedAction(this);
 	}
 
@@ -43,8 +43,7 @@ public class StageIncAndVpAction implements Action, DelayedAction {
 			newStages = newStageCount - stageCount;
 			stageCount = newStageCount;
 		}
-		if (newStages != 0)
-		{
+		if (newStages != 0) {
 			board.CommerceVps += newStages;
 			board.addToVPs(newStages);
 		}
@@ -59,10 +58,9 @@ public class StageIncAndVpAction implements Action, DelayedAction {
 		return "coins and vps for the number of stages completed";
 	}
 
-	@Override
 	public int points(Board brd) {
-		board=brd;
-		int stages=board.getStagesCompleted();
+		board = brd;
+		int stages = board.getStagesCompleted();
 		return stages;
 	}
 } // end of StageIncAndVpAction class

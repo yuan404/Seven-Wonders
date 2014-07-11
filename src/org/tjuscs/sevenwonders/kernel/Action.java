@@ -6,7 +6,7 @@ import java.io.Serializable;
  * The Interface Action.<br>
  * Action接口
  */
-interface Action extends Serializable{
+interface Action extends Serializable {
 
 	/**
 	 * Activate the action on the specific board.<br>
@@ -16,7 +16,7 @@ interface Action extends Serializable{
 	 *            the target board。目标奇迹（板）
 	 */
 	public void activate(Board brd);
-	
+
 	public int points(Board brd);
 
 	/**

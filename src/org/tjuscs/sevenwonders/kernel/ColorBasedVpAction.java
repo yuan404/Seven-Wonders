@@ -75,13 +75,12 @@ public class ColorBasedVpAction implements Action, DelayedAction {
 		return "vps based on neighbors " + color.toString() + " cards";
 	}
 
-	@Override
 	public int points(Board brd) {
-		board=brd;
-		int left,right;
+		board = brd;
+		int left, right;
 		left = board.getLeftNeighbor().getColorCount(color);
 		right = board.getRightNeighbor().getColorCount(color);
-		int newStructures = left+right;
+		int newStructures = left + right;
 		return newStructures * vps;
 	}
 }

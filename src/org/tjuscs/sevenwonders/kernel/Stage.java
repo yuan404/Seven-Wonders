@@ -7,7 +7,7 @@ import java.util.*;
  * The Class Stage.
  */
 @SuppressWarnings("serial")
-public class Stage implements Cloneable, Buildable, Serializable{
+public class Stage implements Cloneable, Buildable, Serializable {
 
 	/** The cost. */
 	EnumMap<Resource, Integer> cost;
@@ -16,7 +16,7 @@ public class Stage implements Cloneable, Buildable, Serializable{
 	EnumMap<Resource, Integer> goods;
 
 	/** The card. */
-//	Card card;
+	// Card card;
 
 	/** The stage num. */
 	int stageNum;
@@ -175,9 +175,9 @@ public class Stage implements Cloneable, Buildable, Serializable{
 	 * 
 	 * @return the card
 	 */
-//	public Card getCard() {
-//		return card;
-//	}
+	// public Card getCard() {
+	// return card;
+	// }
 
 	/**
 	 * Sets the card.
@@ -185,9 +185,9 @@ public class Stage implements Cloneable, Buildable, Serializable{
 	 * @param card
 	 *            the new card
 	 */
-//	public void setCard(Card card) {
-//		this.card = card;
-//	}
+	// public void setCard(Card card) {
+	// this.card = card;
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -197,7 +197,7 @@ public class Stage implements Cloneable, Buildable, Serializable{
 	 * .core.Resource)
 	 */
 	public int goodsCnt(Resource r) {
-		//assert goods != null;//For Debug!!!
+		// assert goods != null;//For Debug!!!
 		Integer i = goods.get(r);
 		return i == null ? 0 : i;
 	}

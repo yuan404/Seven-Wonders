@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * The Class Hand.
  */
 @SuppressWarnings("serial")
-public class Hand implements Serializable{
+public class Hand implements Serializable {
 
 	/** The hand. */
 	ArrayList<Card> hand;

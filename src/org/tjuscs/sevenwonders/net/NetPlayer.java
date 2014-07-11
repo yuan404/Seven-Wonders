@@ -11,17 +11,17 @@
 //		this.name = playerName;
 //	}
 //
-//	@Override
+//	
 //	public CommandOption makeAChoice(CommandOption[] options) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
-//	@Override
+//	
 //	public void makeABuyDecision(SimpleResList needs, SimpleResList leftGoods,
 //			SimpleResList rightGoods) {
 //		// TODO Auto-generated method stub
 //
 //	}
 //
-//}
+// }

@@ -1,8 +1,7 @@
 package org.tjuscs.sevenwonders.kernel;
 
 /**
- * enum the information of the board.
- * 枚举奇迹板的信息
+ * enum the information of the board. 枚举奇迹板的信息
  */
 public enum BoardInfo {
 

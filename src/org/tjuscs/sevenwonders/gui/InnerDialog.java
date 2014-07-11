@@ -22,7 +22,8 @@ public class InnerDialog extends DropGroup {
 	private Node focusNode;
 	Timeline startAct, endAct;
 
-	public InnerDialog(double width, double height, Timeline startAct, Timeline endAct) {
+	public InnerDialog(double width, double height, Timeline startAct,
+			Timeline endAct) {
 		this(width, height, startAct);
 		this.endAct = endAct;
 	}
@@ -59,7 +60,6 @@ public class InnerDialog extends DropGroup {
 
 		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ESCAPE)) {
 					InnerDialog s = (InnerDialog) event.getSource();
@@ -75,7 +75,6 @@ public class InnerDialog extends DropGroup {
 		close.setLayoutY(20);
 		close.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-			@Override
 			public void handle(MouseEvent me) {
 				close();
 			}
@@ -83,7 +82,6 @@ public class InnerDialog extends DropGroup {
 
 		close.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
-			@Override
 			public void handle(MouseEvent me) {
 				if (GUIManager.enableDropShadowEffect)
 					close.setEffect(new DropShadow());
@@ -92,7 +90,6 @@ public class InnerDialog extends DropGroup {
 
 		close.setOnMouseExited(new EventHandler<MouseEvent>() {
 
-			@Override
 			public void handle(MouseEvent me) {
 				if (GUIManager.enableDropShadowEffect)
 					close.setEffect(null);
@@ -108,7 +105,7 @@ public class InnerDialog extends DropGroup {
 		this.getLayoutX();
 		double ly = getLayoutY();
 		EventHandler<ActionEvent> action = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				if (startAct != null) {
 					startAct.play();
@@ -117,11 +114,14 @@ public class InnerDialog extends DropGroup {
 			}
 		};
 
-		Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(this.opacityProperty(), 0.0), new KeyValue(
-				dropShadow.colorProperty(), Color.TRANSPARENT), new KeyValue(this.layoutYProperty(), ly - 30)),
-				new KeyFrame(Duration.seconds(0.3), new KeyValue(this.opacityProperty(), 0.85), new KeyValue(this
-						.layoutYProperty(), ly), new KeyValue(dropShadow.colorProperty(), Color.web("#000000", 0.7))),
-				new KeyFrame(Duration.seconds(0), action));
+		Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
+				this.opacityProperty(), 0.0), new KeyValue(
+				dropShadow.colorProperty(), Color.TRANSPARENT), new KeyValue(
+				this.layoutYProperty(), ly - 30)), new KeyFrame(
+				Duration.seconds(0.3), new KeyValue(this.opacityProperty(),
+						0.85), new KeyValue(this.layoutYProperty(), ly),
+				new KeyValue(dropShadow.colorProperty(), Color.web("#000000",
+						0.7))), new KeyFrame(Duration.seconds(0), action));
 		tl.play();
 		if (focusNode == null)
 			this.requestFocus();
@@ -138,20 +138,25 @@ public class InnerDialog extends DropGroup {
 		final Group root = this;
 
 		EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
-			@Override
+
 			public void handle(ActionEvent event) {
 				root.getParent().requestFocus();
 			}
 		};
 		this.getLayoutX();
 		double ly = getLayoutY();
-		Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(this.opacityProperty(), 0.85),
-				new KeyValue(this.layoutYProperty(), ly), new KeyValue(dropShadow.colorProperty(), Color.web("#000000",
-						0.7))), new KeyFrame(Duration.seconds(0.3), new KeyValue(this.opacityProperty(), 0.0),
-				new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT), new KeyValue(this.layoutYProperty(),
-						ly - 30), new KeyValue(this.visibleProperty(), false)),
-				new KeyFrame(Duration.seconds(0.3), act), new KeyFrame(Duration.seconds(0.31), new KeyValue(
-						this.layoutYProperty(), ly)));
+		Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
+				this.opacityProperty(), 0.85), new KeyValue(
+				this.layoutYProperty(), ly), new KeyValue(
+				dropShadow.colorProperty(), Color.web("#000000", 0.7))),
+				new KeyFrame(Duration.seconds(0.3), new KeyValue(this
+						.opacityProperty(), 0.0), new KeyValue(dropShadow
+						.colorProperty(), Color.TRANSPARENT), new KeyValue(this
+						.layoutYProperty(), ly - 30), new KeyValue(this
+						.visibleProperty(), false)), new KeyFrame(
+						Duration.seconds(0.3), act), new KeyFrame(
+						Duration.seconds(0.31), new KeyValue(
+								this.layoutYProperty(), ly)));
 		tl.play();
 	}
 

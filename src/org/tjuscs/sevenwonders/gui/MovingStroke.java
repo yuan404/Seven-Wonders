@@ -15,12 +15,14 @@ import javafx.scene.shape.StrokeType;
 import javafx.util.Duration;
 
 public class MovingStroke {
-	public static Shape set(Shape s, Paint color, double width, double lineLength, double spaceLength,
-			double secendsPerFrame) {
+	public static Shape set(Shape s, Paint color, double width,
+			double lineLength, double spaceLength, double secendsPerFrame) {
 		if (s instanceof Rectangle)
-			RectangleBuilder.create().strokeDashArray(lineLength, spaceLength).applyTo(s);
+			RectangleBuilder.create().strokeDashArray(lineLength, spaceLength)
+					.applyTo(s);
 		else if (s instanceof Circle)
-			CircleBuilder.create().strokeDashArray(lineLength, spaceLength).applyTo(s);
+			CircleBuilder.create().strokeDashArray(lineLength, spaceLength)
+					.applyTo(s);
 
 		s.setStroke(color);
 		s.setStrokeDashOffset(0);
@@ -29,14 +31,18 @@ public class MovingStroke {
 		s.setStrokeType(StrokeType.CENTERED);
 		s.setStrokeWidth(width);
 		if (secendsPerFrame > 0) {
-			Timeline tl = new Timeline(new KeyFrame(Duration.seconds(secendsPerFrame), new KeyValue(
-					s.strokeDashOffsetProperty(), lineLength + spaceLength)));
+			Timeline tl = new Timeline(new KeyFrame(
+					Duration.seconds(secendsPerFrame), new KeyValue(
+							s.strokeDashOffsetProperty(), lineLength
+									+ spaceLength)));
 			tl.setCycleCount(Timeline.INDEFINITE);
 			tl.play();
 		} else if (secendsPerFrame < 0) {
-			Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(s.strokeDashOffsetProperty(),
-					lineLength + spaceLength)), new KeyFrame(Duration.seconds(-secendsPerFrame), new KeyValue(
-					s.strokeDashOffsetProperty(), 0)));
+			Timeline tl = new Timeline(new KeyFrame(Duration.ZERO,
+					new KeyValue(s.strokeDashOffsetProperty(), lineLength
+							+ spaceLength)), new KeyFrame(
+					Duration.seconds(-secendsPerFrame), new KeyValue(
+							s.strokeDashOffsetProperty(), 0)));
 			tl.setCycleCount(Timeline.INDEFINITE);
 			tl.play();
 		}

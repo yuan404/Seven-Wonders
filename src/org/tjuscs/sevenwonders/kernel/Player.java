@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * The Interface Player.
  */
-public interface Player extends Serializable{
+public interface Player extends Serializable {
 
 	/**
 	 * Sets the board.
