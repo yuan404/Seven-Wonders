@@ -321,6 +321,7 @@ public class MainBackGround extends SceneContainer {
 			wonder[i].setScaleY(0.6 * percent + 0.4);
 			wonder[i].getChildren().add(rec[i]);
 			final int index = i;
+			// 设置手牌的动画效果，鼠标移上去牌会整体
 			wonder[i].addEventHandler(MouseEvent.MOUSE_ENTERED,
 					new EventHandler<MouseEvent>() {
 
@@ -337,6 +338,7 @@ public class MainBackGround extends SceneContainer {
 						}
 
 					});
+			// 设置手牌动画恢复
 			wonder[i].addEventHandler(MouseEvent.MOUSE_EXITED,
 					new EventHandler<MouseEvent>() {
 

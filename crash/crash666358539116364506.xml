@@ -1,0 +1,844 @@
+<!-- Game Crash Report of 7Wonders(Iteration1 Demo Code) -->
+<!-- Generated in Fri Jul 11 17:36:29 CST 2014 -->
+
+<!-- Platform Info
+javafx.version = 2.2.51
+java.runtime.name = Java(TM) SE Runtime Environment
+sun.boot.library.path = D:\jdk\bin
+java.vm.version = 24.51-b03
+java.vm.vendor = Oracle Corporation
+java.vendor.url = http://java.oracle.com/
+path.separator = ;
+java.vm.name = Java HotSpot(TM) 64-Bit Server VM
+file.encoding.pkg = sun.io
+user.country = CN
+user.script = 
+sun.java.launcher = SUN_STANDARD
+sun.os.patch.level = 
+java.vm.specification.name = Java Virtual Machine Specification
+user.dir = D:\javadoc\SevenWonders
+java.runtime.version = 1.7.0_51-b13
+java.awt.graphicsenv = sun.awt.Win32GraphicsEnvironment
+javafx.runtime.version = 2.2.51-b13
+java.endorsed.dirs = D:\jdk\lib\endorsed
+os.arch = amd64
+java.io.tmpdir = C:\Users\wanting\AppData\Local\Temp\
+line.separator = 
+
+java.vm.specification.vendor = Oracle Corporation
+user.variant = 
+os.name = Windows 8
+sun.jnu.encoding = GBK
+java.library.path = D:\jdk\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\jdk1.7.0_06\bin;D:\jdk1.7.0_06\jre\bin;;.
+sun.awt.enableExtraMouseButtons = true
+java.specification.name = Java Platform API Specification
+java.class.version = 51.0
+sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+os.version = 6.2
+user.home = C:\Users\wanting
+user.timezone = Asia/Shanghai
+java.awt.printerjob = sun.awt.windows.WPrinterJob
+file.encoding = GBK
+java.specification.version = 1.7
+java.class.path = D:\javadoc\SevenWonders\bin;D:\javadoc\SevenWonders\lib\log4j-1.2.16.jar;D:\javadoc\SevenWonders\lib\xstream-1.4.2.jar;D:\javadoc\SevenWonders\lib\kxml2-2.3.0.jar;D:\jdk\lib\jfxrt.jar
+user.name = wanting
+java.vm.specification.version = 1.7
+sun.java.command = org.tjuscs.sevenwonders.Manager
+java.home = D:\jdk
+sun.arch.data.model = 64
+user.language = zh
+java.specification.vendor = Oracle Corporation
+awt.toolkit = sun.awt.windows.WToolkit
+java.vm.info = mixed mode
+java.version = 1.7.0_51
+java.ext.dirs = D:\jdk\lib\ext;C:\Windows\Sun\Java\lib\ext
+sun.boot.class.path = D:\jdk\lib\resources.jar;D:\jdk\lib\rt.jar;D:\jdk\lib\sunrsasign.jar;D:\jdk\lib\jsse.jar;D:\jdk\lib\jce.jar;D:\jdk\lib\charsets.jar;D:\jdk\lib\jfr.jar;D:\jdk\classes
+java.vendor = Oracle Corporation
+file.separator = \
+java.vendor.url.bug = http://bugreport.sun.com/bugreport/
+sun.io.unicode.encoding = UnicodeLittle
+sun.cpu.endian = little
+sun.desktop = windows
+sun.cpu.isalist = amd64
+
+ -->
+
+<!-- Environment Info
+USERPROFILE = C:\Users\wanting
+ProgramData = C:\ProgramData
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+JAVA_HOME = D:\jdk1.7.0_06
+ProgramFiles(x86) = C:\Program Files (x86)
+TEMP = C:\Users\wanting\AppData\Local\Temp
+SystemDrive = C:
+ProgramFiles = C:\Program Files
+Path = C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\jdk1.7.0_06\bin;D:\jdk1.7.0_06\jre\bin;
+HOMEDRIVE = C:
+PROCESSOR_REVISION = 2a07
+USERDOMAIN = twt-lyd
+ALLUSERSPROFILE = C:\ProgramData
+VBOX_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
+ProgramW6432 = C:\Program Files
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 42 Stepping 7, GenuineIntel
+SESSIONNAME = Console
+TMP = C:\Users\wanting\AppData\Local\Temp
+CommonProgramFiles = C:\Program Files\Common Files
+CLASSPATH = D:\jdk1.7.0_06\lib\dt.jar;D:\jdk1.7.0_06\lib\tools.jar
+=:: = ::\
+LOGONSERVER = \\TWT-LYD
+PROCESSOR_ARCHITECTURE = AMD64
+FP_NO_HOST_CHECK = NO
+OS = Windows_NT
+HOMEPATH = \Users\wanting
+PROCESSOR_LEVEL = 6
+CommonProgramW6432 = C:\Program Files\Common Files
+USERDOMAIN_ROAMINGPROFILE = twt-lyd
+=D: = D:\
+LOCALAPPDATA = C:\Users\wanting\AppData\Local
+COMPUTERNAME = TWT-LYD
+windir = C:\Windows
+SystemRoot = C:\Windows
+NUMBER_OF_PROCESSORS = 4
+USERNAME = wanting
+PUBLIC = C:\Users\Public
+PSModulePath = C:\Windows\system32\WindowsPowerShell\v1.0\Modules\
+CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
+ComSpec = C:\Windows\system32\cmd.exe
+APPDATA = C:\Users\wanting\AppData\Roaming
+
+ -->
+
+<!-- Game Record -->
+<Game>
+  <boardNames>
+    <string>Rhodes</string>
+    <string>Halicarnassus</string>
+    <string>Alexandria</string>
+    <string>Olympia</string>
+    <string>Babylon</string>
+  </boardNames>
+  <playerNames>
+    <string>Player</string>
+    <string>RandBot_1</string>
+    <string>RandBot_2</string>
+    <string>RandBot_3</string>
+    <string>RandBot_4</string>
+  </playerNames>
+  <boardSides>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+  </boardSides>
+  <ages>
+    <Age>
+      <ageNum>1</ageNum>
+      <cardNames>
+        <string-array>
+          <string>Guard Tower</string>
+          <string>Clay Pool</string>
+          <string>Ore Vein</string>
+          <string>Marketplace</string>
+          <string>Guard Tower</string>
+          <string>Stone Pit</string>
+          <string>Forest Cave</string>
+        </string-array>
+        <string-array>
+          <string>Altar</string>
+          <string>West Trading Post</string>
+          <string>Scriptorium</string>
+          <string>Ore Vein</string>
+          <string>East Trading Post</string>
+          <string>Apothecary</string>
+          <string>Pawnshop</string>
+        </string-array>
+        <string-array>
+          <string>Loom</string>
+          <string>Tavern</string>
+          <string>Glass Works</string>
+          <string>Lumber Yard</string>
+          <string>Baths</string>
+          <string>Timber Yard</string>
+          <string>Apothecary</string>
+        </string-array>
+        <string-array>
+          <string>Press</string>
+          <string>Theater</string>
+          <string>Stockade</string>
+          <string>Barracks</string>
+          <string>Tavern</string>
+          <string>Excavation</string>
+          <string>Stone Pit</string>
+        </string-array>
+        <string-array>
+          <string>Lumber Yard</string>
+          <string>Workshop</string>
+          <string>Scriptorium</string>
+          <string>Clay Pit</string>
+          <string>Barracks</string>
+          <string>Clay Pool</string>
+          <string>Altar</string>
+        </string-array>
+      </cardNames>
+      <turns>
+        <Turn-array>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>0</Player>
+            <Card>6</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>2</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>3</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>4</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>0</Player>
+            <Card>5</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>1</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>2</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>3</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>4</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>0</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>1</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>2</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>3</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>4</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>0</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>2</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>3</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>4</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>0</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>2</Player>
+            <Card>2</Card>
+            <Command>BUILD_STAGE</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>3</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>4</Player>
+            <Card>0</Card>
+            <Command>BUILD_STAGE</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>0</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_STAGE</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>2</Player>
+            <Card>0</Card>
+            <Command>BUILD_STAGE</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>3</Player>
+            <Card>1</Card>
+            <Command>BUILD_STAGE</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>4</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+        </Turn-array>
+      </turns>
+    </Age>
+    <Age>
+      <ageNum>2</ageNum>
+      <cardNames>
+        <string-array>
+          <string>Caravansery</string>
+          <string>Dispensary</string>
+          <string>Saw Mill</string>
+          <string>Vineyard</string>
+          <string>Stables</string>
+          <string>Foundry</string>
+          <string>Quarry</string>
+        </string-array>
+        <string-array>
+          <string>Caravansery</string>
+          <string>Temple</string>
+          <string>Press</string>
+          <string>Stables</string>
+          <string>Press</string>
+          <string>Forum</string>
+          <string>Aqueduct</string>
+        </string-array>
+        <string-array>
+          <string>Dispensary</string>
+          <string>Glass Works</string>
+          <string>Archery Range</string>
+          <string>Loom</string>
+          <string>School</string>
+          <string>Glass Works</string>
+          <string>Training Ground</string>
+        </string-array>
+        <string-array>
+          <string>Foundry</string>
+          <string>Brick Yard</string>
+          <string>Library</string>
+          <string>Courthouse</string>
+          <string>Bazar</string>
+          <string>Saw Mill</string>
+          <string>Loom</string>
+        </string-array>
+        <string-array>
+          <string>Laboratory</string>
+          <string>Walls</string>
+          <string>Brick Yard</string>
+          <string>Quarry</string>
+          <string>Laboratory</string>
+          <string>Statue</string>
+          <string>Courthouse</string>
+        </string-array>
+      </cardNames>
+      <turns>
+        <Turn-array>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>0</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>1</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>2</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>3</Player>
+            <Card>5</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>4</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>0</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>1</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>2</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>3</Player>
+            <Card>5</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>4</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>0</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>2</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>3</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>4</Player>
+            <Card>0</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>0</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>1</Player>
+            <Card>2</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>2</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>3</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>4</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>0</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>2</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>3</Player>
+            <Card>2</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>4</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>0</Player>
+            <Card>0</Card>
+            <Command>BUILD_STAGE</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>1</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>2</Player>
+            <Card>1</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>3</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>4</Player>
+            <Card>0</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+        </Turn-array>
+      </turns>
+    </Age>
+    <Age>
+      <ageNum>3</ageNum>
+      <cardNames>
+        <string-array>
+          <string>Senate</string>
+          <string>Gardens</string>
+          <string>Palace</string>
+          <string>Spies Guild</string>
+          <string>University</string>
+          <string>Chamber of Commerce</string>
+          <string>Gardens</string>
+        </string-array>
+        <string-array>
+          <string>Philosophers Guild</string>
+          <string>Observatory</string>
+          <string>Arena</string>
+          <string>Traders Guild</string>
+          <string>Study</string>
+          <string>Town Hall</string>
+          <string>Lodge</string>
+        </string-array>
+        <string-array>
+          <string>Haven</string>
+          <string>Craftsmens Guild</string>
+          <string>Magistrates Guild</string>
+          <string>Fortifications</string>
+          <string>Academy</string>
+          <string>Haven</string>
+          <string>Scientists Guild</string>
+        </string-array>
+        <string-array>
+          <string>Arsenal</string>
+          <string>Siege Workshop</string>
+          <string>Lighthouse</string>
+          <string>Siege Workshop</string>
+          <string>Strategists Guild</string>
+          <string>Town Hall</string>
+          <string>University</string>
+        </string-array>
+        <string-array>
+          <string>Senate</string>
+          <string>Circus</string>
+          <string>Pantheon</string>
+          <string>Study</string>
+          <string>Arena</string>
+          <string>Circus</string>
+          <string>Arsenal</string>
+        </string-array>
+      </cardNames>
+      <turns>
+        <Turn-array>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>0</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>1</Player>
+            <Card>5</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>2</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>3</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>4</Player>
+            <Card>6</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>0</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>1</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>2</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>3</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>4</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>0</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>1</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>2</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>3</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>4</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>0</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>1</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>2</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>3</Player>
+            <Card>0</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>4</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+        </Turn-array>
+        <Turn-array>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+        </Turn-array>
+        <Turn-array>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+        </Turn-array>
+      </turns>
+    </Age>
+  </ages>
+</Game>
+
+<!-- Exceptions -->
+<!-- 
+java.lang.NegativeArraySizeException
+	at org.tjuscs.sevenwonders.gui.Wonders.

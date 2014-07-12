@@ -956,10 +956,15 @@ public class Board implements Serializable {
 			cd.getCmd().setAvailableFree(ava);
 			for (Card crd : structures) {
 				if (crd.getName().equals(cd.getName())) {
+					freeList.remove(cd.getName());
+					cd.getCmd().setAvailableFree(false);
 					cd.getCmd().setCanBuild(false);
 					break;
 				}
 			}
+		}
+		for (Card crd : structures) {
+			System.out.println("Ground:  " + crd.getName());
 		}
 	}
 
