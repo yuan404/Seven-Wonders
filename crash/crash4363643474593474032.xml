@@ -1,0 +1,511 @@
+<!-- Game Crash Report of 7Wonders(Iteration1 Demo Code) -->
+<!-- Generated in Sat Jul 12 17:17:50 CST 2014 -->
+
+<!-- Platform Info
+javafx.version = 2.2.60
+java.runtime.name = Java(TM) SE Runtime Environment
+sun.boot.library.path = D:\Java7\jre\bin
+java.vm.version = 24.60-b09
+java.vm.vendor = Oracle Corporation
+java.vendor.url = http://java.oracle.com/
+path.separator = ;
+java.vm.name = Java HotSpot(TM) 64-Bit Server VM
+file.encoding.pkg = sun.io
+user.country = CN
+user.script = 
+sun.java.launcher = SUN_STANDARD
+sun.os.patch.level = Service Pack 1
+java.vm.specification.name = Java Virtual Machine Specification
+user.dir = D:\workspace\SevenWonders
+java.runtime.version = 1.7.0_60-b19
+java.awt.graphicsenv = sun.awt.Win32GraphicsEnvironment
+javafx.runtime.version = 2.2.60-b19
+java.endorsed.dirs = D:\Java7\jre\lib\endorsed
+os.arch = amd64
+java.io.tmpdir = C:\Users\TWT01\AppData\Local\Temp\
+line.separator = 
+
+java.vm.specification.vendor = Oracle Corporation
+user.variant = 
+os.name = Windows 7
+sun.jnu.encoding = GBK
+java.library.path = D:\Java7\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\NetSarang;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;.
+sun.awt.enableExtraMouseButtons = true
+java.specification.name = Java Platform API Specification
+java.class.version = 51.0
+sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+os.version = 6.1
+user.home = C:\Users\TWT01
+user.timezone = Asia/Shanghai
+java.awt.printerjob = sun.awt.windows.WPrinterJob
+file.encoding = UTF-8
+java.specification.version = 1.7
+java.class.path = D:\workspace\SevenWonders\bin;D:\workspace\SevenWonders\lib\log4j-1.2.16.jar;D:\workspace\SevenWonders\lib\xstream-1.4.2.jar;D:\workspace\SevenWonders\lib\kxml2-2.3.0.jar;D:\Java7\jre\lib\jfxrt.jar
+user.name = TWT01
+java.vm.specification.version = 1.7
+sun.java.command = org.tjuscs.sevenwonders.Manager
+java.home = D:\Java7\jre
+sun.arch.data.model = 64
+user.language = zh
+java.specification.vendor = Oracle Corporation
+awt.toolkit = sun.awt.windows.WToolkit
+java.vm.info = mixed mode
+java.version = 1.7.0_60
+java.ext.dirs = D:\Java7\jre\lib\ext;C:\Windows\Sun\Java\lib\ext
+sun.boot.class.path = D:\Java7\jre\lib\resources.jar;D:\Java7\jre\lib\rt.jar;D:\Java7\jre\lib\sunrsasign.jar;D:\Java7\jre\lib\jsse.jar;D:\Java7\jre\lib\jce.jar;D:\Java7\jre\lib\charsets.jar;D:\Java7\jre\lib\jfr.jar;D:\Java7\jre\classes
+java.vendor = Oracle Corporation
+file.separator = \
+java.vendor.url.bug = http://bugreport.sun.com/bugreport/
+sun.io.unicode.encoding = UnicodeLittle
+sun.cpu.endian = little
+sun.desktop = windows
+sun.cpu.isalist = amd64
+
+ -->
+
+<!-- Environment Info
+USERPROFILE = C:\Users\TWT01
+ProgramData = C:\ProgramData
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+windows_tracing_logfile = C:\BVTBin\Tests\installpackage\csilogfile.log
+ProgramFiles(x86) = C:\Program Files (x86)
+windows_tracing_flags = 3
+TEMP = C:\Users\TWT01\AppData\Local\Temp
+SystemDrive = C:
+ProgramFiles = C:\Program Files
+Path = C:\Program Files (x86)\Common Files\NetSarang;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
+HOMEDRIVE = C:
+PROCESSOR_REVISION = 2a07
+USERDOMAIN = TWT01-PC
+ALLUSERSPROFILE = C:\ProgramData
+ProgramW6432 = C:\Program Files
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 42 Stepping 7, GenuineIntel
+SESSIONNAME = Console
+TMP = C:\Users\TWT01\AppData\Local\Temp
+CommonProgramFiles = C:\Program Files\Common Files
+=:: = ::\
+LOGONSERVER = \\TWT01-PC
+PROCESSOR_ARCHITECTURE = AMD64
+FP_NO_HOST_CHECK = NO
+OS = Windows_NT
+HOMEPATH = \Users\TWT01
+PROCESSOR_LEVEL = 6
+CommonProgramW6432 = C:\Program Files\Common Files
+LOCALAPPDATA = C:\Users\TWT01\AppData\Local
+COMPUTERNAME = TWT01-PC
+windir = C:\Windows
+SystemRoot = C:\Windows
+NUMBER_OF_PROCESSORS = 4
+USERNAME = TWT01
+PUBLIC = C:\Users\Public
+PSModulePath = C:\Windows\system32\WindowsPowerShell\v1.0\Modules\
+CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
+ComSpec = C:\Windows\system32\cmd.exe
+APPDATA = C:\Users\TWT01\AppData\Roaming
+
+ -->
+
+<!-- Game Record -->
+<Game>
+  <boardNames>
+    <string>Babylon</string>
+    <string>Ephesus</string>
+    <string>Rhodes</string>
+    <string>Halicarnassus</string>
+    <string>Olympia</string>
+    <string>Alexandria</string>
+    <string>Giza</string>
+  </boardNames>
+  <playerNames>
+    <string>Player</string>
+    <string>RandBot_1</string>
+    <string>RandBot_2</string>
+    <string>RandBot_3</string>
+    <string>RandBot_4</string>
+    <string>RandBot_5</string>
+    <string>RandBot_6</string>
+  </playerNames>
+  <boardSides>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+    <int>0</int>
+  </boardSides>
+  <ages>
+    <Age>
+      <ageNum>1</ageNum>
+      <cardNames>
+        <string-array>
+          <string>Tree Farm</string>
+          <string>Clay Pool</string>
+          <string>Lumber Yard</string>
+          <string>Mine</string>
+          <string>Guard Tower</string>
+          <string>Glass Works</string>
+          <string>Loom</string>
+        </string-array>
+        <string-array>
+          <string>Timber Yard</string>
+          <string>Theater</string>
+          <string>Lumber Yard</string>
+          <string>East Trading Post</string>
+          <string>Stone Pit</string>
+          <string>Clay Pit</string>
+          <string>Baths</string>
+        </string-array>
+        <string-array>
+          <string>Clay Pool</string>
+          <string>Loom</string>
+          <string>Guard Tower</string>
+          <string>Pawnshop</string>
+          <string>Apothecary</string>
+          <string>Stockade</string>
+          <string>Marketplace</string>
+        </string-array>
+        <string-array>
+          <string>Stone Pit</string>
+          <string>Stockade</string>
+          <string>Apothecary</string>
+          <string>Scriptorium</string>
+          <string>East Trading Post</string>
+          <string>Pawnshop</string>
+          <string>Tavern</string>
+        </string-array>
+        <string-array>
+          <string>Press</string>
+          <string>Barracks</string>
+          <string>Marketplace</string>
+          <string>Forest Cave</string>
+          <string>Ore Vein</string>
+          <string>Altar</string>
+          <string>Tavern</string>
+        </string-array>
+        <string-array>
+          <string>Workshop</string>
+          <string>West Trading Post</string>
+          <string>West Trading Post</string>
+          <string>Glass Works</string>
+          <string>Baths</string>
+          <string>Tavern</string>
+          <string>Excavation</string>
+        </string-array>
+        <string-array>
+          <string>Scriptorium</string>
+          <string>Ore Vein</string>
+          <string>Workshop</string>
+          <string>Altar</string>
+          <string>Theater</string>
+          <string>Press</string>
+          <string>Barracks</string>
+        </string-array>
+      </cardNames>
+      <turns>
+        <Turn-array>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>0</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>2</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>3</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>4</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>5</Player>
+            <Card>5</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>1</turnNum>
+            <Player>6</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>0</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>1</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>2</Player>
+            <Card>5</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>3</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>4</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>5</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>2</turnNum>
+            <Player>6</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>0</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>1</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>2</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>3</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>4</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>5</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>3</turnNum>
+            <Player>6</Player>
+            <Card>4</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>0</Player>
+            <Card>0</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>2</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>3</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>4</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>5</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>4</turnNum>
+            <Player>6</Player>
+            <Card>3</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>0</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>2</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>3</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>4</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>5</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>5</turnNum>
+            <Player>6</Player>
+            <Card>2</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>0</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>1</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>2</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>3</Player>
+            <Card>0</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>4</Player>
+            <Card>1</Card>
+            <Command>SELL_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>5</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+          <Turn>
+            <turnNum>6</turnNum>
+            <Player>6</Player>
+            <Card>1</Card>
+            <Command>BUILD_CARD</Command>
+          </Turn>
+        </Turn-array>
+        <Turn-array>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+          <null/>
+        </Turn-array>
+      </turns>
+    </Age>
+    <null/>
+    <null/>
+  </ages>
+</Game>
+
+<!-- Exceptions -->
+<!-- 
+java.lang.NegativeArraySizeException
+	at org.tjuscs.sevenwonders.gui.Wonders.addGoldSign(Wonders.java:118)
+	at org.tjuscs.sevenwonders.gui.MainBackGround.updateBoard(MainBackGround.java:1141)
+	at org.tjuscs.sevenwonders.gui.MainBackGround.nextTurn(MainBackGround.java:1004)
+	at org.tjuscs.sevenwonders.gui.CardGroup$5$1$1.handle(CardGroup.java:343)
+	at org.tjuscs.sevenwonders.gui.CardGroup$5$1$1.handle(CardGroup.java:1)
+	at com.sun.scenario.animation.shared.TimelineClipCore.visitKeyFrame(TimelineClipCore.java:218)
+	at com.sun.scenario.animation.shared.TimelineClipCore.playTo(TimelineClipCore.java:158)
+	at javafx.animation.Timeline.impl_playTo(Timeline.java:182)
+	at com.sun.scenario.animation.shared.SingleLoopClipEnvelope.timePulse(SingleLoopClipEnvelope.java:119)
+	at javafx.animation.Animation.impl_timePulse(Animation.java:953)
+	at com.sun.scenario.animation.shared.AnimationPulseReceiver$1.run(AnimationPulseReceiver.java:133)
+	at com.sun.scenario.animation.shared.AnimationPulseReceiver$1.run(AnimationPulseReceiver.java:131)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.scenario.animation.shared.AnimationPulseReceiver.timePulse(AnimationPulseReceiver.java:131)
+	at com.sun.scenario.animation.AbstractMasterTimer.timePulseImpl(AbstractMasterTimer.java:365)
+	at com.sun.scenario.animation.AbstractMasterTimer$MainLoop.run(AbstractMasterTimer.java:288)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.pulse(QuantumToolkit.java:459)
+	at com.sun.javafx.tk.quantum.QuantumToolkit$9.run(QuantumToolkit.java:332)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.access$100(WinApplication.java:17)
+	at com.sun.glass.ui.win.WinApplication$3$1.run(WinApplication.java:67)
+	at java.lang.Thread.run(Thread.java:745)
+ -->
