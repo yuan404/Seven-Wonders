@@ -447,8 +447,6 @@ public class CommandOption {
 		strB.append(String.format("%s: %s buildable:[<%d>: E%d, W%d]", card,
 				(isBuildable() ? "is" : "isn't"), needToBuild, leftHas,
 				rightHas));
-
-		// strB.append(" ");
 		strB.append(reason);
 
 		return strB.toString();

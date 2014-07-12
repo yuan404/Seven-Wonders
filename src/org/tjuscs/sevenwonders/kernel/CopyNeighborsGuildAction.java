@@ -15,8 +15,8 @@ public class CopyNeighborsGuildAction implements Action, DelayedAction {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.tjuscs.sevenwonders.core.Action#activate(org.tjuscs.sevenwonders.
-	 * core.Board)
+	 * org.tjuscs.sevenwonders.kernel.Action#activate(org.tjuscs.sevenwonders.
+	 * kernel.Board)
 	 */
 	public void activate(Board brd) {
 		board = brd;
@@ -26,7 +26,7 @@ public class CopyNeighborsGuildAction implements Action, DelayedAction {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.tjuscs.sevenwonders.core.DelayedAction#doDelayedAction()
+	 * @see org.tjuscs.sevenwonders.kernel.DelayedAction#doDelayedAction()
 	 */
 	public void doDelayedAction() {
 		ArrayList<CommandOption> options = new ArrayList<CommandOption>();

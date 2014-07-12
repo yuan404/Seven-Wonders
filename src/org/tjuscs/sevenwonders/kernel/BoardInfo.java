@@ -16,13 +16,11 @@ public enum BoardInfo {
 			board.setStage(stage);
 
 			stage = new Stage("Rhodes STG2", 2);
-			// stage.setName("Rhodes STG2");
 			stage.addCost(Resource.BRICK, 3);
 			stage.addGoods(Resource.SHEILD, 2);
 			board.setStage(stage);
 
 			stage = new Stage("Rhodes STG3", 3);
-			// stage.setName("Rhodes STG3");
 			stage.addCost(Resource.ORE, 4);
 			stage.addGoods(Resource.VP, 7);
 			board.setStage(stage);
