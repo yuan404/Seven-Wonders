@@ -948,15 +948,17 @@ public class Board implements Serializable {
 			cd.getCmd().setCanBuild(canB);
 			cd.getCmd().setNeedToBuild(ndToBd);
 			opt = (ndToBd == 0);
+			//关于免费兼做
 			ava = freeList.contains(cd.getName());
 			if (ava) {
 				cd.getCmd().setOptions(false);
+				cd.getCmd().setNeedToBuild(0);
+				cd.getCmd().setCanBuild(true);
 			}
 			// System.out.println(Board.class.getName()+" availableFree = "+ava);
 			cd.getCmd().setAvailableFree(ava);
 			for (Card crd : structures) {
 				if (crd.getName().equals(cd.getName())) {
-					cd.getCmd().setOptions(false);
 					cd.getCmd().setAvailableFree(false);
 					cd.getCmd().setCanBuild(false);
 					break;
