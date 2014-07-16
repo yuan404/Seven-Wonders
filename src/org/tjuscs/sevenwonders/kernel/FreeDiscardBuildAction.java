@@ -42,7 +42,7 @@ public class FreeDiscardBuildAction implements Action, DelayedAction {
 		System.out.println("TESTING on: " + board.getName());
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		board.getPlayerChoice(options);
-
+		
 		KernelManager.getManager().removeEOTDelayedAction(this); // remove
 																	// because
 																	// this is a
