@@ -799,7 +799,7 @@ public class CardGroup extends Parent {
 		g[i].getChildren().add(sign);
 	}
 
-	private void implementCommand(CommandOption com) {
+	public static void implementCommand(CommandOption com) {
 		System.out.println(CardGroup.class.getName() + " - implementCommand()");
 		board.implementCommand(com);
 		Card card = com.getCard();
@@ -827,7 +827,7 @@ public class CardGroup extends Parent {
 		tl.play();
 	}
 
-	public void markCard(final int index) {
+	public static void markCard(final int index) {
 		Rectangle rec = new Rectangle(-1.5, -1.5, 208 + 3, 320 + 3);
 		rec.setFill(Color.TRANSPARENT);
 		Rectangle mstk = (Rectangle) MovingStroke.set(rec, Color.GOLDENROD, 6,
@@ -865,6 +865,6 @@ public class CardGroup extends Parent {
 	private CommandOption[] com;
 	private static Hand hand;
 	private static Board board;
-	private static Wonders player;
+	public static Wonders player;
 
 }

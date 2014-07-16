@@ -96,11 +96,23 @@ public class Hand implements Serializable {
 	 * 
 	 * @return string
 	 */
-	public String getNames(){
-		String str = new String();
-		for (Card c : hand)
-			str = c.getName();
+	public String[] getNames(){
+		String[] str = new String[hand.size()];
+		int i = 0;
+		for (Card c : hand){
+			str[i] = new String();
+			str[i++] = c.getName();
+		}
 		return str;
+	}
+
+	public Card getCardByName(String str){
+		Card cd = new Card();
+		for (Card c : hand){
+			if(c.getName().equals(str))
+				cd = c;
+		}
+		return cd;
 	}
 	/*
 	 * (non-Javadoc)

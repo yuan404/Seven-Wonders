@@ -72,7 +72,7 @@ public class MainBackGround extends SceneContainer {
 	private static ImageView counterClockwise3;
 	private static Circle[] player;
 	private static boolean[] isTwice;
-	private static Group playerBoard;
+	public static Group playerBoard;
 	private static Block b;
 	private static boolean handlerEnable;
 	private static Label numOfCardGivenup;
@@ -1144,7 +1144,7 @@ public class MainBackGround extends SceneContainer {
 			coins[ii] = boards[ii].getTotalCoins();
 
 			if (boards[ii].getStagesCompleted() > wonder[ii].getHasbuild()) {
-				wonder[ii].stageCompleted(age);
+				wonder[ii].stageCompleted(age,boards[ii]);
 			}
 
 			// wonder[ii].toFront();// Must be wrong, but must be here!

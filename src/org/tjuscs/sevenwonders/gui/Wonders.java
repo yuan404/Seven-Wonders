@@ -14,11 +14,15 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
+import org.tjuscs.sevenwonders.kernel.Board;
+import org.tjuscs.sevenwonders.kernel.FreeBuildAction;
+import org.tjuscs.sevenwonders.gui.BuyBoard;
 import org.tjuscs.sevenwonders.kernel.CardColor;
 
 public class Wonders extends Group {
@@ -151,11 +155,20 @@ public class Wonders extends Group {
 		this.toBack();
 	}
 
-	public void stageCompleted(int i) {
+
+	public void stageCompleted(int i, final Board board) {
 		hasbuild++;
 		Image III = ResManager.getImage("build" + i + ".png");
 		ImageView sta = new ImageView();
 		sta.setImage(III);
+		FreeBuildAction.setIsA(false);
+		sta.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				FreeBuildAction fba = new FreeBuildAction();
+				fba.freeAddCard(board);
+			}
+		});
 		sta.setScaleX(0.75);
 		sta.setScaleY(0.75);
 		if (NUM == 7) {
