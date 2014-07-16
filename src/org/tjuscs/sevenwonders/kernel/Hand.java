@@ -91,7 +91,17 @@ public class Hand implements Serializable {
 	public int size() {
 		return hand.size();
 	}
-
+	/**
+	 * Get Name of cards for hand
+	 * 
+	 * @return string
+	 */
+	public String getNames(){
+		String str = new String();
+		for (Card c : hand)
+			str = c.getName();
+		return str;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

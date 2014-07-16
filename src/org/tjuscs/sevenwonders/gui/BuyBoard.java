@@ -12,11 +12,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import org.tjuscs.sevenwonders.Manager;
 import org.tjuscs.sevenwonders.kernel.Board;
 import org.tjuscs.sevenwonders.kernel.BuyDecision;
 import org.tjuscs.sevenwonders.kernel.Card;
+import org.tjuscs.sevenwonders.kernel.Hand;
 import org.tjuscs.sevenwonders.kernel.SimpleResList;
 
 public class BuyBoard extends DropGroup {
@@ -142,6 +144,45 @@ public class BuyBoard extends DropGroup {
 			isFinish = new ImageView(notok);
 			isFinish.setLayoutX(265);
 			isFinish.setLayoutY(33);
+			
+			
+			
+			
+			//做奇迹板功能测试
+			//-----
+			ImageView fr = new ImageView();
+			fr.setImage(frame2);
+			getChildren().add(fr);
+			fr.setLayoutY(-69);
+			Hand[] hands = Manager.getKernel().getHands();
+			String str = new String();
+			Label[] lb = new Label[8];
+			ImageView back[] = new ImageView[8];
+			int item = 0;
+			for(Hand hand: hands){
+				++item;
+				str = hand.getNames();
+				lb[item] = new Label();
+				lb[item].setText(str);
+				lb[item].setLayoutX(20);
+				lb[item].setLayoutY(-69 * item + 10);
+				lb[item].setFont(Font.font("Arial", 40));
+				lb[item].setTextFill(Color.LIGHTBLUE);
+				back[item] = new ImageView();
+				back[item].setImage(pic1);
+				getChildren().add(back[item]);
+				getChildren().add(lb[item]);
+				back[item].setLayoutY(-69 * item);
+			}
+			++item;
+			ImageView fr1 = new ImageView();
+			fr1.setImage(frame1);
+			getChildren().add(fr1);
+			fr1.setLayoutY(-69 * item);
+			//-----
+			
+			
+			
 			for (int i = 0; i < numOfRsNeeded; i++) {
 				System.out.println("30");
 				from[i] = 0;
