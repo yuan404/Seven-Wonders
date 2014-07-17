@@ -15,6 +15,7 @@ import org.tjuscs.sevenwonders.Manager;
 import org.tjuscs.sevenwonders.gui.CardGroup;
 import org.tjuscs.sevenwonders.gui.MainBackGround;
 import org.tjuscs.sevenwonders.gui.ResManager;
+import org.tjuscs.sevenwonders.kernel.RecManager.TurnInfo;
 
 @SuppressWarnings("serial")
 public class FreeBuildAction implements Action {
@@ -97,8 +98,9 @@ public class FreeBuildAction implements Action {
 			Set<Card> structures = new HashSet<Card>();
 			structures = board.getStructure();
 			Boolean isSame = false;
+			int i1 = 0;
 			for (String str : s) {
-				++item;
+				++item;++i1;
 				for (Card crd : structures) {
 					if (crd.getName().equals(str)) {
 						isSame = true;
@@ -153,16 +155,28 @@ public class FreeBuildAction implements Action {
 							}
 						});
 				final int num2 = num;
+				final int i3 = i1;
 				isC.addEventHandler(MouseEvent.MOUSE_CLICKED,
 						new EventHandler<MouseEvent>() {
 							public void handle(MouseEvent e) {
 								if (isB && !isA ) {
 									remove();
+									Card cd = new Card();
+									for (Card c : KernelManager.cardManager.deck)
+										if (c.getName().equals(CName)) {
+											cd = c;
+											break;
+										}
+									for (Card c : KernelManager.cardManager.guildDeck)
+										if (c.getName().equals(CName)) {
+											cd = c;
+											break;
+										}
 									CardGroup.player.addCard(CardGroup.cardNameMap
 											.get(CName),
-											hands[num2].getCardByName(CName)
-													.getColor());
-									board.addCard(hands[num2].getCardByName(CName));
+											cd.getColor());
+									board.addCard(cd);
+									hands[num2].remove(CName);
 									MainBackGround.nextTurn();
 									isB = false;
 									isA = true;

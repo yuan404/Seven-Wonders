@@ -109,8 +109,10 @@ public class Hand implements Serializable {
 	public Card getCardByName(String str){
 		Card cd = new Card();
 		for (Card c : hand){
-			if(c.getName().equals(str))
+			if(c.getName().equals(str)){
 				cd = c;
+				return cd;
+			}
 		}
 		return cd;
 	}

@@ -155,20 +155,23 @@ public class Wonders extends Group {
 		this.toBack();
 	}
 
-
 	public void stageCompleted(int i, final Board board) {
 		hasbuild++;
 		Image III = ResManager.getImage("build" + i + ".png");
 		ImageView sta = new ImageView();
 		sta.setImage(III);
-		FreeBuildAction.setIsA(false);
-		sta.addEventHandler(MouseEvent.MOUSE_CLICKED,
-				new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent e) {
-				FreeBuildAction fba = new FreeBuildAction();
-				fba.freeAddCard(board);
-			}
-		});
+		//System.out.print(board.getName()+" " +board.getSides()+" "+board.getStagesCompleted()+" ");
+		if (board.getName() == "Olympia" && board.getSides() == 0
+				&& board.getStagesCompleted() > 1) {
+			FreeBuildAction.setIsA(false);
+			sta.addEventHandler(MouseEvent.MOUSE_CLICKED,
+					new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent e) {
+							FreeBuildAction fba = new FreeBuildAction();
+							fba.freeAddCard(board);
+						}
+					});
+		}
 		sta.setScaleX(0.75);
 		sta.setScaleY(0.75);
 		if (NUM == 7) {
