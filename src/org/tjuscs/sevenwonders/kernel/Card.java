@@ -434,5 +434,5 @@ public class Card implements Cloneable, Buildable, Serializable {
 				+ list.srl[5] + list.srl[6] + list.srl[7];
 		return list;
 	}
-
+	
 } // end of Card class

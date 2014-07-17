@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import org.tjuscs.sevenwonders.Manager;
-//import org.tjuscs.sevenwonders.gui.BuyBoard;
+import org.tjuscs.sevenwonders.gui.BuyBoard;
 import org.tjuscs.sevenwonders.kernel.RecManager.*;
 
 /**
@@ -586,6 +586,7 @@ public class Board implements Serializable {
 				sta.getAction().activate(this); // activate any actions
 
 			this.stagesCompleted++;
+<<<<<<< HEAD
 			// 如果是Halicarnassus A面的二阶
 //			if(brdName == "Halicarnassus" && stagesCompleted == 2) {
 //				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -594,6 +595,9 @@ public class Board implements Serializable {
 //				Card c = it.next();
 //				addCard(c);
 //			}			
+=======
+			
+>>>>>>> df8af59c3504dc6c830977bac6c080b81050875e
 			break;
 		case SELL_CARD:
 			this.addToCoins(3);
@@ -851,7 +855,7 @@ public class Board implements Serializable {
 				+ this.brdName);
 		CommandOption[] opts = buildCommandOptions(hand);
 		CommandOption opt = player.makeChoice(opts);
-
+		
 		// System.out.println(Board.class.getName()+" - CommandOption="+opt);
 		this.implementCommand(opt);
 
@@ -1198,7 +1202,10 @@ public class Board implements Serializable {
 	// }
 	// return totalNeeded - numLeft;
 	// }
-
+	
+	public Set<Card> getStructure(){
+		return structures;
+	}
 	/**
 	 * Gets the number of completed stages. 返回奇迹完成的层数
 	 * 
