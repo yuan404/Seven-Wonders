@@ -21,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import org.tjuscs.sevenwonders.kernel.Board;
+import org.tjuscs.sevenwonders.kernel.CopyNeighborsGuildAction;
 import org.tjuscs.sevenwonders.kernel.FreeBuildAction;
 import org.tjuscs.sevenwonders.gui.BuyBoard;
 import org.tjuscs.sevenwonders.kernel.CardColor;
@@ -168,6 +169,17 @@ public class Wonders extends Group {
 					new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent e) {
 							FreeBuildAction fba = new FreeBuildAction();
+							fba.freeAddCard(board);
+						}
+					});
+		}
+		if (board.getName() == "Olympia" && board.getSides() == 1
+				&& board.getStagesCompleted() > 2) {
+		CopyNeighborsGuildAction.setIsA(false);
+			sta.addEventHandler(MouseEvent.MOUSE_CLICKED,
+					new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent e) {
+							CopyNeighborsGuildAction fba = new CopyNeighborsGuildAction();
 							fba.freeAddCard(board);
 						}
 					});

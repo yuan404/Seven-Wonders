@@ -1360,7 +1360,7 @@ public class Index extends SceneContainer {
 				Duration.ZERO,// new KeyValue(clip.layoutYProperty(), 0),
 				new KeyValue(head.opacityProperty(), 0), new KeyValue(
 						head.textProperty(),
-						"\t\tLane\n\n\thttps://github.com/LiLane"),
+						"\t\tLane\n\n\thttp://lane-li.com/"),
 				new KeyValue(head.layoutXProperty(), headX - 100),
 				new KeyValue(head.fontProperty(), bigFont), new KeyValue(
 						head.layoutYProperty(), 240)), new KeyFrame(
@@ -1374,7 +1374,7 @@ public class Index extends SceneContainer {
 						.opacityProperty(), 0), new KeyValue(head
 						.layoutXProperty(), headX + 30), new KeyValue(head
 						.textProperty(),
-						"\t\twanting721\n\n\thttps://github.com/wanting721")),
+						"\t\twanting721\n\n\thttp://wayne-t.com")),
 				new KeyFrame(Duration.seconds(6), new KeyValue(head
 						.opacityProperty(), 1)), new KeyFrame(
 						Duration.seconds(7), new KeyValue(
