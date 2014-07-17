@@ -100,7 +100,17 @@ public class CardManager {
 	public Card[] getDiscardedCards() {
 		return discard.toArray(null);
 	}
-
+	
+	/**
+	 * Get the discarded in Board class
+	 * 
+	 * @author wanting
+	 * @return the discarded cards
+	 */
+	
+	public LinkedList<Card> getDiscardedCards2() {
+		return discard;
+	}
 	/**
 	 * Discard card.
 	 * 

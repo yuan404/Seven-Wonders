@@ -318,7 +318,7 @@ public class Board implements Serializable {
 		CommerceVps = 0;
 		GuildVps = 0;
 		FreeSci = 0;
-		saveSeventhCard = false; // Here set false now!
+		saveSeventhCard = true; // Here set false now!
 		canfreebuild = false; // Here set false now!changebhcs
 		usefreebuild = true;
 
@@ -350,7 +350,7 @@ public class Board implements Serializable {
 			System.out.println("ERROR: Board already contains " + c);
 			return;// JUST Return!?
 		}
-
+		
 		if (!c.hasOrResources()) {
 			// System.out.println("non-or card");
 			resList.addCard(c);
@@ -538,8 +538,9 @@ public class Board implements Serializable {
 
 			break;
 		case BUILD_STAGE:
-
+			
 			Stage sta = stages[stagesCompleted];
+			
 			if (!sta.hasOrResources()) {
 				resList.addCard(sta);
 			}
@@ -585,6 +586,14 @@ public class Board implements Serializable {
 				sta.getAction().activate(this); // activate any actions
 
 			this.stagesCompleted++;
+			// 如果是Halicarnassus A面的二阶
+//			if(brdName == "Halicarnassus" && stagesCompleted == 2) {
+//				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//				LinkedList<Card> dCard = KernelManager.getCardManager().getDiscardedCards2();
+//				Iterator<Card> it = dCard.iterator();
+//				Card c = it.next();
+//				addCard(c);
+//			}			
 			break;
 		case SELL_CARD:
 			this.addToCoins(3);
@@ -853,7 +862,13 @@ public class Board implements Serializable {
 			System.out.println("\nTESTING: " + this.toString() + " has: "
 					+ hand.size() + " cards left in after 6th turn ");
 			seventhCard = hand.get(0);
-			hand.remove(seventhCard.getName());// Just Remove!?
+			/**
+			 *  第七张牌应加入discard链表中
+			 *  然后从手牌中remove掉
+			 *  @author wanting
+			 */
+			discardCard(seventhCard);
+			hand.remove(seventhCard.getName());
 		}
 
 		TurnInfo info = new TurnInfo();
@@ -965,10 +980,15 @@ public class Board implements Serializable {
 				}
 			}
 		}
-		System.out.println("手牌：" + hand.size());
+		/**
+		 * @author wanting
+		 * 打印场上牌的信息和墓地中牌的信息
+		 */
+		getDiscarded();
 		for(Card crd: structures) {
 			System.out.println("Ground:" + crd.getName());
 		}
+		System.out.println("HandSize: " + hand.size());
 	}
 
 	/**
@@ -1682,5 +1702,19 @@ public class Board implements Serializable {
 				+ list.srl[5] + list.srl[6] + list.srl[7];
 
 		return list;
+	}
+	/**
+	 * @author wanting
+	 * Print the DisCarded card
+	 */
+	private void getDiscarded() {
+		LinkedList<Card> myCard = KernelManager.getCardManager().getDiscardedCards2();
+		Iterator<Card> it = myCard.iterator();
+		int i = 1;
+		while(it.hasNext()) {
+			Card card = it.next();
+			System.out.println("DisCard" + i + ":" + card.getName());
+			++i;
+		}
 	}
 }

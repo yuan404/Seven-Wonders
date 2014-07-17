@@ -30,6 +30,7 @@ import javafx.util.Duration;
 
 import org.tjuscs.sevenwonders.Manager;
 import org.tjuscs.sevenwonders.kernel.Board;
+import org.tjuscs.sevenwonders.kernel.Card;
 import org.tjuscs.sevenwonders.kernel.Command;
 import org.tjuscs.sevenwonders.kernel.CommandOption;
 import org.tjuscs.sevenwonders.kernel.Hand;
@@ -1020,6 +1021,7 @@ public class MainBackGround extends SceneContainer {
 				}
 				turn++;
 			} else {
+				// 把最后一张弃牌加进去
 				changeCardGivenUp(CardsGivenup + numOfPlayers);
 				Manager.getKernel().doEndOfAge(age);
 				for (int i = 0; i < numOfPlayers; i++) {
@@ -1165,10 +1167,10 @@ public class MainBackGround extends SceneContainer {
 			Board board = boards[i];
 			if (age == 2) {
 				board.takeTurn(hands[(2 - turn + ind + 2 * numOfPlayers)
-						% numOfPlayers], turn);
+				                     % numOfPlayers], turn);
 				Manager.debug("AI " + i + " takes hand["
 						+ (2 - turn + ind + 2 * numOfPlayers) % numOfPlayers
-						+ "]");
+						+ "]");			
 			} else {
 				// JOptionPane.showMessageDialog(null, hands[(ind + turn) %
 				// numOfPlayers]);
@@ -1270,6 +1272,14 @@ public class MainBackGround extends SceneContainer {
 
 		wonder[r[1].num].toFront();
 		wonder[r[0].num].toFront();
+	}
+	/**
+	 * 添加手牌最后一张到弃牌堆
+	 * @author wanting
+	 */
+	private void discardCard(Card card) {
+		KernelManager.getCardManager().discardCard(card);
+		// GameManager.getManager().getCardManager().discardCard(card);
 	}
 
 }
