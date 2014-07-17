@@ -193,7 +193,7 @@ public class FreeBuildAction implements Action {
 		public static void setIsA(boolean is){
 			isA = is;
 		}
-		private void remove() {
+		public void remove() {
 			MainBackGround.playerBoard.getChildren().removeAll(isC);
 			MainBackGround.playerBoard.getChildren().removeAll(bk);
 			MainBackGround.playerBoard.getChildren().removeAll(lb);

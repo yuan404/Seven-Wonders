@@ -183,15 +183,6 @@ public class CopyNeighborsGuildAction implements Action, DelayedAction {
 		isA = is;
 	}
 
-	private void remove() {
-		MainBackGround.playerBoard.getChildren().removeAll(isC);
-		MainBackGround.playerBoard.getChildren().removeAll(bk);
-		MainBackGround.playerBoard.getChildren().removeAll(lb);
-		MainBackGround.playerBoard.getChildren().remove(isB);
-		MainBackGround.playerBoard.getChildren().remove(hands);
-		MainBackGround.playerBoard.getChildren().removeAll(isC);
-		MainBackGround.playerBoard.getChildren().removeAll(fr);
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -207,4 +198,13 @@ public class CopyNeighborsGuildAction implements Action, DelayedAction {
 		return 0;
 	}
 
+	public void remove() {
+		MainBackGround.playerBoard.getChildren().removeAll(isC);
+		MainBackGround.playerBoard.getChildren().removeAll(bk);
+		MainBackGround.playerBoard.getChildren().removeAll(lb);
+		MainBackGround.playerBoard.getChildren().remove(isB);
+		MainBackGround.playerBoard.getChildren().remove(hands);
+		MainBackGround.playerBoard.getChildren().removeAll(isC);
+		MainBackGround.playerBoard.getChildren().removeAll(fr);
+	}
 }
