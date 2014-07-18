@@ -11,11 +11,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import org.tjuscs.sevenwonders.Manager;
-import org.tjuscs.sevenwonders.gui.BuyBoard;
 import org.tjuscs.sevenwonders.gui.CardGroup;
 import org.tjuscs.sevenwonders.gui.MainBackGround;
 import org.tjuscs.sevenwonders.gui.ResManager;
-import org.tjuscs.sevenwonders.kernel.RecManager.*;
+
 
 /**
  * The Class FreeDiscardBuildAction.
@@ -198,7 +197,6 @@ public class FreeDiscardBuildAction implements Action, DelayedAction {
 										isC.setImage(notok);
 								}
 							});
-					final int i3 = i1;
 					isC.addEventHandler(MouseEvent.MOUSE_CLICKED,
 							new EventHandler<MouseEvent>() {
 								public void handle(MouseEvent e) {

@@ -61,7 +61,7 @@ public class ResManager {
 			return audio;
 		} else {
 			URL url = rm.getClass().getResource("res/sound/" + key);
-			audio = new AudioClip(url.toString());
+			//audio = new AudioClip(url.toString());
 			if (audio != null) {
 				audioClips.put(key, audio);
 				return audio;

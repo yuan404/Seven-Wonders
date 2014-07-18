@@ -396,15 +396,15 @@ public class GUIManager {
 
 	public static void playMusic(String musicFileName) {
 		loadMusic(musicFileName);
-		bgMusic.play();
+		//bgMusic.play();
 	}
 
 	public static void loadMusic(String musicFileName) {
 		if (bgMusic != null)
 			bgMusic.stop();
-		bgMusic = ResManager.getAudio(musicFileName);
-		bgMusic.setCycleCount(AudioClip.INDEFINITE);
-		bgMusic.setVolume(volumn);
+		//bgMusic = ResManager.getAudio(musicFileName);
+		//bgMusic.setCycleCount(AudioClip.INDEFINITE);
+		//bgMusic.setVolume(volumn);
 	}
 
 	public static void setFullScreen(boolean isFullScreen) {
