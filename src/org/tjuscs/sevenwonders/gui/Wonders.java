@@ -179,17 +179,17 @@ public class Wonders extends Group {
 						}
 					});
 		}
-<<<<<<< HEAD
+
 		if ((board.getName() == "Halicarnassus" && board.getSides() == 0 && board
 				.getStagesCompleted() == 2)
 				|| (board.getName() == "Halicarnassus" && board.getSides() == 1)) {
 			FreeDiscardBuildAction.setIsA(false);
 			FreeDiscardBuildAction dba = new FreeDiscardBuildAction();
 			dba.FreeBuild(board);
-=======
+		}
 		if (board.getName() == "Olympia" && board.getSides() == 1
 				&& board.getStagesCompleted() > 2) {
-		CopyNeighborsGuildAction.setIsA(false);
+			CopyNeighborsGuildAction.setIsA(false);
 			sta.addEventHandler(MouseEvent.MOUSE_CLICKED,
 					new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent e) {
@@ -197,7 +197,6 @@ public class Wonders extends Group {
 							fba.freeAddCard(board);
 						}
 					});
->>>>>>> 39f411ae263889dd9fe594d68ec1bf06000dcb0b
 		}
 		sta.setScaleX(0.75);
 		sta.setScaleY(0.75);
