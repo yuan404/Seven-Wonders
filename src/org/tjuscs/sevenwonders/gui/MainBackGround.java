@@ -33,7 +33,13 @@ import org.tjuscs.sevenwonders.kernel.Board;
 import org.tjuscs.sevenwonders.kernel.Card;
 import org.tjuscs.sevenwonders.kernel.Command;
 import org.tjuscs.sevenwonders.kernel.CommandOption;
+<<<<<<< HEAD
 import org.tjuscs.sevenwonders.kernel.FreeDiscardBuildAction;
+=======
+import org.tjuscs.sevenwonders.kernel.CopyNeighborsGuildAction;
+import org.tjuscs.sevenwonders.kernel.FreeBuildAction;
+import org.tjuscs.sevenwonders.kernel.FreeSciSymbolAction;
+>>>>>>> 39f411ae263889dd9fe594d68ec1bf06000dcb0b
 import org.tjuscs.sevenwonders.kernel.Hand;
 import org.tjuscs.sevenwonders.kernel.KernelManager;
 import org.tjuscs.sevenwonders.kernel.SimpleResList;
@@ -1001,6 +1007,10 @@ public class MainBackGround extends SceneContainer {
 	public static void nextTurn() {
 		try {
 			// System.gc();//Maybe good or maybe very bad idea...-_-|||
+			FreeBuildAction fba = new FreeBuildAction();
+			fba.remove();
+			CopyNeighborsGuildAction fba1 = new CopyNeighborsGuildAction();
+			fba1.remove();
 			AITakeTurn(turn);
 			// if(age >= 2)
 			// JOptionPane.showMessageDialog(null,hands,"Hand Card List",JOptionPane.INFORMATION_MESSAGE);
@@ -1022,7 +1032,17 @@ public class MainBackGround extends SceneContainer {
 				}
 				turn++;
 			} else {
+<<<<<<< HEAD
 				// 把最后一张弃牌加进去
+=======
+				for(Board board: KernelManager.getManager().getBoards()){
+					if(board.getName()=="Babylon" && board.getSides() == 1
+							&& board.getStagesCompleted() > 1){
+						FreeSciSymbolAction fba2 = new FreeSciSymbolAction();
+						fba2.freeBuildLast(board);
+					}
+				}
+>>>>>>> 39f411ae263889dd9fe594d68ec1bf06000dcb0b
 				changeCardGivenUp(CardsGivenup + numOfPlayers);
 				Manager.getKernel().doEndOfAge(age);
 				for (int i = 0; i < numOfPlayers; i++) {

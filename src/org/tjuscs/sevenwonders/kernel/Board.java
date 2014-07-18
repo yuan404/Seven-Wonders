@@ -567,8 +567,7 @@ public class Board implements Serializable {
 				}
 				goods.put(r, newAmt);
 
-				Resource[] orOpts = r.getOptionalRes(); // trying to add OR
-														// cards
+				Resource[] orOpts = r.getOptionalRes(); 
 				if (orOpts != null) {
 					orCards.add(sta);
 					SimpleResList srl = new SimpleResList(sta);
