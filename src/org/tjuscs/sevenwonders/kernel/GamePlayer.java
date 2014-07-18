@@ -5,7 +5,7 @@ import org.tjuscs.sevenwonders.gui.MainBackGround;
 
 @SuppressWarnings("serial")
 public abstract class GamePlayer implements Player {
-	protected Board board;
+	protected static Board board;
 	protected int index;
 	protected String name;
 
@@ -26,7 +26,7 @@ public abstract class GamePlayer implements Player {
 	public abstract void makeABuyDecision(SimpleResList needs,
 			SimpleResList leftGoods, SimpleResList rightGoods);
 
-	public Board getBoard() {
+	public static Board getBoard() {
 		return board;
 	}
 

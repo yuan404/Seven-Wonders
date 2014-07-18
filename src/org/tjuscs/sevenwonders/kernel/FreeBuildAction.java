@@ -48,6 +48,7 @@ public class FreeBuildAction implements Action {
 		static String CName;
 		static Hand[] hands;
 		static int Cnum;
+		
 		static ImageView[] fr = new ImageView[8];
 		private static Image frame1;
 		private static Image frame2;
