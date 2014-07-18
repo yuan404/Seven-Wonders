@@ -14,7 +14,7 @@ public abstract class GamePlayer implements Player {
 		MainBackGround.implementPlayerCommandOption(index, opt);
 		return opt;
 	}
-
+	
 	public final void makeBuyDecision(SimpleResList needs,
 			SimpleResList leftGoods, SimpleResList rightGoods) {
 		// Inform the GUI!!!
