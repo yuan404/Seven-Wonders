@@ -23,6 +23,7 @@ import javafx.util.Duration;
 import org.tjuscs.sevenwonders.kernel.Board;
 import org.tjuscs.sevenwonders.kernel.CopyNeighborsGuildAction;
 import org.tjuscs.sevenwonders.kernel.FreeBuildAction;
+import org.tjuscs.sevenwonders.kernel.FreeDiscardBuildAction;
 import org.tjuscs.sevenwonders.gui.BuyBoard;
 import org.tjuscs.sevenwonders.kernel.CardColor;
 
@@ -120,6 +121,10 @@ public class Wonders extends Group {
 		// }
 		// JOptionPane.showMessageDialog(null, gold);
 		coinView.getChildren().clear();
+		System.out.print(gold / 3 + gold % 3);
+		if (gold < 0) {
+			gold = 0;
+		}
 		ImageView[] iv = new ImageView[gold / 3 + gold % 3];
 		int k = 0;
 		for (int j = 0; j < gold / 3; j++) {
@@ -161,7 +166,8 @@ public class Wonders extends Group {
 		Image III = ResManager.getImage("build" + i + ".png");
 		ImageView sta = new ImageView();
 		sta.setImage(III);
-		//System.out.print(board.getName()+" " +board.getSides()+" "+board.getStagesCompleted()+" ");
+		// System.out.print(board.getName()+" "
+		// +board.getSides()+" "+board.getStagesCompleted()+" ");
 		if (board.getName() == "Olympia" && board.getSides() == 0
 				&& board.getStagesCompleted() > 1) {
 			FreeBuildAction.setIsA(false);
@@ -173,9 +179,17 @@ public class Wonders extends Group {
 						}
 					});
 		}
+
+		if ((board.getName() == "Halicarnassus" && board.getSides() == 0 && board
+				.getStagesCompleted() == 2)
+				|| (board.getName() == "Halicarnassus" && board.getSides() == 1)) {
+			FreeDiscardBuildAction.setIsA(false);
+			FreeDiscardBuildAction dba = new FreeDiscardBuildAction();
+			dba.FreeBuild(board);
+		}
 		if (board.getName() == "Olympia" && board.getSides() == 1
 				&& board.getStagesCompleted() > 2) {
-		CopyNeighborsGuildAction.setIsA(false);
+			CopyNeighborsGuildAction.setIsA(false);
 			sta.addEventHandler(MouseEvent.MOUSE_CLICKED,
 					new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent e) {

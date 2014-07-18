@@ -98,9 +98,32 @@ public class CardManager {
 	 * @return the discarded cards
 	 */
 	public Card[] getDiscardedCards() {
-		return discard.toArray(null);
+//		return discard.toArray(null);
+		Iterator<Card> it = discard.iterator();
+		// 计算链表长度
+		int i = 0;
+		for(i = 0; it.hasNext(); i++) {
+			it.next();
+		}
+		Card[] myCard = new Card[i];
+		// 计算链表长度
+		Iterator<Card> it2 = discard.iterator();
+		for(int j = 0; it.hasNext(); j++) {
+			myCard[j] = it2.next();
+		}
+		return myCard;
 	}
-
+	
+	/**
+	 * Get the discarded in Board class
+	 * 
+	 * @author wanting
+	 * @return the discarded cards
+	 */
+	
+	public LinkedList<Card> getDiscardedCards2() {
+		return discard;
+	}
 	/**
 	 * Discard card.
 	 * 
