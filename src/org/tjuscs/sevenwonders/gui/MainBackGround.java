@@ -33,6 +33,7 @@ import org.tjuscs.sevenwonders.kernel.Board;
 import org.tjuscs.sevenwonders.kernel.Card;
 import org.tjuscs.sevenwonders.kernel.Command;
 import org.tjuscs.sevenwonders.kernel.CommandOption;
+import org.tjuscs.sevenwonders.kernel.FreeDiscardBuildAction;
 import org.tjuscs.sevenwonders.kernel.Hand;
 import org.tjuscs.sevenwonders.kernel.KernelManager;
 import org.tjuscs.sevenwonders.kernel.SimpleResList;

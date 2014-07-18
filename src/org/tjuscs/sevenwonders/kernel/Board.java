@@ -586,7 +586,7 @@ public class Board implements Serializable {
 				sta.getAction().activate(this); // activate any actions
 
 			this.stagesCompleted++;
-<<<<<<< HEAD
+
 			// 如果是Halicarnassus A面的二阶
 //			if(brdName == "Halicarnassus" && stagesCompleted == 2) {
 //				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -595,9 +595,7 @@ public class Board implements Serializable {
 //				Card c = it.next();
 //				addCard(c);
 //			}			
-=======
-			
->>>>>>> df8af59c3504dc6c830977bac6c080b81050875e
+
 			break;
 		case SELL_CARD:
 			this.addToCoins(3);
