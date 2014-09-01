@@ -88,9 +88,8 @@ public class BuyBoard extends DropGroup {
 
 		iv = new ImageView[20];
 	}
-
 	
-
+	//从游戏可见界面中藏匿
 	private void unload() {
 		getChildren().removeAll(dir1);
 		getChildren().removeAll(dir2);
@@ -1045,7 +1044,6 @@ public class BuyBoard extends DropGroup {
 			goldBoard = new Group();
 			goldBoard.setLayoutX(16);
 			goldBoard.setLayoutY(7);
-
 		}
 		goldBoard.getChildren().clear();
 		// end change

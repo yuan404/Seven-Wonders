@@ -179,6 +179,10 @@ public class Wonders extends Group {
 						}
 					});
 		}
+		if (board.getName() == "Rhodes" && board.getSides() == 0
+				&& board.getStagesCompleted() == 1) {
+			
+		}
 
 		if ((board.getName() == "Halicarnassus" && board.getSides() == 0 && board
 				.getStagesCompleted() == 2)

@@ -955,11 +955,13 @@ public class MainBackGround extends SceneContainer {
 							.scaleXProperty(), rate, Interpolator.EASE_OUT)));
 			tl.play();
 		} else if (age == 2) {
+			/* 2014-08-25 @Lane
 			GUIManager.bgMusic.stop();
 			GUIManager.bgMusic = ResManager.getAudio("age2.mp3");
 			GUIManager.bgMusic.setCycleCount(AudioClip.INDEFINITE);
 			GUIManager.bgMusic.setVolume(GUIManager.volumn);
 			GUIManager.bgMusic.play();
+			*/
 			final Image stageII = ResManager.getImage("ph2.png");
 			EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
 
@@ -979,11 +981,13 @@ public class MainBackGround extends SceneContainer {
 			tl.play();
 
 		} else if (age == 3) {
+			/* 2014-08-25 @Lane
 			GUIManager.bgMusic.stop();
 			GUIManager.bgMusic = ResManager.getAudio("age3.mp3");
 			GUIManager.bgMusic.setCycleCount(AudioClip.INDEFINITE);
 			GUIManager.bgMusic.setVolume(GUIManager.volumn);
 			GUIManager.bgMusic.play();
+			*/
 			final Image stageIII = ResManager.getImage("ph3.png");
 			EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
 

@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * The Class CardManager.
+ * 管理所有卡的效果及消费
  */
 public class CardManager {
 
@@ -719,7 +720,7 @@ public class CardManager {
 		deck.add(crd);
 
 		crd = new Card("East Trading Post", 1, 3, CardColor.YELLOW);
-		crd.addCost(Resource.COIN, 1);
+		crd.addCost(Resource.FREE, 0);
 		crd.setAction(new DiscountAction(DiscountAction.DiscountType.RIGHT_RAW));
 		crd.addToFreeList("Forum");
 		deck.add(crd);
@@ -729,7 +730,7 @@ public class CardManager {
 		deck.add(crd);
 
 		crd = new Card("West Trading Post", 1, 3, CardColor.YELLOW);
-		crd.addCost(Resource.COIN, 1);
+		crd.addCost(Resource.FREE, 0);
 		crd.setAction(new DiscountAction(DiscountAction.DiscountType.LEFT_RAW));
 		crd.addToFreeList("Forum");
 		deck.add(crd);
@@ -739,7 +740,7 @@ public class CardManager {
 		deck.add(crd);
 
 		crd = new Card("Marketplace", 1, 3, CardColor.YELLOW);
-		crd.addCost(Resource.COIN, 1);
+		crd.addCost(Resource.FREE, 0);
 		crd.setAction(new DiscountAction(DiscountAction.DiscountType.BOTH_MANUF));
 		crd.addToFreeList("Caravansery");
 		deck.add(crd);

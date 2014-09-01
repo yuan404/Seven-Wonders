@@ -333,6 +333,7 @@ public class SimpleResList implements Serializable {
 		return newList;
 	} // end of add() method
 
+	//20140901 Bug-Lane Happen
 	public static boolean jugOrListCanAfford(SimpleResList need,
 			ArrayList<SimpleResList> orList) {
 		for (SimpleResList smpList : orList) {

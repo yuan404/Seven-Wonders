@@ -198,11 +198,19 @@ public class GUIManager {
 			}
 		};
 		Parent root = GUIManager.getCurrentScene().getRoot();
+		//20140901-Lane 注释声音 
+		/*
 		Timeline t = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
 				bgMusic.volumeProperty(), volumn), new KeyValue(
 				root.opacityProperty(), 1)), new KeyFrame(
 				Duration.seconds(0.3), h, new KeyValue(
 						bgMusic.volumeProperty(), 0), new KeyValue(
+						root.opacityProperty(), 0)));
+		t.play();
+		*/
+		Timeline t = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
+				root.opacityProperty(), 1)), new KeyFrame(
+				Duration.seconds(0.3), h,  new KeyValue(
 						root.opacityProperty(), 0)));
 		t.play();
 	}
@@ -402,6 +410,7 @@ public class GUIManager {
 	public static void loadMusic(String musicFileName) {
 		if (bgMusic != null)
 			bgMusic.stop();
+		
 		//bgMusic = ResManager.getAudio(musicFileName);
 		//bgMusic.setCycleCount(AudioClip.INDEFINITE);
 		//bgMusic.setVolume(volumn);
