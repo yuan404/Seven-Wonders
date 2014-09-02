@@ -166,8 +166,7 @@ public class Wonders extends Group {
 		Image III = ResManager.getImage("build" + i + ".png");
 		ImageView sta = new ImageView();
 		sta.setImage(III);
-		// System.out.print(board.getName()+" "
-		// +board.getSides()+" "+board.getStagesCompleted()+" ");
+		// Olympia-Special Function-Free Build-Lane
 		if (board.getName() == "Olympia" && board.getSides() == 0
 				&& board.getStagesCompleted() > 1) {
 			FreeBuildAction.setIsA(false);
@@ -178,18 +177,6 @@ public class Wonders extends Group {
 							fba.freeAddCard(board);
 						}
 					});
-		}
-		if (board.getName() == "Rhodes" && board.getSides() == 0
-				&& board.getStagesCompleted() == 1) {
-			
-		}
-
-		if ((board.getName() == "Halicarnassus" && board.getSides() == 0 && board
-				.getStagesCompleted() == 2)
-				|| (board.getName() == "Halicarnassus" && board.getSides() == 1)) {
-			FreeDiscardBuildAction.setIsA(false);
-			FreeDiscardBuildAction dba = new FreeDiscardBuildAction();
-			dba.FreeBuild(board);
 		}
 		if (board.getName() == "Olympia" && board.getSides() == 1
 				&& board.getStagesCompleted() > 2) {
@@ -202,6 +189,15 @@ public class Wonders extends Group {
 						}
 					});
 		}
+		// Halicarnassus-Discard Card Free Build-Lane
+		if ((board.getName() == "Halicarnassus" && board.getSides() == 0 && board
+				.getStagesCompleted() == 2)
+				|| (board.getName() == "Halicarnassus" && board.getSides() == 1)) {
+			FreeDiscardBuildAction.setIsA(false);
+			FreeDiscardBuildAction dba = new FreeDiscardBuildAction();
+			dba.FreeBuild(board);
+		}
+
 		sta.setScaleX(0.75);
 		sta.setScaleY(0.75);
 		if (NUM == 7) {

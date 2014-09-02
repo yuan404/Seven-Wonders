@@ -955,13 +955,13 @@ public class MainBackGround extends SceneContainer {
 							.scaleXProperty(), rate, Interpolator.EASE_OUT)));
 			tl.play();
 		} else if (age == 2) {
-			/* 2014-08-25 @Lane
-			GUIManager.bgMusic.stop();
-			GUIManager.bgMusic = ResManager.getAudio("age2.mp3");
-			GUIManager.bgMusic.setCycleCount(AudioClip.INDEFINITE);
-			GUIManager.bgMusic.setVolume(GUIManager.volumn);
-			GUIManager.bgMusic.play();
-			*/
+			/*
+			 * 2014-08-25 @Lane GUIManager.bgMusic.stop(); GUIManager.bgMusic =
+			 * ResManager.getAudio("age2.mp3");
+			 * GUIManager.bgMusic.setCycleCount(AudioClip.INDEFINITE);
+			 * GUIManager.bgMusic.setVolume(GUIManager.volumn);
+			 * GUIManager.bgMusic.play();
+			 */
 			final Image stageII = ResManager.getImage("ph2.png");
 			EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
 
@@ -981,13 +981,13 @@ public class MainBackGround extends SceneContainer {
 			tl.play();
 
 		} else if (age == 3) {
-			/* 2014-08-25 @Lane
-			GUIManager.bgMusic.stop();
-			GUIManager.bgMusic = ResManager.getAudio("age3.mp3");
-			GUIManager.bgMusic.setCycleCount(AudioClip.INDEFINITE);
-			GUIManager.bgMusic.setVolume(GUIManager.volumn);
-			GUIManager.bgMusic.play();
-			*/
+			/*
+			 * 2014-08-25 @Lane GUIManager.bgMusic.stop(); GUIManager.bgMusic =
+			 * ResManager.getAudio("age3.mp3");
+			 * GUIManager.bgMusic.setCycleCount(AudioClip.INDEFINITE);
+			 * GUIManager.bgMusic.setVolume(GUIManager.volumn);
+			 * GUIManager.bgMusic.play();
+			 */
 			final Image stageIII = ResManager.getImage("ph3.png");
 			EventHandler<ActionEvent> act = new EventHandler<ActionEvent>() {
 
@@ -1021,6 +1021,7 @@ public class MainBackGround extends SceneContainer {
 			Manager.getKernel().doEndOfTurn(turn);
 			updateBoard();
 			// handCard.unload();
+
 			if (turn < 6) {
 				if (age == 2) {
 					handCard.nextHand(
@@ -1036,12 +1037,10 @@ public class MainBackGround extends SceneContainer {
 				}
 				turn++;
 			} else {
-
-				// 把最后一张弃牌加进去
-
-				for(Board board: KernelManager.getManager().getBoards()){
-					if(board.getName()=="Babylon" && board.getSides() == 1
-							&& board.getStagesCompleted() > 1){
+				// 把最后一张弃牌加进去-Lane
+				for (Board board : KernelManager.getManager().getBoards()) {
+					if (board.getName() == "Babylon" && board.getSides() == 1
+							&& board.getStagesCompleted() > 1) {
 						FreeSciSymbolAction fba2 = new FreeSciSymbolAction();
 						fba2.freeBuildLast(board);
 					}
@@ -1171,7 +1170,7 @@ public class MainBackGround extends SceneContainer {
 			coins[ii] = boards[ii].getTotalCoins();
 
 			if (boards[ii].getStagesCompleted() > wonder[ii].getHasbuild()) {
-				wonder[ii].stageCompleted(age,boards[ii]);
+				wonder[ii].stageCompleted(age, boards[ii]);
 			}
 
 			// wonder[ii].toFront();// Must be wrong, but must be here!
@@ -1192,10 +1191,10 @@ public class MainBackGround extends SceneContainer {
 			Board board = boards[i];
 			if (age == 2) {
 				board.takeTurn(hands[(2 - turn + ind + 2 * numOfPlayers)
-				                     % numOfPlayers], turn);
+						% numOfPlayers], turn);
 				Manager.debug("AI " + i + " takes hand["
 						+ (2 - turn + ind + 2 * numOfPlayers) % numOfPlayers
-						+ "]");			
+						+ "]");
 			} else {
 				// JOptionPane.showMessageDialog(null, hands[(ind + turn) %
 				// numOfPlayers]);
@@ -1298,8 +1297,10 @@ public class MainBackGround extends SceneContainer {
 		wonder[r[1].num].toFront();
 		wonder[r[0].num].toFront();
 	}
+
 	/**
 	 * 添加手牌最后一张到弃牌堆
+	 * 
 	 * @author wanting
 	 */
 	private void discardCard(Card card) {

@@ -1,1 +1,1 @@
-1.20140901-Lane ×¢ÊÍÉùÒô Restart-Bug
+1.20140901-Lane æ³¨é‡Šå£°éŸ³ Restart-Bug
