@@ -293,7 +293,7 @@ public class ErrorDialog extends Stage {
 			contact.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				
 				public void handle(MouseEvent event) {
-					String qqURL = "http://wpa.qq.com/msgrd?v=3&uin=773534839&site=qq&menu=yes";
+					String qqURL = "http://wpa.qq.com/msgrd?v=3&uin=2745202736&site=qq&menu=yes";
 					if (Manager.isApplet) {
 						Manager.getManager().getHostServices().showDocument(qqURL);
 					} else {

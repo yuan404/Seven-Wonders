@@ -198,7 +198,7 @@ public class GUIManager {
 			}
 		};
 		Parent root = GUIManager.getCurrentScene().getRoot();
-		//20140901-Lane 注释声音 
+		//20140901-Lane 注释声音 Restart-Bug
 		/*
 		Timeline t = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(
 				bgMusic.volumeProperty(), volumn), new KeyValue(
@@ -404,13 +404,14 @@ public class GUIManager {
 
 	public static void playMusic(String musicFileName) {
 		loadMusic(musicFileName);
+		//20140901 Lane Music-Bug
 		//bgMusic.play();
 	}
 
 	public static void loadMusic(String musicFileName) {
 		if (bgMusic != null)
 			bgMusic.stop();
-		
+		//20140901 Lane Music-Bug
 		//bgMusic = ResManager.getAudio(musicFileName);
 		//bgMusic.setCycleCount(AudioClip.INDEFINITE);
 		//bgMusic.setVolume(volumn);

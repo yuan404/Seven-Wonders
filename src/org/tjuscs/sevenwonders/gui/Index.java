@@ -1078,7 +1078,7 @@ public class Index extends SceneContainer {
 		if (temp.equals("Language"))
 			language.getItems().addAll("Chinese", "English");
 		else
-			language.getItems().addAll("����(Chinese)", "English");
+			language.getItems().addAll("中文(Chinese)", "English");
 		language.getSelectionModel().selectFirst();
 		language.setLayoutX(194);
 		language.setLayoutY(175);
