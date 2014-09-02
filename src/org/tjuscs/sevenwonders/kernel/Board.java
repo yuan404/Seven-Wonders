@@ -21,7 +21,7 @@ public class Board implements Serializable {
 
 	// 0 表示 A面， 1表示B面
 	int sides = 0;
-
+ 
 	boolean isBSide;
 
 	// boolean canBuildNextStage = true;

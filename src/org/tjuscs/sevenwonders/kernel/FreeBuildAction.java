@@ -41,6 +41,9 @@ public class FreeBuildAction implements Action {
 	}
 	
 	// 奇迹测试
+	/**
+	 * @author Lane
+	 */
 		static ImageView[] bk = new ImageView[8];
 		static Label[] lb = new Label[8];
 		static boolean isB = false;
