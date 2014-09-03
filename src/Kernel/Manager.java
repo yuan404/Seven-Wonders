@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Lane
- * ÓÎÏ·¹ÜÀíÕß-ÓÎÏ·¿ªÊ¼µÄÈë¿Ú
+ * æ¸¸æˆç®¡ç†è€…-æ¸¸æˆå¼€å§‹çš„å…¥å£
  */
 
 public class Manager extends Application{

@@ -8,7 +8,7 @@ import javafx.stage.StageStyle;
 
 /**
  * @author Lane
- * ½çÃæ¹ÜÀíÕß-Í¨¹ı¸ÃÀà¹ÜÀíËùÓĞ½çÃæ
+ * ç•Œé¢ç®¡ç†è€…-é€šè¿‡è¯¥ç±»ç®¡ç†æ‰€æœ‰ç•Œé¢
  */
 
 public class GUIManager {

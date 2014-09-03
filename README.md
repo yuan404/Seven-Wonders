@@ -1,4 +1,4 @@
-# Seven Wonders / Æß´óÆæ¼£
+# Seven Wonders / ä¸ƒå¤§å¥‡è¿¹
 
-* Card Game / ¿¨ÅÆÓÎÏ·
+* Card Game / å¡ç‰Œæ¸¸æˆ
 * 

@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 /**
  * @author Lane
- * ±³¾°°å½çÃæ
+ * èƒŒæ™¯æ¿ç•Œé¢
  */
 
 public class Block{
