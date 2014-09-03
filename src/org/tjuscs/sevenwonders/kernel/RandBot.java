@@ -101,6 +101,8 @@ public class RandBot extends GamePlayer {
 		} else { // no cards are buildable and so randomly chooses to sell a
 					// card TODO should also see if Stage is buildable
 			int num = rand.nextInt(options.length);
+			if(options.length<0)
+				num = 0;
 			options[num].setCommand(Command.SELL_CARD);
 			System.out.println("MakeChoice:noBuildable so sell "
 					+ options[num].card);

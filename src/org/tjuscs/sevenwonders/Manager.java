@@ -17,6 +17,7 @@ import org.tjuscs.sevenwonders.kernel.KernelManager;
 
 //import org.tjuscs.sevenwonders.net.NetManager;
 
+//游戏的入口
 public class Manager extends Application {
 
 	private final static Logger log = Logger.getLogger(Manager.class.getName());
