@@ -6,18 +6,18 @@ import javafx.stage.Stage;
 
 /**
  * @author Lane
- * æ¸¸æˆç®¡ç†è€…-æ¸¸æˆå¼€å§‹çš„å…¥å£
+ * ÓÎÏ·¹ÜÀíÕß-ÓÎÏ·¿ªÊ¼µÄÈë¿Ú
  */
 
 public class Manager extends Application{
 	
-	public GUIManager gm = new GUIManager();
+	private GUIManager gm = new GUIManager();
 	
 	public static void main(String[] args){
-		Manager.launch(args);
+		Application.launch(args);
 	}
 	
-	public void start(Stage stage){
+	public void start(Stage stage) throws Exception{
 		gm.initScene();
 		gm.initStage();
 		stage = gm.getStage();
