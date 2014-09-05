@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class Manager extends Application{
 	
-	private GUIManager gm = new GUIManager();
+	private static GUIManager gm = new GUIManager();
 	
 	public static void main(String[] args){
 		Application.launch(args);
@@ -22,5 +22,9 @@ public class Manager extends Application{
 		gm.initStage();
 		stage = gm.getStage();
 		stage.show();
+	}
+	
+	public GUIManager getGUIManager(){
+		return gm;
 	}
 }
