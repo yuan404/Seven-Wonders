@@ -86,6 +86,8 @@ public class GUIManager {
 	public Button[] button = new Button[2];
 
 	public void setNewGame() {
+		if(PlayerNum != null)
+			removeNewGame();
 		iv = block.getMenuBg();
 		root.getChildren().add(iv);
 

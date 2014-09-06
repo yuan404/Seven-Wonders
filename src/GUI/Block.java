@@ -23,7 +23,7 @@ import javafx.util.Duration;
 
 public class Block {
 
-	private String version = new String("Version 0.1.0");
+	private String version = new String("Version 0.1.2");
 
 	private Image bg = new Image("resource/image/newbg.png");
 	private ImageView block = new ImageView(bg);
@@ -68,6 +68,15 @@ public class Block {
 		paperTop.setY(height / 3 - 55);
 		paperMiddle.setY(height / 3 + 20);
 		paperFoot.setY(height / 3 + 20);
+		
+		//菜单子菜单页面
+		Rectangle rec = new Rectangle(300, 400);
+		rec.setArcHeight(50);
+		rec.setArcWidth(50);
+		menuBg.setClip(rec);
+		menuBg.setLayoutX(width / 3);
+		menuBg.setLayoutY(height / 3 - 60);
+		menuBg.setOpacity(0.7);
 	}
 
 	public ImageView getBlock() {
@@ -95,13 +104,6 @@ public class Block {
 	}
 
 	public ImageView getMenuBg() {
-		Rectangle rec = new Rectangle(300, 400);
-		rec.setArcHeight(50);
-		rec.setArcWidth(50);
-		menuBg.setClip(rec);
-		menuBg.setLayoutX(width / 3);
-		menuBg.setLayoutY(height / 3 - 60);
-		menuBg.setOpacity(0.7);
 		return menuBg;
 	}
 
@@ -171,10 +173,12 @@ public class Block {
 	final ChoiceBox<Integer> playerNum = new ChoiceBox<Integer>();
 
 	public ChoiceBox<Integer> getPlayerNum() {
+		playerNum.getItems().clear();
 		playerNum.getItems().addAll(3, 4, 5, 6, 7);
 		playerNum.getSelectionModel().selectFirst();
 		playerNum.setLayoutX(width / 3 + 180);
 		playerNum.setLayoutY(height / 3 - 40);
+		playerNum.setMinSize(30, 30);
 		playerNum.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				menuBg.setOnMouseMoved(new EventHandler<MouseEvent>() {
@@ -199,6 +203,7 @@ public class Block {
 		Level.getSelectionModel().select(0);
 		Level.setLayoutX(width / 3 + 180);
 		Level.setLayoutY(height / 3 - 40 + i * 40);
+		Level.setMinSize(30, 30);
 		return Level;
 	}
 
