@@ -1,7 +1,7 @@
 package Kernel;
 
 /**
- * @author Lane 游戏进程管理
+ * @author Lane 娓告垙杩涚▼绠＄悊
  */
 
 public class KernelManager {

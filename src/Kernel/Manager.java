@@ -5,12 +5,12 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * @author Lane ÓÎÏ·¹ÜÀíÕß-ÓÎÏ·¿ªÊ¼µÄÈë¿Ú
+ * @author Lane æ¸¸æˆç®¡ç†è€…-æ¸¸æˆå¼€å§‹çš„å…¥å£
  */
 
 public class Manager extends Application {
 
-	// µ¥»÷ÓÎÏ·Ê±²ÉÓÃstatic£¬Èç¹û¸ü¸Ä³É¾ÖÓòÍø»òĞíĞèÒª¸Ä³ÉÊı×éĞÎÊ½.
+	// å•å‡»æ¸¸æˆæ—¶é‡‡ç”¨staticï¼Œå¦‚æœæ›´æ”¹æˆå±€åŸŸç½‘æˆ–è®¸éœ€è¦æ”¹æˆæ•°ç»„å½¢å¼.
 	private static GUIManager gm = new GUIManager();
 	private KernelManager km;
 

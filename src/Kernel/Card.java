@@ -1,7 +1,7 @@
 package Kernel;
 
 /**
- * @author Lane ¿¨ÅÆĞÅÏ¢Àà
+ * @author Lane å¡ç‰Œä¿¡æ¯ç±»
  */
 
 public class Card {
