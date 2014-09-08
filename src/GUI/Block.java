@@ -23,7 +23,7 @@ import javafx.util.Duration;
 
 public class Block {
 
-	private String version = new String("Version 0.1.2");
+	private String version = new String("Version 0.1.3");
 
 	private Image bg = new Image("resource/image/newbg.png");
 	private ImageView block = new ImageView(bg);
@@ -68,8 +68,8 @@ public class Block {
 		paperTop.setY(height / 3 - 55);
 		paperMiddle.setY(height / 3 + 20);
 		paperFoot.setY(height / 3 + 20);
-		
-		//菜单子菜单页面
+
+		// 菜单子菜单页面
 		Rectangle rec = new Rectangle(300, 400);
 		rec.setArcHeight(50);
 		rec.setArcWidth(50);
@@ -185,8 +185,10 @@ public class Block {
 					public void handle(MouseEvent event) {
 						Manager m = new Manager();
 						m.getGUIManager().removePlayer(7);
-						m.getGUIManager().setPlayer(
-								playerNum.getSelectionModel().getSelectedItem());
+						m.getGUIManager()
+								.setPlayer(
+										playerNum.getSelectionModel()
+												.getSelectedItem());
 						menuBg.setOnMouseMoved(null);
 					}
 				});
@@ -197,9 +199,10 @@ public class Block {
 
 	public ChoiceBox<String> getPlayerLevel(int i) {
 		final ChoiceBox<String> Level = new ChoiceBox<String>();
-		if(i == 1)
+		if (i == 1)
 			Level.getItems().add("Player");
-		Level.getItems().addAll(GUIManager.Level);
+		Manager m = new Manager();
+		Level.getItems().addAll(m.getGUIManager().Level);
 		Level.getSelectionModel().select(0);
 		Level.setLayoutX(width / 3 + 180);
 		Level.setLayoutY(height / 3 - 40 + i * 40);
@@ -221,6 +224,12 @@ public class Block {
 		start.setFont(new Font(22));
 		start.setLayoutX(width / 3 + 30);
 		start.setLayoutY(height / 3 + 280);
+		start.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				Manager m = new Manager();
+				m.startGame();
+			}
+		});
 		return start;
 	}
 

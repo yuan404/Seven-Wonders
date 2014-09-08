@@ -30,9 +30,10 @@ public class GUIManager {
 	private Image cursor = new Image("resource/image/arrow.png");
 
 	public ChoiceBox<Integer> PlayerNum;
-	public ChoiceBox<String>[] PlayerLevel = new ChoiceBox[8];
+	@SuppressWarnings("unchecked")
+	public ChoiceBox<String>[] PlayerLevel = new ChoiceBox[7];
 
-	public static String[] Level = { "Level1" };
+	public String[] Level = { "Level1" };
 
 	public GUIManager() {
 		XScreen = 1099;
@@ -86,7 +87,7 @@ public class GUIManager {
 	public Button[] button = new Button[2];
 
 	public void setNewGame() {
-		if(PlayerNum != null)
+		if (PlayerNum != null)
 			removeNewGame();
 		iv = block.getMenuBg();
 		root.getChildren().add(iv);
@@ -110,15 +111,15 @@ public class GUIManager {
 			text[i] = block.getText("Player " + i, XScreen / 3 + 30, YScreen
 					/ 3 - 20 + i * 40, 25);
 			root.getChildren().add(text[i]);
-			PlayerLevel[i] = block.getPlayerLevel(i);
-			root.getChildren().add(PlayerLevel[i]);
+			PlayerLevel[i - 1] = block.getPlayerLevel(i);
+			root.getChildren().add(PlayerLevel[i - 1]);
 		}
 	}
-	
-	public void removePlayer(int num){
+
+	public void removePlayer(int num) {
 		for (int i = 1; i <= num; i++) {
 			root.getChildren().remove(text[i]);
-			root.getChildren().remove(PlayerLevel[i]);
+			root.getChildren().remove(PlayerLevel[i - 1]);
 		}
 	}
 

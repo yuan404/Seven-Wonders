@@ -1,7 +1,14 @@
 package Kernel;
 
+/**
+ * @author Lane ø®≈∆–≈œ¢¿‡
+ */
+
 public class Card {
-	public Card(){
+	
+	public String color;
+	
+	public Card() {
 		
 	}
 }
