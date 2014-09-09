@@ -19,7 +19,8 @@ public class KernelManager {
 	}
 
 	public void initGame() {
-		System.out.print(playerNum);
+		Manager m = new Manager();
+		m.getGUIManager().getGroup().getChildren().clear();
 	}
 
 	public void nextTurn() {
