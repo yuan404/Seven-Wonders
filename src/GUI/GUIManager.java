@@ -131,4 +131,17 @@ public class GUIManager {
 		root.getChildren().remove(button[1]);
 		removePlayer(PlayerNum.getSelectionModel().getSelectedItem());
 	}
+
+	private GameBack bk = new GameBack();
+
+	public GameBack getBack() {
+		return bk;
+	}
+
+	public void startGame() {
+		root.getChildren().add(bk.getIv());
+		root.getChildren().add(bk.getAge());
+		root.getChildren().add(bk.getText());
+		root.getChildren().add(bk.getCir());
+	}
 }

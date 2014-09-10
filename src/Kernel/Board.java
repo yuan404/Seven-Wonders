@@ -1,6 +1,6 @@
 package Kernel;
 
-/*
+/**
  * @author Lane 奇迹板信息
  */
 

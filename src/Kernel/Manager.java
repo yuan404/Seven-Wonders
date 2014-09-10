@@ -33,5 +33,6 @@ public class Manager extends Application {
 		km = new KernelManager(getGUIManager().PlayerNum.getSelectionModel()
 				.getSelectedItem());
 		km.initGame();
+		gm.startGame();
 	}
 }

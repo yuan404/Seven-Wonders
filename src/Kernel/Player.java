@@ -1,13 +1,16 @@
 package Kernel;
 
-/*
+import javafx.scene.paint.Paint;
+
+/**
  * @author Lane 玩家信息
  */
 
 public class Player {
 
 	public Board board;
-
+	public Paint color;
+	
 	// 资源生产
 	public int Gwood = 0;
 	public int Gstone = 0;
@@ -40,7 +43,8 @@ public class Player {
 	// 蓝牌加分
 	public int GblueScore = 0;
 
-	Player(Board board) {
+	Player(Board board,Paint color) {
 		this.board = board;
+		this.color = color;
 	}
 }
