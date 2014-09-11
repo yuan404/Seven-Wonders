@@ -13,13 +13,13 @@ public class Board {
 	int side;
 
 	// 升级花费
-	public int[] Cwood = new int[3];
-	public int[] Cstone = new int[3];
-	public int[] Cbrick = new int[3];
-	public int[] Core = new int[3];
-	public int[] Cglass = new int[3];
-	public int[] Ccloth = new int[3];
-	public int[] Cpaper = new int[3];
+	public int[] Cwood = new int[4];
+	public int[] Cstone = new int[4];
+	public int[] Cbrick = new int[4];
+	public int[] Core = new int[4];
+	public int[] Cglass = new int[4];
+	public int[] Ccloth = new int[4];
+	public int[] Cpaper = new int[4];
 
 	Board(String name, int side) {
 		this.name = name;

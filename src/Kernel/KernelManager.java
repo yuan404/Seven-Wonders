@@ -1,5 +1,6 @@
 package Kernel;
 
+import java.util.Calendar;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
@@ -14,22 +15,23 @@ public class KernelManager {
 
 	private int playerNum;
 	private String[] playerLevel = new String[7];
-	public Paint[] color = new Paint[7];
+	public static Paint[] color = new Paint[7];
 	private Player[] player = new Player[7];
 	private Board[] board = new Board[7];
 
 	public KernelManager(int playerNum) {
 		this.playerNum = playerNum;
 
-		color[0] = Color.RED;
-		color[1] = Color.ORANGE;
-		color[2] = Color.YELLOW;
-		color[3] = Color.YELLOWGREEN;
-		color[4] = Color.GREEN;
-		color[5] = Color.BLUE;
-		color[6] = Color.PURPLE;
+		color[0] = Color.RED.darker();
+		color[1] = Color.ORANGE.darker();
+		color[2] = Color.YELLOW.darker();
+		color[3] = Color.YELLOWGREEN.darker();
+		color[4] = Color.GREEN.darker();
+		color[5] = Color.BLUE.darker();
+		color[6] = Color.PURPLE.darker();
 		Paint[] temp = new Paint[1];
-		Random random = new Random(10);
+		Calendar c = Calendar.getInstance();
+		Random random = new Random(c.get(Calendar.SECOND));
 		for (int i = 0; i < this.playerNum; i++) {
 			int a = random.nextInt() % 7;
 			int b = random.nextInt() % 7;

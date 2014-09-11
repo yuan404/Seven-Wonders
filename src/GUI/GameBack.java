@@ -1,10 +1,12 @@
 package GUI;
 
+import Kernel.MathGame;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
@@ -70,5 +72,14 @@ public class GameBack {
 		rt.setToAngle(360);
 		rt.play();
 		return cir;
+	}
+	
+	public Circle getBall(double angle,Paint color){
+		Circle ball = new Circle();
+		ball.setLayoutX(MathGame.getCircleX(angle, 1050, 50, 40));
+		ball.setLayoutY(MathGame.getCircleY(angle, 1050, 50, 40));
+		ball.setFill(color);
+		ball.setRadius(5);
+		return ball;
 	}
 }

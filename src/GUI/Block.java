@@ -23,7 +23,7 @@ import javafx.util.Duration;
 
 public class Block {
 
-	private String version = new String("Version 0.1.5");
+	private String version = new String("Version 0.1.6");
 
 	private Image bg = new Image("resource/image/newbg.png");
 	private ImageView block = new ImageView(bg);

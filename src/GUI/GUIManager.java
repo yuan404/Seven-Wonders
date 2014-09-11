@@ -1,5 +1,6 @@
 package GUI;
 
+import Kernel.KernelManager;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
@@ -7,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -143,5 +145,11 @@ public class GUIManager {
 		root.getChildren().add(bk.getAge());
 		root.getChildren().add(bk.getText());
 		root.getChildren().add(bk.getCir());
+		int num = PlayerNum.getSelectionModel().getSelectedItem();
+		Circle[] cir = new Circle[num];
+		for (int i = 0; i < num; i++) {
+			cir[i] = bk.getBall(180 + i * (int)(360.0 / num), KernelManager.color[i]);
+			root.getChildren().add(cir[i]);
+		}
 	}
 }
