@@ -53,6 +53,37 @@ public class Card {
 	public int Gphysics = 0;
 	public int Gmath = 0;
 
+	public int Gliterature_physics_math = 0;
+
+	public String[] freeBuild = new String[2];
+
+	public boolean LeftCheap = false;
+	public boolean RightCheap = false;
+	public boolean GrayCheap = false;
+
+	public boolean LRMGrayCoin = false;
+	public boolean LRMBrownCoin = false;
+
+	public boolean BrownScore = false;
+	public boolean YellowScore = false;
+	public boolean GrayScore = false;
+	public boolean StageScore = false;
+
+	public boolean GrayCoin = false;
+	public boolean BrownCoin = false;
+	public boolean YellowCoin = false;
+	public boolean StageCoin = false;
+
+	public boolean GuildMixed = false;
+	public boolean GuildBrown = false;
+	public boolean GuildBlue = false;
+	public boolean GuildRed = false;
+	public boolean GuildYellow = false;
+	public boolean GuildGreen = false;
+	public boolean GuildForce = false;
+	public boolean GuildStage = false;
+	public boolean GuildGray = false;
+
 	// 蓝牌加分
 	public int GblueScore = 0;
 
@@ -94,7 +125,7 @@ public class Card {
 		}
 	}
 
-	public void AddFormit(String str, int num) {
+	public void addFormit(String str, int num) {
 		switch (str) {
 		case "wood":
 			Gwood += num;
@@ -163,9 +194,92 @@ public class Card {
 			Gmath += num;
 			break;
 
+		case "literature_physics_math":
+			Gliterature_physics_math += num;
+			break;
+
 		case "blueScore":
 			GblueScore += num;
 			break;
+
+		case "LeftCheap":
+			LeftCheap = true;
+			break;
+		case "RightCheap":
+			RightCheap = true;
+			break;
+		case "GrayCheap":
+			GrayCheap = true;
+			break;
+
+		case "LRMGrayCoin":
+			LRMGrayCoin = true;
+			break;
+		case "LRMBrownCoin":
+			LRMBrownCoin = true;
+			break;
+
+		case "BrownScore":
+			BrownScore = true;
+			break;
+		case "YellowScore":
+			YellowScore = true;
+			break;
+		case "GrayScore":
+			GrayScore = true;
+			break;
+		case "StageScore":
+			StageScore = true;
+			break;
+
+		case "BrownCoin":
+			BrownScore = true;
+			break;
+		case "YellowCoin":
+			YellowScore = true;
+			break;
+		case "GrayCoin":
+			GrayScore = true;
+			break;
+		case "StageCoin":
+			StageCoin = true;
+			break;
+
+		case "GuildBrown":
+			GuildBrown = true;
+			break;
+		case "GuildGreen":
+			GuildGreen = true;
+			break;
+		case "GuildYellow":
+			GuildYellow = true;
+			break;
+		case "GuildBlue":
+			GuildBlue = true;
+			break;
+		case "GuildRed":
+			GuildRed = true;
+			break;
+		case "GuildGray":
+			GuildGray = true;
+			break;
+		case "GuildMixed":
+			GuildMixed = true;
+			break;
+		case "GuildForce":
+			GuildForce = true;
+			break;
+		case "GuildStage":
+			GuildStage = true;
+			break;
 		}
+
+	}
+
+	public void addFree(String name) {
+		if (freeBuild[0] != null)
+			freeBuild[0] = name;
+		else
+			freeBuild[1] = name;
 	}
 }

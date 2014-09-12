@@ -22,13 +22,13 @@ public class KernelManager {
 	public KernelManager(int playerNum) {
 		this.playerNum = playerNum;
 
-		color[0] = Color.RED.darker();
-		color[1] = Color.ORANGE.darker();
-		color[2] = Color.YELLOW.darker();
-		color[3] = Color.YELLOWGREEN.darker();
-		color[4] = Color.GREEN.darker();
-		color[5] = Color.BLUE.darker();
-		color[6] = Color.PURPLE.darker();
+		color[0] = Color.RED;
+		color[1] = Color.ORANGE;
+		color[2] = Color.BLACK;
+		color[3] = Color.YELLOWGREEN;
+		color[4] = Color.GREEN;
+		color[5] = Color.BLUE;
+		color[6] = Color.PURPLE;
 		Paint[] temp = new Paint[1];
 		Calendar c = Calendar.getInstance();
 		Random random = new Random(c.get(Calendar.SECOND));

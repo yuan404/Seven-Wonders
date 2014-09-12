@@ -3,10 +3,14 @@ package GUI;
 import Kernel.MathGame;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.Paint;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
@@ -73,13 +77,28 @@ public class GameBack {
 		rt.play();
 		return cir;
 	}
-	
-	public Circle getBall(double angle,Paint color){
+
+	public Circle getBall(double angle, Paint color) {
 		Circle ball = new Circle();
-		ball.setLayoutX(MathGame.getCircleX(angle, 1050, 50, 40));
-		ball.setLayoutY(MathGame.getCircleY(angle, 1050, 50, 40));
+		double x = MathGame.getCircleX(angle, 1050, 50, 40);
+		double y = MathGame.getCircleY(angle, 1050, 50, 40);
+		ball.setLayoutX(x);
+		ball.setLayoutY(y);
 		ball.setFill(color);
 		ball.setRadius(5);
+
+		RadialGradient fill = new RadialGradient(300, 0.7, 0.3, 0.4, 0.2, true,
+				CycleMethod.NO_CYCLE, new Stop(1, (Color) color), new Stop(0,
+						Color.WHITE));
+		ball.setFill(fill);
+
+		DropShadow dropShadow = new DropShadow();
+		dropShadow.setRadius(5.0);
+		dropShadow.setOffsetX(1.0);
+		dropShadow.setOffsetY(1.0);
+		dropShadow.setColor(Color.WHITE);
+		ball.setEffect(dropShadow);
+
 		return ball;
 	}
 }
