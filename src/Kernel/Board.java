@@ -1,5 +1,7 @@
 package Kernel;
 
+import javafx.scene.image.ImageView;
+
 /**
  * @author Lane 奇迹板信息
  */
@@ -8,6 +10,8 @@ public class Board {
 
 	String name;
 	int age = 0;
+
+	public ImageView iv = new ImageView();
 
 	// 0 是 A面,1是B面。
 	int side;

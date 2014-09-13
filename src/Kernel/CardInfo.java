@@ -194,6 +194,8 @@ public class CardInfo {
 		card[48] = new Card("Marketplace", "Yellow", 1, 3);
 		card[48].addFormit("GrayCheap", 1);
 		card[48].addFree("Caravansery");
+
+		TestCard();
 	}
 
 	public void changeCardAgeTwo() {
@@ -319,7 +321,7 @@ public class CardInfo {
 		card[24].addCost("coin", 1);
 		card[24].addFormit("brick", 2);
 
-		card[25] = new Card("School", "Green", 2, 7);
+		card[25] = new Card("School", "Green", 2, 3);
 		card[25].addCost("wood", 1);
 		card[25].addCost("paper", 1);
 		card[25].addFormit("literature", 1);
@@ -741,5 +743,33 @@ public class CardInfo {
 		card[49].addCost("brick", 1);
 		card[49].addCost("stone", 1);
 		card[49].addCost("wood", 1);
+	}
+
+	public void TestCard() {
+		changeCardAgeThree();
+		int[] num = new int[8];
+		int[] color = new int[8];
+		for (int i = 0; i < 50; i++) {
+			if (card[i] != null) {
+				num[card[i].num]++;
+				if (card[i].color == "Brown")
+					color[1]++;
+				else if (card[i].color == "Gray")
+					color[2]++;
+				else if (card[i].color == "Blue")
+					color[3]++;
+				else if (card[i].color == "Yellow")
+					color[4]++;
+				else if (card[i].color == "Red")
+					color[5]++;
+				else if (card[i].color == "Green")
+					color[6]++;
+				else if (card[i].color == "Purple")
+					color[7]++;
+			}
+		}
+		for (int i = 1; i < 8; i++) {
+			System.out.print(i + ":" + num[i] + " " + color[i] + "\n");
+		}
 	}
 }

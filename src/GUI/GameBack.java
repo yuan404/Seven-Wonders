@@ -1,11 +1,15 @@
 package GUI;
 
+import Kernel.Manager;
 import Kernel.MathGame;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.Paint;
@@ -91,14 +95,36 @@ public class GameBack {
 				CycleMethod.NO_CYCLE, new Stop(1, (Color) color), new Stop(0,
 						Color.WHITE));
 		ball.setFill(fill);
+		ball.setEffect(getDropShadow());
+		return ball;
+	}
 
+	public DropShadow getDropShadow() {
 		DropShadow dropShadow = new DropShadow();
 		dropShadow.setRadius(5.0);
 		dropShadow.setOffsetX(1.0);
 		dropShadow.setOffsetY(1.0);
 		dropShadow.setColor(Color.WHITE);
-		ball.setEffect(dropShadow);
+		return dropShadow;
+	}
 
-		return ball;
+	public AnchorPane getDropGroup() {
+		final AnchorPane ap = new AnchorPane();
+		ap.setMinSize(540, 230);
+		final Manager m = new Manager();
+		ap.getChildren().add(m.getKenelManager().player[0].board.iv);
+		ap.setLayoutX(1099 / 4);
+		ap.setLayoutY(713 / 5 * 3 - 25);
+		m.getKenelManager().player[0].board.iv.setEffect(m.getGUIManager()
+				.getBack().getDropShadow());
+		ap.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				ap.setLayoutX(event.getX());
+				ap.setLayoutY(event.getY());
+
+			}
+		});
+
+		return ap;
 	}
 }

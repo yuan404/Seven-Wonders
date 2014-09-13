@@ -148,8 +148,10 @@ public class GUIManager {
 		int num = PlayerNum.getSelectionModel().getSelectedItem();
 		Circle[] cir = new Circle[num];
 		for (int i = 0; i < num; i++) {
-			cir[i] = bk.getBall(180 + i * (int)(360.0 / num), KernelManager.color[i]);
+			cir[i] = bk.getBall(180 + i * (int) (360.0 / num),
+					KernelManager.color[i]);
 			root.getChildren().add(cir[i]);
 		}
+		root.getChildren().add(bk.getDropGroup());
 	}
 }

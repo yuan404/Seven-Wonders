@@ -16,7 +16,7 @@ public class KernelManager {
 	private int playerNum;
 	private String[] playerLevel = new String[7];
 	public static Paint[] color = new Paint[7];
-	private Player[] player = new Player[7];
+	public Player[] player = new Player[7];
 	private Board[] board = new Board[7];
 
 	public KernelManager(int playerNum) {
@@ -40,6 +40,9 @@ public class KernelManager {
 			temp[0] = color[a];
 			color[a] = color[b];
 			color[b] = temp[0];
+			
+			BoardInfo bi = new BoardInfo();
+			board[i] = bi.board[i];
 		}
 
 		// 随机奇迹板-或自选奇迹板
@@ -58,6 +61,7 @@ public class KernelManager {
 	public void initGame() {
 		Manager m = new Manager();
 		m.getGUIManager().getGroup().getChildren().clear();
+		
 	}
 
 	public void nextTurn() {
