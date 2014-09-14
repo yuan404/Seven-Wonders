@@ -1,6 +1,7 @@
 package GUI;
 
 import Kernel.KernelManager;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
@@ -8,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,6 +39,8 @@ public class GUIManager {
 	public ChoiceBox<String>[] PlayerLevel = new ChoiceBox[7];
 
 	public String[] Level = { "Level1" };
+
+	public AnchorPane[] ap = new AnchorPane[7];
 
 	public GUIManager() {
 		XScreen = 1099;
@@ -139,7 +144,7 @@ public class GUIManager {
 	public GameBack getBack() {
 		return bk;
 	}
-
+	
 	public void startGame() {
 		root.getChildren().add(bk.getIv());
 		root.getChildren().add(bk.getAge());
@@ -147,11 +152,41 @@ public class GUIManager {
 		root.getChildren().add(bk.getCir());
 		int num = PlayerNum.getSelectionModel().getSelectedItem();
 		Circle[] cir = new Circle[num];
-		for (int i = 0; i < num; i++) {
-			cir[i] = bk.getBall(180 + i * (int) (360.0 / num),
-					KernelManager.color[i]);
+		for (int i = num - 1; i >= 0; i--) {
+			double angle = 180 + i * (int) (360.0 / num);
+			cir[i] = bk.getBall(angle, KernelManager.color[i]);
 			root.getChildren().add(cir[i]);
+			
+			ap[i] = bk.getDropGroup(i);
+			root.getChildren().add(ap[i]);
+			Game.blueScore[i].setX(369);
+			Game.blueScore[i].setY(55);
+			Game.redScore[i].setX(459);
+			Game.redScore[i].setY(55);
+			bk.setAnchorPosition(ap[i], angle);
+			
+			ap[i].getChildren().add(Game.blueScore[i]);
+			ap[i].getChildren().add(Game.redScore[i]);
+			
+			final int n = i;
+			final int number = num;
+			cir[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					for (int i = number - 1; i >= 0; i--)
+						root.getChildren().remove(ap[i]);
+					int k = number - 1;
+					for (int i = n-1; i >=0; i--) {
+						root.getChildren().add(ap[i]);
+						bk.setAnchorPosition(ap[i], 180 + k--
+								* (int) (360.0 / number));
+					}
+					for (int i = number -  1; i >= n; i--) {
+						root.getChildren().add(ap[i]);
+						bk.setAnchorPosition(ap[i], 180 + k--
+								* (int) (360.0 / number));
+					}
+				}
+			});
 		}
-		root.getChildren().add(bk.getDropGroup());
 	}
 }

@@ -3,6 +3,7 @@ package Kernel;
 import java.util.Calendar;
 import java.util.Random;
 
+import GUI.Game;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -13,7 +14,7 @@ import javafx.scene.paint.Paint;
 
 public class KernelManager {
 
-	private int playerNum;
+	public int playerNum;
 	private String[] playerLevel = new String[7];
 	public static Paint[] color = new Paint[7];
 	public Player[] player = new Player[7];
@@ -61,7 +62,7 @@ public class KernelManager {
 	public void initGame() {
 		Manager m = new Manager();
 		m.getGUIManager().getGroup().getChildren().clear();
-		
+		Game.setText(player);
 	}
 
 	public void nextTurn() {

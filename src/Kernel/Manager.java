@@ -38,6 +38,6 @@ public class Manager extends Application {
 				.getSelectedItem());
 		km.initGame();
 		gm.startGame();
-
+		
 	}
 }

@@ -4,11 +4,9 @@ import Kernel.Manager;
 import Kernel.MathGame;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -37,6 +35,8 @@ public class GameBack {
 	public Text discardNum = new Text(990, 130, "0");
 
 	public Circle cir = new Circle(1050, 50, 40);
+
+	public Image score = new Image("resource/image/centerstat.png");
 
 	public GameBack() {
 		for (int i = 0; i < 3; i++)
@@ -108,23 +108,35 @@ public class GameBack {
 		return dropShadow;
 	}
 
-	public AnchorPane getDropGroup() {
+	public AnchorPane getDropGroup(int i) {
 		final AnchorPane ap = new AnchorPane();
-		ap.setMinSize(540, 230);
+		ap.setMinSize(540, 295);
 		final Manager m = new Manager();
-		ap.getChildren().add(m.getKenelManager().player[0].board.iv);
+		ImageView sc = new ImageView(score);
+		m.getKenelManager().player[i].board.iv.setX(29);
+		m.getKenelManager().player[i].board.iv.setY(85);
+		ap.getChildren().add(m.getKenelManager().player[i].board.iv);
 		ap.setLayoutX(1099 / 4);
-		ap.setLayoutY(713 / 5 * 3 - 25);
-		m.getKenelManager().player[0].board.iv.setEffect(m.getGUIManager()
+		ap.setLayoutY(713 / 5 * 2 + 50);
+		m.getKenelManager().player[i].board.iv.setEffect(m.getGUIManager()
 				.getBack().getDropShadow());
-		ap.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				ap.setLayoutX(event.getX());
-				ap.setLayoutY(event.getY());
-
-			}
-		});
-
+		ap.getChildren().add(sc);
+		sc.setX(150);
 		return ap;
+	}
+
+	// 之后如果改成奇迹板可移动形式，这里的函数算法得进一步变化，考虑特殊角度
+	public void setAnchorPosition(AnchorPane ap, double angle) {
+		ap.setScaleX(1);
+		ap.setScaleY(1);
+		double x = MathGame.getCircleX(angle, 1099 / 4, 713 / 5 + 20, 340);
+		double y = MathGame.getCircleY(angle, 1099 / 4, 713 / 5 + 20, 200);
+		ap.setLayoutX(x);
+		ap.setLayoutY(y);
+		double scale = Math.abs(x - 1099 / 4) / 250 / 2;
+		if (angle != 180) {
+			ap.setScaleX(scale);
+			ap.setScaleY(scale);
+		}
 	}
 }
