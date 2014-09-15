@@ -22,17 +22,162 @@ public class MathGame {
 		return y;
 	}
 
-	// 三种操作的判断
-	public static boolean ifBuy() {
-		
+	// 能否建造该卡牌
+	public static boolean ifBuild(Player player, Card card) {
+		int wood = player.Gwood - card.Cwood + player.Bwood;
+		int stone = player.Gstone - card.Cstone + player.Bstone;
+		int brick = player.Gbrick - card.Cbrick + player.Bbrick;
+		int ore = player.Gore - card.Core + player.Bore;
+
+		int cloth = player.Gcloth - card.Ccloth + player.Bcloth;
+		int glass = player.Gglass - card.Cglass + player.Bglass;
+		int paper = player.Gpaper - card.Cpaper + player.Bpaper;
+
+		if (ifBuild2(player, wood, stone, brick, ore, cloth, glass, paper))
+			return true;
 		return false;
 	}
 
-	public static boolean ifBuild() {
-		return false;
+	public static boolean ifBuild2(Player player, int wood, int stone,
+			int brick, int ore, int cloth, int glass, int paper) {
+		int three = cloth + glass + paper - player.Gglass_cloth_paper;
+		if (three < 0)
+			return false;
+		int wb = player.Gwood_brick;
+		int ws = player.Gwood_stone;
+		int wo = player.Gwood_ore;
+		int sb = player.Gstone_brick;
+		int so = player.Gstone_ore;
+		int bo = player.Gbrick_ore;
+		for (int i = 0; i < 6; i++) {
+			if (wb > 0) {
+				if (wood < 0 && brick >= 0) {
+					wood++;
+					wb--;
+				} else if (wood >= 0 && brick < 0) {
+					brick++;
+					wb--;
+				}
+			}
+			if (ws > 0) {
+				if (wood < 0 && stone >= 0) {
+					wood++;
+					ws--;
+				} else if (wood >= 0 && stone < 0) {
+					stone++;
+					ws--;
+				}
+			}
+			if (wo > 0) {
+				if (wood < 0 && ore >= 0) {
+					wood++;
+					wo--;
+				} else if (wood >= 0 && ore < 0) {
+					ore++;
+					wo--;
+				}
+			}
+			if (sb > 0) {
+				if (stone < 0 && brick >= 0) {
+					stone++;
+					sb--;
+				} else if (brick < 0 && stone >= 0) {
+					brick++;
+					sb--;
+				}
+			}
+			if (so > 0) {
+				if (stone < 0 && ore >= 0) {
+					stone++;
+					so--;
+				} else if (ore < 0 && stone >= 0) {
+					ore++;
+					so--;
+				}
+			}
+			if (bo > 0) {
+				if (brick < 0 && ore >= 0) {
+					brick++;
+					bo--;
+				} else if (ore < 0 && brick >= 0) {
+					ore++;
+					bo--;
+				}
+			}
+		}
+		if (wb > 0) {
+			if (wood < 0) {
+				wood++;
+				wb--;
+			} else if (brick < 0) {
+				brick++;
+				wb--;
+			}
+		}
+		if (ws > 0) {
+			if (wood < 0) {
+				wood++;
+				ws--;
+			} else if (stone < 0) {
+				stone++;
+				ws--;
+			}
+		}
+		if (wo > 0) {
+			if (wood < 0) {
+				wood++;
+				wo--;
+			} else if (ore < 0) {
+				ore++;
+				wo--;
+			}
+		}
+		if (sb > 0) {
+			if (stone < 0) {
+				stone++;
+				sb--;
+			} else if (brick < 0) {
+				brick++;
+				sb--;
+			}
+		}
+		if (so > 0) {
+			if (stone < 0) {
+				stone++;
+				so--;
+			} else if (ore < 0) {
+				ore++;
+				so--;
+			}
+		}
+		if (bo > 0) {
+			if (brick < 0) {
+				brick++;
+				bo--;
+			} else if (ore < 0) {
+				ore++;
+				bo--;
+			}
+		}
+		if (wood + stone + brick + ore + player.Gwood_stone_brick_ore < 0)
+			return false;
+		else
+			return true;
 	}
 
-	public static boolean ifBuildStage() {
+	public static boolean ifBuildStage(Player player) {
+		int age = player.board.age + 1;
+		int wood = player.Gwood - player.board.Cwood[age] + player.Bwood;
+		int stone = player.Gstone - player.board.Cstone[age] + player.Bstone;
+		int brick = player.Gbrick - player.board.Cbrick[age] + player.Bbrick;
+		int ore = player.Gore - player.board.Core[age] + player.Bore;
+
+		int cloth = player.Gcloth - player.board.Ccloth[age] + player.Bcloth;
+		int glass = player.Gglass - player.board.Cglass[age] + player.Bglass;
+		int paper = player.Gpaper - player.board.Cpaper[age] + player.Bpaper;
+
+		if (ifBuild2(player, wood, stone, brick, ore, cloth, glass, paper))
+			return true;
 		return false;
 	}
 

@@ -10,6 +10,7 @@ public class Player {
 
 	public Board board;
 	public Paint color;
+	public Turn turn = new Turn();
 
 	// 资源生产
 	public int Gwood = 0;
@@ -20,6 +21,16 @@ public class Player {
 	public int Gglass = 0;
 	public int Gcloth = 0;
 	public int Gpaper = 0;
+
+	// 当回合已买资源
+	public int Bwood = 0;
+	public int Bstone = 0;
+	public int Bbrick = 0;
+	public int Bore = 0;
+
+	public int Bglass = 0;
+	public int Bcloth = 0;
+	public int Bpaper = 0;
 
 	public int Gcoin = 0;
 

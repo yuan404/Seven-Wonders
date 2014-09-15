@@ -8,8 +8,8 @@ import javafx.scene.image.ImageView;
 
 public class Board {
 
-	String name;
-	int age = 0;
+	public String name;
+	public int age = -1;
 
 	public ImageView iv = new ImageView();
 

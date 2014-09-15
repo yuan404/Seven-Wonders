@@ -1,5 +1,7 @@
 package Kernel;
 
+import javafx.scene.image.ImageView;
+
 /**
  * @author Lane 卡牌信息类
  */
@@ -13,6 +15,8 @@ public class Card {
 	public String name;
 	// 卡牌开启人数
 	public int num;
+
+	public ImageView iv = new ImageView();
 
 	// 卡牌花费
 	public int Cwood = 0;

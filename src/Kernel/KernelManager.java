@@ -14,6 +14,8 @@ import javafx.scene.paint.Paint;
 
 public class KernelManager {
 
+	public Card[] discard = new Card[148];
+	public int disNum = 0;
 	public int playerNum;
 	private String[] playerLevel = new String[7];
 	public static Paint[] color = new Paint[7];
@@ -41,7 +43,7 @@ public class KernelManager {
 			temp[0] = color[a];
 			color[a] = color[b];
 			color[b] = temp[0];
-			
+
 			BoardInfo bi = new BoardInfo();
 			board[i] = bi.board[i];
 		}
@@ -63,9 +65,28 @@ public class KernelManager {
 		Manager m = new Manager();
 		m.getGUIManager().getGroup().getChildren().clear();
 		Game.setText(player);
+		for (int i = 0; i < playerNum; i++) {
+			player[i].turn.setChoose(2);
+		}
 	}
 
 	public void nextTurn() {
 
+	}
+
+	public void addDiscard(Card card) {
+		discard[disNum++] = card;
+	}
+
+	public void removeDiscard(Card card) {
+		int i;
+		for (i = 0; i < disNum; i++) {
+			if (discard[i] == card)
+				break;
+		}
+		for (; i < disNum - 1; i++)
+			discard[i] = discard[i + 1];
+		discard[disNum - 1] = null;
+		disNum--;
 	}
 }

@@ -134,9 +134,13 @@ public class GameBack {
 		ap.setLayoutX(x);
 		ap.setLayoutY(y);
 		double scale = Math.abs(x - 1099 / 4) / 250 / 2;
-		if (angle != 180) {
+		if (angle != 180 && angle != 360) {
 			ap.setScaleX(scale);
 			ap.setScaleY(scale);
+		}
+		if (angle == 360) {
+			ap.setScaleX(0.4);
+			ap.setScaleY(0.4);
 		}
 	}
 }

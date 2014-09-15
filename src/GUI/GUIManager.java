@@ -144,7 +144,7 @@ public class GUIManager {
 	public GameBack getBack() {
 		return bk;
 	}
-	
+
 	public void startGame() {
 		root.getChildren().add(bk.getIv());
 		root.getChildren().add(bk.getAge());
@@ -156,7 +156,7 @@ public class GUIManager {
 			double angle = 180 + i * (int) (360.0 / num);
 			cir[i] = bk.getBall(angle, KernelManager.color[i]);
 			root.getChildren().add(cir[i]);
-			
+
 			ap[i] = bk.getDropGroup(i);
 			root.getChildren().add(ap[i]);
 			Game.blueScore[i].setX(369);
@@ -164,10 +164,10 @@ public class GUIManager {
 			Game.redScore[i].setX(459);
 			Game.redScore[i].setY(55);
 			bk.setAnchorPosition(ap[i], angle);
-			
+
 			ap[i].getChildren().add(Game.blueScore[i]);
 			ap[i].getChildren().add(Game.redScore[i]);
-			
+
 			final int n = i;
 			final int number = num;
 			cir[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -175,12 +175,12 @@ public class GUIManager {
 					for (int i = number - 1; i >= 0; i--)
 						root.getChildren().remove(ap[i]);
 					int k = number - 1;
-					for (int i = n-1; i >=0; i--) {
+					for (int i = n - 1; i >= 0; i--) {
 						root.getChildren().add(ap[i]);
 						bk.setAnchorPosition(ap[i], 180 + k--
 								* (int) (360.0 / number));
 					}
-					for (int i = number -  1; i >= n; i--) {
+					for (int i = number - 1; i >= n; i--) {
 						root.getChildren().add(ap[i]);
 						bk.setAnchorPosition(ap[i], 180 + k--
 								* (int) (360.0 / number));

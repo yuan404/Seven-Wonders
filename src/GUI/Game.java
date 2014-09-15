@@ -1,5 +1,6 @@
 package GUI;
 
+import Kernel.Board;
 import Kernel.Manager;
 import Kernel.Player;
 import javafx.scene.paint.Color;
@@ -33,5 +34,9 @@ public class Game {
 			blueScore[i].setText(String.valueOf(player[i].GblueScore));
 			redScore[i].setText(String.valueOf(player[i].Gforce));
 		}
+	}
+	
+	public static void AddResource(Player player){
+		
 	}
 }
