@@ -25,6 +25,14 @@ public class Board {
 	public int[] Ccloth = new int[4];
 	public int[] Cpaper = new int[4];
 
+	public int[] Gwood = new int[5];
+	public int[] Gstone = new int[5];
+	public int[] Gbrick = new int[5];
+	public int[] Gore = new int[5];
+	public int[] Gglass = new int[5];
+	public int[] Gcloth = new int[5];
+	public int[] Gpaper = new int[5];
+
 	public int[] Gcoin = new int[5];
 
 	public int[] Gwood_stone_brick_ore = new int[5];
@@ -85,6 +93,29 @@ public class Board {
 		switch (str) {
 		case "coin":
 			Gcoin[age] += num;
+			break;
+
+		case "wood":
+			Gwood[age] += num;
+			break;
+		case "stone":
+			Gstone[age] += num;
+			break;
+		case "brick":
+			Gbrick[age] += num;
+			break;
+		case "ore":
+			Gore[age] += num;
+			break;
+
+		case "glass":
+			Gglass[age] += num;
+			break;
+		case "cloth":
+			Gcloth[age] += num;
+			break;
+		case "paper":
+			Gpaper[age] += num;
 			break;
 
 		case "wood_stone_brick_ore":

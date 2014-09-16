@@ -33,6 +33,9 @@ public class MathGame {
 		int glass = player.Gglass - card.Cglass + player.Bglass;
 		int paper = player.Gpaper - card.Cpaper + player.Bpaper;
 
+		int coin = player.Gcoin - card.Ccoin;
+		if (coin < 0)
+			return false;
 		if (ifBuild2(player, wood, stone, brick, ore, cloth, glass, paper))
 			return true;
 		return false;
@@ -40,7 +43,14 @@ public class MathGame {
 
 	public static boolean ifBuild2(Player player, int wood, int stone,
 			int brick, int ore, int cloth, int glass, int paper) {
-		int three = cloth + glass + paper - player.Gglass_cloth_paper;
+		int three = 0;
+		if (cloth < 0)
+			three += cloth;
+		if (glass < 0)
+			three += cloth;
+		if (paper < 0)
+			three += paper;
+		three += player.Gglass_cloth_paper;
 		if (three < 0)
 			return false;
 		int wb = player.Gwood_brick;
@@ -159,6 +169,14 @@ public class MathGame {
 				bo--;
 			}
 		}
+		if (wood > 0)
+			wood = 0;
+		if (stone > 0)
+			stone = 0;
+		if (brick > 0)
+			brick = 0;
+		if (ore > 0)
+			ore = 0;
 		if (wood + stone + brick + ore + player.Gwood_stone_brick_ore < 0)
 			return false;
 		else
@@ -264,6 +282,15 @@ public class MathGame {
 	public static void doAction(Player player) {
 		player.board.age++;
 		int age = player.board.age;
+
+		player.Gwood += player.board.Gwood[age];
+		player.Gstone += player.board.Gstone[age];
+		player.Gbrick += player.board.Gbrick[age];
+		player.Gore += player.board.Gore[age];
+		player.Gglass += player.board.Gglass[age];
+		player.Gcloth += player.board.Gcloth[age];
+		player.Gpaper += player.board.Gpaper[age];
+
 		player.Gwood_stone_brick_ore += player.board.Gwood_stone_brick_ore[age];
 		player.Gglass_cloth_paper += player.board.Gglass_cloth_paper[age];
 		player.Gliterature_physics_math += player.board.Gliterature_physics_math[age];

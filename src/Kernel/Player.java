@@ -10,7 +10,11 @@ public class Player {
 
 	public Board board;
 	public Paint color;
-	public Turn turn = new Turn();
+	public Turn turn;
+	public int index;
+
+	public Card[] card = new Card[25];
+	public int cardNum = 0;
 
 	// 资源生产
 	public int Gwood = 0;
@@ -101,8 +105,14 @@ public class Player {
 	// olympia-copy any guild from a neighbour
 	public boolean CopyGuild = false;
 
-	Player(Board board, Paint color) {
+	Player(Board board, Paint color, int i) {
 		this.board = board;
 		this.color = color;
+		this.index = i;
+		turn = new Turn(i);
+	}
+
+	public void addCard(Card newCard) {
+		card[cardNum++] = newCard;
 	}
 }

@@ -1,6 +1,9 @@
 package GUI;
 
 import Kernel.KernelManager;
+import Kernel.Manager;
+import Kernel.MathGame;
+import Kernel.Player;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
@@ -145,11 +148,20 @@ public class GUIManager {
 		return bk;
 	}
 
+	// TODO 弃牌数目
+	Text discard;
+
 	public void startGame() {
+		// 背景图
 		root.getChildren().add(bk.getIv());
+		// 时代标志
 		root.getChildren().add(bk.getAge());
-		root.getChildren().add(bk.getText());
+		// 弃牌数目标志
+		discard = bk.getText();
+		root.getChildren().add(discard);
+		// 玩家定位-滚动圆圈
 		root.getChildren().add(bk.getCir());
+
 		int num = PlayerNum.getSelectionModel().getSelectedItem();
 		Circle[] cir = new Circle[num];
 		for (int i = num - 1; i >= 0; i--) {
@@ -189,4 +201,113 @@ public class GUIManager {
 			});
 		}
 	}
+
+	public final ImageView[] card = new ImageView[7];
+	public Image choose = new Image("resource/image/chooser.png");
+	public final ImageView[] chooser = new ImageView[7];
+
+	public void updateHand() {
+		root.getChildren().removeAll(card);
+	}
+
+	// 如果以后要改局域网游戏 final变量必须全部重查！！！-Lane
+	public void addCard(final Player player, ImageView Ncard, int ind) {
+		chooser[ind] = new ImageView(choose);
+		this.card[ind] = Ncard;
+		final int index = ind;
+		final EventHandler<MouseEvent> exitedCard = new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				card[index].setScaleX(0.6);
+				card[index].setScaleY(0.6);
+				card[index].setTranslateY(0);
+			}
+		};
+		final EventHandler<MouseEvent> enteredCard = new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				root.getChildren().remove(chooser[index]);
+				for (int i = 0; i < 7; i++) {
+					if (card[i] != null && i != index) {
+						card[i].setScaleX(0.6);
+						card[i].setScaleY(0.6);
+						card[i].setTranslateY(0);
+					}
+				}
+				card[index].setTranslateY(-190);
+				card[index].setScaleX(0.8);
+				card[index].setScaleY(0.8);
+				root.getChildren().remove(card[index]);
+				root.getChildren().add(card[index]);
+				card[index].setOnMouseClicked(new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						root.getChildren().remove(chooser[index]);
+						chooser[index].setX(180 + index * 120);
+						chooser[index].setY(500);
+						root.getChildren().add(chooser[index]);
+						chooser[index]
+								.setOnMouseEntered(new EventHandler<MouseEvent>() {
+									public void handle(MouseEvent event) {
+										card[index].setTranslateY(-190);
+										card[index].setScaleX(0.8);
+										card[index].setScaleY(0.8);
+										root.getChildren().remove(
+												chooser[index]);
+										root.getChildren().add(chooser[index]);
+									}
+								});
+					}
+				});
+			}
+		};
+		chooser[index].setOnMouseExited(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				root.getChildren().remove(chooser[index]);
+				card[index].setOnMouseExited(exitedCard);
+			}
+		});
+		chooser[index].setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				Manager m = new Manager();
+				if (event.getY() < 567) {
+					if (MathGame.ifBuild(
+							player,
+							m.getKenelManager().hand[(player.index
+									+ m.getKenelManager().times + 6) % 7].card[index])) {
+						player.turn.setChoose(
+								m.getKenelManager().hand[(player.index
+										+ m.getKenelManager().times + 6) % 7].card[index],
+								1);
+						root.getChildren().removeAll(card);
+						root.getChildren().remove(chooser[index]);
+					}
+				} else if (event.getY() < 619) {
+					if (MathGame.ifBuildStage(player)) {
+						player.turn.setChoose(
+								m.getKenelManager().hand[(player.index
+										+ m.getKenelManager().times + 6) % 7].card[index],
+								2);
+						root.getChildren().removeAll(card);
+						root.getChildren().remove(chooser[index]);
+					}
+				} else {
+					player.turn.setChoose(
+							m.getKenelManager().hand[(player.index
+									+ m.getKenelManager().times + 6) % 7].card[index],
+							0);
+					root.getChildren().removeAll(card);
+					root.getChildren().remove(chooser[index]);
+				}
+			}
+
+		});
+		this.card[index].setOnMouseEntered(enteredCard);
+		this.card[index].setOnMouseExited(exitedCard);
+		root.getChildren().add(this.card[index]);
+	}
+	//TODO 更新弃牌数目
+	public void updateDiscard() {
+		Manager m = new Manager();
+		discard.setText(String.valueOf(m.getKenelManager().disNum));
+	}
+	
+	
 }

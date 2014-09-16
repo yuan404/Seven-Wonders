@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class Manager extends Application {
 
-	// 单击游戏时采用static，如果更改成局域网或许需要改成数组形式.
+	//TODO 单击游戏时采用static，如果更改成局域网或许需要改成数组形式.
 	private static GUIManager gm = new GUIManager();
 	private static KernelManager km;
 
@@ -44,7 +44,5 @@ public class Manager extends Application {
 		km = new KernelManager(getGUIManager().PlayerNum.getSelectionModel()
 				.getSelectedItem());
 		km.initGame();
-		gm.startGame();
-
 	}
 }

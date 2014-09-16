@@ -1,10 +1,13 @@
 package Kernel;
 
+import java.util.Calendar;
+import java.util.Random;
+
 import javafx.scene.image.Image;
 
 public class CardInfo {
-	Card[] card = new Card[149];
-
+	Card[] card = new Card[51];
+	Card[] cardHand;
 	Image[] im = new Image[149];
 
 	public CardInfo() {
@@ -926,5 +929,66 @@ public class CardInfo {
 		for (int i = 1; i < 8; i++) {
 			System.out.print(i + ":" + num[i] + " " + color[i] + "\n");
 		}
+	}
+
+	public Card[] getCard(int age, int playerNum) {
+		cardHand = new Card[playerNum * 7];
+		Calendar c = Calendar.getInstance();
+		Random random = new Random(c.get(Calendar.SECOND));
+		if (age == 1) {
+			int j = 0;
+			for (int i = 0; i < playerNum * 7; i++) {
+				for (; j < 49; j++)
+					if (card[j].num <= playerNum) {
+						cardHand[i] = card[j];
+						j++;
+						break;
+					}
+			}
+		} else if (age == 2) {
+			changeCardAgeTwo();
+			int j = 0;
+			for (int i = 0; i < playerNum * 7; i++) {
+				for (; j < 49; j++)
+					if (card[j].num <= playerNum) {
+						cardHand[i] = card[j];
+						j++;
+						break;
+					}
+			}
+		} else if (age == 3) {
+			changeCardAgeThree();
+			int j = 0;
+			for (int i = 0; i < (playerNum - 3) * 6 + 16; i++) {
+				for (; j < 50; j++)
+					if (card[j].num <= playerNum && card[j].color != "Purple") {
+						cardHand[i] = card[j];
+						j++;
+						break;
+					}
+			}
+			for (int i = 0; i < 10; i++) {
+				int a = random.nextInt() % 10;
+				int b = random.nextInt() % 10;
+				a = Math.abs(a) % 10;
+				b = Math.abs(b) % 10;
+				card[50] = card[40 + a];
+				card[40 + a] = card[40 + b];
+				card[40 + b] = card[50];
+			}
+			for (int i = playerNum * 6 - 2; i < playerNum * 7; i++) {
+				cardHand[i] = card[playerNum * 7 - i + 39];
+			}
+		}
+		for (int i = 0; i < playerNum * 7; i++) {
+			int a = random.nextInt() % (playerNum * 7);
+			int b = random.nextInt() % (playerNum * 7);
+			a = Math.abs(a) % (playerNum * 7);
+			b = Math.abs(b) % (playerNum * 7);
+			card[50] = cardHand[a];
+			cardHand[a] = cardHand[b];
+			cardHand[b] = card[50];
+		}
+		return cardHand;
 	}
 }
