@@ -39,8 +39,10 @@ public class Game {
 				redScore[i].setFont(new Font(20));
 			blueScore[i].setFill(Color.WHITE);
 			redScore[i].setFill(Color.WHITE);
+
 			blueScore[i].setText(String.valueOf(player[i].GblueScore));
 			redScore[i].setText(String.valueOf(player[i].Gforce));
+
 		}
 	}
 
@@ -50,7 +52,7 @@ public class Game {
 		if (str == "wood") {
 			Image im = new Image("resource/image/rs4.png");
 			ImageView iv = new ImageView(im);
-			iv.setX(10 - 25 * num - player.Gwood);
+			iv.setX(10 - 25 * (num + player.Gwood));
 			iv.setY(70);
 			iv.setScaleX(0.5);
 			iv.setScaleY(0.5);
@@ -58,7 +60,7 @@ public class Game {
 		} else if (str == "stone") {
 			Image im = new Image("resource/image/rs3.png");
 			ImageView iv = new ImageView(im);
-			iv.setX(10 - 25 * num - player.Gstone);
+			iv.setX(10 - 25 * (num + player.Gstone));
 			iv.setY(70 + 25);
 			iv.setScaleX(0.5);
 			iv.setScaleY(0.5);
@@ -66,7 +68,7 @@ public class Game {
 		} else if (str == "brick") {
 			Image im = new Image("resource/image/rs1.png");
 			ImageView iv = new ImageView(im);
-			iv.setX(10 - 25 * num - player.Gbrick);
+			iv.setX(10 - 25 * (num + player.Gbrick));
 			iv.setY(70 + 50);
 			iv.setScaleX(0.5);
 			iv.setScaleY(0.5);
@@ -74,7 +76,7 @@ public class Game {
 		} else if (str == "ore") {
 			Image im = new Image("resource/image/rs2.png");
 			ImageView iv = new ImageView(im);
-			iv.setX(10 - 25 * num - player.Gore);
+			iv.setX(10 - 25 * (num + player.Gore));
 			iv.setY(70 + 75);
 			iv.setScaleX(0.5);
 			iv.setScaleY(0.5);
@@ -82,7 +84,7 @@ public class Game {
 		} else if (str == "glass") {
 			Image im = new Image("resource/image/rs6.png");
 			ImageView iv = new ImageView(im);
-			iv.setX(10 - 25 * num - player.Gglass);
+			iv.setX(10 - 25 * (num + player.Gglass));
 			iv.setY(70 + 100);
 			iv.setScaleX(0.5);
 			iv.setScaleY(0.5);
@@ -90,7 +92,7 @@ public class Game {
 		} else if (str == "cloth") {
 			Image im = new Image("resource/image/rs5.png");
 			ImageView iv = new ImageView(im);
-			iv.setX(10 - 25 * num - player.Gcloth);
+			iv.setX(10 - 25 * (num + player.Gcloth));
 			iv.setY(70 + 125);
 			iv.setScaleX(0.5);
 			iv.setScaleY(0.5);
@@ -98,7 +100,7 @@ public class Game {
 		} else if (str == "paper") {
 			Image im = new Image("resource/image/rs7.png");
 			ImageView iv = new ImageView(im);
-			iv.setX(10 - 25 * num - player.Gpaper);
+			iv.setX(10 - 25 * (num + player.Gpaper));
 			iv.setY(70 + 150);
 			iv.setScaleX(0.5);
 			iv.setScaleY(0.5);
@@ -154,7 +156,7 @@ public class Game {
 		} else if (str == "wood_stone_brick_ore") {
 			Image im = new Image("resource/image/rs15.png");
 			ImageView i = new ImageView(im);
-			i.setX(-80);
+			i.setX(-80 - 80 * player.Gwood_stone_brick_ore);
 			i.setY(245);
 			i.setScaleX(0.5);
 			i.setScaleY(0.5);
@@ -162,12 +164,15 @@ public class Game {
 		} else if (str == "glass_cloth_paper") {
 			Image im = new Image("resource/image/rs14.png");
 			ImageView i = new ImageView(im);
-			i.setX(-80);
+			i.setX(-80 - 80 * player.Gglass_cloth_paper);
 			i.setY(270);
 			i.setScaleX(0.5);
 			i.setScaleY(0.5);
 			m.getGUIManager().ap[player.index].getChildren().add(i);
 		}
+		if (num == 1)
+			return;
+		AddResource(player, str, --num);
 	}
 
 	// TODO 呈现玩家手牌
@@ -186,6 +191,10 @@ public class Game {
 	public static void updateCoin(Player player) {
 		player.Gcoin += player.turn.Gcoin;
 		Manager m = new Manager();
+		m.getGUIManager().ap[player.index].getChildren().removeAll(
+				bCoin[player.index]);
+		m.getGUIManager().ap[player.index].getChildren().removeAll(
+				sCoin[player.index]);
 		int big = player.Gcoin / 3;
 		int small = player.Gcoin % 3;
 		Image bc = new Image("resource/image/geld3.png");
@@ -240,21 +249,19 @@ public class Game {
 			m.getGUIManager().ap[player.index].getChildren().add(iv);
 		}
 	}
-	
-	//TODO 建造卡牌后有个卡牌消失效果-未起作用-Bug
-	public static void hideCard(Player player,Card card){
+
+	// TODO 建造卡牌后有个卡牌消失效果-未起作用-Bug
+	public static void hideCard(Player player, Card card) {
 		Manager m = new Manager();
-		ImageView iv = card.iv;
-		iv.setOnMouseClicked(null);
-		iv.setOnMouseEntered(null);
-		iv.setOnMouseExited(null);
+		ImageView iv = new ImageView(card.iv.getImage());
+		iv.setScaleX(0.6);
+		iv.setScaleY(0.6);
 		iv.setX(200);
 		iv.setY(20);
-		m.getGUIManager().getGroup().getChildren().remove(iv);
 		m.getGUIManager().ap[player.index].getChildren().add(iv);
-		FadeTransition ft = new FadeTransition(Duration.millis(200000),iv);
+		FadeTransition ft = new FadeTransition(Duration.millis(2000), iv);
 		ft.setFromValue(1);
-		ft.setFromValue(0.3);
+		ft.setToValue(0);
 		ft.play();
 	}
 }

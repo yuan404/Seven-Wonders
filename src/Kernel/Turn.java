@@ -25,6 +25,7 @@ public class Turn {
 	public void setChoose(Card card, int choose) {
 		this.card = card;
 		this.choose = choose;
+		System.out.print(card.name + ":" + choose + "\n");
 		Manager m = new Manager();
 		m.getKenelManager().checkTurn();
 	}

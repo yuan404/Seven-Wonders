@@ -36,6 +36,8 @@ public class KernelManager {
 	public CardInfo ci = new CardInfo();
 	// 回合数
 	public int times = 1;
+	// 时代
+	public int age = 1;
 
 	public KernelManager(int playerNum) {
 		this.playerNum = playerNum;
@@ -119,6 +121,11 @@ public class KernelManager {
 			player[i].Gcoin += 3;
 			Game.updateCoin(player[i]);
 		}
+		// TODO next结束后，进行AI测试
+		for (int i = 0; i < playerNum; i++) {
+			if (playerLevel[i] != "Player")
+				AI.Level1(player[i]);
+		}
 	}
 
 	// TODO 下一回合,清理痕迹
@@ -138,13 +145,18 @@ public class KernelManager {
 			player[i].turn.card = null;
 			player[i].turn.choose = 0;
 		}
-		// TODO 更新蓝分和红战斗力
-		Game.setText(player);
+		// TODO 换手牌
+		changeHand(age);
 		// TODO 显示手牌给玩家一号，即唯一的真实人物
 		for (int i = 0; i < hand[0].cardNum; i++) {
 			if (hand[0].card[i] != null) {
 				Game.addCard(player[0], hand[0].card[i], i, hand[0].cardNum);
 			}
+		}
+		// TODO next结束后，进行AI测试
+		for (int i = 0; i < playerNum; i++) {
+			if (playerLevel[i] != "Player")
+				AI.Level1(player[i]);
 		}
 	}
 
@@ -171,7 +183,11 @@ public class KernelManager {
 		for (int i = 0; i < playerNum; i++) {
 			if (player[i].turn.card == null)
 				return;
+			else
+				System.out.print("玩家" + i + "选择出牌" + player[i].turn.card.name
+						+ "\n");
 		}
+		System.out.print("时代" + age + "回合" + times + "\n");
 		for (int i = 0; i < playerNum; i++) {
 			if (player[i].turn.choose == 0) {
 				MathGame.doAction(player[i], player[i].turn.card, true);
@@ -191,6 +207,135 @@ public class KernelManager {
 		}
 		Manager m = new Manager();
 		m.getGUIManager().updateDiscard();
+		// TODO 更新蓝分和红战斗力
+		Game.setText(player);
+		m.getGUIManager().updateRedBlue();
+		if (times < 6)
+			nextTurn();
+		else if (age < 3) {
+			endAge();
+			newAge();
+		} else {
+			endAge();
+			endGame();
+		}
+	}
+
+	public void endGame() {
+		Manager m = new Manager();
+		m.getGUIManager().ScoreBoard();
+		for (int i = 0; i < playerNum; i++)
+			m.getGUIManager().score(player[i]);
+	}
+
+	// TODO 结束时代
+	public void endAge() {
+		Manager m = new Manager();
+		// TODO 把旧时代的卡牌扔入弃牌堆
+		for (int i = 0; i < playerNum; i++) {
+			for (int j = 0; j < hand[i].cardNum; j++)
+				addDiscard(hand[i].card[j]);
+		}
+		// TODO 更新弃牌数目标志
+		m.getGUIManager().updateDiscard();
+		// TODO 时代战争
+		for (int i = 0; i < playerNum; i++) {
+			battle(player[i]);
+		}
+	}
+
+	// TODO 新时代
+	public void newAge() {
+		// TODO 时代数增加
+		age++;
+		Manager m = new Manager();
+		// TODO 改变时代标志
+		m.getGUIManager().newAge(age);
+		// TODO 回合数变为0
+		times = 0;
+		// TODO 生成新时代卡牌
+		cardHand = ci.getCard(age, playerNum);
+		// TODO 生成新时代手牌
+		for (int i = 0; i < playerNum; i++) {
+			hand[i] = new Hand();
+			for (int j = 0; j < 7; j++) {
+				hand[i].card[hand[i].cardNum++] = cardHand[i * 7 + j];
+			}
+		}
 		nextTurn();
+	}
+
+	// TODO 换手牌
+	public void changeHand(int age) {
+		Hand h = new Hand();
+		if (age == 1 || age == 3) {
+			h = hand[playerNum - 1];
+			for (int i = playerNum - 1; i > 0; i--) {
+				hand[i] = hand[i - 1];
+			}
+			hand[0] = h;
+		} else if (age == 2) {
+			h = hand[0];
+			for (int i = 0; i < playerNum - 1; i++) {
+				hand[i] = hand[i + 1];
+			}
+			hand[playerNum - 1] = h;
+		}
+		for (int i = 0; i < playerNum; i++) {
+			System.out.print("手牌玩家" + i + "#");
+			for (int j = 0; j < hand[0].cardNum; j++)
+				System.out.print(j + ":" + hand[i].card[j].name + " ");
+			System.out.print("\n");
+		}
+	}
+
+	public void battle(Player Aplayer) {
+		Manager m = new Manager();
+		if (Aplayer.index == 0) {
+			if (Aplayer.Gforce > player[Aplayer.index + 1].Gforce) {
+				m.getGUIManager().addLeftForce(Aplayer, age, true);
+				Aplayer.GforceScore += age * 2 - 1;
+			} else if (Aplayer.Gforce < player[Aplayer.index + 1].Gforce) {
+				m.getGUIManager().addLeftForce(Aplayer, age, false);
+				Aplayer.GforceScore -= 1;
+			}
+			if (Aplayer.Gforce > player[playerNum - 1].Gforce) {
+				Aplayer.GforceScore += age * 2 - 1;
+				m.getGUIManager().addRightForce(Aplayer, age, true);
+			} else if (Aplayer.Gforce < player[playerNum - 1].Gforce) {
+				Aplayer.GforceScore -= 1;
+				m.getGUIManager().addRightForce(Aplayer, age, false);
+			}
+		} else if (Aplayer.index != playerNum - 1) {
+			if (Aplayer.Gforce > player[Aplayer.index - 1].Gforce) {
+				Aplayer.GforceScore += age * 2 - 1;
+				m.getGUIManager().addRightForce(Aplayer, age, true);
+			} else if (Aplayer.Gforce < player[Aplayer.index - 1].Gforce) {
+				Aplayer.GforceScore -= 1;
+				m.getGUIManager().addRightForce(Aplayer, age, false);
+			}
+			if (Aplayer.Gforce > player[Aplayer.index + 1].Gforce) {
+				Aplayer.GforceScore += age * 2 - 1;
+				m.getGUIManager().addLeftForce(Aplayer, age, true);
+			} else if (Aplayer.Gforce < player[Aplayer.index + 1].Gforce) {
+				Aplayer.GforceScore -= 1;
+				m.getGUIManager().addLeftForce(Aplayer, age, false);
+			}
+		} else {
+			if (Aplayer.Gforce > player[0].Gforce) {
+				Aplayer.GforceScore += age * 2 - 1;
+				m.getGUIManager().addRightForce(Aplayer, age, true);
+			} else if (Aplayer.Gforce < player[0].Gforce) {
+				Aplayer.GforceScore -= 1;
+				m.getGUIManager().addRightForce(Aplayer, age, false);
+			}
+			if (Aplayer.Gforce > player[Aplayer.index - 1].Gforce) {
+				Aplayer.GforceScore += age * 2 - 1;
+				m.getGUIManager().addLeftForce(Aplayer, age, true);
+			} else if (Aplayer.Gforce < player[Aplayer.index - 1].Gforce) {
+				Aplayer.GforceScore -= 1;
+				m.getGUIManager().addLeftForce(Aplayer, age, false);
+			}
+		}
 	}
 }

@@ -24,6 +24,15 @@ public class MathGame {
 
 	// 能否建造该卡牌
 	public static boolean ifBuild(Player player, Card card) {
+		for (int i = 0; i < player.cardNum; i++) {
+			if (card.name == player.card[i].name)
+				return false;
+		}
+		for (int i = 0; i < player.freeNum; i++) {
+			if (card.name == player.freeBuild[i]) {
+				return true;
+			}
+		}
 		int wood = player.Gwood - card.Cwood + player.Bwood;
 		int stone = player.Gstone - card.Cstone + player.Bstone;
 		int brick = player.Gbrick - card.Cbrick + player.Bbrick;
@@ -184,7 +193,7 @@ public class MathGame {
 	}
 
 	public static boolean ifBuildStage(Player player) {
-		int age = player.board.age + 1;
+		int age = player.board.age;
 		int wood = player.Gwood - player.board.Cwood[age] + player.Bwood;
 		int stone = player.Gstone - player.board.Cstone[age] + player.Bstone;
 		int brick = player.Gbrick - player.board.Cbrick[age] + player.Bbrick;
@@ -222,6 +231,8 @@ public class MathGame {
 		player.Gwood_ore += card.Gwood_ore;
 		player.Gwood_stone += card.Gwood_stone;
 		player.Gwood_stone_brick_ore += card.Gwood_stone_brick_ore;
+
+		player.Gcoin -= card.Ccoin;
 
 		if (card.freeBuild[0] != null) {
 			player.freeBuild[player.freeNum++] = card.freeBuild[0];

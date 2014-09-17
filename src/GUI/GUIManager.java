@@ -14,7 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -44,6 +46,9 @@ public class GUIManager {
 	public String[] Level = { "Level1" };
 
 	public AnchorPane[] ap = new AnchorPane[7];
+
+	public Text[] blueScore = new Text[7];
+	public Text[] redScore = new Text[7];
 
 	public GUIManager() {
 		XScreen = 1099;
@@ -177,8 +182,10 @@ public class GUIManager {
 			Game.redScore[i].setY(55);
 			bk.setAnchorPosition(ap[i], angle);
 
-			ap[i].getChildren().add(Game.blueScore[i]);
-			ap[i].getChildren().add(Game.redScore[i]);
+			blueScore[i] = Game.blueScore[i];
+			redScore[i] = Game.redScore[i];
+			ap[i].getChildren().add(blueScore[i]);
+			ap[i].getChildren().add(redScore[i]);
 
 			final int n = i;
 			final int number = num;
@@ -268,33 +275,28 @@ public class GUIManager {
 			public void handle(MouseEvent event) {
 				Manager m = new Manager();
 				if (event.getY() < 567) {
-					if (MathGame.ifBuild(
-							player,
-							m.getKenelManager().hand[(player.index
-									+ m.getKenelManager().times + 6) % 7].card[index])) {
-						player.turn.setChoose(
-								m.getKenelManager().hand[(player.index
-										+ m.getKenelManager().times + 6) % 7].card[index],
-								1);
+					if (MathGame.ifBuild(player,
+							m.getKenelManager().hand[player.index].card[index])) {
 						root.getChildren().removeAll(card);
 						root.getChildren().remove(chooser[index]);
+						player.turn.setChoose(
+								m.getKenelManager().hand[player.index].card[index],
+								1);
 					}
 				} else if (event.getY() < 619) {
 					if (MathGame.ifBuildStage(player)) {
-						player.turn.setChoose(
-								m.getKenelManager().hand[(player.index
-										+ m.getKenelManager().times + 6) % 7].card[index],
-								2);
 						root.getChildren().removeAll(card);
 						root.getChildren().remove(chooser[index]);
+						player.turn.setChoose(
+								m.getKenelManager().hand[player.index].card[index],
+								2);
 					}
 				} else {
-					player.turn.setChoose(
-							m.getKenelManager().hand[(player.index
-									+ m.getKenelManager().times + 6) % 7].card[index],
-							0);
 					root.getChildren().removeAll(card);
 					root.getChildren().remove(chooser[index]);
+					player.turn.setChoose(
+							m.getKenelManager().hand[player.index].card[index],
+							0);
 				}
 			}
 
@@ -303,11 +305,109 @@ public class GUIManager {
 		this.card[index].setOnMouseExited(exitedCard);
 		root.getChildren().add(this.card[index]);
 	}
-	//TODO 更新弃牌数目
+
+	// TODO 更新弃牌数目
 	public void updateDiscard() {
 		Manager m = new Manager();
 		discard.setText(String.valueOf(m.getKenelManager().disNum));
 	}
-	
-	
+
+	// TODO 更新红战斗力和蓝分
+	public void updateRedBlue() {
+		Manager m = new Manager();
+		for (int i = 0; i < m.getKenelManager().playerNum; i++) {
+			blueScore[i].setText(Game.blueScore[i].getText());
+			blueScore[i].setFont(Game.blueScore[i].getFont());
+			redScore[i].setText(Game.redScore[i].getText());
+			redScore[i].setFont(Game.redScore[i].getFont());
+		}
+	}
+
+	// TODO 新时代
+	public void newAge(int age) {
+		bk.setAge(age);
+	}
+
+	// TODO 时代战争
+	public void addLeftForce(Player player, int age, boolean win) {
+		Image im;
+		ImageView iv;
+		if (win) {
+			im = new Image("resource/image/fight" + age + ".png");
+			iv = new ImageView(im);
+			iv.setX(-5 + 25 * age);
+			iv.setY(180);
+			iv.setScaleX(0.5);
+			iv.setScaleY(0.5);
+		} else {
+			im = new Image("resource/image/fight0.png");
+			iv = new ImageView(im);
+			iv.setX(-5 + 25 * age);
+			iv.setY(193);
+			iv.setScaleX(0.5);
+			iv.setScaleY(0.5);
+		}
+		ap[player.index].getChildren().add(iv);
+	}
+
+	public void addRightForce(Player player, int age, boolean win) {
+		Image im;
+		ImageView iv;
+		if (win) {
+			im = new Image("resource/image/fight" + age + ".png");
+			iv = new ImageView(im);
+			iv.setX(522 - 25 * age);
+			iv.setY(180);
+			iv.setScaleX(0.5);
+			iv.setScaleY(0.5);
+		} else {
+			im = new Image("resource/image/fight0.png");
+			iv = new ImageView(im);
+			iv.setX(522 - 25 * age);
+			iv.setY(193);
+			iv.setScaleX(0.5);
+			iv.setScaleY(0.5);
+		}
+		ap[player.index].getChildren().add(iv);
+	}
+
+	// TODO 记分板
+	public void ScoreBoard() {
+		Image im = new Image("resource/image/scorehead.jpg");
+		ImageView iv = new ImageView(im);
+		iv.setX(400);
+		iv.setY(300);
+		iv.setOpacity(1);
+		root.getChildren().add(iv);
+	}
+
+	public void score(Player player) {
+		Rectangle rec = new Rectangle(400, 330 + 30 * player.index, 338, 30);
+		rec.setFill(Color.BROWN.brighter());
+		root.getChildren().add(rec);
+		Text name = new Text(player.board.name);
+		name.setX(410);
+		name.setY(340 + 30 * player.index);
+		name.setFill(Color.WHITE);
+		root.getChildren().add(name);
+		Text[] sc = new Text[8];
+		for (int i = 0; i < 8; i++) {
+			sc[i] = new Text("0");
+			sc[i].setFill(Color.WHITE);
+			sc[i].setX(510 + 29 * i);
+			sc[i].setY(340 + 30 * player.index);
+		}
+		sc[0].setText(String.valueOf(player.GforceScore));
+		sc[1].setText(String.valueOf((int) player.Gcoin / 3));
+		sc[2].setText(String.valueOf(player.GboardScore));
+		sc[3].setText(String.valueOf(player.GblueScore));
+		sc[4].setText(String.valueOf(player.GyellowScore));
+		sc[5].setText(String.valueOf(player.GpurpleScore));
+		sc[6].setText(String.valueOf(player.GgreenScore));
+		int total = player.GforceScore + (int) player.Gcoin / 3
+				+ player.GboardScore + player.GblueScore + player.GyellowScore
+				+ player.GpurpleScore + player.GgreenScore;
+		sc[7].setText(String.valueOf(total));
+		root.getChildren().addAll(sc);
+	}
 }

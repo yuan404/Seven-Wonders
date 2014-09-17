@@ -49,6 +49,7 @@ public class Player {
 	public int Gglass_cloth_paper = 0;
 
 	public int Gforce = 0;
+	public int GforceScore = 0;
 
 	// 科技分为 文学-造字 物理-轮子 数学-卡尺
 	public int Gliterature = 0;
@@ -62,6 +63,11 @@ public class Player {
 
 	// 奇迹板加分
 	public int GboardScore = 0;
+
+	// 黄牌加分
+	public int GyellowScore = 0;
+	public int GpurpleScore = 0;
+	public int GgreenScore = 0;
 
 	public int freeNum = 0;
 	public String[] freeBuild = new String[55];
