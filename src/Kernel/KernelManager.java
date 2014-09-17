@@ -104,12 +104,6 @@ public class KernelManager {
 		}
 		// TODO 加入初始化游戏背景
 		m.getGUIManager().startGame();
-		// TODO 呈现玩家手牌
-		for (int i = 0; i < 7; i++) {
-			if (hand[0].card[i] != null) {
-				Game.addCard(player[0], hand[0].card[i], i, 7);
-			}
-		}
 		// TODO 初始化奇迹板收益
 		for (int i = 0; i < playerNum; i++) {
 			player[i].turn.setChoose(2);
@@ -120,6 +114,15 @@ public class KernelManager {
 		for (int i = 0; i < playerNum; i++) {
 			player[i].Gcoin += 3;
 			Game.updateCoin(player[i]);
+		}
+		// TODO 呈现玩家手牌
+		for (int i = 0; i < 7; i++) {
+			if (hand[0].card[i] != null) {
+				Game.addCard(player[0], hand[0].card[i], i, 7);
+				if (MathGame.ifBuild(player[0], hand[0].card[i])) {
+					m.getGUIManager().addOK(hand[0].card[i], i);
+				}
+			}
 		}
 		// TODO next结束后，进行AI测试
 		for (int i = 0; i < playerNum; i++) {
@@ -148,9 +151,24 @@ public class KernelManager {
 		// TODO 换手牌
 		changeHand(age);
 		// TODO 显示手牌给玩家一号，即唯一的真实人物
+		Manager m = new Manager();
 		for (int i = 0; i < hand[0].cardNum; i++) {
 			if (hand[0].card[i] != null) {
 				Game.addCard(player[0], hand[0].card[i], i, hand[0].cardNum);
+				for (int j = 0; j < player[0].freeNum; j++) {
+					if (hand[0].card[i].name == player[0].freeBuild[j]) {
+						m.getGUIManager().addFreeOK(hand[0].card[i], i);
+						break;
+					}
+				}
+				if (MathGame.ifBuild(player[0], hand[0].card[i])) {
+					m.getGUIManager().addOK(hand[0].card[i], i);
+				}
+				for (int j = 0; j < player[0].cardNum; j++) {
+					if (hand[0].card[i].name == player[0].card[j].name) {
+						m.getGUIManager().addnotOK(hand[0].card[i], i);
+					}
+				}
 			}
 		}
 		// TODO next结束后，进行AI测试
@@ -183,11 +201,7 @@ public class KernelManager {
 		for (int i = 0; i < playerNum; i++) {
 			if (player[i].turn.card == null)
 				return;
-			else
-				System.out.print("玩家" + i + "选择出牌" + player[i].turn.card.name
-						+ "\n");
 		}
-		System.out.print("时代" + age + "回合" + times + "\n");
 		for (int i = 0; i < playerNum; i++) {
 			if (player[i].turn.choose == 0) {
 				MathGame.doAction(player[i], player[i].turn.card, true);
@@ -203,6 +217,7 @@ public class KernelManager {
 				Game.updateStage(player[i]);
 			}
 			hand[i].removeHand(player[i].turn.card);
+			checkCoin(player[i]);
 			Game.updateCoin(player[i]);
 		}
 		Manager m = new Manager();
@@ -210,6 +225,7 @@ public class KernelManager {
 		// TODO 更新蓝分和红战斗力
 		Game.setText(player);
 		m.getGUIManager().updateRedBlue();
+		m.getGUIManager().removeOK();
 		if (times < 6)
 			nextTurn();
 		else if (age < 3) {
@@ -224,8 +240,39 @@ public class KernelManager {
 	public void endGame() {
 		Manager m = new Manager();
 		m.getGUIManager().ScoreBoard();
-		for (int i = 0; i < playerNum; i++)
+		for (int i = 0; i < playerNum; i++) {
+			checkScore(player[i]);
+			while (player[i].Gliterature_physics_math > 0) {
+				int a = checkGreen(player[i].Gliterature + 1,
+						player[i].Gphysics, player[i].Gmath);
+				int b = checkGreen(player[i].Gliterature,
+						player[i].Gphysics + 1, player[i].Gmath);
+				int c = checkGreen(player[i].Gliterature, player[i].Gphysics,
+						player[i].Gmath + 1);
+				player[i].Gliterature_physics_math--;
+				if (a > b && a > c) {
+					player[i].Gliterature++;
+				} else if (b > a && b > c) {
+					player[i].Gphysics++;
+				} else
+					player[i].Gmath++;
+			}
+			player[i].GgreenScore = checkGreen(player[i].Gliterature,
+					player[i].Gphysics, player[i].Gmath);
 			m.getGUIManager().score(player[i]);
+		}
+	}
+
+	// TODO 计算科技分
+	public int checkGreen(int a, int b, int c) {
+		int green = 0;
+		green += a * a;
+		green += b * b;
+		green += c * c;
+		int series = Math.min(a, b);
+		series = Math.min(series, c);
+		green += 7 * series;
+		return green;
 	}
 
 	// TODO 结束时代
@@ -281,12 +328,6 @@ public class KernelManager {
 			}
 			hand[playerNum - 1] = h;
 		}
-		for (int i = 0; i < playerNum; i++) {
-			System.out.print("手牌玩家" + i + "#");
-			for (int j = 0; j < hand[0].cardNum; j++)
-				System.out.print(j + ":" + hand[i].card[j].name + " ");
-			System.out.print("\n");
-		}
 	}
 
 	public void battle(Player Aplayer) {
@@ -298,12 +339,14 @@ public class KernelManager {
 			} else if (Aplayer.Gforce < player[Aplayer.index + 1].Gforce) {
 				m.getGUIManager().addLeftForce(Aplayer, age, false);
 				Aplayer.GforceScore -= 1;
+				Aplayer.failTimes++;
 			}
 			if (Aplayer.Gforce > player[playerNum - 1].Gforce) {
 				Aplayer.GforceScore += age * 2 - 1;
 				m.getGUIManager().addRightForce(Aplayer, age, true);
 			} else if (Aplayer.Gforce < player[playerNum - 1].Gforce) {
 				Aplayer.GforceScore -= 1;
+				Aplayer.failTimes++;
 				m.getGUIManager().addRightForce(Aplayer, age, false);
 			}
 		} else if (Aplayer.index != playerNum - 1) {
@@ -312,6 +355,7 @@ public class KernelManager {
 				m.getGUIManager().addRightForce(Aplayer, age, true);
 			} else if (Aplayer.Gforce < player[Aplayer.index - 1].Gforce) {
 				Aplayer.GforceScore -= 1;
+				Aplayer.failTimes++;
 				m.getGUIManager().addRightForce(Aplayer, age, false);
 			}
 			if (Aplayer.Gforce > player[Aplayer.index + 1].Gforce) {
@@ -319,6 +363,7 @@ public class KernelManager {
 				m.getGUIManager().addLeftForce(Aplayer, age, true);
 			} else if (Aplayer.Gforce < player[Aplayer.index + 1].Gforce) {
 				Aplayer.GforceScore -= 1;
+				Aplayer.failTimes++;
 				m.getGUIManager().addLeftForce(Aplayer, age, false);
 			}
 		} else {
@@ -327,6 +372,7 @@ public class KernelManager {
 				m.getGUIManager().addRightForce(Aplayer, age, true);
 			} else if (Aplayer.Gforce < player[0].Gforce) {
 				Aplayer.GforceScore -= 1;
+				Aplayer.failTimes++;
 				m.getGUIManager().addRightForce(Aplayer, age, false);
 			}
 			if (Aplayer.Gforce > player[Aplayer.index - 1].Gforce) {
@@ -334,8 +380,116 @@ public class KernelManager {
 				m.getGUIManager().addLeftForce(Aplayer, age, true);
 			} else if (Aplayer.Gforce < player[Aplayer.index - 1].Gforce) {
 				Aplayer.GforceScore -= 1;
+				Aplayer.failTimes++;
 				m.getGUIManager().addLeftForce(Aplayer, age, false);
 			}
+		}
+	}
+
+	// TODO 结算金钱-每回合
+	public void checkCoin(Player Aplayer) {
+		if (Aplayer.LRMGrayCoin == true) {
+			Aplayer.LRMGrayCoin = false;
+			Aplayer.turn.Gcoin += Aplayer.grayNum * 2;
+			Aplayer.turn.Gcoin += player[(Aplayer.index + playerNum - 1)
+					% playerNum].grayNum * 2;
+			Aplayer.turn.Gcoin += player[(Aplayer.index + playerNum + 1)
+					% playerNum].grayNum * 2;
+		}
+		if (Aplayer.LRMBrownCoin == true) {
+			Aplayer.LRMBrownCoin = false;
+			Aplayer.turn.Gcoin += Aplayer.brownNum;
+			Aplayer.turn.Gcoin += player[(Aplayer.index + playerNum - 1)
+					% playerNum].brownNum;
+			Aplayer.turn.Gcoin += player[(Aplayer.index + playerNum + 1)
+					% playerNum].brownNum;
+		}
+		if (Aplayer.GrayCoin == true) {
+			Aplayer.GrayCoin = false;
+			Aplayer.turn.Gcoin += Aplayer.grayNum * 2;
+		}
+		if (Aplayer.BrownCoin == true) {
+			Aplayer.BrownCoin = false;
+			Aplayer.turn.Gcoin += Aplayer.brownNum;
+		}
+		if (Aplayer.YellowCoin == true) {
+			Aplayer.YellowCoin = false;
+			Aplayer.turn.Gcoin += Aplayer.yellowNum;
+		}
+		if (Aplayer.StageCoin == true) {
+			Aplayer.StageCoin = false;
+			Aplayer.turn.Gcoin += Aplayer.board.age * 3;
+		}
+	}
+
+	// TODO 结算分数-游戏结束
+	public void checkScore(Player Aplayer) {
+
+		if (Aplayer.GrayScore == true) {
+			Aplayer.GyellowScore += Aplayer.grayNum * 2;
+		}
+		if (Aplayer.BrownScore == true) {
+			Aplayer.GyellowScore += Aplayer.brownNum;
+		}
+		if (Aplayer.YellowScore == true) {
+			Aplayer.GyellowScore += Aplayer.yellowNum;
+		}
+		if (Aplayer.StageScore == true) {
+			Aplayer.GyellowScore += Aplayer.board.age;
+		}
+		if (Aplayer.GuildBlue == true) {
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum - 1)
+					% playerNum].blueNum;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
+					% playerNum].blueNum;
+		}
+		if (Aplayer.GuildBrown == true) {
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum - 1)
+					% playerNum].brownNum;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
+					% playerNum].brownNum;
+		}
+		if (Aplayer.GuildGray == true) {
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum - 1)
+					% playerNum].grayNum * 2;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
+					% playerNum].grayNum * 2;
+		}
+		if (Aplayer.GuildYellow == true) {
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum - 1)
+					% playerNum].yellowNum;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
+					% playerNum].yellowNum;
+		}
+		if (Aplayer.GuildGreen == true) {
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum - 1)
+					% playerNum].greenNum;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
+					% playerNum].greenNum;
+		}
+		if (Aplayer.GuildRed == true) {
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum - 1)
+					% playerNum].redNum;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
+					% playerNum].redNum;
+		}
+		if (Aplayer.GuildForce == true) {
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum - 1)
+					% playerNum].failTimes;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
+					% playerNum].failTimes;
+		}
+		if (Aplayer.GuildMixed == true) {
+			Aplayer.GpurpleScore += Aplayer.brownNum;
+			Aplayer.GpurpleScore += Aplayer.grayNum;
+			Aplayer.GpurpleScore += Aplayer.purpleNum;
+		}
+		if (Aplayer.GuildStage == true) {
+			Aplayer.GpurpleScore += Aplayer.board.age;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum - 1)
+					% playerNum].board.age;
+			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
+					% playerNum].board.age;
 		}
 	}
 }

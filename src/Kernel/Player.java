@@ -50,6 +50,7 @@ public class Player {
 
 	public int Gforce = 0;
 	public int GforceScore = 0;
+	public int failTimes = 0;
 
 	// 科技分为 文学-造字 物理-轮子 数学-卡尺
 	public int Gliterature = 0;
@@ -69,6 +70,14 @@ public class Player {
 	public int GpurpleScore = 0;
 	public int GgreenScore = 0;
 
+	public int brownNum = 0;
+	public int grayNum = 0;
+	public int blueNum = 0;
+	public int greenNum = 0;
+	public int redNum = 0;
+	public int yellowNum = 0;
+	public int purpleNum = 0;
+	
 	public int freeNum = 0;
 	public String[] freeBuild = new String[55];
 

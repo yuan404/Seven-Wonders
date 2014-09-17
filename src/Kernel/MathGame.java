@@ -1,5 +1,7 @@
 package Kernel;
 
+import GUI.Game;
+
 /**
  * 
  * @author Lane 数学逻辑函数
@@ -56,7 +58,7 @@ public class MathGame {
 		if (cloth < 0)
 			three += cloth;
 		if (glass < 0)
-			three += cloth;
+			three += glass;
 		if (paper < 0)
 			three += paper;
 		three += player.Gglass_cloth_paper;
@@ -233,6 +235,30 @@ public class MathGame {
 		player.Gwood_stone_brick_ore += card.Gwood_stone_brick_ore;
 
 		player.Gcoin -= card.Ccoin;
+
+		if (card.color == "Brown") {
+			player.brownNum++;
+		} else if (card.color == "Gray") {
+			player.grayNum++;
+		} else if (card.color == "Green") {
+			player.greenNum++;
+		} else if (card.color == "Blue") {
+			player.blueNum++;
+		} else if (card.color == "Red") {
+			player.redNum++;
+		} else if (card.color == "Yellow") {
+			player.yellowNum++;
+		} else if (card.color == "Purple") {
+			player.purpleNum++;
+		}
+		if (card.color == "Green" && card.Gliterature == 1)
+			Game.addPoint(card.color, player, 1,card);
+		else if (card.color == "Green" && card.Gphysics == 1)
+			Game.addPoint(card.color, player, 2,card);
+		else if (card.color == "Green" && card.Gmath == 1)
+			Game.addPoint(card.color, player, 3,card);
+		else
+			Game.addPoint(card.color, player, 0,card);
 
 		if (card.freeBuild[0] != null) {
 			player.freeBuild[player.freeNum++] = card.freeBuild[0];

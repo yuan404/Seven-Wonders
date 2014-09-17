@@ -1,5 +1,6 @@
 package GUI;
 
+import Kernel.Card;
 import Kernel.KernelManager;
 import Kernel.Manager;
 import Kernel.MathGame;
@@ -409,5 +410,49 @@ public class GUIManager {
 				+ player.GpurpleScore + player.GgreenScore;
 		sc[7].setText(String.valueOf(total));
 		root.getChildren().addAll(sc);
+	}
+
+	Image ok = new Image("resource/image/ok.png");
+	Image freeok = new Image("resource/image/freeok.png");
+	Image notok = new Image("resource/image/notok.png");
+	ImageView[] OK = new ImageView[7];
+	ImageView[] freeOK = new ImageView[7];
+	ImageView[] notOK = new ImageView[7];
+
+	// TODO 增加免费信号
+	public void addFreeOK(Card card, int i) {
+		freeOK[i] = new ImageView(freeok);
+		freeOK[i].setScaleX(0.5);
+		freeOK[i].setScaleY(0.5);
+		freeOK[i].setX(card.iv.getX() + 50);
+		freeOK[i].setY(card.iv.getY() + 50);
+		root.getChildren().add(freeOK[i]);
+	}
+
+	// TODO 增加可建信号
+	public void addOK(Card card, int i) {
+		OK[i] = new ImageView(ok);
+		OK[i].setScaleX(0.5);
+		OK[i].setScaleY(0.5);
+		OK[i].setX(card.iv.getX() + 30);
+		OK[i].setY(card.iv.getY() + 50);
+		root.getChildren().add(OK[i]);
+	}
+
+	// TODO 移除
+	public void removeOK() {
+		root.getChildren().removeAll(OK);
+		root.getChildren().removeAll(freeOK);
+		root.getChildren().removeAll(notOK);
+	}
+
+	// TODO 不可建
+	public void addnotOK(Card card, int i) {
+		notOK[i] = new ImageView(notok);
+		notOK[i].setScaleX(0.5);
+		notOK[i].setScaleY(0.5);
+		notOK[i].setX(card.iv.getX() + 30);
+		notOK[i].setY(card.iv.getY() + 50);
+		root.getChildren().add(notOK[i]);
 	}
 }

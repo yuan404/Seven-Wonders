@@ -15,6 +15,12 @@
   
   The bottom ball always is your ball / 底部的小球是你的小球
 
+* Click the colorful circle on the board / 点击奇迹板上的彩色小圆
+
+  Search the different information of cards / 查看不同卡牌的信息
+  
+  Glide the card and make it disappear / 从卡牌滑过使它消失
+
 ## Game informations / 游戏信息
 
 * The first age has 14 brown cards, / 第一时代有14张棕牌，

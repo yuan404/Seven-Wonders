@@ -4,9 +4,12 @@ import Kernel.Card;
 import Kernel.Manager;
 import Kernel.Player;
 import javafx.animation.FadeTransition;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -250,7 +253,7 @@ public class Game {
 		}
 	}
 
-	// TODO 建造卡牌后有个卡牌消失效果-未起作用-Bug
+	// TODO 建造卡牌后有个卡牌消失效果
 	public static void hideCard(Player player, Card card) {
 		Manager m = new Manager();
 		ImageView iv = new ImageView(card.iv.getImage());
@@ -263,5 +266,68 @@ public class Game {
 		ft.setFromValue(1);
 		ft.setToValue(0);
 		ft.play();
+	}
+
+	// TODO 加入点
+	public static void addPoint(String color, final Player player, int i,
+			final Card card) {
+		Circle cir = new Circle();
+		final Manager m = new Manager();
+		if (color == "Brown") {
+			cir.setFill(Color.BROWN);
+			cir.setLayoutX(30 + player.brownNum * 11);
+			cir.setLayoutY(140);
+		} else if (color == "Gray") {
+			cir.setFill(Color.GRAY);
+			cir.setLayoutX(30 + player.grayNum * 11);
+			cir.setLayoutY(151);
+		} else if (color == "Green") {
+			cir.setFill(Color.GREEN);
+			cir.setLayoutY(70);
+			if (i == 1) {
+				cir.setLayoutX(220 + player.Gliterature * 11);
+			} else if (i == 2) {
+				cir.setLayoutX(170 + player.Gphysics * 11);
+			} else if (i == 3) {
+				cir.setLayoutX(270 + player.Gmath * 11);
+			}
+		} else if (color == "Blue") {
+			cir.setFill(Color.BLUE);
+			cir.setLayoutX(339 + player.blueNum * 11);
+			cir.setLayoutY(75);
+		} else if (color == "Red") {
+			cir.setFill(Color.RED);
+			cir.setLayoutX(429 + player.redNum * 11);
+			cir.setLayoutY(75);
+		} else if (color == "Yellow") {
+			cir.setFill(Color.YELLOW);
+			cir.setLayoutX(541 - player.yellowNum * 11);
+			cir.setLayoutY(140);
+		} else if (color == "Purple") {
+			cir.setFill(Color.PURPLE);
+			cir.setLayoutX(541 - player.purpleNum * 11);
+			cir.setLayoutY(151);
+		}
+		cir.setRadius(5);
+		final ImageView iv = new ImageView(card.iv.getImage());
+		EventHandler<MouseEvent> enter = new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				m.getGUIManager().ap[player.index].getChildren().remove(iv);
+				m.getGUIManager().ap[player.index].getChildren().add(iv);
+				iv.setScaleX(0.4);
+				iv.setScaleY(0.4);
+				iv.setX(((Circle) event.getSource()).getCenterX());
+				iv.setY(((Circle) event.getSource()).getCenterX());
+				iv.setOnMouseExited(new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						m.getGUIManager().ap[player.index].getChildren()
+								.remove(iv);
+					}
+				});
+			}
+		};
+		cir.setOnMouseClicked(enter);
+
+		m.getGUIManager().ap[player.index].getChildren().add(cir);
 	}
 }

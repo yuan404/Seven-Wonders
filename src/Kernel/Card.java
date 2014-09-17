@@ -281,7 +281,7 @@ public class Card {
 	}
 
 	public void addFree(String name) {
-		if (freeBuild[0] != null)
+		if (freeBuild[0] == null)
 			freeBuild[0] = name;
 		else
 			freeBuild[1] = name;
