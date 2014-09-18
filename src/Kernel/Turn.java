@@ -27,6 +27,21 @@ public class Turn {
 		this.choose = choose;
 		System.out.print(card.name + ":" + choose + "\n");
 		Manager m = new Manager();
+		if (choose == 2
+				&& m.getKenelManager().player[index].board.name == "Halicarnassus"
+				&& ((m.getKenelManager().player[index].board.age == 2 && m
+						.getKenelManager().player[index].board.side == 0) || (m
+						.getKenelManager().player[index].board.side == 1 && m
+						.getKenelManager().player[index].board.age >= 0))
+				&& m.getKenelManager().disNum > 0) {
+			m.getKenelManager().update(m.getKenelManager().player[index]);
+			this.card = null;
+			if (index == 0) {
+				m.getGUIManager().addDiscard(m.getKenelManager().player[0]);
+			} else {
+				// TODO bug1
+			}
+		}
 		m.getKenelManager().checkTurn();
 	}
 

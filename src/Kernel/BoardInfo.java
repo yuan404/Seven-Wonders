@@ -112,6 +112,7 @@ public class BoardInfo {
 		board[8].iv.setImage(im[8]);
 		board[8].addCost("stone", 3, 1);
 		board[8].addCost("ore", 4, 2);
+		board[8].max = 2;
 
 		board[8].addFormit("ore", 1, 0);
 		board[8].addFormit("force", 1, 1);
@@ -145,6 +146,7 @@ public class BoardInfo {
 		board[10].addCost("brick", 3, 3);
 		board[10].addCost("paper", 1, 4);
 		board[10].addCost("stone", 4, 4);
+		board[10].max = 4;
 
 		board[10].addFormit("stone", 1, 0);
 		board[10].addFormit("score", 3, 1);

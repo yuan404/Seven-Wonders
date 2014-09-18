@@ -11,6 +11,8 @@ public class Board {
 	public String name;
 	public int age = -1;
 
+	public int max = 3;
+
 	public ImageView iv = new ImageView();
 
 	// 0 是 A面,1是B面。

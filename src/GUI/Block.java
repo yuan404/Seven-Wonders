@@ -22,15 +22,15 @@ import javafx.util.Duration;
  */
 
 public class Block {
-
-	private String version = new String("Version 0.1.13");
-
+	// TODO 版本号
+	private String version = new String("Version 0.1.14");
+	// TODO 开始画面背景
 	private Image bg = new Image("resource/image/newbg.png");
 	private ImageView block = new ImageView(bg);
-
+	// TODO Logo
 	private Image lg = new Image("resource/image/logo.png");
 	private ImageView logo = new ImageView(lg);
-
+	// TODO　菜单及菜单背景
 	private Image mn = new Image("resource/image/engtext_normal.png");
 	private ImageView menu = new ImageView(mn);
 	private Image pt = new Image("resource/image/paper_top.png");
@@ -39,10 +39,10 @@ public class Block {
 	private ImageView paperTop = new ImageView(pt);
 	private ImageView paperMiddle = new ImageView(pm);
 	private ImageView paperFoot = new ImageView(pf);
-
+	// TODO 触发菜单背景
 	private Image mBg = new Image("resource/image/bg.png");
 	private ImageView menuBg = new ImageView(mBg);
-
+	// TODO 游戏界面的宽高
 	private double width;
 	private double height;
 
@@ -56,10 +56,10 @@ public class Block {
 		// rec.setArcWidth(100);
 		// block.setClip(rec);
 
-		// Logo位置
+		// TODO Logo位置
 		logo.setX(width / 3);
 
-		// 菜单内容及背景位置
+		// TODO 菜单内容及背景位置
 		menu.setX(width / 3 * 2 + 30);
 		menu.setY(height / 3);
 		paperTop.setX(width / 3 * 2);
@@ -69,7 +69,7 @@ public class Block {
 		paperMiddle.setY(height / 3 + 20);
 		paperFoot.setY(height / 3 + 20);
 
-		// 菜单子菜单页面
+		// TODO 触发菜单页面
 		Rectangle rec = new Rectangle(300, 400);
 		rec.setArcHeight(50);
 		rec.setArcWidth(50);
@@ -107,7 +107,7 @@ public class Block {
 		return menuBg;
 	}
 
-	// 开始动画效果
+	// TODO 开始动画效果
 	public void setStartEffect() {
 		FadeTransition ft = new FadeTransition(Duration.millis(2000), block);
 		ft.setFromValue(0);
@@ -124,7 +124,7 @@ public class Block {
 		pt.play();
 	}
 
-	// 版本号
+	// TODO 设置版本号
 	public Text getVersion() {
 		Text tf = new Text();
 		tf.setText(version);
@@ -135,7 +135,7 @@ public class Block {
 		return tf;
 	}
 
-	// 菜单
+	// TODO 菜单
 	public Rectangle getLabel(int n) {
 		final Rectangle[] Rectangle = new Rectangle[7];
 		for (int i = 0; i < 7; i++) {
@@ -170,6 +170,7 @@ public class Block {
 		return Rectangle[n];
 	}
 
+	// TODO 选择人数的选择项
 	final ChoiceBox<Integer> playerNum = new ChoiceBox<Integer>();
 
 	public ChoiceBox<Integer> getPlayerNum() {
@@ -197,6 +198,7 @@ public class Block {
 		return playerNum;
 	}
 
+	// TODO 触发菜单的电脑等级项
 	public ChoiceBox<String> getPlayerLevel(int i) {
 		final ChoiceBox<String> Level = new ChoiceBox<String>();
 		if (i == 1)
@@ -218,6 +220,7 @@ public class Block {
 		return text;
 	}
 
+	// TODO 开始按钮
 	public Button getStart() {
 		Button start = new Button();
 		start.setText("Start");
@@ -233,6 +236,7 @@ public class Block {
 		return start;
 	}
 
+	// TODO 取消按钮
 	public Button getCancel() {
 		Button cancel = new Button();
 		cancel.setText("Cancel");

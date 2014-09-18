@@ -12,7 +12,7 @@ public class AI {
 	public static void Level1(Player player) {
 		Manager m = new Manager();
 		for (int i = 0; i < m.getKenelManager().hand[player.index].cardNum; i++) {
-			if (player.board.age < 3 && MathGame.ifBuildStage(player)) {
+			if (MathGame.ifBuildStage(player)) {
 				player.turn.setChoose(
 						m.getKenelManager().hand[player.index].card[i], 2);
 				return;

@@ -77,7 +77,7 @@ public class Player {
 	public int redNum = 0;
 	public int yellowNum = 0;
 	public int purpleNum = 0;
-	
+
 	public int freeNum = 0;
 	public String[] freeBuild = new String[55];
 
@@ -113,6 +113,7 @@ public class Player {
 	public boolean FreeDiscard = false;
 	// olympia-build 1 free building for each age
 	public boolean FreeBuild = false;
+	public int[] free = new int[3];
 	// babylon-play the last card of each age
 	public boolean LastCard = false;
 	// olympia-cheap buy
@@ -129,5 +130,13 @@ public class Player {
 
 	public void addCard(Card newCard) {
 		card[cardNum++] = newCard;
+	}
+
+	public void freeBuild(Card newCard) {
+		Manager m = new Manager();
+		if (FreeBuild && free[m.getKenelManager().age - 1] != 0) {
+			turn.setChoose(newCard, 1);
+			free[m.getKenelManager().age - 1] = 0;
+		}
 	}
 }

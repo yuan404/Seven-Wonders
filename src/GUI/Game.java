@@ -330,4 +330,5 @@ public class Game {
 
 		m.getGUIManager().ap[player.index].getChildren().add(cir);
 	}
+
 }

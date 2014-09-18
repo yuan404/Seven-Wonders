@@ -61,7 +61,7 @@ public class KernelManager {
 
 		BoardInfo bi = new BoardInfo();
 
-		for (int i = 0; i < this.playerNum; i++) {
+		for (int i = 1; i < this.playerNum; i++) {
 			int a = random.nextInt() % 7;
 			int b = random.nextInt() % 7;
 			a = Math.abs(a) % 7;
@@ -74,9 +74,10 @@ public class KernelManager {
 			bi.board[a] = bi.board[b];
 			bi.board[b] = bd;
 		}
-		for (int i = 0; i < this.playerNum; i++) {
+		for (int i = 1; i < this.playerNum; i++) {
 			board[i] = bi.board[i];
 		}
+		board[0] = bi.board[12];
 		// TODO 生成第一时代卡牌
 		cardHand = ci.getCard(1, playerNum);
 		// TODO 设置难度(AI)及初始化玩家
@@ -198,9 +199,18 @@ public class KernelManager {
 
 	// TODO 判断是不是所有人都进行了操作
 	public void checkTurn() {
+		Manager m = new Manager();
 		for (int i = 0; i < playerNum; i++) {
 			if (player[i].turn.card == null)
 				return;
+			else if (player[i].LastCard && times == 6 && hand[i].cardNum != 1) {
+				update(player[i]);
+				if (i == 0)
+					lastCard();
+				else
+					AI.Level1(player[i]);
+				return;
+			}
 		}
 		for (int i = 0; i < playerNum; i++) {
 			if (player[i].turn.choose == 0) {
@@ -220,7 +230,6 @@ public class KernelManager {
 			checkCoin(player[i]);
 			Game.updateCoin(player[i]);
 		}
-		Manager m = new Manager();
 		m.getGUIManager().updateDiscard();
 		// TODO 更新蓝分和红战斗力
 		Game.setText(player);
@@ -233,6 +242,22 @@ public class KernelManager {
 			newAge();
 		} else {
 			endAge();
+			for (int i = 0; i < playerNum; i++) {
+				if (player[i].board.name == "Olympia"
+						&& player[i].board.side == 1
+						&& player[i].board.age == 3) {
+					if (i == 0) {
+						if (m.getGUIManager().addPurple(player[i]))
+							return;
+						else {
+							endGame();
+							return;
+						}
+					} else {
+						// TODO bug2
+					}
+				}
+			}
 			endGame();
 		}
 	}
@@ -290,6 +315,10 @@ public class KernelManager {
 			battle(player[i]);
 		}
 	}
+
+	// TODO 特殊时代间隙
+
+	// TODO 特殊游戏间隙
 
 	// TODO 新时代
 	public void newAge() {
@@ -491,5 +520,55 @@ public class KernelManager {
 			Aplayer.GpurpleScore += player[(Aplayer.index + playerNum + 1)
 					% playerNum].board.age;
 		}
+	}
+
+	// TODO 奇迹板特殊属性-最后一张牌
+	public void lastCard() {
+		Manager m = new Manager();
+		if (player[0].LastCard == true) {
+			for (int i = 0; i < hand[0].cardNum; i++) {
+				if (hand[0].card[i] != null) {
+					Game.addCard(player[0], hand[0].card[i], i, hand[0].cardNum);
+					for (int j = 0; j < player[0].freeNum; j++) {
+						if (hand[0].card[i].name == player[0].freeBuild[j]) {
+							m.getGUIManager().addFreeOK(hand[0].card[i], i);
+							break;
+						}
+					}
+					if (MathGame.ifBuild(player[0], hand[0].card[i])) {
+						m.getGUIManager().addOK(hand[0].card[i], i);
+					}
+					for (int j = 0; j < player[0].cardNum; j++) {
+						if (hand[0].card[i].name == player[0].card[j].name) {
+							m.getGUIManager().addnotOK(hand[0].card[i], i);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void update(Player Aplayer) {
+		Manager m = new Manager();
+		if (Aplayer.turn.choose == 0) {
+			MathGame.doAction(Aplayer, Aplayer.turn.card, true);
+			addDiscard(Aplayer.turn.card);
+		} else if (Aplayer.turn.choose == 1) {
+			Aplayer.turn.update(Aplayer, Aplayer.turn.card);
+			MathGame.doAction(Aplayer, Aplayer.turn.card);
+			Aplayer.addCard(Aplayer.turn.card);
+			if (!(Aplayer.board.name == "Olympia" && Aplayer.board.side == 1 && Aplayer.board.age == 3))
+				Game.hideCard(Aplayer, Aplayer.turn.card);
+		} else {
+			Aplayer.turn.update(Aplayer, Aplayer.board);
+			MathGame.doAction(Aplayer);
+			Game.updateStage(Aplayer);
+		}
+		hand[Aplayer.index].removeHand(Aplayer.turn.card);
+		checkCoin(Aplayer);
+		m.getGUIManager().updateDiscard();
+		Game.updateCoin(Aplayer);
+		Game.setText(player);
+		m.getGUIManager().updateRedBlue();
 	}
 }

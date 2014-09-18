@@ -237,13 +237,13 @@ public class Card {
 			break;
 
 		case "BrownCoin":
-			BrownScore = true;
+			BrownCoin = true;
 			break;
 		case "YellowCoin":
-			YellowScore = true;
+			YellowCoin = true;
 			break;
 		case "GrayCoin":
-			GrayScore = true;
+			GrayCoin = true;
 			break;
 		case "StageCoin":
 			StageCoin = true;

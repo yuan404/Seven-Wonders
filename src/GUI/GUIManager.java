@@ -1,6 +1,7 @@
 package GUI;
 
 import Kernel.Card;
+import Kernel.CardInfo;
 import Kernel.KernelManager;
 import Kernel.Manager;
 import Kernel.MathGame;
@@ -18,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -36,7 +38,7 @@ public class GUIManager {
 	private Stage stage;
 
 	private Block block;
-
+	// TODO 图标及光标
 	private Image icon = new Image("resource/image/icon.png");
 	private Image cursor = new Image("resource/image/arrow.png");
 
@@ -46,8 +48,9 @@ public class GUIManager {
 
 	public String[] Level = { "Level1" };
 
+	// TODO 玩家各自小屏信息
 	public AnchorPane[] ap = new AnchorPane[7];
-
+	// TODO 玩家各自红战斗力及蓝分
 	public Text[] blueScore = new Text[7];
 	public Text[] redScore = new Text[7];
 
@@ -85,6 +88,7 @@ public class GUIManager {
 		return stage;
 	}
 
+	// TODO 设置开始背景
 	public void setBlock() {
 		root.getChildren().add(block.getBlock());
 		root.getChildren().add(block.getLogo());
@@ -98,6 +102,7 @@ public class GUIManager {
 		block.setStartEffect();
 	}
 
+	// TODO 开始游戏的一些元素
 	public ImageView iv;
 	public Text[] text = new Text[8];
 	public Button[] button = new Button[2];
@@ -276,6 +281,7 @@ public class GUIManager {
 			public void handle(MouseEvent event) {
 				Manager m = new Manager();
 				if (event.getY() < 567) {
+					// TODO 当资源足够或者 有免费建造的奇迹属性
 					if (MathGame.ifBuild(player,
 							m.getKenelManager().hand[player.index].card[index])) {
 						root.getChildren().removeAll(card);
@@ -283,6 +289,10 @@ public class GUIManager {
 						player.turn.setChoose(
 								m.getKenelManager().hand[player.index].card[index],
 								1);
+					} else if (player.free[m.getKenelManager().age - 1] != 0) {
+						root.getChildren().removeAll(card);
+						root.getChildren().remove(chooser[index]);
+						player.freeBuild(m.getKenelManager().hand[player.index].card[index]);
 					}
 				} else if (event.getY() < 619) {
 					if (MathGame.ifBuildStage(player)) {
@@ -454,5 +464,261 @@ public class GUIManager {
 		notOK[i].setX(card.iv.getX() + 30);
 		notOK[i].setY(card.iv.getY() + 50);
 		root.getChildren().add(notOK[i]);
+	}
+
+	Image top = new Image("resource/image/frametop.png");
+	final Image bg = new Image("resource/image/dist2.jpg");
+	final Image bg2 = new Image("resource/image/dist.jpg");
+	Image foot = new Image("resource/image/framebottom.jpg");
+	ImageView topIv = new ImageView(top);
+	final ImageView[] bgIv = new ImageView[55];
+	ImageView footIv = new ImageView(foot);
+	final Text[] dis = new Text[55];
+	ImageView okIv = new ImageView(ok);
+	ImageView notokIv = new ImageView(notok);
+
+	// TODO 弃牌选择
+	public void addDiscard(final Player player) {
+		final Manager m = new Manager();
+		int num = m.getKenelManager().disNum;
+		if (num > 10)
+			num = 10;
+		if (num == 0)
+			return;
+		final int number = num;
+		topIv.setX(200);
+		topIv.setY(100);
+		root.getChildren().add(topIv);
+		root.getChildren().add(footIv);
+		for (int i = 0; i < num; i++) {
+			bgIv[i] = new ImageView(bg);
+			bgIv[i].setX(215);
+			bgIv[i].setY(135 + 35 * i);
+			bgIv[i].setScaleX(0.5);
+			bgIv[i].setScaleY(0.5);
+			bgIv[i].setId(String.valueOf(i));
+			bgIv[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					for (int i = 0; i < number; i++) {
+						bgIv[i].setImage(bg);
+					}
+					final int i = Integer.parseInt(((ImageView) event
+							.getSource()).getId());
+					((ImageView) event.getSource()).setImage(bg2);
+					root.getChildren().remove(okIv);
+					root.getChildren().remove(notokIv);
+					root.getChildren().add(okIv);
+					okIv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							removeDis();
+							player.turn.setChoose(
+									m.getKenelManager().discard[m
+											.getKenelManager().disNum - i - 1],
+									1);
+							m.getKenelManager().removeDiscard(
+									m.getKenelManager().discard[m
+											.getKenelManager().disNum - i - 1]);
+						}
+					});
+				}
+			});
+			notokIv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					removeDis();
+				}
+			});
+			root.getChildren().add(bgIv[i]);
+			dis[i] = new Text(
+					m.getKenelManager().discard[m.getKenelManager().disNum - i
+							- 1].name);
+			dis[i].setX(275);
+			dis[i].setY(185 + 35 * i);
+			dis[i].setScaleX(0.5);
+			dis[i].setScaleY(0.5);
+			dis[i].setFont(new Font(40));
+			root.getChildren().add(dis[i]);
+			dis[i].setId(String.valueOf(i));
+			dis[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					for (int i = 0; i < number; i++) {
+						bgIv[i].setImage(bg);
+					}
+					final int i = Integer.parseInt(((Text) event.getSource())
+							.getId());
+					bgIv[i].setImage(bg2);
+					root.getChildren().remove(okIv);
+					root.getChildren().remove(notokIv);
+					root.getChildren().add(okIv);
+					okIv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							removeDis();
+							player.turn.setChoose(
+									m.getKenelManager().discard[m
+											.getKenelManager().disNum - i - 1],
+									1);
+							m.getKenelManager().removeDiscard(
+									m.getKenelManager().discard[m
+											.getKenelManager().disNum - i - 1]);
+
+						}
+					});
+				}
+			});
+		}
+		footIv.setX(200);
+		footIv.setY(100 + 35 * num);
+		topIv.setScaleX(0.5);
+		topIv.setScaleY(0.5);
+		footIv.setScaleX(0.5);
+		footIv.setScaleY(0.5);
+		notokIv.setX(410);
+		notokIv.setY(120);
+		notokIv.setScaleX(0.5);
+		notokIv.setScaleY(0.5);
+		okIv.setX(410);
+		okIv.setY(120);
+		okIv.setScaleX(0.5);
+		okIv.setScaleY(0.5);
+		root.getChildren().add(notokIv);
+	}
+
+	// TODO 弃牌选择
+	public boolean addPurple(final Player player) {
+		final Manager m = new Manager();
+		final int Lnum = m.getKenelManager().player[(player.index
+				+ m.getKenelManager().playerNum + 1)
+				% m.getKenelManager().playerNum].purpleNum;
+		final int Rnum = m.getKenelManager().player[(player.index
+				+ m.getKenelManager().playerNum - 1)
+				% m.getKenelManager().playerNum].purpleNum;
+		if (Lnum + Rnum == 0)
+			return false;
+		topIv.setX(200);
+		topIv.setY(100);
+		root.getChildren().add(topIv);
+		root.getChildren().add(footIv);
+		for (int i = 0; i < Lnum + Rnum; i++) {
+			bgIv[i] = new ImageView(bg);
+			bgIv[i].setX(215);
+			bgIv[i].setY(135 + 35 * i);
+			bgIv[i].setScaleX(0.5);
+			bgIv[i].setScaleY(0.5);
+			bgIv[i].setId(String.valueOf(i));
+			bgIv[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					for (int i = 0; i < Lnum + Rnum; i++) {
+						bgIv[i].setImage(bg);
+					}
+					final int i = Integer.parseInt(((ImageView) event
+							.getSource()).getId());
+					((ImageView) event.getSource()).setImage(bg2);
+					root.getChildren().remove(okIv);
+					root.getChildren().remove(notokIv);
+					root.getChildren().add(okIv);
+					okIv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							removeDis();
+							MathGame.doAction(player,
+									CardInfo.getCardByName(dis[i].getText()));
+							m.getKenelManager().update(player);
+							m.getKenelManager().endGame();
+						}
+					});
+				}
+			});
+			notokIv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					removeDis();
+				}
+			});
+			root.getChildren().add(bgIv[i]);
+			if (i < Lnum) {
+				int k = 0;
+				for (; k < m.getKenelManager().player[(player.index
+						+ m.getKenelManager().playerNum + 1)
+						% m.getKenelManager().playerNum].cardNum; k++) {
+					if (m.getKenelManager().player[(player.index
+							+ m.getKenelManager().playerNum + 1)
+							% m.getKenelManager().playerNum].card[k].color == "Purple") {
+						dis[i] = new Text(
+								m.getKenelManager().player[(player.index
+										+ m.getKenelManager().playerNum + 1)
+										% m.getKenelManager().playerNum].card[k].name);
+						break;
+					}
+				}
+
+			} else {
+				int k = 0;
+				for (; k < m.getKenelManager().player[(player.index
+						+ m.getKenelManager().playerNum - 1)
+						% m.getKenelManager().playerNum].cardNum; k++) {
+					if (m.getKenelManager().player[(player.index
+							+ m.getKenelManager().playerNum - 1)
+							% m.getKenelManager().playerNum].card[k].color == "Purple") {
+						dis[i] = new Text(
+								m.getKenelManager().player[(player.index
+										+ m.getKenelManager().playerNum - 1)
+										% m.getKenelManager().playerNum].card[k].name);
+						break;
+					}
+				}
+
+			}
+			dis[i].setX(275);
+			dis[i].setY(185 + 35 * i);
+			dis[i].setScaleX(0.5);
+			dis[i].setScaleY(0.5);
+			dis[i].setFont(new Font(40));
+			root.getChildren().add(dis[i]);
+			dis[i].setId(String.valueOf(i));
+			dis[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					for (int i = 0; i < Lnum + Rnum; i++) {
+						bgIv[i].setImage(bg);
+					}
+					final int i = Integer.parseInt(((Text) event.getSource())
+							.getId());
+					bgIv[i].setImage(bg2);
+					root.getChildren().remove(okIv);
+					root.getChildren().remove(notokIv);
+					root.getChildren().add(okIv);
+					okIv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							removeDis();
+							MathGame.doAction(player,
+									CardInfo.getCardByName(dis[i].getText()));
+							m.getKenelManager().update(player);
+							m.getKenelManager().endGame();
+						}
+					});
+				}
+			});
+		}
+		footIv.setX(200);
+		footIv.setY(100 + 35 * (Lnum + Rnum));
+		topIv.setScaleX(0.5);
+		topIv.setScaleY(0.5);
+		footIv.setScaleX(0.5);
+		footIv.setScaleY(0.5);
+		notokIv.setX(410);
+		notokIv.setY(120);
+		notokIv.setScaleX(0.5);
+		notokIv.setScaleY(0.5);
+		okIv.setX(410);
+		okIv.setY(120);
+		okIv.setScaleX(0.5);
+		okIv.setScaleY(0.5);
+		root.getChildren().add(notokIv);
+		return true;
+	}
+
+	public void removeDis() {
+		root.getChildren().remove(topIv);
+		root.getChildren().remove(okIv);
+		root.getChildren().remove(notokIv);
+		root.getChildren().remove(footIv);
+		root.getChildren().removeAll(bgIv);
+		root.getChildren().removeAll(dis);
 	}
 }

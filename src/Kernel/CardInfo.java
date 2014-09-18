@@ -6,7 +6,7 @@ import java.util.Random;
 import javafx.scene.image.Image;
 
 public class CardInfo {
-	Card[] card = new Card[51];
+	static Card[] card = new Card[51];
 	Card[] cardHand;
 	Image[] im = new Image[149];
 
@@ -990,5 +990,13 @@ public class CardInfo {
 			cardHand[b] = card[50];
 		}
 		return cardHand;
+	}
+
+	public static Card getCardByName(String name) {
+		for (int i = 40; i < 50; i++) {
+			if (card[i].name == name)
+				return card[i];
+		}
+		return null;
 	}
 }

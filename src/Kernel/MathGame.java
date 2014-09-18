@@ -24,7 +24,7 @@ public class MathGame {
 		return y;
 	}
 
-	// 能否建造该卡牌
+	// TODO 建造该卡牌的可行性
 	public static boolean ifBuild(Player player, Card card) {
 		for (int i = 0; i < player.cardNum; i++) {
 			if (card.name == player.card[i].name)
@@ -196,6 +196,8 @@ public class MathGame {
 
 	public static boolean ifBuildStage(Player player) {
 		int age = player.board.age;
+		if (age == player.board.max)
+			return false;
 		int wood = player.Gwood - player.board.Cwood[age] + player.Bwood;
 		int stone = player.Gstone - player.board.Cstone[age] + player.Bstone;
 		int brick = player.Gbrick - player.board.Cbrick[age] + player.Bbrick;
@@ -210,7 +212,7 @@ public class MathGame {
 		return false;
 	}
 
-	// 三种操作造成的收益
+	// TODO 三种操作造成的收益
 	public static void doAction(Player player, Card card) {
 		player.GblueScore += card.GblueScore;
 		player.Gbrick += card.Gbrick;
@@ -252,13 +254,13 @@ public class MathGame {
 			player.purpleNum++;
 		}
 		if (card.color == "Green" && card.Gliterature == 1)
-			Game.addPoint(card.color, player, 1,card);
+			Game.addPoint(card.color, player, 1, card);
 		else if (card.color == "Green" && card.Gphysics == 1)
-			Game.addPoint(card.color, player, 2,card);
+			Game.addPoint(card.color, player, 2, card);
 		else if (card.color == "Green" && card.Gmath == 1)
-			Game.addPoint(card.color, player, 3,card);
+			Game.addPoint(card.color, player, 3, card);
 		else
-			Game.addPoint(card.color, player, 0,card);
+			Game.addPoint(card.color, player, 0, card);
 
 		if (card.freeBuild[0] != null) {
 			player.freeBuild[player.freeNum++] = card.freeBuild[0];
@@ -319,7 +321,7 @@ public class MathGame {
 	public static void doAction(Player player) {
 		player.board.age++;
 		int age = player.board.age;
-
+		System.out.print(age + "\n");
 		player.Gwood += player.board.Gwood[age];
 		player.Gstone += player.board.Gstone[age];
 		player.Gbrick += player.board.Gbrick[age];
@@ -338,8 +340,12 @@ public class MathGame {
 			player.CheapBuy = true;
 		if (player.board.CopyGuild[age] == true)
 			player.CopyGuild = true;
-		if (player.board.FreeBuild[age] == true)
+		if (player.board.FreeBuild[age] == true) {
 			player.FreeBuild = true;
+			Manager m = new Manager();
+			for (int i = m.getKenelManager().age - 1; i < 3; i++)
+				player.free[i] = 1;
+		}
 		if (player.board.FreeDiscard[age] == true)
 			player.FreeDiscard = true;
 		if (player.board.LastCard[age] == true)
