@@ -23,7 +23,7 @@ import javafx.util.Duration;
 
 public class Block {
 	// TODO 版本号
-	private String version = new String("Version 0.1.14");
+	private String version = new String("Version 0.2.0");
 	// TODO 开始画面背景
 	private Image bg = new Image("resource/image/newbg.png");
 	private ImageView block = new ImageView(bg);

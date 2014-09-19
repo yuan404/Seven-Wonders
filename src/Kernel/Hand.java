@@ -1,5 +1,9 @@
 package Kernel;
 
+/**
+ * 
+ * @author Lane 手牌
+ */
 public class Hand {
 
 	public Card[] card = new Card[7];

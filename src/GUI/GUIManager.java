@@ -1,5 +1,6 @@
 package GUI;
 
+import Kernel.Buy;
 import Kernel.Card;
 import Kernel.CardInfo;
 import Kernel.KernelManager;
@@ -720,5 +721,171 @@ public class GUIManager {
 		root.getChildren().remove(footIv);
 		root.getChildren().removeAll(bgIv);
 		root.getChildren().removeAll(dis);
+		root.getChildren().removeAll(re);
+
+	}
+
+	public Image[] res = new Image[7];
+	public ImageView[] re = new ImageView[7];
+
+	// TODO 买卖交易
+	public void addBuy(final Player player, final int side) {
+		final Buy b = new Buy();
+		final Manager m = new Manager();
+		int ind;
+		ind = 0;
+		if (side == 0) {
+			ind = (player.index + 1 + m.getKenelManager().playerNum)
+					% m.getKenelManager().playerNum;
+		} else {
+			ind = (player.index - 1 + m.getKenelManager().playerNum)
+					% m.getKenelManager().playerNum;
+		}
+		final int index = ind;
+		for (int i = 0; i < 7; i++) {
+			res[i] = new Image("resource/image/rs" + (i + 1) + ".png");
+			re[i] = new ImageView(res[i]);
+		}
+		re[0].setId("brick");
+		re[1].setId("ore");
+		re[2].setId("stone");
+		re[3].setId("wood");
+		re[4].setId("cloth");
+		re[5].setId("glass");
+		re[6].setId("paper");
+
+		topIv.setX(200);
+		topIv.setY(100);
+		footIv.setX(200);
+		footIv.setY(100 + 35 * (7));
+		topIv.setScaleX(0.5);
+		topIv.setScaleY(0.5);
+		footIv.setScaleX(0.5);
+		footIv.setScaleY(0.5);
+		notokIv.setX(410);
+		notokIv.setY(120);
+		notokIv.setScaleX(0.5);
+		notokIv.setScaleY(0.5);
+		okIv.setX(410);
+		okIv.setY(120);
+		okIv.setScaleX(0.5);
+		okIv.setScaleY(0.5);
+		root.getChildren().add(topIv);
+		root.getChildren().add(footIv);
+
+		for (int i = 0; i < 7; i++) {
+			bgIv[i] = new ImageView(bg);
+			bgIv[i].setX(215);
+			bgIv[i].setY(135 + 35 * i);
+			bgIv[i].setScaleX(0.5);
+			bgIv[i].setScaleY(0.5);
+			root.getChildren().add(bgIv[i]);
+			re[i].setX(315);
+			re[i].setY(145 + 35 * i);
+			re[i].setScaleX(0.5);
+			re[i].setScaleY(0.5);
+			root.getChildren().add(re[i]);
+			dis[i] = new Text();
+			dis[i].setText(String.valueOf(0));
+			dis[i].setX(405);
+			dis[i].setY(185 + 35 * i);
+			dis[i].setScaleX(0.5);
+			dis[i].setScaleY(0.5);
+			dis[i].setFont(new Font(40));
+			root.getChildren().add(dis[i]);
+			re[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					String str = ((ImageView) event.getSource()).getId();
+					if (str == "wood") {
+						b.Cwood++;
+						dis[3].setText(String.valueOf(b.Cwood));
+						if ((player.CheapBuy)
+								|| (side == 0 && player.LeftCheap)
+								|| (side == 1 && player.RightCheap))
+							b.coin++;
+						else
+							b.coin += 2;
+					} else if (str == "stone") {
+						b.Cstone++;
+						dis[2].setText(String.valueOf(b.Cstone));
+						if ((player.CheapBuy)
+								|| (side == 0 && player.LeftCheap)
+								|| (side == 1 && player.RightCheap))
+							b.coin++;
+						else
+							b.coin += 2;
+					} else if (str == "brick") {
+						b.Cbrick++;
+						dis[0].setText(String.valueOf(b.Cbrick));
+						if ((player.CheapBuy)
+								|| (side == 0 && player.LeftCheap)
+								|| (side == 1 && player.RightCheap))
+							b.coin++;
+						else
+							b.coin += 2;
+					} else if (str == "ore") {
+						b.Core++;
+						dis[1].setText(String.valueOf(b.Core));
+						if ((player.CheapBuy)
+								|| (side == 0 && player.LeftCheap)
+								|| (side == 1 && player.RightCheap))
+							b.coin++;
+						else
+							b.coin += 2;
+					} else if (str == "glass") {
+						b.Cglass++;
+						dis[5].setText(String.valueOf(b.Cglass));
+						if ((player.GrayCheap))
+							b.coin++;
+						else
+							b.coin += 2;
+					} else if (str == "cloth") {
+						b.Ccloth++;
+						dis[4].setText(String.valueOf(b.Ccloth));
+						if ((player.GrayCheap))
+							b.coin++;
+						else
+							b.coin += 2;
+					} else if (str == "paper") {
+						b.Cpaper++;
+						dis[6].setText(String.valueOf(b.Cpaper));
+						if ((player.GrayCheap))
+							b.coin++;
+						else
+							b.coin += 2;
+					}
+					root.getChildren().remove(notokIv);
+					root.getChildren().remove(okIv);
+					if (b.coin > player.Gcoin
+							|| !MathGame.ifBuy(
+									m.getKenelManager().player[index], b)) {
+						root.getChildren().add(notokIv);
+					} else
+						root.getChildren().add(okIv);
+
+				}
+			});
+		}
+		notokIv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				b.clear();
+				removeDis();
+			}
+		});
+		okIv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				b.update(player);
+				removeDis();
+				for (int i = 0; i < m.getKenelManager().hand[0].cardNum; i++) {
+					if (MathGame.ifBuild(player,
+							m.getKenelManager().hand[0].card[i])) {
+						root.getChildren().remove(OK[i]);
+						m.getGUIManager().addOK(
+								m.getKenelManager().hand[0].card[i], i);
+					}
+				}
+			}
+		});
+		root.getChildren().add(notokIv);
 	}
 }

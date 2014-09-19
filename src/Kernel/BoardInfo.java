@@ -2,6 +2,11 @@ package Kernel;
 
 import javafx.scene.image.Image;
 
+/**
+ * 
+ * @author Lane 奇迹板总信息
+ * 
+ */
 public class BoardInfo {
 
 	public Board[] board = new Board[15];

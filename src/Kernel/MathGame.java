@@ -321,7 +321,6 @@ public class MathGame {
 	public static void doAction(Player player) {
 		player.board.age++;
 		int age = player.board.age;
-		System.out.print(age + "\n");
 		player.Gwood += player.board.Gwood[age];
 		player.Gstone += player.board.Gstone[age];
 		player.Gbrick += player.board.Gbrick[age];
@@ -355,4 +354,163 @@ public class MathGame {
 	public static void doAction(Player player, Card card, boolean discard) {
 		player.Gcoin += 3;
 	}
+
+	// TODO 判断是否能买
+	public static boolean ifBuy(Player player, Buy card) {
+		int wood = player.Gwood - card.Cwood + player.Bwood;
+		int stone = player.Gstone - card.Cstone + player.Bstone;
+		int brick = player.Gbrick - card.Cbrick + player.Bbrick;
+		int ore = player.Gore - card.Core + player.Bore;
+
+		int cloth = player.Gcloth - card.Ccloth + player.Bcloth;
+		int glass = player.Gglass - card.Cglass + player.Bglass;
+		int paper = player.Gpaper - card.Cpaper + player.Bpaper;
+
+		if (ifBuy2(player, wood, stone, brick, ore, cloth, glass, paper))
+			return true;
+		return false;
+	}
+
+	public static boolean ifBuy2(Player player, int wood, int stone, int brick,
+			int ore, int cloth, int glass, int paper) {
+		int three = 0;
+		if (cloth < 0)
+			three += cloth;
+		if (glass < 0)
+			three += glass;
+		if (paper < 0)
+			three += paper;
+		three += player.Gglass_cloth_paper;
+		if (three < 0)
+			return false;
+		int wb = player.Gwood_brick;
+		int ws = player.Gwood_stone;
+		int wo = player.Gwood_ore;
+		int sb = player.Gstone_brick;
+		int so = player.Gstone_ore;
+		int bo = player.Gbrick_ore;
+		for (int i = 0; i < 6; i++) {
+			if (wb > 0) {
+				if (wood < 0 && brick >= 0) {
+					wood++;
+					wb--;
+				} else if (wood >= 0 && brick < 0) {
+					brick++;
+					wb--;
+				}
+			}
+			if (ws > 0) {
+				if (wood < 0 && stone >= 0) {
+					wood++;
+					ws--;
+				} else if (wood >= 0 && stone < 0) {
+					stone++;
+					ws--;
+				}
+			}
+			if (wo > 0) {
+				if (wood < 0 && ore >= 0) {
+					wood++;
+					wo--;
+				} else if (wood >= 0 && ore < 0) {
+					ore++;
+					wo--;
+				}
+			}
+			if (sb > 0) {
+				if (stone < 0 && brick >= 0) {
+					stone++;
+					sb--;
+				} else if (brick < 0 && stone >= 0) {
+					brick++;
+					sb--;
+				}
+			}
+			if (so > 0) {
+				if (stone < 0 && ore >= 0) {
+					stone++;
+					so--;
+				} else if (ore < 0 && stone >= 0) {
+					ore++;
+					so--;
+				}
+			}
+			if (bo > 0) {
+				if (brick < 0 && ore >= 0) {
+					brick++;
+					bo--;
+				} else if (ore < 0 && brick >= 0) {
+					ore++;
+					bo--;
+				}
+			}
+		}
+		if (wb > 0) {
+			if (wood < 0) {
+				wood++;
+				wb--;
+			} else if (brick < 0) {
+				brick++;
+				wb--;
+			}
+		}
+		if (ws > 0) {
+			if (wood < 0) {
+				wood++;
+				ws--;
+			} else if (stone < 0) {
+				stone++;
+				ws--;
+			}
+		}
+		if (wo > 0) {
+			if (wood < 0) {
+				wood++;
+				wo--;
+			} else if (ore < 0) {
+				ore++;
+				wo--;
+			}
+		}
+		if (sb > 0) {
+			if (stone < 0) {
+				stone++;
+				sb--;
+			} else if (brick < 0) {
+				brick++;
+				sb--;
+			}
+		}
+		if (so > 0) {
+			if (stone < 0) {
+				stone++;
+				so--;
+			} else if (ore < 0) {
+				ore++;
+				so--;
+			}
+		}
+		if (bo > 0) {
+			if (brick < 0) {
+				brick++;
+				bo--;
+			} else if (ore < 0) {
+				ore++;
+				bo--;
+			}
+		}
+		if (wood > 0)
+			wood = 0;
+		if (stone > 0)
+			stone = 0;
+		if (brick > 0)
+			brick = 0;
+		if (ore > 0)
+			ore = 0;
+		if (wood + stone + brick + ore < 0)
+			return false;
+		else
+			return true;
+	}
+
 }

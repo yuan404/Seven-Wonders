@@ -61,7 +61,7 @@ public class KernelManager {
 
 		BoardInfo bi = new BoardInfo();
 
-		for (int i = 1; i < this.playerNum; i++) {
+		for (int i = 0; i < this.playerNum; i++) {
 			int a = random.nextInt() % 7;
 			int b = random.nextInt() % 7;
 			a = Math.abs(a) % 7;
@@ -74,10 +74,9 @@ public class KernelManager {
 			bi.board[a] = bi.board[b];
 			bi.board[b] = bd;
 		}
-		for (int i = 1; i < this.playerNum; i++) {
+		for (int i = 0; i < this.playerNum; i++) {
 			board[i] = bi.board[i];
 		}
-		board[0] = bi.board[12];
 		// TODO 生成第一时代卡牌
 		cardHand = ci.getCard(1, playerNum);
 		// TODO 设置难度(AI)及初始化玩家
@@ -130,6 +129,7 @@ public class KernelManager {
 			if (playerLevel[i] != "Player")
 				AI.Level1(player[i]);
 		}
+		Game.setBuy(player[0]);
 	}
 
 	// TODO 下一回合,清理痕迹
@@ -153,6 +153,8 @@ public class KernelManager {
 		changeHand(age);
 		// TODO 显示手牌给玩家一号，即唯一的真实人物
 		Manager m = new Manager();
+		// TODO 清理买卖
+		m.getGUIManager().removeDis();
 		for (int i = 0; i < hand[0].cardNum; i++) {
 			if (hand[0].card[i] != null) {
 				Game.addCard(player[0], hand[0].card[i], i, hand[0].cardNum);

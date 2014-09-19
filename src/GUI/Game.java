@@ -14,6 +14,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+/**
+ * 
+ * @author Lane-游戏进行更新信息
+ * 
+ */
 public class Game {
 
 	public static Text[] blueScore = new Text[7];
@@ -331,4 +336,30 @@ public class Game {
 		m.getGUIManager().ap[player.index].getChildren().add(cir);
 	}
 
+	// TODO 买卖标志
+	public static void setBuy(final Player player) {
+		Image b = new Image("resource/image/zeus.png");
+		ImageView[] iv = new ImageView[2];
+		iv[0] = new ImageView(b);
+		iv[1] = new ImageView(b);
+		iv[0].setX(100);
+		iv[1].setX(520);
+		final Manager m = new Manager();
+		for (int i = 0; i < 2; i++) {
+			m.getGUIManager().ap[0].getChildren().add(iv[i]);
+			iv[i].setId(String.valueOf(i));
+			iv[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					int i = Integer.parseInt(((ImageView) event.getSource())
+							.getId());
+					if (m.getKenelManager().times == 6
+							&& m.getKenelManager().age == 3
+							&& player.turn.card != null)
+						;
+					else
+						m.getGUIManager().addBuy(player, i);
+				}
+			});
+		}
+	}
 }

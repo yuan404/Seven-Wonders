@@ -5,6 +5,11 @@ import java.util.Random;
 
 import javafx.scene.image.Image;
 
+/**
+ * 
+ * @author Lane 卡牌信息总汇
+ * 
+ */
 public class CardInfo {
 	static Card[] card = new Card[51];
 	Card[] cardHand;
@@ -130,7 +135,7 @@ public class CardInfo {
 
 		card[25] = new Card("WorkShop", "Green", 1, 7);
 		card[25].addCost("glass", 1);
-		card[25].addFormit("Physics", 1);
+		card[25].addFormit("physics", 1);
 		card[25].addFree("Laboratory");
 		card[25].addFree("ArcheryRange");
 		card[25].iv.setImage(im[65]);
@@ -158,7 +163,7 @@ public class CardInfo {
 
 		card[29] = new Card("WorkShop", "Green", 1, 3);
 		card[29].addCost("glass", 1);
-		card[29].addFormit("Physics", 1);
+		card[29].addFormit("physics", 1);
 		card[29].addFree("Laboratory");
 		card[29].addFree("ArcheryRange");
 		card[29].iv.setImage(im[65]);

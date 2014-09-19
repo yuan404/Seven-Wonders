@@ -13,6 +13,8 @@ public class Player {
 	public Turn turn;
 	public int index;
 
+	public Buy buy;
+
 	public Card[] card = new Card[25];
 	public int cardNum = 0;
 
