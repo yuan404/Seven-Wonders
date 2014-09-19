@@ -156,7 +156,7 @@ public class KernelManager {
 		// TODO 清理买卖
 		m.getGUIManager().removeDis();
 		for (int i = 0; i < hand[0].cardNum; i++) {
-			if (hand[0].card[i] != null) {
+			if (hand[0].card[i] != null && playerLevel[0] == "Player") {
 				Game.addCard(player[0], hand[0].card[i], i, hand[0].cardNum);
 				for (int j = 0; j < player[0].freeNum; j++) {
 					if (hand[0].card[i].name == player[0].freeBuild[j]) {

@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Fri Sep 19 16:53:49 CST 2014
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=true
+jarname=D\:\\workspace\\Seven-Wonders\\Seven-Wonders_fat.jar
+manifest.mergeall=true
+manifest.mainclass=Kernel.Manager
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=
