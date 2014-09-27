@@ -20,6 +20,10 @@
   Search the different information of cards / 查看不同卡牌的信息
   
   Glide the card and make it disappear / 从卡牌滑过使它消失
+  
+* Click the throne / 点击王座
+
+  Can buy resource from the neighbors / 从邻居处买资源
 
 ## Game informations / 游戏信息
 
