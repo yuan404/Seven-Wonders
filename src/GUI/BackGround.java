@@ -13,6 +13,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+/**
+ * 
+ * @author Lane
+ *
+ */
 public class BackGround {
 	/**
 	 * 管理者
