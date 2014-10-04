@@ -2,6 +2,12 @@ package Kernel;
 
 import javafx.scene.image.Image;
 
+/**
+ * 卡牌信息类
+ * 
+ * @author Lane
+ *
+ */
 public class CardInfo {
 	private Image[] im = new Image[149];
 	private Card[] card = new Card[149];
@@ -51,7 +57,7 @@ public class CardInfo {
 
 		card[8] = new Card("ClayPit", "Brown", 1, 3);
 		card[8].addCost("coin", 1);
-		card[8].addFormit("brick_ore", 1);
+		card[8].addFormit("ore_brick", 1);
 		card[8].iv.setImage(im[7]);
 
 		card[9] = new Card("OreVein", "Brown", 1, 3);
@@ -500,7 +506,7 @@ public class CardInfo {
 
 		card[90] = new Card("Caravansery", "Yellow", 2, 6);
 		card[90].addCost("wood", 2);
-		card[90].addFormit("wood_stone_brick_ore", 1);
+		card[90].addFormit("wood_stone_ore_brick", 1);
 		card[90].addFree("Lighthouse");
 		card[90].iv.setImage(im[57]);
 
@@ -514,7 +520,7 @@ public class CardInfo {
 
 		card[93] = new Card("Caravansery", "Yellow", 2, 5);
 		card[93].addCost("wood", 2);
-		card[93].addFormit("wood_stone_brick_ore", 1);
+		card[93].addFormit("wood_stone_ore_brick", 1);
 		card[93].addFree("Lighthouse");
 		card[93].iv.setImage(im[57]);
 
@@ -538,7 +544,7 @@ public class CardInfo {
 
 		card[97] = new Card("Caravansery", "Yellow", 2, 3);
 		card[97].addCost("wood", 2);
-		card[97].addFormit("wood_stone_brick_ore", 1);
+		card[97].addFormit("wood_stone_ore_brick", 1);
 		card[97].addFree("Lighthouse");
 		card[97].iv.setImage(im[57]);
 		// TODO 第三时代卡牌
@@ -909,30 +915,36 @@ public class CardInfo {
 		}
 		return null;
 	}
+
 	/**
 	 * 生成时代牌组
+	 * 
 	 * @param age
 	 * @param num
+	 *            玩家人数
 	 * @return
 	 */
 	public String[] getCardofHand(int age, int num) {
 		int n = num * 7;
 		String[] ageCard = new String[n];
 		if (age < 3) {
-			if(age == 1)
-				shuffle(0,49);
+			if (age == 1)
+				shuffle(0, 49);
 			else
-				shuffle(49,49*2);
-			for (int j = 0; j < n; j++)
-				for (int i = 0; i < 137; i++) {
+				shuffle(49, 49 * 2);
+			int i = -1;
+			for (int j = 0; j < n; j++) {
+				i++;
+				for (; i < 137; i++) {
 					if (card[i].getNum() <= num && card[i].getAge() == age) {
 						ageCard[j] = card[i].getName();
 						break;
 					}
 				}
+			}
 		} else {
-			shuffle(49*2,137);
-			shuffle(137,49*3);
+			shuffle(49 * 2, 137);
+			shuffle(137, 49 * 3);
 			for (int j = 0; j < n - num - 2; j++) {
 				for (int i = 0; i < 137; i++) {
 					if (card[i].getNum() <= num && card[i].getAge() == age) {
@@ -948,15 +960,17 @@ public class CardInfo {
 		}
 		return ageCard;
 	}
+
 	/**
 	 * 随机打乱
+	 * 
 	 * @param a
 	 * @param b
 	 */
 	private void shuffle(int a, int b) {
 		for (int i = a; i < b; i++) {
-			int m = (int)Math.floor(Math.random()*(b-a))+a;
-			int n = (int)Math.floor(Math.random()*(b-a))+a;
+			int m = (int) Math.floor(Math.random() * (b - a)) + a;
+			int n = (int) Math.floor(Math.random() * (b - a)) + a;
 			card[148] = card[m];
 			card[m] = card[n];
 			card[n] = card[148];

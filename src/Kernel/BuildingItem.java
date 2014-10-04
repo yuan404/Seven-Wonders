@@ -1,5 +1,11 @@
 package Kernel;
 
+/**
+ * 带有消耗信息的元素类
+ * 
+ * @author Lane
+ *
+ */
 public class BuildingItem extends Item {
 	/**
 	 * 消耗资源1-木材
@@ -68,7 +74,12 @@ public class BuildingItem extends Item {
 		}
 	}
 
-	public String toString() {
+	/**
+	 * 获取游戏细节关于消费
+	 * 
+	 * @return
+	 */
+	public String getDetailsCost() {
 		String str = new String();
 		str += putWood + " ";
 		str += putStone + " ";

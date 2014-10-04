@@ -1,5 +1,11 @@
 package Kernel;
 
+/**
+ * 基础收益元素类
+ * 
+ * @author Lane
+ *
+ */
 public class Item {
 	/**
 	 * 生产资源1-木材
@@ -369,11 +375,17 @@ public class Item {
 		case "CopyGuild":
 			CopyGuild = true;
 			break;
+		default:
+			System.out.print(resource+"空收益消息\n");
+			break;
 		}
 	}
 
-	public String[] str = new String[24];
-	
+	/**
+	 * 游戏细节的字符串数组
+	 */
+	protected String[] str = new String[24];
+
 	protected void update(PlayerInfo info) {
 		for (int i = 0; i < 24; i++)
 			str[i] = new String();
@@ -434,10 +446,12 @@ public class Item {
 		str[13] += "formit:getOreBrick" + getOreBrick + " ";
 		info.getOreBrick += getOreBrick;
 		str[13] += "result:getOreBrick" + info.getOreBrick + "\n";
-		str[14] += "former:getWoodStoneOreBrick" + info.getWoodStoneOreBrick + " ";
+		str[14] += "former:getWoodStoneOreBrick" + info.getWoodStoneOreBrick
+				+ " ";
 		str[14] += "formit:getWoodStoneOreBrick" + getWoodStoneOreBrick + " ";
 		info.getWoodStoneOreBrick += getWoodStoneOreBrick;
-		str[14] += "result:getWoodStoneOreBrick" + info.getWoodStoneOreBrick + "\n";
+		str[14] += "result:getWoodStoneOreBrick" + info.getWoodStoneOreBrick
+				+ "\n";
 		str[15] += "former:getGlassClothPaper" + info.getGlassClothPaper + " ";
 		str[15] += "formit:getGlassClothPaper" + getGlassClothPaper + " ";
 		info.getGlassClothPaper += getGlassClothPaper;
@@ -454,10 +468,13 @@ public class Item {
 		str[18] += "formit:getMath" + getMath + " ";
 		info.getMath += getMath;
 		str[18] += "result:getMath" + info.getMath + "\n";
-		str[19] += "former:getLiteraturePhysicsMath" + info.getLiteraturePhysicsMath + " ";
-		str[19] += "formit:getLiteraturePhysicsMath" + getLiteraturePhysicsMath + " ";
+		str[19] += "former:getLiteraturePhysicsMath"
+				+ info.getLiteraturePhysicsMath + " ";
+		str[19] += "formit:getLiteraturePhysicsMath" + getLiteraturePhysicsMath
+				+ " ";
 		info.getLiteraturePhysicsMath += getLiteraturePhysicsMath;
-		str[19] += "result:getLiteraturePhysicsMath" + info.getLiteraturePhysicsMath + "\n";
+		str[19] += "result:getLiteraturePhysicsMath"
+				+ info.getLiteraturePhysicsMath + "\n";
 		str[20] += "former:getForce" + info.getForce + " ";
 		str[20] += "formit:getForce" + getForce + " ";
 		info.getForce += getForce;
@@ -473,112 +490,132 @@ public class Item {
 		// TODO 共有27种收益状态
 		if (LeftCheap) {
 			info.LeftCheap = true;
-			str[23] += "LeftCheap"+" ";
+			str[23] += "LeftCheap" + " ";
 		}
 		if (RightCheap) {
 			info.RightCheap = true;
-			str[23] += "RightCheap"+" ";
+			str[23] += "RightCheap" + " ";
 		}
 		if (GrayCheap) {
 			info.GrayCheap = true;
-			str[23] += "GrayCheap"+" ";
+			str[23] += "GrayCheap" + " ";
 		}
 		if (LRMGrayCoin) {
 			info.LRMGrayCoin = true;
-			str[23] += "LRMGrayCoin"+" ";
+			str[23] += "LRMGrayCoin" + " ";
 		}
 		if (LRMBrownCoin) {
 			info.LRMBrownCoin = true;
-			str[23] += "LRMBrownCoin"+" ";
+			str[23] += "LRMBrownCoin" + " ";
 		}
 		if (BrownScore) {
 			info.BrownScore = true;
-			str[23] += "BrownScore"+" ";
+			str[23] += "BrownScore" + " ";
 		}
 		if (YellowScore) {
 			info.YellowScore = true;
-			str[23] += "YellowScore"+" ";
+			str[23] += "YellowScore" + " ";
 		}
 		if (GrayScore) {
 			info.GrayScore = true;
-			str[23] += "GrayScore"+" ";
+			str[23] += "GrayScore" + " ";
 		}
 		if (StageScore) {
 			info.StageScore = true;
-			str[23] += "StageScore"+" ";
+			str[23] += "StageScore" + " ";
 		}
 		if (BrownCoin) {
 			info.BrownCoin = true;
-			str[23] += "BrownCoin"+" ";
+			str[23] += "BrownCoin" + " ";
 		}
 		if (YellowCoin) {
 			info.YellowCoin = true;
-			str[23] += "YellowCoin"+" ";
+			str[23] += "YellowCoin" + " ";
 		}
 		if (GrayCoin) {
 			info.GrayCoin = true;
-			str[23] += "GrayCoin"+" ";
+			str[23] += "GrayCoin" + " ";
 		}
 		if (StageCoin) {
 			info.StageCoin = true;
-			str[23] += "StageCoin"+" ";
+			str[23] += "StageCoin" + " ";
 		}
 		if (GuildBrown) {
 			info.GuildBrown = true;
-			str[23] += "GuildBrown"+" ";
+			str[23] += "GuildBrown" + " ";
 		}
 		if (GuildGreen) {
 			info.GuildGreen = true;
-			str[23] += "GuildGreen"+" ";
+			str[23] += "GuildGreen" + " ";
 		}
 		if (GuildYellow) {
 			info.GuildYellow = true;
-			str[23] += "GuildYellow"+" ";
+			str[23] += "GuildYellow" + " ";
 		}
 		if (GuildBlue) {
 			info.GuildBlue = true;
-			str[23] += "GuildBlue"+" ";
+			str[23] += "GuildBlue" + " ";
 		}
 		if (GuildRed) {
 			info.GuildRed = true;
-			str[23] += "GuildRed"+" ";
+			str[23] += "GuildRed" + " ";
 		}
 		if (GuildGray) {
 			info.GuildGray = true;
-			str[23] += "GuildGray"+" ";
+			str[23] += "GuildGray" + " ";
 		}
 		if (GuildMixed) {
 			info.GuildMixed = true;
-			str[23] += "GuildMixed"+" ";
+			str[23] += "GuildMixed" + " ";
 		}
 		if (GuildForce) {
 			info.GuildForce = true;
-			str[23] += "GuildForce"+" ";
+			str[23] += "GuildForce" + " ";
 		}
 		if (GuildStage) {
 			info.GuildStage = true;
-			str[23] += "GuildStage"+" ";
+			str[23] += "GuildStage" + " ";
 		}
 		if (FreeDiscard) {
 			info.FreeDiscard = true;
-			str[23] += "FreeDiscard"+" ";
+			str[23] += "FreeDiscard" + " ";
 		}
 		if (FreeBuild) {
 			info.FreeBuild = true;
-			str[23] += "FreeBuild"+" ";
+			str[23] += "FreeBuild" + " ";
 		}
 		if (LastCard) {
 			info.LastCard = true;
-			str[23] += "LastCard"+" ";
+			str[23] += "LastCard" + " ";
 		}
 		if (CheapBuy) {
 			info.CheapBuy = true;
-			str[23] += "CheapBuy"+" ";
+			str[23] += "CheapBuy" + " ";
 		}
 		if (CopyGuild) {
 			info.CopyGuild = true;
-			str[23] += "CopyGuild"+"\n";
+			str[23] += "CopyGuild" + "\n";
 		}
 	}
 
+	/**
+	 * 获取游戏细节关于收益
+	 * 
+	 * @return
+	 */
+	public String[] getDetails() {
+		return str;
+	}
+
+	/**
+	 * 置空函数(不完整)
+	 */
+	public void clear() {
+		getWood = 0;
+		getStone = 0;
+		getOre = 0;
+		getBrick = 0;
+		getGlass = 0;
+		getCloth = 0;
+	}
 }

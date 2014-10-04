@@ -1,5 +1,11 @@
 package Kernel;
 
+/**
+ * 奇迹板类
+ * 
+ * @author Lane
+ *
+ */
 public class Board extends BuildingItem {
 	/**
 	 * 免费建造使用记录 如果0即为无资格 1即为未使用 2即为使用过

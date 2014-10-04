@@ -1,57 +1,101 @@
 package Kernel;
 
-public class PlayerInfo extends Item{
+/**
+ * 玩家信息类
+ * 
+ * @author Lane
+ *
+ */
+public class PlayerInfo extends Item {
 	/**
 	 * 序号
 	 */
-	private int index;
+	protected int index;
 	/**
 	 * 已持有卡牌
 	 */
-	private Card[] card = new Card[25];
+	protected Card[] card = new Card[25];
 	/**
 	 * 已持有卡牌数
 	 */
-	private int cardNum = 0;
+	protected int cardNum = 0;
+	/**
+	 * 战争收益分数
+	 */
+	protected int GforceScore = 0;
+	/**
+	 * 战争失败次数
+	 */
+	protected int failTimes = 0;
+	/**
+	 * 奇迹板加分
+	 */
+	protected int GboardScore = 0;
+	/**
+	 * 黄牌加分
+	 */
+	protected int GyellowScore = 0;
+	/**
+	 * 紫牌加分
+	 */
+	protected int GpurpleScore = 0;
+	/**
+	 * 绿牌加分
+	 */
+	protected int GgreenScore = 0;
+	/**
+	 * 棕牌个数
+	 */
+	protected int brownNum = 0;
+	/**
+	 * 灰牌个数
+	 */
+	protected int grayNum = 0;
+	/**
+	 * 蓝牌个数
+	 */
+	protected int blueNum = 0;
+	/**
+	 * 绿牌个数
+	 */
+	protected int greenNum = 0;
+	/**
+	 * 红牌个数
+	 */
+	protected int redNum = 0;
+	/**
+	 * 黄牌个数
+	 */
+	protected int yellowNum = 0;
+	/**
+	 * 紫牌个数
+	 */
+	protected int purpleNum = 0;
+	/**
+	 * 免费牌个数
+	 */
+	protected int freeNum = 0;
+	/**
+	 * 免费牌
+	 */
+	protected String[] freeBuild = new String[55];
 
-	// 当回合已买资源
-	private int Bwood = 0;
-	private int Bstone = 0;
-	private int Bbrick = 0;
-	private int Bore = 0;
-
-	private int Bglass = 0;
-	private int Bcloth = 0;
-	private int Bpaper = 0;
-
-	
-	private int GforceScore = 0;
-	private int failTimes = 0;
-
-	
-	// 奇迹板加分
-	private int GboardScore = 0;
-
-	// 黄牌加分
-	private int GyellowScore = 0;
-	private int GpurpleScore = 0;
-	private int GgreenScore = 0;
-
-	private int brownNum = 0;
-	private int grayNum = 0;
-	private int blueNum = 0;
-	private int greenNum = 0;
-	private int redNum = 0;
-	private int yellowNum = 0;
-	private int purpleNum = 0;
-
-	private int freeNum = 0;
-	private String[] freeBuild = new String[55];
-	
+	/**
+	 * 获得卡牌组
+	 * 
+	 * @return
+	 */
 	public Card[] getCard() {
 		return card;
 	}
+
+	/**
+	 * 向卡牌组里添加卡牌
+	 * 
+	 * @param card
+	 */
 	public void addCard(Card card) {
 		this.card[cardNum++] = card;
 	}
+	
 }

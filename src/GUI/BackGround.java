@@ -160,6 +160,19 @@ public class BackGround {
 				}
 			});
 		}
+		// TODO AI测试选项
+		rect[1].setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent event){
+				Manager m = new Manager();
+				m.startGame();
+			}
+		});
+		// TODO 退出游戏选项
+		rect[6].setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent event){
+				System.exit(0);
+			}
+		});
 	}
 
 	/**
