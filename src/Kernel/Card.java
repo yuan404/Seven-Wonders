@@ -27,10 +27,6 @@ public class Card extends BuildingItem {
 	}
 
 	/**
-	 * 卡牌名称
-	 */
-	private String name;
-	/**
 	 * 卡牌颜色
 	 */
 	private String color;

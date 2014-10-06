@@ -8,6 +8,20 @@ package Kernel;
  */
 public class Item {
 	/**
+	 * 名字
+	 */
+	protected String name;
+
+	/**
+	 * 获得命名
+	 * 
+	 * @return
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
 	 * 生产资源1-木材
 	 */
 	protected int getWood = 0;

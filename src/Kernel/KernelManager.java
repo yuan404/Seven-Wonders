@@ -32,12 +32,21 @@ public class KernelManager {
 		CardInfo ci = new CardInfo();
 		String[] cards = ci.getCardofHand(1, num);
 		hands = new String[num][7];
+		BoardInfo bi = new BoardInfo();
+		bi.shuffle(0, 7);
 		int k = 0;
 		for (int i = 0; i < num; i++) {
+			infos[i] = new PlayerInfo();
+			players[i] = new Player(i);
+			infos[i].board = bi.board[i];
+			ci.getCardByName(infos[i].getName() + 0).update(infos[i]);
+			System.out.print(ci.getCardByName(infos[i].getName() + 0)
+					.getDetails());
 			for (int j = 0; j < 7; j++) {
 				hands[i][j] = cards[k++];
 			}
 		}
+
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package Kernel;
 
+import javafx.scene.image.ImageView;
+
 /**
  * 奇迹板类
  * 
@@ -35,4 +37,33 @@ public class Board extends BuildingItem {
 			for (int i = age - 1; i < 3; i++)
 				free[i] = 1;
 	}
+
+	/**
+	 * 奇迹板翻面
+	 */
+	protected int side = 0;
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param name
+	 * @param side
+	 */
+	public Board(String name, int side) {
+		this.name = name;
+		this.side = side;
+	}
+
+	/**
+	 * 图
+	 */
+	public ImageView iv = new ImageView();
+	/**
+	 * 费用及收益效果
+	 */
+	protected Card[] cards = new Card[5];
+	/**
+	 * 可建造的最大层数
+	 */
+	protected int max;
 }

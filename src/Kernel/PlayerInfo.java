@@ -101,9 +101,13 @@ public class PlayerInfo extends Item {
 	/**
 	 * 从左邻居购置资源
 	 */
-	Business left = new Business();
+	protected Business left = new Business();
 	/**
 	 * 从右邻居购置资源
 	 */
-	Business right = new Business();
+	protected Business right = new Business();
+	/**
+	 * 奇迹板
+	 */
+	protected Board board;
 }
