@@ -13,6 +13,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+/**
+ * 
+ * @author Lane
+ * 
+ */
 public class BackGround {
 	/**
 	 * 管理者
@@ -155,6 +160,19 @@ public class BackGround {
 				}
 			});
 		}
+		// TODO AI测试选项
+		rect[1].setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				Manager m = new Manager();
+				m.startGame();
+			}
+		});
+		// TODO 退出游戏选项
+		rect[6].setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				System.exit(0);
+			}
+		});
 	}
 
 	/**

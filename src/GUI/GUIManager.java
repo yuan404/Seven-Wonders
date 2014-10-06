@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 /**
  * 
  * @author Lane
- *
+ * 
  */
 public class GUIManager {
 
