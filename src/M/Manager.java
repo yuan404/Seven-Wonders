@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 /**
  * 总接口调入口
+ * 
  * @author Lane
  *
  */
@@ -19,7 +20,7 @@ public class Manager extends Application {
 	 * 游戏管理者
 	 */
 	private static KernelManager km;
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -36,16 +37,18 @@ public class Manager extends Application {
 	public GUIManager getGUIManager() {
 		return gm;
 	}
+
 	/**
 	 * @return KernelManager
 	 */
-	public KernelManager getKernelManager(){
+	public KernelManager getKernelManager() {
 		return km;
 	}
+
 	/**
 	 * 游戏开始
 	 */
-	public void startGame(){
+	public void startGame() {
 		km = new KernelManager(5);
 	}
 }

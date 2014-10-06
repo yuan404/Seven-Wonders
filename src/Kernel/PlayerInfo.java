@@ -97,5 +97,13 @@ public class PlayerInfo extends Item {
 	public void addCard(Card card) {
 		this.card[cardNum++] = card;
 	}
-	
+
+	/**
+	 * 从左邻居购置资源
+	 */
+	Business left = new Business();
+	/**
+	 * 从右邻居购置资源
+	 */
+	Business right = new Business();
 }

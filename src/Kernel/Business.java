@@ -43,4 +43,19 @@ public class Business {
 	 * 真实使用资源-金币
 	 */
 	protected int realCoin = 0;
+
+	/**
+	 * 置空
+	 */
+	public void clear() {
+		buyWood = 0;
+		buyStone = 0;
+		buyOre = 0;
+		buyBrick = 0;
+		buyGlass = 0;
+		buyCloth = 0;
+		buyPaper = 0;
+		Coin = 0;
+		realCoin = 0;
+	}
 }

@@ -33,8 +33,8 @@ public class KernelManager {
 		String[] cards = ci.getCardofHand(1, num);
 		hands = new String[num][7];
 		int k = 0;
-		for(int i = 0;i < num; i++){
-			for(int j = 0; j < 7; j++){
+		for (int i = 0; i < num; i++) {
+			for (int j = 0; j < 7; j++) {
 				hands[i][j] = cards[k++];
 			}
 		}
@@ -60,6 +60,7 @@ public class KernelManager {
 	public PlayerInfo right(PlayerInfo info) {
 		return infos[(info.index + playerNum - 1) % playerNum];
 	}
+
 	/**
 	 * 手牌组
 	 */

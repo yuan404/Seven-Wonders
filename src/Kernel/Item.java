@@ -376,7 +376,7 @@ public class Item {
 			CopyGuild = true;
 			break;
 		default:
-			System.out.print(resource+"空收益消息\n");
+			System.out.print(resource + "空收益消息\n");
 			break;
 		}
 	}
