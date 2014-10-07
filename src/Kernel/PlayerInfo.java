@@ -1,7 +1,5 @@
 package Kernel;
 
-import M.Manager;
-
 /**
  * 玩家信息类
  * 
@@ -29,10 +27,6 @@ public class PlayerInfo extends Item {
 	 * 战争失败次数
 	 */
 	protected int failTimes = 0;
-	/**
-	 * 奇迹板加分
-	 */
-	protected int GboardScore = 0;
 	/**
 	 * 黄牌加分
 	 */
@@ -146,4 +140,23 @@ public class PlayerInfo extends Item {
 		return m.getKernelManager().right(this);
 	}
 
+	/**
+	 * 获得弃牌组
+	 * 
+	 * @return
+	 */
+	public String[] getDisCard() {
+		Manager m = new Manager();
+		return m.getKernelManager().disCard;
+	}
+
+	/**
+	 * 获得弃牌数
+	 * 
+	 * @return
+	 */
+	public int getDisCardNum() {
+		Manager m = new Manager();
+		return m.getKernelManager().disNum;
+	}
 }

@@ -1,5 +1,7 @@
 package Kernel;
 
+import AI.AI0;
+
 /**
  * 游戏管理者类
  * 
@@ -22,10 +24,17 @@ public class KernelManager {
 
 	/**
 	 * 构造函数
+	 */
+	public KernelManager() {
+
+	}
+
+	/**
+	 * 预加载函数
 	 * 
 	 * @param num
 	 */
-	public KernelManager(int num) {
+	public void init(int num) {
 		playerNum = num;
 		infos = new PlayerInfo[num];
 		players = new Player[num];
@@ -40,14 +49,22 @@ public class KernelManager {
 			players[i] = new Player(i);
 			infos[i].board = bi.board[i];
 			infos[i].board.cards[0].update(infos[i]);
-			System.out.print(infos[i].board.getName() + "\n");
-			for (int n = 0; n < 24; n++)
-				System.out.print(infos[i].board.cards[0].getDetails()[n]);
+			// System.out.print(infos[i].board.getName() + "\n");
+			// for (int n = 0; n < 24; n++)
+			// System.out.print(infos[i].board.cards[0].getDetails()[n]);
 			for (int j = 0; j < 7; j++) {
 				hands[i][j] = cards[k++];
 			}
+			infos[i].getCoin += 3;
 		}
-
+		for (int n = 0; n < 3; n++) {
+			for (int j = 0; j < 6; j++) {
+				for (int i = 0; i < playerNum; i++) {
+					AI0 ai0 = new AI0();
+					ai0.load(players[i]);
+				}
+			}
+		}
 	}
 
 	/**
@@ -86,6 +103,46 @@ public class KernelManager {
 	}
 
 	/**
+	 * 从字符串中添加一个元素
+	 * 
+	 * @param strs
+	 * @param str
+	 */
+	public void addString(String[] strs, String str) {
+		int i = 0;
+		while (strs[i] != null) {
+			i++;
+		}
+		strs[i] = str;
+	}
+
+	/**
+	 * 从字符串中删除目标元素
+	 * 
+	 * @param strs
+	 * @param str
+	 */
+	public void removeString(String[] strs, String str) {
+		int i = 0;
+		System.out.print(str + "\n");
+		while (strs[i] != str) {
+			i++;
+		}
+		for (; i < strs.length - 1; i++)
+			strs[i] = strs[i + 1];
+		strs[strs.length - 1] = null;
+	}
+
+	/**
+	 * 弃牌卡牌
+	 */
+	String[] disCard = new String[150];
+	/**
+	 * 弃牌数
+	 */
+	int disNum = 0;
+
+	/**
 	 * 回合更新
 	 * 
 	 * @param player
@@ -103,7 +160,12 @@ public class KernelManager {
 			infos[player.getIndex()].board.age++;
 		} else {
 			infos[player.getIndex()].getCoin += 3;
+			addString(disCard, player.card);
+			disNum++;
 		}
+		System.out.print(player.choose + " ");
+		removeString(hands[i], player.card);
+		player.clear();
 		if (infos[i].LRMGrayCoin == true) {
 			infos[i].LRMGrayCoin = false;
 			infos[i].getCoin += infos[i].grayNum * 2;
@@ -134,7 +196,97 @@ public class KernelManager {
 		}
 	}
 
+	/**
+	 * 时代阶数
+	 */
+	public int age = 1;
+	/**
+	 * 回合阶数
+	 */
+	protected int turnNum = 1;
+
+	/**
+	 * 回合结束
+	 */
+	public void endTurn() {
+		for (int i = 0; i < playerNum; i++) {
+			if (players[i].card == null || players[i].card == "")
+				return;
+		}
+		turnNum++;
+		for (int i = 0; i < playerNum; i++) {
+			updateTurn(players[i]);
+		}
+		for (int i = 0; i < playerNum; i++) {
+			infos[i].getCoin += infos[i].right().left.getCoin
+					- infos[i].right().left.realCoin;
+			infos[i].getCoin += infos[i].left().right.getCoin
+					- infos[i].left().right.realCoin;
+		}
+		if (turnNum == 7) {
+			endAge();
+			return;
+		}
+		if (age == 2) {
+			String[] temp = hands[0];
+			for (int i = 0; i < playerNum - 1; i++) {
+				hands[i] = hands[i + 1];
+			}
+			hands[playerNum - 1] = temp;
+		} else {
+			String[] temp = hands[playerNum - 1];
+			for (int i = playerNum - 1; i > 0; i--) {
+				hands[i] = hands[i - 1];
+			}
+			hands[0] = temp;
+		}
+		System.out.print(turnNum + "\n");
+	}
+
+	/**
+	 * 更新时代
+	 */
 	public void updateAge() {
 
+	}
+
+	/**
+	 * 结束时代
+	 */
+	public void endAge() {
+		System.out.print("\n");
+		age++;
+		if (age == 4) {
+			endGame();
+			return;
+		}
+		CardInfo ci = new CardInfo();
+		String[] cards = ci.getCardofHand(age, playerNum);
+		int k = 0;
+		for (int i = 0; i < playerNum; i++) {
+			for (int j = 0; j < 7; j++) {
+				hands[i][j] = cards[k++];
+			}
+		}
+		turnNum = 1;
+	}
+
+	/**
+	 * 游戏结束
+	 */
+	public void endGame() {
+		System.out.print("name" + " red" + " coin" + " stage" + " blue"
+				+ " yellow" + " purple" + " green" + " total" + "\n");
+		for (int i = 0; i < playerNum; i++) {
+			System.out.print(infos[i].board.getName() + " "
+					+ infos[i].GforceScore + " " + infos[i].getCoin / 3 + " "
+					+ infos[i].getBoardScore + " " + infos[i].getBlueScore
+					+ " " + infos[i].GyellowScore + " " + infos[i].GpurpleScore
+					+ " " + infos[i].GgreenScore + " ");
+			System.out.print(infos[i].GforceScore + infos[i].getCoin / 3
+					+ infos[i].getBoardScore + infos[i].getBlueScore
+					+ infos[i].GyellowScore + infos[i].GpurpleScore
+					+ infos[i].GgreenScore + "\n");
+		}
 	}
 }

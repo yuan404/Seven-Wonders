@@ -1,6 +1,6 @@
 package GUI;
 
-import M.Manager;
+import Kernel.Manager;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;

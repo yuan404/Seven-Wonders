@@ -1,7 +1,6 @@
-package M;
+package Kernel;
 
 import GUI.GUIManager;
-import Kernel.KernelManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -49,6 +48,7 @@ public class Manager extends Application {
 	 * 游戏开始
 	 */
 	public void startGame() {
-		km = new KernelManager(5);
+		km = new KernelManager();
+		km.init(5);
 	}
 }

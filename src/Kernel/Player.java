@@ -1,7 +1,5 @@
 package Kernel;
 
-import M.Manager;
-
 /**
  * 玩家类
  * 
@@ -35,11 +33,11 @@ public class Player {
 	/**
 	 * 选择卡牌
 	 */
-	String card = new String();
+	protected String card = null;
 	/**
 	 * 选项 0是无选择，1是建造卡牌，2是升级奇迹，3是弃牌
 	 */
-	int choose = 0;
+	protected int choose = 0;
 
 	/**
 	 * 选择
@@ -50,7 +48,21 @@ public class Player {
 		Manager m = new Manager();
 		CardInfo ci = new CardInfo();
 		if (choose == 1) {
+			PlayerInfo pi = m.getKernelManager().infos[index];
+			for (int i = 0; i < pi.cardNum; i++) {
+				if (pi.card[i].getName() == card) {
+					clear();
+					return false;
+				}
+			}
+			for (int i = 0; i < pi.freeNum; i++) {
+				if (pi.freeBuild[i] == card) {
+					m.getKernelManager().endTurn();
+					return true;
+				}
+			}
 			if (ci.getCardByName(card).judge(m.getKernelManager().infos[index])) {
+				m.getKernelManager().endTurn();
 				return true;
 			}
 		} else if (choose == 2) {
@@ -59,9 +71,11 @@ public class Player {
 					.getKernelManager().infos[index])
 					&& (m.getKernelManager().infos[index].board.age < m
 							.getKernelManager().infos[index].board.max)) {
+				m.getKernelManager().endTurn();
 				return true;
 			}
 		} else {
+			m.getKernelManager().endTurn();
 			return true;
 		}
 		clear();
@@ -72,7 +86,7 @@ public class Player {
 	 * 置空
 	 */
 	public void clear() {
-		card = new String();
+		card = null;
 		choose = 0;
 	}
 
@@ -86,36 +100,44 @@ public class Player {
 	public boolean buy(String resource, int num, int side) {
 		Manager m = new Manager();
 		if (side == 0) {
-			if (((resource == "wood") || (resource == "stone")
-					|| (resource == "ore") || (resource == "brick"))
-					&& (m.getKernelManager().infos[index].LeftCheap || m
-							.getKernelManager().infos[index].CheapBuy))
-				m.getKernelManager().infos[index].left.putCoin += 1 * num;
-			else if (m.getKernelManager().infos[index].GrayCheap)
-				m.getKernelManager().infos[index].left.putCoin += 1 * num;
-			else
-				m.getKernelManager().infos[index].left.putCoin += 2 * num;
 			m.getKernelManager().infos[index].left.buy(resource, num);
 			if (!m.getKernelManager().infos[index].left.judgeBuy(m
 					.getKernelManager().infos[index])) {
 				m.getKernelManager().infos[index].left.buy(resource, num * -1);
 				return false;
 			}
-		} else {
 			if (((resource == "wood") || (resource == "stone")
 					|| (resource == "ore") || (resource == "brick"))
-					&& (m.getKernelManager().infos[index].RightCheap || m
-							.getKernelManager().infos[index].CheapBuy))
-				m.getKernelManager().infos[index].right.putCoin += 1 * num;
-			else if (m.getKernelManager().infos[index].GrayCheap)
-				m.getKernelManager().infos[index].right.putCoin += 1 * num;
-			else
-				m.getKernelManager().infos[index].right.putCoin += 2 * num;
+					&& (m.getKernelManager().infos[index].LeftCheap || m
+							.getKernelManager().infos[index].CheapBuy)) {
+				m.getKernelManager().infos[index].left.putCoin += 1 * num;
+				m.getKernelManager().infos[index].getCoin -= 1 * num;
+			} else if (m.getKernelManager().infos[index].GrayCheap) {
+				m.getKernelManager().infos[index].left.putCoin += 1 * num;
+				m.getKernelManager().infos[index].getCoin -= 1 * num;
+			} else {
+				m.getKernelManager().infos[index].left.putCoin += 2 * num;
+				m.getKernelManager().infos[index].getCoin -= 2 * num;
+			}
+		} else {
 			m.getKernelManager().infos[index].right.buy(resource, num);
 			if (!m.getKernelManager().infos[index].right.judgeBuy(m
 					.getKernelManager().infos[index])) {
 				m.getKernelManager().infos[index].right.buy(resource, num * -1);
 				return false;
+			}
+			if (((resource == "wood") || (resource == "stone")
+					|| (resource == "ore") || (resource == "brick"))
+					&& (m.getKernelManager().infos[index].RightCheap || m
+							.getKernelManager().infos[index].CheapBuy)) {
+				m.getKernelManager().infos[index].right.putCoin += 1 * num;
+				m.getKernelManager().infos[index].getCoin -= 1 * num;
+			} else if (m.getKernelManager().infos[index].GrayCheap) {
+				m.getKernelManager().infos[index].right.putCoin += 1 * num;
+				m.getKernelManager().infos[index].getCoin -= 1 * num;
+			} else {
+				m.getKernelManager().infos[index].right.putCoin += 2 * num;
+				m.getKernelManager().infos[index].getCoin -= 2 * num;
 			}
 		}
 		return true;

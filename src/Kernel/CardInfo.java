@@ -926,7 +926,7 @@ public class CardInfo {
 	 */
 	public String[] getCardofHand(int age, int num) {
 		int n = num * 7;
-		String[] ageCard = new String[n];
+		String[] ageCard = new String[n + 1];
 		if (age < 3) {
 			if (age == 1)
 				shuffle(0, 49);
@@ -935,7 +935,7 @@ public class CardInfo {
 			int i = -1;
 			for (int j = 0; j < n; j++) {
 				i++;
-				for (; i < 137; i++) {
+				for (; i < 138; i++) {
 					if (card[i].getNum() <= num && card[i].getAge() == age) {
 						ageCard[j] = card[i].getName();
 						break;
@@ -943,19 +943,28 @@ public class CardInfo {
 				}
 			}
 		} else {
-			shuffle(49 * 2, 137);
-			shuffle(137, 49 * 3);
+			shuffle(49 * 2, 138);
+			shuffle(138, 49 * 3);
+			int i = -1;
 			for (int j = 0; j < n - num - 2; j++) {
-				for (int i = 0; i < 137; i++) {
+				i++;
+				for (; i < 138; i++) {
 					if (card[i].getNum() <= num && card[i].getAge() == age) {
 						ageCard[j] = card[i].getName();
 						break;
 					}
 				}
 			}
-			int i = 137;
+			i = 138;
 			for (int j = n - num - 2; j < n; j++) {
 				ageCard[j] = card[i++].getName();
+			}
+			for (int q = 0; q < n; q++) {
+				int m = (int) Math.floor(Math.random() * (n));
+				int p = (int) Math.floor(Math.random() * (n));
+				ageCard[n] = ageCard[m];
+				ageCard[m] = ageCard[p];
+				ageCard[p] = ageCard[n];
 			}
 		}
 		return ageCard;

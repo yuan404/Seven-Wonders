@@ -1,7 +1,6 @@
 package AI;
 
 import Kernel.Player;
-import M.Manager;
 
 /**
  * 测试AI 0号
@@ -16,6 +15,8 @@ public class AI0 {
 	 * @param player
 	 */
 	public void load(Player player) {
-		player.setChoose(player.getHands()[0], 1);
+		if (!player.setChoose(player.getHands()[0], 1))
+			if (!player.setChoose(player.getHands()[0], 2))
+				player.setChoose(player.getHands()[0], 3);
 	}
 }

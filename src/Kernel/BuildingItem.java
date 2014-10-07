@@ -112,6 +112,8 @@ public class BuildingItem extends Item {
 		int paper = info.getPaper - putPaper + info.left.putPaper
 				+ info.right.putPaper;
 		int coin = info.getCoin - putCoin;
+		if (coin < 0)
+			return false;
 		int wb = info.getWoodBrick;
 		int ws = info.getWoodStone;
 		int wo = info.getWoodOre;
