@@ -65,7 +65,7 @@ public class Board extends BuildingItem {
 	/**
 	 * 可建造的最大层数
 	 */
-	protected int max;
+	protected int max = 3;
 	/**
 	 * 已建造层数
 	 */

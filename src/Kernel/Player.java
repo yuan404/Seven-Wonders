@@ -153,4 +153,13 @@ public class Player {
 		return m.getKernelManager().getHands(index);
 	}
 
+	/**
+	 * 得到当前手牌数
+	 * 
+	 * @return
+	 */
+	public int getHandNum() {
+		Manager m = new Manager();
+		return (8 - m.getKernelManager().turnNum);
+	}
 }

@@ -45,7 +45,7 @@ public class KernelManager {
 		bi.shuffle(0, 7);
 		int k = 0;
 		for (int i = 0; i < num; i++) {
-			infos[i] = new PlayerInfo();
+			infos[i] = new PlayerInfo(i);
 			players[i] = new Player(i);
 			infos[i].board = bi.board[i];
 			infos[i].board.cards[0].update(infos[i]);
@@ -77,15 +77,15 @@ public class KernelManager {
 	/**
 	 * 得到左邻居玩家信息
 	 */
-	public PlayerInfo left(PlayerInfo info) {
-		return infos[(info.index + playerNum + 1) % playerNum];
+	public PlayerInfo left(int index) {
+		return infos[(index + playerNum + 1) % playerNum];
 	}
 
 	/**
 	 * 得到右邻居玩家信息
 	 */
-	public PlayerInfo right(PlayerInfo info) {
-		return infos[(info.index + playerNum - 1) % playerNum];
+	public PlayerInfo right(int index) {
+		return infos[(index + playerNum - 1) % playerNum];
 	}
 
 	/**
@@ -156,14 +156,19 @@ public class KernelManager {
 			infos[player.getIndex()].addFreeCard(player.card);
 		} else if (player.choose == 2) {
 			infos[player.getIndex()].board.cards[infos[player.getIndex()].board.age + 1]
-					.update(infos[player.getIndex()]);
+					.update(infos[i]);
 			infos[player.getIndex()].board.age++;
 		} else {
 			infos[player.getIndex()].getCoin += 3;
 			addString(disCard, player.card);
 			disNum++;
 		}
-		System.out.print(player.choose + " ");
+		if (player.choose == 1)
+			System.out.print("build ");
+		else if (player.choose == 2)
+			System.out.print("stage ");
+		else
+			System.out.print("sold ");
 		removeString(hands[i], player.card);
 		player.clear();
 		if (infos[i].LRMGrayCoin == true) {
@@ -218,15 +223,18 @@ public class KernelManager {
 			updateTurn(players[i]);
 		}
 		for (int i = 0; i < playerNum; i++) {
-			infos[i].getCoin += infos[i].right().left.getCoin
+			infos[i].getCoin += infos[i].right().left.putCoin
 					- infos[i].right().left.realCoin;
-			infos[i].getCoin += infos[i].left().right.getCoin
+			infos[i].getCoin += infos[i].left().right.putCoin
 					- infos[i].left().right.realCoin;
 		}
 		if (turnNum == 7) {
 			endAge();
 			return;
 		}
+		// TODO BUG!!!
+		if (turnNum == 8)
+			return;
 		if (age == 2) {
 			String[] temp = hands[0];
 			for (int i = 0; i < playerNum - 1; i++) {
@@ -246,14 +254,45 @@ public class KernelManager {
 	/**
 	 * 更新时代
 	 */
-	public void updateAge() {
-
+	public void updateAge(PlayerInfo info) {
+		if (info.getForce < info.left().getForce) {
+			info.failTimes++;
+			info.GforceScore -= 1;
+			System.out.print(info.getForce + " " + info.board.getName() + " "
+					+ info.left().getForce + " " + info.left().board.getName()
+					+ " " + age + " " + "\n");
+		} else if (info.getForce > info.left().getForce) {
+			info.GforceScore += age * 2 - 1;
+			System.out.print(info.getForce + " " + info.board.getName() + " "
+					+ info.left().getForce + " " + info.left().board.getName()
+					+ " " + age + " " + "\n");
+		} else
+			System.out.print(info.getForce + " " + info.board.getName() + " "
+					+ info.left().getForce + " " + info.left().board.getName()
+					+ " " + age + " " + "\n");
+		if (info.getForce < info.right().getForce) {
+			info.failTimes++;
+			info.GforceScore -= 1;
+			System.out.print(info.getForce + " " + info.board.getName() + " "
+					+ info.right().getForce + " "
+					+ info.right().board.getName() + " " + age + " " + "\n");
+		} else if (info.getForce > info.right().getForce) {
+			info.GforceScore += age * 2 - 1;
+			System.out.print(info.getForce + " " + info.board.getName() + " "
+					+ info.right().getForce + " "
+					+ info.right().board.getName() + " " + age + " " + "\n");
+		} else
+			System.out.print(info.getForce + " " + info.board.getName() + " "
+					+ info.right().getForce + " "
+					+ info.right().board.getName() + " " + age + " " + "\n");
 	}
 
 	/**
 	 * 结束时代
 	 */
 	public void endAge() {
+		for (int i = 0; i < playerNum; i++)
+			updateAge(infos[i]);
 		System.out.print("\n");
 		age++;
 		if (age == 4) {
@@ -275,18 +314,153 @@ public class KernelManager {
 	 * 游戏结束
 	 */
 	public void endGame() {
-		System.out.print("name" + " red" + " coin" + " stage" + " blue"
-				+ " yellow" + " purple" + " green" + " total" + "\n");
+		System.out.print("name" + space("name", 20) + "red   " + "  coin  "
+				+ "  stage " + "  blue  " + "  yellow" + "  purple"
+				+ "  green " + "  total " + "\n");
 		for (int i = 0; i < playerNum; i++) {
-			System.out.print(infos[i].board.getName() + " "
-					+ infos[i].GforceScore + " " + infos[i].getCoin / 3 + " "
-					+ infos[i].getBoardScore + " " + infos[i].getBlueScore
-					+ " " + infos[i].GyellowScore + " " + infos[i].GpurpleScore
-					+ " " + infos[i].GgreenScore + " ");
+			// TODO 绿分
+			getGreenScore(infos[i]);
+			// TODO 黄分和紫分
+			checkScore(infos[i]);
+
+			System.out.print(infos[i].board.getName()
+					+ space(infos[i].board.getName(), 20)
+					+ infos[i].GforceScore + space("", 7) + infos[i].getCoin
+					/ 3 + space("", 7) + infos[i].getBoardScore + space("", 7)
+					+ infos[i].getBlueScore + space("", 7)
+					+ infos[i].GyellowScore + space("", 7)
+					+ infos[i].GpurpleScore + space("", 7)
+					+ infos[i].GgreenScore + space("", 7));
 			System.out.print(infos[i].GforceScore + infos[i].getCoin / 3
 					+ infos[i].getBoardScore + infos[i].getBlueScore
 					+ infos[i].GyellowScore + infos[i].GpurpleScore
 					+ infos[i].GgreenScore + "\n");
 		}
+		System.out.print("name" + space("name", 20) + "red   " + " brown "
+				+ "  gray  " + "  blue  " + "  yellow" + "  purple"
+				+ "  green " + "  stage " + "\n");
+		for (int i = 0; i < playerNum; i++) {
+			System.out.print(infos[i].board.getName()
+					+ space(infos[i].board.getName(), 20) + infos[i].redNum
+					+ space("", 7) + infos[i].brownNum + space("", 7)
+					+ infos[i].grayNum + space("", 7) + infos[i].blueNum
+					+ space("", 7) + infos[i].yellowNum + space("", 7)
+					+ infos[i].purpleNum + space("", 7) + infos[i].greenNum
+					+ space("", 7) + infos[i].board.age + "\n");
+		}
+	}
+
+	/**
+	 * 获得绿色科技分
+	 * 
+	 * @param info
+	 * @return
+	 */
+	public void getGreenScore(PlayerInfo info) {
+		while (info.getLiteraturePhysicsMath > 0) {
+			int a = checkGreen(info.getLiterature + 1, info.getPhysics,
+					info.getMath);
+			int b = checkGreen(info.getLiterature, info.getPhysics + 1,
+					info.getMath);
+			int c = checkGreen(info.getLiterature, info.getPhysics,
+					info.getMath + 1);
+			info.getLiteraturePhysicsMath--;
+			if (a > b && a > c) {
+				info.getLiterature++;
+			} else if (b > a && b > c) {
+				info.getPhysics++;
+			} else
+				info.getMath++;
+		}
+		info.GgreenScore = checkGreen(info.getLiterature, info.getPhysics,
+				info.getMath);
+	}
+
+	/**
+	 * 科技计算函数
+	 * 
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @return
+	 */
+	public int checkGreen(int a, int b, int c) {
+		int green = 0;
+		green += a * a;
+		green += b * b;
+		green += c * c;
+		int series = Math.min(a, b);
+		series = Math.min(series, c);
+		green += 7 * series;
+		return green;
+	}
+
+	/**
+	 * 黄分和紫分计算
+	 * 
+	 * @param Aplayer
+	 */
+	public void checkScore(PlayerInfo Aplayer) {
+		if (Aplayer.GrayScore == true) {
+			Aplayer.GyellowScore += Aplayer.grayNum * 2;
+		}
+		if (Aplayer.BrownScore == true) {
+			Aplayer.GyellowScore += Aplayer.brownNum;
+		}
+		if (Aplayer.YellowScore == true) {
+			Aplayer.GyellowScore += Aplayer.yellowNum;
+		}
+		if (Aplayer.StageScore == true) {
+			Aplayer.GyellowScore += Aplayer.board.age;
+		}
+		if (Aplayer.GuildBlue == true) {
+			Aplayer.GpurpleScore += Aplayer.right().blueNum;
+			Aplayer.GpurpleScore += Aplayer.left().blueNum;
+		}
+		if (Aplayer.GuildBrown == true) {
+			Aplayer.GpurpleScore += Aplayer.right().brownNum;
+			Aplayer.GpurpleScore += Aplayer.left().brownNum;
+		}
+		if (Aplayer.GuildGray == true) {
+			Aplayer.GpurpleScore += Aplayer.right().grayNum * 2;
+			Aplayer.GpurpleScore += Aplayer.left().grayNum * 2;
+		}
+		if (Aplayer.GuildYellow == true) {
+			Aplayer.GpurpleScore += Aplayer.right().yellowNum;
+			Aplayer.GpurpleScore += Aplayer.left().yellowNum;
+		}
+		if (Aplayer.GuildGreen == true) {
+			Aplayer.GpurpleScore += Aplayer.right().greenNum;
+			Aplayer.GpurpleScore += Aplayer.left().greenNum;
+		}
+		if (Aplayer.GuildRed == true) {
+			Aplayer.GpurpleScore += Aplayer.right().redNum;
+			Aplayer.GpurpleScore += Aplayer.left().redNum;
+		}
+		if (Aplayer.GuildForce == true) {
+			Aplayer.GpurpleScore += Aplayer.right().failTimes;
+			Aplayer.GpurpleScore += Aplayer.left().failTimes;
+		}
+		if (Aplayer.GuildMixed == true) {
+			Aplayer.GpurpleScore += Aplayer.brownNum;
+			Aplayer.GpurpleScore += Aplayer.grayNum;
+			Aplayer.GpurpleScore += Aplayer.purpleNum;
+		}
+		if (Aplayer.GuildStage == true) {
+			Aplayer.GpurpleScore += Aplayer.board.age;
+			Aplayer.GpurpleScore += Aplayer.right().board.age;
+			Aplayer.GpurpleScore += Aplayer.left().board.age;
+		}
+	}
+
+	public String space(String str, int num) {
+		int n = 0;
+		if (str.length() < num) {
+			n = num - str.length();
+		}
+		String s = new String();
+		for (int i = 0; i < n; i++)
+			s += " ";
+		return s;
 	}
 }

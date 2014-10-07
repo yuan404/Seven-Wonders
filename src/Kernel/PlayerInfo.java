@@ -11,6 +11,11 @@ public class PlayerInfo extends Item {
 	 * 序号
 	 */
 	protected int index;
+
+	public PlayerInfo(int n) {
+		index = n;
+	}
+
 	/**
 	 * 已持有卡牌
 	 */
@@ -127,7 +132,7 @@ public class PlayerInfo extends Item {
 	 */
 	public PlayerInfo left() {
 		Manager m = new Manager();
-		return m.getKernelManager().left(this);
+		return m.getKernelManager().left(index);
 	}
 
 	/**
@@ -137,7 +142,7 @@ public class PlayerInfo extends Item {
 	 */
 	public PlayerInfo right() {
 		Manager m = new Manager();
-		return m.getKernelManager().right(this);
+		return m.getKernelManager().right(index);
 	}
 
 	/**

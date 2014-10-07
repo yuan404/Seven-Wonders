@@ -27,6 +27,12 @@ public class Business extends BuildingItem {
 		realCoin = 0;
 	}
 
+	/**
+	 * 判断是否能够买的起
+	 * 
+	 * @param info
+	 * @return
+	 */
 	public boolean judgeBuy(PlayerInfo info) {
 		int wood = info.getWood - putWood;
 		int stone = info.getStone - putStone;
@@ -158,6 +164,12 @@ public class Business extends BuildingItem {
 		return false;
 	}
 
+	/**
+	 * 执行买
+	 * 
+	 * @param resource
+	 * @param num
+	 */
 	public void buy(String resource, int num) {
 		addCost(resource, num);
 	}
