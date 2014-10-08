@@ -164,4 +164,25 @@ public class PlayerInfo extends Item {
 		Manager m = new Manager();
 		return m.getKernelManager().disNum;
 	}
+
+	public String getDetail() {
+		String str = new String();
+		Manager m = new Manager();
+		str += m.getKernelManager().players[index].card
+				+ "-"
+				+ (m.getKernelManager().age * 6 + m.getKernelManager().turnNum - 7)
+				+ "-Have:\r\n" + "    wood:" + getWood + "\r\n" + "    stone:"
+				+ getStone + "\r\n" + "    ore:" + getOre + "\r\n"
+				+ "    brick:" + getBrick + "\r\n" + "    glass:" + getGlass
+				+ "\r\n" + "    cloth:" + getCloth + "\r\n" + "    paper:"
+				+ getPaper + "\r\n" + "    coin:" + getCoin + "\r\n"
+				+ "    wood_stone:" + getWoodStone + "\r\n" + "    wood_ore:"
+				+ getWoodOre + "\r\n" + "    wood_brick:" + getWoodBrick
+				+ "\r\n" + "    stone_ore:" + getStoneOre + "\r\n"
+				+ "    stone_brick:" + getStoneBrick + "\r\n"
+				+ "    ore_brick:" + getOreBrick + "\r\n"
+				+ "    wood_stone_ore_brick:" + getWoodStoneOreBrick + "\r\n"
+				+ "    glass_cloth_paper:" + getGlassClothPaper + "\r\n";
+		return str;
+	}
 }

@@ -81,13 +81,13 @@ public class BuildingItem extends Item {
 	 */
 	public String getDetailsCost() {
 		String str = new String();
-		str += putWood + " ";
-		str += putStone + " ";
-		str += putOre + " ";
-		str += putBrick + " ";
-		str += putGlass + " ";
-		str += putCloth + " ";
-		str += putPaper + "\n";
+		str += "Cost:" + "\r\n" + "    wood:" + putWood + "\r\n";
+		str += "    stone:" + putStone + "\r\n";
+		str += "    ore:" + putOre + "\r\n";
+		str += "    brick:" + putBrick + "\r\n";
+		str += "    glass:" + putGlass + "\r\n";
+		str += "    cloth:" + putCloth + "\r\n";
+		str += "    paper:" + putPaper + "\r\n";
 		return str;
 	}
 

@@ -1,5 +1,6 @@
 package Kernel;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,20 +38,22 @@ public class KernelManager {
 	 * 写入文件句柄-总
 	 */
 	FileWriter fileWriter;
+	FileWriter[] fw = new FileWriter[5];
+
 	/**
 	 * 构造函数
 	 * 
 	 */
-	public KernelManager()  {
+	public KernelManager() {
 	}
 
 	/**
 	 * 预加载函数
 	 * 
 	 * @param num
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public void init(int num) throws IOException {
+	public void init(int num, String t) throws IOException {
 		playerNum = num;
 		infos = new PlayerInfo[num];
 		players = new Player[num];
@@ -59,7 +62,12 @@ public class KernelManager {
 		hands = new String[num][7];
 		BoardInfo bi = new BoardInfo();
 		bi.shuffle(0, 7);
+		// TODO 得到当前时间
+		df = new SimpleDateFormat("yyyyMMddHHmmss");
+		time = df.format(System.currentTimeMillis());
 		int k = 0;
+		File file = new File("D:\\workspace\\result" + t);
+		file.mkdirs();
 		for (int i = 0; i < num; i++) {
 			infos[i] = new PlayerInfo(i);
 			players[i] = new Player(i);
@@ -71,32 +79,38 @@ public class KernelManager {
 				hands[i][j] = cards[k++];
 			}
 			infos[i].getCoin += 3;
+			fw[i] = new FileWriter("D:\\workspace/result" + t + "/" + time
+					+ "-" + i + ".txt");
 		}
-		//TODO Log
-		df = new SimpleDateFormat("yyyyMMddHHmmss");
-		time = df.format(System.currentTimeMillis());
+		// TODO Log
 		try {
-			fileWriter=new FileWriter("D:\\workspace/result/"+time+"-total.txt");
+			// TODO 句柄地址
+			fileWriter = new FileWriter("D:\\workspace/result" + t + "/" + time
+					+ "-total.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// TODO AI
-		while(turnNum != 7){
-				if(turnNum == 1)
-					try {
-						fileWriter.write(1+"\r\n");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				for (int i = 0; i < playerNum; i++) {
-					AI0 ai0 = new AI0();
-					ai0.load(players[i]);
+		while (turnNum != 7) {
+			if (turnNum == 1)
+				try {
+					fileWriter.write(1 + "\r\n");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+			for (int i = 0; i < playerNum; i++) {
+				AI0 ai0 = new AI0();
+				ai0.load(players[i]);
 			}
+		}
 		fileWriter.flush();
 		fileWriter.close();
+		for (int i = 0; i < num; i++) {
+			fw[i].flush();
+			fw[i].close();
+		}
 	}
 
 	/**
@@ -183,7 +197,7 @@ public class KernelManager {
 	 * 回合更新
 	 * 
 	 * @param player
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void updateTurn(Player player) throws IOException {
 		int i = player.getIndex();
@@ -192,21 +206,30 @@ public class KernelManager {
 			ci.getCardByName(player.card).update(infos[player.getIndex()]);
 			ci.getCardByName(player.card).addColor(infos[player.getIndex()]);
 			infos[player.getIndex()].addFreeCard(player.card);
+			infos[i].addCard(ci.getCardByName(player.card));
+			fw[i].write(ci.getCardByName(player.card).getDetailsCost() + "\r\n");
 		} else if (player.choose == 2) {
 			infos[player.getIndex()].board.cards[infos[player.getIndex()].board.age + 1]
 					.update(infos[i]);
 			infos[player.getIndex()].board.age++;
+			fw[i].write(infos[player.getIndex()].board.cards[infos[player
+					.getIndex()].board.age + 1].getDetailsCost() + "\r\n");
 		} else {
 			infos[player.getIndex()].getCoin += 3;
 			addString(disCard, player.card);
 			disNum++;
 		}
-		if (player.choose == 1)
+		if (player.choose == 1) {
 			fileWriter.write("build ");
-		else if (player.choose == 2)
+			fw[i].write("build ");
+		} else if (player.choose == 2) {
 			fileWriter.write("stage ");
-		else
+			fw[i].write("stage ");
+		} else {
 			fileWriter.write("sold ");
+			fw[i].write("sold ");
+		}
+		fw[i].write(infos[i].getDetail());
 		removeString(hands[i], player.card);
 		player.clear();
 		if (infos[i].LRMGrayCoin == true) {
@@ -250,7 +273,8 @@ public class KernelManager {
 
 	/**
 	 * 回合结束
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void endTurn() throws IOException {
 		for (int i = 0; i < playerNum; i++) {
@@ -269,7 +293,7 @@ public class KernelManager {
 		}
 		if (turnNum == 7) {
 			endAge();
-			return; 
+			return;
 		}
 		if (age == 2) {
 			String[] temp = hands[0];
@@ -289,7 +313,8 @@ public class KernelManager {
 
 	/**
 	 * 更新时代
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void updateAge(PlayerInfo info) throws IOException {
 		if (info.getForce < info.left().getForce) {
@@ -326,7 +351,8 @@ public class KernelManager {
 
 	/**
 	 * 结束时代
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void endAge() throws IOException {
 		for (int i = 0; i < playerNum; i++)
@@ -350,7 +376,8 @@ public class KernelManager {
 
 	/**
 	 * 游戏结束
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void endGame() throws IOException {
 		fileWriter.write("name" + space("name", 20) + "red   " + "  coin  "

@@ -1,6 +1,7 @@
 package Kernel;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import GUI.GUIManager;
 import javafx.application.Application;
@@ -50,10 +51,12 @@ public class Manager extends Application {
 	 * 游戏开始
 	 */
 	public void startGame() {
-		for (int i = 0; i < 5; i++){
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		String time = df.format(System.currentTimeMillis());
+		for (int i = 0; i < 5; i++) {
 			try {
 				km = new KernelManager();
-				km.init(5);
+				km.init(5, time);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
