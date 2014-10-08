@@ -1,5 +1,7 @@
 package Kernel;
 
+import java.io.IOException;
+
 import GUI.GUIManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -48,7 +50,14 @@ public class Manager extends Application {
 	 * 游戏开始
 	 */
 	public void startGame() {
-		km = new KernelManager();
-		km.init(5);
+		for (int i = 0; i < 5; i++){
+			try {
+				km = new KernelManager();
+				km.init(5);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

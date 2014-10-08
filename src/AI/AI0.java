@@ -15,9 +15,18 @@ public class AI0 {
 	 * @param player
 	 */
 	public void load(Player player) {
-		for (int i = 0; i < player.getHandNum(); i++)
-			if (!player.setChoose(player.getHands()[i], 1))
-				if (!player.setChoose(player.getHands()[i], 2))
-					player.setChoose(player.getHands()[i], 3);
+		boolean choose = false;
+		for (int i = 0; i < player.getHandNum(); i++) {
+			if (player.setChoose(player.getHands()[i], 1)) {
+				choose = true;
+				break;
+			}
+			if (player.setChoose(player.getHands()[i], 2)) {
+				choose = true;
+				break;
+			}
+		}
+		if (!choose)
+			player.setChoose(player.getHands()[0], 3);
 	}
 }

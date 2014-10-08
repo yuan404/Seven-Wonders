@@ -1,5 +1,9 @@
 package Kernel;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+
 import AI.AI0;
 
 /**
@@ -21,20 +25,32 @@ public class KernelManager {
 	 * 玩家总人数
 	 */
 	int playerNum;
-
+	/**
+	 * 时间字符串
+	 */
+	String time;
+	/**
+	 * 时间格式
+	 */
+	SimpleDateFormat df;
+	/**
+	 * 写入文件句柄-总
+	 */
+	FileWriter fileWriter;
 	/**
 	 * 构造函数
+	 * 
 	 */
-	public KernelManager() {
-
+	public KernelManager()  {
 	}
 
 	/**
 	 * 预加载函数
 	 * 
 	 * @param num
+	 * @throws IOException 
 	 */
-	public void init(int num) {
+	public void init(int num) throws IOException {
 		playerNum = num;
 		infos = new PlayerInfo[num];
 		players = new Player[num];
@@ -49,7 +65,6 @@ public class KernelManager {
 			players[i] = new Player(i);
 			infos[i].board = bi.board[i];
 			infos[i].board.cards[0].update(infos[i]);
-			// System.out.print(infos[i].board.getName() + "\n");
 			// for (int n = 0; n < 24; n++)
 			// System.out.print(infos[i].board.cards[0].getDetails()[n]);
 			for (int j = 0; j < 7; j++) {
@@ -57,14 +72,31 @@ public class KernelManager {
 			}
 			infos[i].getCoin += 3;
 		}
-		for (int n = 0; n < 3; n++) {
-			for (int j = 0; j < 6; j++) {
+		//TODO Log
+		df = new SimpleDateFormat("yyyyMMddHHmmss");
+		time = df.format(System.currentTimeMillis());
+		try {
+			fileWriter=new FileWriter("D:\\workspace/result/"+time+"-total.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// TODO AI
+		while(turnNum != 7){
+				if(turnNum == 1)
+					try {
+						fileWriter.write(1+"\r\n");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				for (int i = 0; i < playerNum; i++) {
 					AI0 ai0 = new AI0();
 					ai0.load(players[i]);
 				}
 			}
-		}
+		fileWriter.flush();
+		fileWriter.close();
 	}
 
 	/**
@@ -124,7 +156,12 @@ public class KernelManager {
 	 */
 	public void removeString(String[] strs, String str) {
 		int i = 0;
-		System.out.print(str + "\n");
+		try {
+			fileWriter.write(str + "\r\n");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		while (strs[i] != str) {
 			i++;
 		}
@@ -146,8 +183,9 @@ public class KernelManager {
 	 * 回合更新
 	 * 
 	 * @param player
+	 * @throws IOException 
 	 */
-	public void updateTurn(Player player) {
+	public void updateTurn(Player player) throws IOException {
 		int i = player.getIndex();
 		CardInfo ci = new CardInfo();
 		if (player.choose == 1) {
@@ -164,11 +202,11 @@ public class KernelManager {
 			disNum++;
 		}
 		if (player.choose == 1)
-			System.out.print("build ");
+			fileWriter.write("build ");
 		else if (player.choose == 2)
-			System.out.print("stage ");
+			fileWriter.write("stage ");
 		else
-			System.out.print("sold ");
+			fileWriter.write("sold ");
 		removeString(hands[i], player.card);
 		player.clear();
 		if (infos[i].LRMGrayCoin == true) {
@@ -212,8 +250,9 @@ public class KernelManager {
 
 	/**
 	 * 回合结束
+	 * @throws IOException 
 	 */
-	public void endTurn() {
+	public void endTurn() throws IOException {
 		for (int i = 0; i < playerNum; i++) {
 			if (players[i].card == null || players[i].card == "")
 				return;
@@ -230,11 +269,8 @@ public class KernelManager {
 		}
 		if (turnNum == 7) {
 			endAge();
-			return;
+			return; 
 		}
-		// TODO BUG!!!
-		if (turnNum == 8)
-			return;
 		if (age == 2) {
 			String[] temp = hands[0];
 			for (int i = 0; i < playerNum - 1; i++) {
@@ -248,52 +284,54 @@ public class KernelManager {
 			}
 			hands[0] = temp;
 		}
-		System.out.print(turnNum + "\n");
+		fileWriter.write(turnNum + "\r\n");
 	}
 
 	/**
 	 * 更新时代
+	 * @throws IOException 
 	 */
-	public void updateAge(PlayerInfo info) {
+	public void updateAge(PlayerInfo info) throws IOException {
 		if (info.getForce < info.left().getForce) {
 			info.failTimes++;
 			info.GforceScore -= 1;
-			System.out.print(info.getForce + " " + info.board.getName() + " "
+			fileWriter.write(info.getForce + " " + info.board.getName() + " "
 					+ info.left().getForce + " " + info.left().board.getName()
-					+ " " + age + " " + "\n");
+					+ " " + age + " " + "\r\n");
 		} else if (info.getForce > info.left().getForce) {
 			info.GforceScore += age * 2 - 1;
-			System.out.print(info.getForce + " " + info.board.getName() + " "
+			fileWriter.write(info.getForce + " " + info.board.getName() + " "
 					+ info.left().getForce + " " + info.left().board.getName()
-					+ " " + age + " " + "\n");
+					+ " " + age + " " + "\r\n");
 		} else
-			System.out.print(info.getForce + " " + info.board.getName() + " "
+			fileWriter.write(info.getForce + " " + info.board.getName() + " "
 					+ info.left().getForce + " " + info.left().board.getName()
-					+ " " + age + " " + "\n");
+					+ " " + age + " " + "\r\n");
 		if (info.getForce < info.right().getForce) {
 			info.failTimes++;
 			info.GforceScore -= 1;
-			System.out.print(info.getForce + " " + info.board.getName() + " "
+			fileWriter.write(info.getForce + " " + info.board.getName() + " "
 					+ info.right().getForce + " "
-					+ info.right().board.getName() + " " + age + " " + "\n");
+					+ info.right().board.getName() + " " + age + " " + "\r\n");
 		} else if (info.getForce > info.right().getForce) {
 			info.GforceScore += age * 2 - 1;
-			System.out.print(info.getForce + " " + info.board.getName() + " "
+			fileWriter.write(info.getForce + " " + info.board.getName() + " "
 					+ info.right().getForce + " "
-					+ info.right().board.getName() + " " + age + " " + "\n");
+					+ info.right().board.getName() + " " + age + " " + "\r\n");
 		} else
-			System.out.print(info.getForce + " " + info.board.getName() + " "
+			fileWriter.write(info.getForce + " " + info.board.getName() + " "
 					+ info.right().getForce + " "
-					+ info.right().board.getName() + " " + age + " " + "\n");
+					+ info.right().board.getName() + " " + age + " " + "\r\n");
 	}
 
 	/**
 	 * 结束时代
+	 * @throws IOException 
 	 */
-	public void endAge() {
+	public void endAge() throws IOException {
 		for (int i = 0; i < playerNum; i++)
 			updateAge(infos[i]);
-		System.out.print("\n");
+		fileWriter.write("\r\n");
 		age++;
 		if (age == 4) {
 			endGame();
@@ -312,18 +350,19 @@ public class KernelManager {
 
 	/**
 	 * 游戏结束
+	 * @throws IOException 
 	 */
-	public void endGame() {
-		System.out.print("name" + space("name", 20) + "red   " + "  coin  "
+	public void endGame() throws IOException {
+		fileWriter.write("name" + space("name", 20) + "red   " + "  coin  "
 				+ "  stage " + "  blue  " + "  yellow" + "  purple"
-				+ "  green " + "  total " + "\n");
+				+ "  green " + "  total " + "\r\n");
 		for (int i = 0; i < playerNum; i++) {
 			// TODO 绿分
 			getGreenScore(infos[i]);
 			// TODO 黄分和紫分
 			checkScore(infos[i]);
 
-			System.out.print(infos[i].board.getName()
+			fileWriter.write(infos[i].board.getName()
 					+ space(infos[i].board.getName(), 20)
 					+ infos[i].GforceScore + space("", 7) + infos[i].getCoin
 					/ 3 + space("", 7) + infos[i].getBoardScore + space("", 7)
@@ -331,22 +370,22 @@ public class KernelManager {
 					+ infos[i].GyellowScore + space("", 7)
 					+ infos[i].GpurpleScore + space("", 7)
 					+ infos[i].GgreenScore + space("", 7));
-			System.out.print(infos[i].GforceScore + infos[i].getCoin / 3
+			fileWriter.write(infos[i].GforceScore + infos[i].getCoin / 3
 					+ infos[i].getBoardScore + infos[i].getBlueScore
 					+ infos[i].GyellowScore + infos[i].GpurpleScore
-					+ infos[i].GgreenScore + "\n");
+					+ infos[i].GgreenScore + "\r\n");
 		}
-		System.out.print("name" + space("name", 20) + "red   " + " brown "
+		fileWriter.write("name" + space("name", 20) + "red   " + " brown "
 				+ "  gray  " + "  blue  " + "  yellow" + "  purple"
-				+ "  green " + "  stage " + "\n");
+				+ "  green " + "  stage " + "\r\n");
 		for (int i = 0; i < playerNum; i++) {
-			System.out.print(infos[i].board.getName()
+			fileWriter.write(infos[i].board.getName()
 					+ space(infos[i].board.getName(), 20) + infos[i].redNum
 					+ space("", 7) + infos[i].brownNum + space("", 7)
 					+ infos[i].grayNum + space("", 7) + infos[i].blueNum
 					+ space("", 7) + infos[i].yellowNum + space("", 7)
 					+ infos[i].purpleNum + space("", 7) + infos[i].greenNum
-					+ space("", 7) + infos[i].board.age + "\n");
+					+ space("", 7) + infos[i].board.age + "\r\n");
 		}
 	}
 

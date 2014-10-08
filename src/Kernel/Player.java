@@ -1,5 +1,7 @@
 package Kernel;
 
+import java.io.IOException;
+
 /**
  * 玩家类
  * 
@@ -57,12 +59,22 @@ public class Player {
 			}
 			for (int i = 0; i < pi.freeNum; i++) {
 				if (pi.freeBuild[i] == card) {
-					m.getKernelManager().endTurn();
+					try {
+						m.getKernelManager().endTurn();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return true;
 				}
 			}
 			if (ci.getCardByName(card).judge(m.getKernelManager().infos[index])) {
-				m.getKernelManager().endTurn();
+				try {
+					m.getKernelManager().endTurn();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return true;
 			}
 		} else if (choose == 2) {
@@ -71,11 +83,21 @@ public class Player {
 					.getKernelManager().infos[index])
 					&& (m.getKernelManager().infos[index].board.age < m
 							.getKernelManager().infos[index].board.max)) {
-				m.getKernelManager().endTurn();
+				try {
+					m.getKernelManager().endTurn();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return true;
 			}
 		} else {
-			m.getKernelManager().endTurn();
+			try {
+				m.getKernelManager().endTurn();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
 		}
 		clear();
