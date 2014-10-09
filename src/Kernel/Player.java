@@ -49,6 +49,13 @@ public class Player {
 		this.choose = choose;
 		Manager m = new Manager();
 		CardInfo ci = new CardInfo();
+		int temp = 0;
+		for (temp = 0; temp < getHandNum(); temp++) {
+			if (card == getHands()[temp])
+				break;
+		}
+		if (temp == getHandNum())
+			return false;
 		if (choose == 1) {
 			PlayerInfo pi = m.getKernelManager().infos[index];
 			for (int i = 0; i < pi.cardNum; i++) {
