@@ -201,13 +201,15 @@ public class KernelManager {
 	 */
 	public void updateTurn(Player player) throws IOException {
 		int i = player.getIndex();
-		CardInfo ci = new CardInfo();
 		if (player.choose == 1) {
-			ci.getCardByName(player.card).update(infos[player.getIndex()]);
-			ci.getCardByName(player.card).addColor(infos[player.getIndex()]);
+			CardInfo.getCardByName(player.card)
+					.update(infos[player.getIndex()]);
+			CardInfo.getCardByName(player.card).addColor(
+					infos[player.getIndex()]);
 			infos[player.getIndex()].addFreeCard(player.card);
-			infos[i].addCard(ci.getCardByName(player.card));
-			fw[i].write(ci.getCardByName(player.card).getDetailsCost() + "\r\n");
+			infos[i].addCard(CardInfo.getCardByName(player.card));
+			fw[i].write(CardInfo.getCardByName(player.card).getDetailsCost()
+					+ "\r\n");
 		} else if (player.choose == 2) {
 			infos[player.getIndex()].board.cards[infos[player.getIndex()].board.age + 1]
 					.update(infos[i]);
@@ -278,6 +280,12 @@ public class KernelManager {
 	 */
 	public void endTurn() throws IOException {
 		for (int i = 0; i < playerNum; i++) {
+			// TODO Error punish
+			if (players[i].aiChoose == true && players[i].choose != 3) {
+				players[i].setChoose(hands[i][0], 3);
+				fw[i].write("\r\nError\r\n");
+				players[i].aiChoose = false;
+			}
 			if (players[i].card == null || players[i].card == "")
 				return;
 		}

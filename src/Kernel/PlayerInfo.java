@@ -105,11 +105,10 @@ public class PlayerInfo extends Item {
 	 * @param card
 	 */
 	public void addFreeCard(String card) {
-		CardInfo ci = new CardInfo();
-		if (ci.getCardByName(card).freeBuild[0] != null)
-			this.freeBuild[freeNum++] = ci.getCardByName(card).freeBuild[0];
-		if (ci.getCardByName(card).freeBuild[1] != null)
-			this.freeBuild[freeNum++] = ci.getCardByName(card).freeBuild[1];
+		if (CardInfo.getCardByName(card).freeBuild[0] != null)
+			this.freeBuild[freeNum++] = CardInfo.getCardByName(card).freeBuild[0];
+		if (CardInfo.getCardByName(card).freeBuild[1] != null)
+			this.freeBuild[freeNum++] = CardInfo.getCardByName(card).freeBuild[1];
 	}
 
 	/**

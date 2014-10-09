@@ -52,8 +52,13 @@ public class Manager extends Application {
 	 */
 	public void startGame() {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String time = df.format(System.currentTimeMillis());
+		long intTime = System.currentTimeMillis();
+		String time = df.format(intTime);
 		for (int i = 0; i < 5; i++) {
+			if (System.currentTimeMillis() - intTime <= i * 1000) {
+				i--;
+				continue;
+			}
 			try {
 				km = new KernelManager();
 				km.init(5, time);

@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
  */
 public class CardInfo {
 	private Image[] im = new Image[149];
-	private Card[] card = new Card[149];
+	private static Card[] card = new Card[149];
 
 	public CardInfo() {
 		for (int i = 1; i <= 75; i++) {
@@ -907,7 +907,7 @@ public class CardInfo {
 	 * @param name
 	 * @return
 	 */
-	public Card getCardByName(String name) {
+	public static Card getCardByName(String name) {
 		for (int i = 0; i < 147; i++) {
 			if (card[i].getName() == name) {
 				return card[i];
