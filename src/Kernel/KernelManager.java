@@ -5,8 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
-import AI.AI0;
-
 /**
  * 游戏管理者类
  * 
@@ -48,6 +46,33 @@ public class KernelManager {
 	}
 
 	/**
+	 * AI名称
+	 */
+	String[] a;
+	AI AI0;
+	AI AI1;
+	AI AI2;
+	AI AI3;
+	AI AI4;
+
+	/**
+	 * AI-init
+	 * 
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 */
+	public void initAI(Class<?> ai0, Class<?> ai1, Class<?> ai2, Class<?> ai3,
+			Class<?> ai4, String[] a) throws InstantiationException,
+			IllegalAccessException {
+		AI0 = (AI) ai0.newInstance();
+		AI1 = (AI) ai1.newInstance();
+		AI2 = (AI) ai2.newInstance();
+		AI3 = (AI) ai3.newInstance();
+		AI4 = (AI) ai4.newInstance();
+		this.a = a;
+	}
+
+	/**
 	 * 预加载函数
 	 * 
 	 * @param num
@@ -66,8 +91,10 @@ public class KernelManager {
 		df = new SimpleDateFormat("yyyyMMddHHmmss");
 		time = df.format(System.currentTimeMillis());
 		int k = 0;
-		File file = new File("D:\\workspace\\result" + t);
+		File file = new File("D:\\workspace\\result" + "-" + a[0] + "-" + a[1]
+				+ "-" + a[2] + "-" + a[3] + "-" + a[4] + "-" + t);
 		file.mkdirs();
+
 		for (int i = 0; i < num; i++) {
 			infos[i] = new PlayerInfo(i);
 			players[i] = new Player(i);
@@ -79,14 +106,13 @@ public class KernelManager {
 				hands[i][j] = cards[k++];
 			}
 			infos[i].getCoin += 3;
-			fw[i] = new FileWriter("D:\\workspace/result" + t + "/" + time
-					+ "-" + i + ".txt");
 		}
 		// TODO Log
 		try {
 			// TODO 句柄地址
-			fileWriter = new FileWriter("D:\\workspace/result" + t + "/" + time
-					+ "-total.txt");
+			fileWriter = new FileWriter("D:\\workspace/result" + "-" + a[0]
+					+ "-" + a[1] + "-" + a[2] + "-" + a[3] + "-" + a[4] + "-"
+					+ t + "/" + time + "-total.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,16 +120,19 @@ public class KernelManager {
 		// TODO AI
 		while (turnNum != 7) {
 			if (turnNum == 1)
-				try {
-					fileWriter.write(1 + "\r\n");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (age == 1) {
+					for (int i = 0; i < num; i++)
+						fw[i] = new FileWriter("D:\\workspace/result" + "-"
+								+ a[0] + "-" + a[1] + "-" + a[2] + "-" + a[3]
+								+ "-" + a[4] + "-" + t + "/" + time + "-" + i
+								+ ".txt");
 				}
-			for (int i = 0; i < playerNum; i++) {
-				AI0 ai0 = new AI0();
-				ai0.load(players[i]);
-			}
+			fileWriter.write(1 + "\r\n");
+			AI0.load(players[0]);
+			AI1.load(players[1]);
+			AI2.load(players[2]);
+			AI3.load(players[3]);
+			AI4.load(players[4]);
 		}
 		fileWriter.flush();
 		fileWriter.close();
@@ -222,13 +251,16 @@ public class KernelManager {
 			disNum++;
 		}
 		if (player.choose == 1) {
-			fileWriter.write("build ");
+			fileWriter.write(infos[i].board.getName()
+					+ space(infos[i].board.getName(), 20) + " build ");
 			fw[i].write("build ");
 		} else if (player.choose == 2) {
-			fileWriter.write("stage ");
+			fileWriter.write(infos[i].board.getName()
+					+ space(infos[i].board.getName(), 20) + " stage ");
 			fw[i].write("stage ");
 		} else {
-			fileWriter.write("sold ");
+			fileWriter.write(infos[i].board.getName()
+					+ space(infos[i].board.getName(), 20) + " sold ");
 			fw[i].write("sold ");
 		}
 		fw[i].write(infos[i].getDetail());

@@ -1,5 +1,6 @@
 package AI;
 
+import Kernel.AI;
 import Kernel.Player;
 
 /**
@@ -8,7 +9,7 @@ import Kernel.Player;
  * @author Lane
  * 
  */
-public class AI0 {
+public class AI0 extends AI {
 	/**
 	 * 默认加载函数
 	 * 

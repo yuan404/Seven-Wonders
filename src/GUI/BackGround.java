@@ -164,7 +164,13 @@ public class BackGround {
 		rect[1].setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Manager m = new Manager();
-				m.startGame();
+				try {
+					m.testAiGame();
+				} catch (ClassNotFoundException | InstantiationException
+						| IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		// TODO 退出游戏选项

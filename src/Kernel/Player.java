@@ -445,4 +445,24 @@ public class Player {
 		}
 		return 0;
 	}
+
+	/**
+	 * 获取已建造卡牌
+	 */
+	public String[] getCards() {
+		Manager m = new Manager();
+		int num = m.getKernelManager().infos[index].cardNum;
+		String[] str = new String[num];
+		for (int i = 0; i < num; i++)
+			str[i] = m.getKernelManager().infos[index].card[i].getName();
+		return str;
+	}
+
+	/**
+	 * 获取已建造卡牌数量
+	 */
+	public int getCardsNum() {
+		Manager m = new Manager();
+		return m.getKernelManager().infos[index].cardNum;
+	}
 }

@@ -94,3 +94,11 @@
   ask the cost of stage building;
   Item is same with howManyCost;
 ```
+```
+* String[] getCards();
+  ask the cards name of the built cards
+```
+```
+* int getCardsNum();
+  ask the num of the built cards
+```
