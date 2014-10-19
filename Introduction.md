@@ -1,12 +1,12 @@
 # AI
 ```
-* boolean checkChoose(String card, int choose);
+* boolean checkChoice(String card, int choose);
   choose == 1  => Build the card;
   choose == 2  => Build the stage;
   choose == 3  => Sold the card;
 ```
 ```
-* boolean setChoose(String card, int choose);
+* boolean setChoice(String card, int choose);
   choose == 1  => Build the card;
   choose == 2  => Build the stage;
   choose == 3  => Sold the card;
@@ -35,7 +35,7 @@
   get the num of hand cards;
 ```
 ```
-* int howMany(String resource,int side);
+* int howMuch(String resource,int side);
   ask the num of resource of players;
   side == 0 => yourself;
   side == 1 => left;
@@ -77,7 +77,7 @@
   If you ask the item without the list, the action would be error.
 ```
 ```
-* int howManyCost(String resource,String cardName);
+* int howMuchCost(String resource,String cardName);
   ask the cost of card;
   Item : 
 	"wood"		=> resource
@@ -90,7 +90,7 @@
 	"coin"		=> resource/money
 ```
 ```
-* int howManyCostStage(String resource);
+* int getStageCost(String resource);
   ask the cost of stage building;
   Item is same with howManyCost;
 ```
@@ -101,4 +101,12 @@
 ```
 * int getCardsNum();
   ask the num of the built cards
+```
+```
+* int getFeeOfBuild(String card)
+  get how much coin would be paid if you want to build the card
+```
+```
+* void payFeeOfBuild(String card)
+  You want to pay money for building card.
 ```

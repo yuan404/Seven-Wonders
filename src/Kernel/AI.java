@@ -1,5 +1,7 @@
 package Kernel;
 
+import java.io.IOException;
+
 /**
  * AI
  * 
@@ -7,7 +9,7 @@ package Kernel;
  * 
  */
 public class AI {
-	public void load(Player player) {
+	public void load(Player player) throws IOException {
 
 	}
 }

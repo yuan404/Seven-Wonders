@@ -78,7 +78,8 @@ public class KernelManager {
 	 * @param num
 	 * @throws IOException
 	 */
-	public void init(int num, String t) throws IOException {
+	public int[] init(int num, String t, String tt, int point)
+			throws IOException {
 		playerNum = num;
 		infos = new PlayerInfo[num];
 		players = new Player[num];
@@ -91,8 +92,9 @@ public class KernelManager {
 		df = new SimpleDateFormat("yyyyMMddHHmmss");
 		time = df.format(System.currentTimeMillis());
 		int k = 0;
-		File file = new File("D:\\workspace\\result" + "-" + a[0] + "-" + a[1]
-				+ "-" + a[2] + "-" + a[3] + "-" + a[4] + "-" + t);
+		File file = new File("D:\\workspace\\" + tt + "\\result" + point + "-"
+				+ a[0] + "-" + a[1] + "-" + a[2] + "-" + a[3] + "-" + a[4]
+				+ "-" + t);
 		file.mkdirs();
 
 		for (int i = 0; i < num; i++) {
@@ -110,9 +112,9 @@ public class KernelManager {
 		// TODO Log
 		try {
 			// TODO 句柄地址
-			fileWriter = new FileWriter("D:\\workspace/result" + "-" + a[0]
-					+ "-" + a[1] + "-" + a[2] + "-" + a[3] + "-" + a[4] + "-"
-					+ t + "/" + time + "-total.txt");
+			fileWriter = new FileWriter("D:\\workspace/" + tt + "/result"
+					+ point + "-" + a[0] + "-" + a[1] + "-" + a[2] + "-" + a[3]
+					+ "-" + a[4] + "-" + t + "/" + time + "-total.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -122,10 +124,10 @@ public class KernelManager {
 			if (turnNum == 1)
 				if (age == 1) {
 					for (int i = 0; i < num; i++)
-						fw[i] = new FileWriter("D:\\workspace/result" + "-"
-								+ a[0] + "-" + a[1] + "-" + a[2] + "-" + a[3]
-								+ "-" + a[4] + "-" + t + "/" + time + "-" + i
-								+ ".txt");
+						fw[i] = new FileWriter("D:\\workspace/" + tt
+								+ "/result" + point + "-" + a[0] + "-" + a[1]
+								+ "-" + a[2] + "-" + a[3] + "-" + a[4] + "-"
+								+ t + "/" + time + "-" + i + ".txt");
 				}
 			fileWriter.write(1 + "\r\n");
 			AI0.load(players[0]);
@@ -140,6 +142,7 @@ public class KernelManager {
 			fw[i].flush();
 			fw[i].close();
 		}
+		return total;
 	}
 
 	/**
@@ -314,7 +317,7 @@ public class KernelManager {
 		for (int i = 0; i < playerNum; i++) {
 			// TODO Error punish
 			if (players[i].aiChoose == true && players[i].choose != 3) {
-				players[i].setChoose(hands[i][0], 3);
+				players[i].setChoice(hands[i][0], 3);
 				fw[i].write("\r\nError\r\n");
 				players[i].aiChoose = false;
 			}
@@ -414,6 +417,8 @@ public class KernelManager {
 		turnNum = 1;
 	}
 
+	int[] total = new int[5];
+
 	/**
 	 * 游戏结束
 	 * 
@@ -437,10 +442,11 @@ public class KernelManager {
 					+ infos[i].GyellowScore + space("", 7)
 					+ infos[i].GpurpleScore + space("", 7)
 					+ infos[i].GgreenScore + space("", 7));
-			fileWriter.write(infos[i].GforceScore + infos[i].getCoin / 3
+			total[i] = infos[i].GforceScore + infos[i].getCoin / 3
 					+ infos[i].getBoardScore + infos[i].getBlueScore
 					+ infos[i].GyellowScore + infos[i].GpurpleScore
-					+ infos[i].GgreenScore + "\r\n");
+					+ infos[i].GgreenScore;
+			fileWriter.write(total[i] + "\r\n");
 		}
 		fileWriter.write("name" + space("name", 20) + "red   " + " brown "
 				+ "  gray  " + "  blue  " + "  yellow" + "  purple"

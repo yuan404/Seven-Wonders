@@ -47,8 +47,10 @@ public class Player {
 
 	/**
 	 * 判定选择
+	 * 
+	 * @throws IOException
 	 */
-	public boolean checkChoose(String card, int choose) {
+	public boolean checkChoice(String card, int choose) throws IOException {
 		this.card = card;
 		this.choose = choose;
 		Manager m = new Manager();
@@ -57,13 +59,15 @@ public class Player {
 			if (card == getHands()[temp])
 				break;
 		}
-		if (temp == getHandNum())
+		if (temp == getHandNum()) {
 			return false;
+		}
 		if (choose == 1) {
 			PlayerInfo pi = m.getKernelManager().infos[index];
 			for (int i = 0; i < pi.cardNum; i++) {
 				if (pi.card[i].getName() == card) {
 					clear();
+
 					return false;
 				}
 			}
@@ -75,7 +79,9 @@ public class Player {
 			if (CardInfo.getCardByName(card).judge(
 					m.getKernelManager().infos[index])) {
 				return true;
-			}
+			} else
+				m.getKernelManager().fw[index]
+						.write("\r\nNo Enough Resource\r\n");
 		} else if (choose == 2) {
 			if (m.getKernelManager().infos[index].board.cards[m
 					.getKernelManager().infos[index].board.age + 1].judge(m
@@ -92,9 +98,66 @@ public class Player {
 	}
 
 	/**
-	 * 选择
+	 * 得到该卡牌需要多少钱可以建造
 	 */
-	public boolean setChoose(String card, int choose) {
+	public int getFeeOfBuild(String card) {
+		Manager m = new Manager();
+		int temp = 0;
+		for (temp = 0; temp < getHandNum(); temp++) {
+			if (card == getHands()[temp])
+				break;
+		}
+		if (temp == getHandNum()) {
+			return 10000;
+		}
+		return CardInfo.getCardByName(card).bigJudge(
+				m.getKernelManager().infos[index]);
+	}
+
+	/**
+	 * 花钱造卡
+	 * 
+	 * @throws IOException
+	 */
+	public void payFeeOfBuild(String card) throws IOException {
+		Manager m = new Manager();
+		int temp = 0;
+		for (temp = 0; temp < getHandNum(); temp++) {
+			if (card == getHands()[temp])
+				break;
+		}
+		if (temp == getHandNum()) {
+			aiChoose = true;
+			m.getKernelManager().fw[index].write("\r\nNo the Card\r\n");
+			m.getKernelManager().endTurn();
+			return;
+		}
+		int fee = CardInfo.getCardByName(card).bigJudge(
+				m.getKernelManager().infos[index]);
+		if (fee < m.getKernelManager().infos[index].getCoin) {
+			m.getKernelManager().infos[index].getCoin -= fee;
+			m.getKernelManager().infos[index].addFreeCard(card);
+			setChoice(card, 1);
+			m.getKernelManager().infos[index].left.putCoin = CardInfo
+					.getCardByName(card).leftFee;
+			m.getKernelManager().infos[index].right.putCoin = CardInfo
+					.getCardByName(card).rightFee;
+			m.getKernelManager().endTurn();
+		} else {
+			aiChoose = true;
+			m.getKernelManager().fw[index].write("\r\nNo enough money\r\n");
+			m.getKernelManager().endTurn();
+			return;
+		}
+
+	}
+
+	/**
+	 * 选择
+	 * 
+	 * @throws IOException
+	 */
+	public boolean setChoice(String card, int choose) throws IOException {
 		this.card = card;
 		this.choose = choose;
 		Manager m = new Manager();
@@ -105,6 +168,7 @@ public class Player {
 		}
 		if (temp == getHandNum()) {
 			aiChoose = true;
+			m.getKernelManager().fw[index].write("\r\nNo the Card\r\n");
 			return false;
 		}
 		if (choose == 1) {
@@ -113,6 +177,8 @@ public class Player {
 				if (pi.card[i].getName() == card) {
 					clear();
 					aiChoose = true;
+					m.getKernelManager().fw[index]
+							.write("\r\nSame Name Card\r\n");
 					return false;
 				}
 			}
@@ -162,6 +228,7 @@ public class Player {
 			return true;
 		}
 		clear();
+		m.getKernelManager().fw[index].write("\r\nNo Enough Resource\r\n");
 		aiChoose = true;
 		return false;
 	}
@@ -212,8 +279,9 @@ public class Player {
 	 * @param resource
 	 * @param num
 	 * @param side
+	 * @throws IOException
 	 */
-	public boolean buy(String resource, int num, int side) {
+	public boolean buy(String resource, int num, int side) throws IOException {
 		Manager m = new Manager();
 		if (side == 0) {
 			m.getKernelManager().infos[index].left.buy(resource, num);
@@ -221,6 +289,8 @@ public class Player {
 					.getKernelManager().infos[index])) {
 				m.getKernelManager().infos[index].left.buy(resource, num * -1);
 				aiChoose = true;
+				m.getKernelManager().fw[index]
+						.write("\r\nLeft Resource Error\r\n");
 				return false;
 			}
 			if (((resource == "wood") || (resource == "stone")
@@ -241,6 +311,8 @@ public class Player {
 			if (!m.getKernelManager().infos[index].right.judgeBuy(m
 					.getKernelManager().infos[index])) {
 				m.getKernelManager().infos[index].right.buy(resource, num * -1);
+				m.getKernelManager().fw[index]
+						.write("\r\nRight Resource Error\r\n");
 				aiChoose = true;
 				return false;
 			}
@@ -288,7 +360,7 @@ public class Player {
 	 * @param side
 	 * @return
 	 */
-	public int howMany(String resource, int side) {
+	public int howMuch(String resource, int side) {
 		PlayerInfo pi;
 		Manager m = new Manager();
 		if (side == 0) {
@@ -387,7 +459,7 @@ public class Player {
 	 * @param cardName
 	 * @return
 	 */
-	public int howManyCost(String resource, String cardName) {
+	public int howMuchCost(String resource, String cardName) {
 		Card card = CardInfo.getCardByName(cardName);
 		switch (resource) {
 		case "wood":
@@ -417,7 +489,7 @@ public class Player {
 	 * 
 	 * @return
 	 */
-	public int howManyCostStage(String resource) {
+	public int getStageCost(String resource) {
 		Manager m = new Manager();
 		int age = m.getKernelManager().infos[index].board.age;
 		if (age >= m.getKernelManager().infos[index].board.max)

@@ -1,5 +1,7 @@
 package GUI;
 
+import java.io.IOException;
+
 import Kernel.Manager;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
@@ -168,6 +170,12 @@ public class BackGround {
 					m.testAiGame();
 				} catch (ClassNotFoundException | InstantiationException
 						| IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
